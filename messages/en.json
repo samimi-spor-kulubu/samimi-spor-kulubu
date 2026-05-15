@@ -1,0 +1,475 @@
+{
+  "Site": {
+    "name": "Samimi Sports Club",
+    "tagline": "Taekwondo, Boxing, Archery, Gymnastics and Reformer Pilates in Ankara Yenimahalle."
+  },
+  "Nav": {
+    "home": "Home",
+    "branches": "Classes",
+    "trainers": "Trainers",
+    "gallery": "Gallery",
+    "blog": "Blog",
+    "about": "About",
+    "contact": "Contact",
+    "faq": "FAQ",
+    "tour": "Facility Tour",
+    "whatsapp": "Message on WhatsApp",
+    "openMenu": "Open menu",
+    "closeMenu": "Close menu",
+    "skipToContent": "Skip to content"
+  },
+  "Home": {
+    "hero": {
+      "subtitle": "Samimi <yellow>SPORTS</yellow> Club",
+      "title": "MOVE, GROW, WIN",
+      "description": "Five disciplines, experienced trainers and a warm community await you in Ankara Yenimahalle Demet.",
+      "ctaPrimary": "Book a Session",
+      "ctaSecondary": "Explore Classes"
+    },
+    "stats": {
+      "branchesValue": "6",
+      "branchesLabel": "Classes",
+      "hoursValue": "12–23",
+      "hoursLabel": "Open Hours"
+    },
+    "branches": {
+      "title": "Our Classes",
+      "subtitle": "Pick the one for you and start today.",
+      "cta": "All Classes"
+    },
+    "trainers": {
+      "title": "Our Trainers",
+      "subtitle": "An expert and welcoming team."
+    },
+    "cta": {
+      "title": "Book Your Session — Reach Us on WhatsApp",
+      "description": "We'll answer your questions and shape the right plan with you.",
+      "button": "Message on WhatsApp"
+    },
+    "tour": {
+      "eyebrow": "Tour the Studio",
+      "title": "SEE WHERE YOU'LL TRAIN",
+      "description": "From the martial arts hall to the reformer studio, the archery range to the kids gymnastics area — take a short facility tour.",
+      "button": "Facility Tour"
+    }
+  },
+  "Branches": {
+    "hero": {
+      "title": "OUR CLASSES",
+      "subtitle": "Five disciplines for every level, led by expert trainers."
+    },
+    "labels": {
+      "detailLink": "Details",
+      "womenOnly": "Women only"
+    },
+    "prices": {
+      "title": "Package Prices (8 Sessions)",
+      "package": "Package",
+      "campaign": "Promo",
+      "normal": "Regular",
+      "packages": {
+        "group4": "Group of 4",
+        "group3": "Group of 3",
+        "group2": "Group of 2",
+        "individual": "Individual"
+      }
+    },
+    "cta": {
+      "title": "Let's pick the right class together.",
+      "description": "Message us on WhatsApp and we'll plan a trial session.",
+      "button": "Message on WhatsApp"
+    },
+    "detail": {
+      "scheduleLabel": "Schedule",
+      "instructorLabel": "Trainer",
+      "featuresLabel": "Highlights",
+      "infoBoxTitle": "Join This Class",
+      "bookButton": "Book via WhatsApp",
+      "cta": {
+        "title": "Ready to start?",
+        "description": "Message us on WhatsApp and we'll pick the right day and time together.",
+        "button": "Message on WhatsApp"
+      }
+    },
+    "items": {
+      "taekwondo": {
+        "name": "Taekwondo",
+        "schedule": "Mon / Wed / Fri · 18:00 – 19:30",
+        "scheduleLong": "Monday / Wednesday / Friday · 18:00 – 19:30",
+        "description": "A timeless Korean martial art that builds discipline, balance and confidence. Kids and adult groups.",
+        "longDescription": "Korea's national martial art. Builds discipline, confidence and reflexes. Suitable for every age and level.",
+        "instructor": "Esat Mahmut Akın",
+        "features": [
+          "Suitable for all ages",
+          "Discipline and confidence",
+          "Self-defense techniques"
+        ]
+      },
+      "boxing": {
+        "name": "Boxing & Kickboxing",
+        "schedule": "Mon / Wed / Fri · 19:30 – 21:00",
+        "scheduleLong": "Monday / Wednesday / Friday · 19:30 – 21:00",
+        "description": "High-tempo, mixed training that develops conditioning and reflexes.",
+        "longDescription": "Conditioning, power and self-defense combined. For beginners and experienced alike.",
+        "instructor": "",
+        "features": [
+          "High-intensity conditioning",
+          "Self-defense",
+          "Suitable for all levels"
+        ]
+      },
+      "archery": {
+        "name": "Traditional Archery",
+        "schedule": "Tue / Thu · 16:30 – 17:30",
+        "scheduleLong": "Tuesday / Thursday · 16:30 – 17:30",
+        "description": "Traditional 'tirendaz' technique with focus on posture, breath and concentration.",
+        "longDescription": "Carry on the Turkish archery tradition. Focus, patience and technique.",
+        "instructor": "",
+        "features": [
+          "Traditional Turkish archery",
+          "Focus development",
+          "All equipment provided"
+        ]
+      },
+      "gymnastics": {
+        "name": "Kids Gymnastics",
+        "schedule": "Thu 17:30 · Sat 14:00 (45 min)",
+        "scheduleLong": "Thursday 17:30 · Saturday 14:00 (45 min)",
+        "description": "Foundational gymnastics, balance and flexibility for ages 4–14.",
+        "longDescription": "Playful gymnastics classes that support kids' motor development.",
+        "instructor": "",
+        "features": ["Ages 4–14", "Motor development", "Playful environment"]
+      },
+      "pilates": {
+        "name": "Reformer Pilates",
+        "schedule": "Tue / Thu / Sat / Sun · 12:00 – 23:00",
+        "scheduleLong": "Tuesday / Thursday / Saturday / Sunday · 12:00 – 23:00",
+        "description": "Women-only full-body work on the reformer, sold as 8-session packages.",
+        "longDescription": "Reformer pilates with physiotherapist Beyza Erdaş. 8-session packages, 2 sessions per week.",
+        "instructor": "Beyza Erdaş (Physiotherapist)",
+        "features": [
+          "Women only",
+          "Physiotherapist trainer",
+          "Small groups"
+        ]
+      }
+    }
+  },
+  "Trainers": {
+    "hero": {
+      "title": "OUR TRAINERS",
+      "subtitle": "Experts in their fields, with a warm approach."
+    },
+    "labels": {
+      "profileLink": "View Profile"
+    },
+    "cta": {
+      "title": "Pick a class, meet your trainer.",
+      "description": "Message us on WhatsApp and we'll shape the right plan together.",
+      "button": "Message on WhatsApp"
+    },
+    "detail": {
+      "aboutLabel": "About",
+      "certificatesLabel": "Certificates",
+      "expertiseLabel": "Areas of expertise",
+      "branchLabel": "Class taught",
+      "branchLink": "Go to class page",
+      "bookButton": "Book via WhatsApp"
+    },
+    "items": {
+      "beyza": {
+        "name": "Beyza Erdaş",
+        "title": "Physiotherapist · Reformer Pilates",
+        "shortBio": "Graduate of Dokuz Eylül University, Physical Therapy and Rehabilitation.",
+        "about": [
+          "Dokuz Eylül University, Physical Therapy and Rehabilitation graduate (2024).",
+          "Practiced sports physiotherapy, pilates and manual therapy at G Therapy Ankara.",
+          "Director at the same clinic since 2025."
+        ],
+        "certificates": [
+          "MPT — Manual / Manipulative Physical Therapy",
+          "Hijama and Cupping Massage"
+        ],
+        "expertise": [
+          "Manual therapy",
+          "Kinesio taping",
+          "Pilates",
+          "Dry needling"
+        ]
+      },
+      "esat": {
+        "name": "Esat Mahmut Akın",
+        "title": "Taekwondo Coach",
+        "shortBio": "Experienced coach of our taekwondo program.",
+        "about": [
+          "Our taekwondo coach. More details coming soon."
+        ],
+        "certificates": [],
+        "expertise": []
+      }
+    }
+  },
+  "Gallery": {
+    "hero": {
+      "title": "GALLERY",
+      "subtitle": "Snapshots from our studio."
+    },
+    "filter": {
+      "all": "All",
+      "noResults": "No photos in this category yet."
+    },
+    "lightbox": {
+      "close": "Close",
+      "prev": "Previous",
+      "next": "Next",
+      "imageCounter": "{current} / {total}"
+    },
+    "categories": {
+      "taekwondo": "Taekwondo",
+      "boxing": "Boxing & Kickboxing",
+      "archery": "Archery",
+      "gymnastics": "Gymnastics",
+      "pilates": "Reformer Pilates",
+      "facility": "Facility"
+    },
+    "items": {
+      "tw-1": {"title": "Taekwondo training"},
+      "tw-2": {"title": "Taekwondo demo"},
+      "bx-1": {"title": "Boxing training"},
+      "bx-2": {"title": "Kickboxing class"},
+      "ar-1": {"title": "Traditional archery"},
+      "ar-2": {"title": "Archery focus"},
+      "gy-1": {"title": "Kids gymnastics"},
+      "gy-2": {"title": "Balance practice"},
+      "pl-1": {"title": "Reformer pilates session"},
+      "pl-2": {"title": "Pilates group class"},
+      "fc-1": {"title": "Studio view"},
+      "fc-2": {"title": "Locker rooms"}
+    }
+  },
+  "Blog": {
+    "hero": {
+      "title": "BLOG",
+      "subtitle": "Notes on health, training and sport."
+    },
+    "filter": {
+      "all": "All",
+      "noResults": "No posts in this category yet."
+    },
+    "card": {
+      "readMore": "Read more",
+      "readTime": "{minutes} min read",
+      "byAuthor": "By"
+    },
+    "pagination": {
+      "prev": "Previous",
+      "next": "Next",
+      "pageOf": "Page {current} of {total}"
+    },
+    "related": {
+      "title": "Related Posts"
+    },
+    "cta": {
+      "title": "Ask us on WhatsApp.",
+      "description": "Training, nutrition or class choice — let's talk it through.",
+      "button": "Message on WhatsApp"
+    },
+    "categories": {
+      "training": "Training",
+      "nutrition": "Nutrition",
+      "pilates": "Pilates",
+      "martial-arts": "Martial Arts",
+      "kids-sports": "Kids Sports",
+      "general": "General"
+    }
+  },
+  "About": {
+    "hero": {
+      "title": "ABOUT US",
+      "subtitle": "Samimi Sports Club"
+    },
+    "story": {
+      "title": "WHO WE ARE",
+      "paragraphs": [
+        "Samimi Sports Club is a small but heartfelt sports community founded in Ankara Yenimahalle Demet, where members are treated like family.",
+        "Under one roof we offer five disciplines: Taekwondo, Boxing & Kickboxing, Traditional Archery, Kids Gymnastics and women-only Reformer Pilates — each led by certified, experienced trainers.",
+        "From children to adults, beginners to advanced, we built a place that fits every age and level. Our goal: bring healthy living, disciplined training and a welcoming sports culture under the same roof."
+      ]
+    },
+    "values": {
+      "title": "OUR VALUES",
+      "subtitle": "Three principles that make us who we are.",
+      "items": {
+        "samimiyet": {
+          "title": "WARMTH",
+          "subtitle": "A Family-Like Community",
+          "text": "True to our name (\"Samimi\" means warm, sincere), we offer a personal atmosphere. Everyone feels at home; trainers and members know each other by name."
+        },
+        "uzmanlik": {
+          "title": "EXPERTISE",
+          "subtitle": "Experienced, Certified Trainers",
+          "text": "Every discipline is led by certified, experienced trainers. Reformer pilates with a physiotherapist, martial arts with seasoned coaches — quality is non-negotiable."
+        },
+        "cesitlilik": {
+          "title": "DIVERSITY",
+          "subtitle": "Five Disciplines, One Place",
+          "text": "Taekwondo, Boxing & Kickboxing, Traditional Archery, Kids Gymnastics and Reformer Pilates. Five disciplines under one roof — something for every member of the family."
+        }
+      },
+      "expand": "Expand",
+      "collapse": "Collapse"
+    },
+    "location": {
+      "title": "HOW TO REACH US",
+      "addressLabel": "Address",
+      "phoneLabel": "Phone",
+      "whatsappLabel": "WhatsApp",
+      "hoursLabel": "Opening Hours",
+      "mapsCta": "Show on Map",
+      "mapTitle": "Samimi Sports Club location"
+    },
+    "cta": {
+      "title": "Come Meet Us",
+      "description": "Tour the studio, ask your questions, plan a trial session together.",
+      "button": "Message on WhatsApp"
+    }
+  },
+  "Contact": {
+    "hero": {
+      "title": "CONTACT",
+      "subtitle": "The easiest ways to reach us."
+    },
+    "methods": {
+      "whatsapp": {
+        "title": "Message on WhatsApp",
+        "description": "Fastest reply — message us 24/7.",
+        "cta": "Send a Message"
+      },
+      "phone": {
+        "title": "Call Us",
+        "description": "Talk to us during opening hours.",
+        "cta": "Call Now"
+      },
+      "instagram": {
+        "title": "Instagram",
+        "description": "Photos from the studio and weekly schedules.",
+        "cta": "Open Profile"
+      }
+    },
+    "location": {
+      "title": "HOW TO GET HERE",
+      "addressLabel": "Address",
+      "hoursLabel": "Opening Hours",
+      "transportLabel": "Transport",
+      "transportText": "On Sami Efendi Avenue in Demet. Parking available nearby; short ride from Yenimahalle center by public transport.",
+      "mapsCta": "Get Directions",
+      "mapTitle": "Samimi Sports Club location"
+    },
+    "form": {
+      "title": "SEND A MESSAGE",
+      "subtitle": "You can also reach us by filling out this form.",
+      "fields": {
+        "name": "Full Name",
+        "phone": "Phone",
+        "email": "Email",
+        "subject": "Subject",
+        "message": "Message",
+        "namePlaceholder": "Your full name",
+        "phonePlaceholder": "+90 5XX XXX XX XX",
+        "emailPlaceholder": "you@example.com",
+        "messagePlaceholder": "Write your message here…"
+      },
+      "subjects": {
+        "general": "General info",
+        "reservation": "Reservation",
+        "branch": "Class info",
+        "other": "Other"
+      },
+      "optional": "Optional",
+      "submit": "Send Message",
+      "sending": "Sending…",
+      "successTitle": "Message received.",
+      "successText": "We'll reply as soon as possible. For urgent matters, reach us on WhatsApp.",
+      "successAction": "Send another message",
+      "errorRequired": "This field is required.",
+      "errorEmail": "Please enter a valid email."
+    }
+  },
+  "Tour": {
+    "hero": {
+      "title": "FACILITY TOUR",
+      "subtitle": "Get to know where you'll train."
+    },
+    "video": {
+      "title": "Welcome to our studio",
+      "placeholder": "Video coming soon",
+      "caption": "A short walk-through of the facility."
+    },
+    "sections": {
+      "main-hall": {
+        "title": "MAIN HALL",
+        "subtitle": "Martial Arts Area",
+        "text": "Dedicated flooring and equipment for taekwondo, boxing and kickboxing. Spacious room, high ceiling, professional gear."
+      },
+      "archery": {
+        "title": "ARCHERY AREA",
+        "subtitle": "Traditional Turkish Archery",
+        "text": "A safe shooting range purpose-built for traditional Turkish archery. All equipment is provided on site."
+      },
+      "gymnastics": {
+        "title": "KIDS GYMNASTICS AREA",
+        "subtitle": "Safe Space for Ages 4–14",
+        "text": "A safe, colourful and playful gymnastics area for ages 4–14. Mats, ropes and balance equipment."
+      },
+      "pilates": {
+        "title": "REFORMER PILATES STUDIO",
+        "subtitle": "Women Only",
+        "text": "A women-only reformer pilates studio with professional reformer machines and a bright atmosphere."
+      },
+      "locker": {
+        "title": "LOCKER ROOMS",
+        "subtitle": "Comfortable and Personal",
+        "text": "Comfortable locker rooms with personal lockers."
+      }
+    },
+    "cta": {
+      "title": "See It in Person",
+      "description": "Book a visit — we'll show you around and answer your questions.",
+      "button": "Message on WhatsApp"
+    }
+  },
+  "Faq": {
+    "hero": {
+      "title": "FREQUENTLY ASKED QUESTIONS",
+      "subtitle": "Quick answers to the things people ask the most."
+    },
+    "filter": {
+      "all": "All",
+      "noResults": "No questions in this category yet."
+    },
+    "accordion": {
+      "expand": "Expand",
+      "collapse": "Collapse"
+    },
+    "cta": {
+      "title": "Didn't find your answer?",
+      "description": "Drop us a WhatsApp message — we'll reply quickly.",
+      "button": "Message on WhatsApp"
+    },
+    "categories": {
+      "membership": "Membership",
+      "classes": "Classes",
+      "facility": "Facility",
+      "pilates": "Reformer Pilates",
+      "payment": "Payment"
+    }
+  },
+  "Footer": {
+    "tagline": "A warm sports community in Ankara Yenimahalle Demet. Five disciplines, experienced trainers, a family-friendly environment.",
+    "quickLinks": "Quick Links",
+    "contactTitle": "Contact",
+    "hoursTitle": "Opening Hours",
+    "followUs": "Follow us",
+    "copyright": "© {year} Samimi Sports Club. All rights reserved."
+  }
+}

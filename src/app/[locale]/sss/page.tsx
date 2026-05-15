@@ -1,0 +1,104 @@
+import type {Metadata} from 'next';
+import {getTranslations, setRequestLocale} from 'next-intl/server';
+import {FAQ_ITEMS, localizeFaq} from '@/lib/faqs';
+import {FaqClient} from '@/components/faq/FaqClient';
+import {contact, getWhatsAppUrl} from '@/config/contact';
+import {pageMetadata} from '@/lib/seo';
+
+export async function generateMetadata({
+  params
+}: {
+  params: Promise<{locale: string}>;
+}): Promise<Metadata> {
+  const {locale} = await params;
+  const t = await getTranslations({locale, namespace: 'Faq.hero'});
+  return pageMetadata({
+    locale,
+    path: '/sss',
+    title: t('title'),
+    description: t('subtitle')
+  });
+}
+
+export default async function SssPage({
+  params
+}: {
+  params: Promise<{locale: string}>;
+}) {
+  const {locale} = await params;
+  setRequestLocale(locale);
+  const tHero = await getTranslations('Faq.hero');
+  const tCta = await getTranslations('Faq.cta');
+
+  const localized = FAQ_ITEMS.map((i) => localizeFaq(i, locale));
+
+  const schema = {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: localized.map((f) => ({
+      '@type': 'Question',
+      name: f.question,
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: f.answer
+      }
+    }))
+  };
+
+  return (
+    <>
+      {/* HERO */}
+      <section className="bg-white">
+        <div className="mx-auto max-w-5xl px-4 py-16 text-center sm:px-6 sm:py-20 lg:px-8">
+          <h1 className="font-heading text-4xl tracking-wider text-brand-black sm:text-5xl md:text-6xl lg:text-7xl">
+            {tHero('title')}
+          </h1>
+          <p className="mx-auto mt-4 max-w-2xl text-lg text-brand-gray">
+            {tHero('subtitle')}
+          </p>
+        </div>
+      </section>
+
+      {/* FAQ */}
+      <section className="bg-brand-surface">
+        <div className="mx-auto max-w-3xl px-4 py-12 sm:px-6 sm:py-16 lg:px-8">
+          <FaqClient items={localized} />
+        </div>
+      </section>
+
+      {/* CTA */}
+      <section className="bg-brand-yellow">
+        <div className="mx-auto max-w-3xl px-4 py-16 text-center sm:px-6 sm:py-20 lg:px-8">
+          <h2 className="font-heading text-3xl leading-tight tracking-wider text-brand-black sm:text-4xl">
+            {tCta('title')}
+          </h2>
+          <p className="mt-4 text-base text-brand-black/80 sm:text-lg">
+            {tCta('description')}
+          </p>
+          <a
+            href={`tel:${contact.phone.tel}`}
+            className="mt-6 inline-block font-heading text-2xl tracking-wider text-brand-black transition-opacity hover:opacity-80 sm:text-3xl"
+          >
+            {contact.phone.display}
+          </a>
+          <div className="mt-6">
+            <a
+              href={getWhatsAppUrl(contact.whatsapp.messages.bilgi)}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex h-12 items-center justify-center rounded-full bg-brand-black px-8 text-base font-semibold text-white transition-colors hover:bg-zinc-800"
+            >
+              {tCta('button')}
+            </a>
+          </div>
+        </div>
+      </section>
+
+      {/* JSON-LD schema for SEO */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{__html: JSON.stringify(schema)}}
+      />
+    </>
+  );
+}

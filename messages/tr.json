@@ -1,0 +1,471 @@
+{
+  "Site": {
+    "name": "Samimi Spor Kulübü",
+    "tagline": "Ankara Yenimahalle'de Taekwondo, Boks, Okçuluk, Jimnastik ve Reformer Pilates."
+  },
+  "Nav": {
+    "home": "Ana Sayfa",
+    "branches": "Branşlar",
+    "trainers": "Eğitmenler",
+    "gallery": "Galeri",
+    "blog": "Blog",
+    "about": "Hakkımızda",
+    "contact": "İletişim",
+    "faq": "SSS",
+    "tour": "Tesis Turu",
+    "whatsapp": "WhatsApp'tan Yaz",
+    "openMenu": "Menüyü aç",
+    "closeMenu": "Menüyü kapat",
+    "skipToContent": "İçeriğe atla"
+  },
+  "Home": {
+    "hero": {
+      "subtitle": "Samimi <yellow>SPOR</yellow> Kulübü",
+      "title": "HAREKET ET, GÜÇLEN, KAZAN",
+      "description": "Ankara Yenimahalle Demet'te 5 branş, deneyimli eğitmenler ve samimi bir topluluk seni bekliyor.",
+      "ctaPrimary": "Seansını Ayırt",
+      "ctaSecondary": "Branşları Keşfet"
+    },
+    "stats": {
+      "branchesValue": "6",
+      "branchesLabel": "Branş",
+      "hoursValue": "12–23",
+      "hoursLabel": "Açık Saat"
+    },
+    "branches": {
+      "title": "Branşlarımız",
+      "subtitle": "Sana uygun branşı seç, hemen başla.",
+      "cta": "Tüm Branşlar"
+    },
+    "trainers": {
+      "title": "Eğitmenlerimiz",
+      "subtitle": "Alanında uzman, samimi ekibimiz."
+    },
+    "cta": {
+      "title": "Seansını Ayırt — WhatsApp'tan Ulaş",
+      "description": "Sorularını cevaplayalım, sana uygun planı birlikte belirleyelim.",
+      "button": "WhatsApp'tan Yaz"
+    },
+    "tour": {
+      "eyebrow": "Tesisimizi Tanı",
+      "title": "ANTRENMAN YAPACAĞIN YERİ GÖR",
+      "description": "Dövüş sanatları salonundan reformer stüdyosuna, okçuluk alanından çocuk jimnastiği bölümüne — kısa bir tesis turuna çık.",
+      "button": "Tesis Turu"
+    }
+  },
+  "Branches": {
+    "hero": {
+      "title": "BRANŞLARIMIZ",
+      "subtitle": "Her seviyeye uygun, uzman eğitmenlerle 5 branş."
+    },
+    "labels": {
+      "detailLink": "Detay",
+      "womenOnly": "Bayanlara özel"
+    },
+    "prices": {
+      "title": "Paket Fiyatları (8 Seans)",
+      "package": "Paket",
+      "campaign": "Kampanyalı",
+      "normal": "Normal",
+      "packages": {
+        "group4": "4 Kişilik Grup",
+        "group3": "3 Kişilik Grup",
+        "group2": "2 Kişilik Grup",
+        "individual": "Bireysel"
+      }
+    },
+    "cta": {
+      "title": "Sana en uygun branşı birlikte seçelim.",
+      "description": "WhatsApp'tan yaz, deneme seansını planlayalım.",
+      "button": "WhatsApp'tan Yaz"
+    },
+    "detail": {
+      "scheduleLabel": "Program",
+      "instructorLabel": "Eğitmen",
+      "featuresLabel": "Öne çıkan özellikler",
+      "infoBoxTitle": "Bu Branşa Katıl",
+      "bookButton": "WhatsApp'tan Rezervasyon",
+      "cta": {
+        "title": "Hemen başlamaya hazır mısın?",
+        "description": "WhatsApp'tan yaz, sana en uygun gün ve saati birlikte belirleyelim.",
+        "button": "WhatsApp'tan Yaz"
+      }
+    },
+    "items": {
+      "taekwondo": {
+        "name": "Taekwondo",
+        "schedule": "Pzt / Çrş / Cum · 18:00 – 19:30",
+        "scheduleLong": "Pazartesi / Çarşamba / Cuma · 18:00 – 19:30",
+        "description": "Disiplin, denge ve özgüven kazandıran köklü bir Kore dövüş sanatı. Çocuk ve yetişkin grupları.",
+        "longDescription": "Kore'nin milli dövüş sanatı. Disiplin, özgüven ve refleks geliştirme. Her yaş ve seviyeye uygun.",
+        "instructor": "Esat Mahmut Akın",
+        "features": [
+          "Her yaşa uygun",
+          "Disiplin ve özgüven",
+          "Öz savunma teknikleri"
+        ]
+      },
+      "boxing": {
+        "name": "Boks & Kick Boks",
+        "schedule": "Pzt / Çrş / Cum · 19:30 – 21:00",
+        "scheduleLong": "Pazartesi / Çarşamba / Cuma · 19:30 – 21:00",
+        "description": "Yüksek tempolu, kondisyon ve refleks geliştiren karma antrenman.",
+        "longDescription": "Kondisyon, güç ve öz savunma bir arada. Hem yeni başlayanlar hem deneyimliler için.",
+        "instructor": "",
+        "features": ["Yoğun kondisyon", "Öz savunma", "Her seviyeye uygun"]
+      },
+      "archery": {
+        "name": "Geleneksel Okçuluk",
+        "schedule": "Sal / Per · 16:30 – 17:30",
+        "scheduleLong": "Salı / Perşembe · 16:30 – 17:30",
+        "description": "Geleneksel tirendaz tekniğiyle odaklanma, postür ve nefes çalışması.",
+        "longDescription": "Türk okçuluk geleneğini yaşat. Konsantrasyon, sabır ve teknik gelişim.",
+        "instructor": "",
+        "features": [
+          "Geleneksel Türk okçuluğu",
+          "Konsantrasyon gelişimi",
+          "Tüm ekipman sağlanır"
+        ]
+      },
+      "gymnastics": {
+        "name": "Çocuk Jimnastiği",
+        "schedule": "Per 17:30 · Cmt 14:00 (45 dk)",
+        "scheduleLong": "Perşembe 17:30 · Cumartesi 14:00 (45 dakika)",
+        "description": "4–14 yaş çocuklar için temel jimnastik becerileri, denge ve esneklik.",
+        "longDescription": "Çocukların motor gelişimini destekleyen eğlenceli jimnastik dersleri.",
+        "instructor": "",
+        "features": ["4–14 yaş", "Motor gelişim", "Eğlenceli ortam"]
+      },
+      "pilates": {
+        "name": "Reformer Pilates",
+        "schedule": "Sal / Per / Cmt / Paz · 12:00 – 23:00",
+        "scheduleLong": "Salı / Perşembe / Cumartesi / Pazar · 12:00 – 23:00",
+        "description": "Bayanlara özel, 8 seanslık paketlerle reformer üzerinde tam vücut çalışması.",
+        "longDescription": "Fizyoterapist Beyza Erdaş eşliğinde reformer pilates. 8 seanslık paketler, haftada 2 seans.",
+        "instructor": "Beyza Erdaş (Fizyoterapist)",
+        "features": [
+          "Bayanlara özel",
+          "Fizyoterapist eğitmen",
+          "Küçük gruplar"
+        ]
+      }
+    }
+  },
+  "Trainers": {
+    "hero": {
+      "title": "EĞİTMENLERİMİZ",
+      "subtitle": "Alanında uzman, deneyimli kadromuz."
+    },
+    "labels": {
+      "profileLink": "Profili Gör"
+    },
+    "cta": {
+      "title": "Bir branşa karar ver, eğitmenle tanış.",
+      "description": "WhatsApp'tan yaz, sana uygun planı birlikte belirleyelim.",
+      "button": "WhatsApp'tan Yaz"
+    },
+    "detail": {
+      "aboutLabel": "Hakkında",
+      "certificatesLabel": "Sertifikalar",
+      "expertiseLabel": "Uzmanlık alanları",
+      "branchLabel": "Verdiği branş",
+      "branchLink": "Branş sayfasına git",
+      "bookButton": "WhatsApp'tan Rezervasyon"
+    },
+    "items": {
+      "beyza": {
+        "name": "Beyza Erdaş",
+        "title": "Fizyoterapist · Reformer Pilates",
+        "shortBio": "Dokuz Eylül Üniversitesi Fizik Tedavi ve Rehabilitasyon mezunu.",
+        "about": [
+          "Dokuz Eylül Üniversitesi Fizik Tedavi ve Rehabilitasyon mezunu (2024).",
+          "G Therapy Ankara'da sporcu fizyoterapistliği, pilates ve manuel terapi pratikleri yürüttü.",
+          "2025'ten itibaren aynı kurumda müdür olarak görev yapıyor."
+        ],
+        "certificates": [
+          "MPT — Manuel-Manipülatif Fizik Tedavi",
+          "Hacamat ve Kupa Masajı"
+        ],
+        "expertise": [
+          "Manuel terapi",
+          "Kinezyo bantlama",
+          "Pilates",
+          "Kuru iğneleme"
+        ]
+      },
+      "esat": {
+        "name": "Esat Mahmut Akın",
+        "title": "Taekwondo Eğitmeni",
+        "shortBio": "Taekwondo branşının deneyimli eğitmeni.",
+        "about": [
+          "Taekwondo eğitmenimiz. Detaylı bilgiler yakında eklenecek."
+        ],
+        "certificates": [],
+        "expertise": []
+      }
+    }
+  },
+  "Gallery": {
+    "hero": {
+      "title": "GALERİ",
+      "subtitle": "Tesisimizden kareler."
+    },
+    "filter": {
+      "all": "Tümü",
+      "noResults": "Bu kategoride henüz fotoğraf yok."
+    },
+    "lightbox": {
+      "close": "Kapat",
+      "prev": "Önceki",
+      "next": "Sonraki",
+      "imageCounter": "{current} / {total}"
+    },
+    "categories": {
+      "taekwondo": "Taekwondo",
+      "boxing": "Boks & Kick Boks",
+      "archery": "Okçuluk",
+      "gymnastics": "Jimnastik",
+      "pilates": "Reformer Pilates",
+      "facility": "Tesis"
+    },
+    "items": {
+      "tw-1": {"title": "Taekwondo antrenmanı"},
+      "tw-2": {"title": "Taekwondo gösterisi"},
+      "bx-1": {"title": "Boks antrenmanı"},
+      "bx-2": {"title": "Kick boks dersi"},
+      "ar-1": {"title": "Geleneksel okçuluk"},
+      "ar-2": {"title": "Okçuluk konsantrasyonu"},
+      "gy-1": {"title": "Çocuk jimnastiği"},
+      "gy-2": {"title": "Denge çalışması"},
+      "pl-1": {"title": "Reformer pilates seansı"},
+      "pl-2": {"title": "Pilates grup dersi"},
+      "fc-1": {"title": "Salon görünümü"},
+      "fc-2": {"title": "Soyunma odaları"}
+    }
+  },
+  "Blog": {
+    "hero": {
+      "title": "BLOG",
+      "subtitle": "Sağlık, antrenman ve spor üzerine yazılar."
+    },
+    "filter": {
+      "all": "Tümü",
+      "noResults": "Bu kategoride henüz yazı yok."
+    },
+    "card": {
+      "readMore": "Devamını oku",
+      "readTime": "{minutes} dk okuma",
+      "byAuthor": "Yazar"
+    },
+    "pagination": {
+      "prev": "Önceki",
+      "next": "Sonraki",
+      "pageOf": "Sayfa {current} / {total}"
+    },
+    "related": {
+      "title": "İlgili Yazılar"
+    },
+    "cta": {
+      "title": "Sorularını WhatsApp'tan sor.",
+      "description": "Antrenman, beslenme veya branş seçimi — birlikte konuşalım.",
+      "button": "WhatsApp'tan Yaz"
+    },
+    "categories": {
+      "training": "Antrenman",
+      "nutrition": "Beslenme",
+      "pilates": "Pilates",
+      "martial-arts": "Dövüş Sanatları",
+      "kids-sports": "Çocuk Sporu",
+      "general": "Genel"
+    }
+  },
+  "About": {
+    "hero": {
+      "title": "HAKKIMIZDA",
+      "subtitle": "Samimi Spor Kulübü"
+    },
+    "story": {
+      "title": "BİZ KİMİZ?",
+      "paragraphs": [
+        "Samimi Spor Kulübü, Ankara Yenimahalle Demet'te kurulmuş, üyelerini bir aile gibi gören küçük ama içten bir spor topluluğudur.",
+        "Tek tesiste 5 farklı branşta hizmet veriyoruz: Taekwondo, Boks & Kick Boks, Geleneksel Okçuluk, Çocuk Jimnastiği ve Bayanlara özel Reformer Pilates. Her branş, alanında sertifikalı ve deneyimli eğitmenler tarafından yönetiliyor.",
+        "Çocuktan yetişkine, yeni başlayandan ileri seviyeye her yaşa ve seviyeye uygun bir ortam kurduk. Hedefimiz; sağlıklı yaşamı, disiplinli antrenmanı ve samimi bir spor kültürünü aynı çatı altında buluşturmak."
+      ]
+    },
+    "values": {
+      "title": "DEĞERLERİMİZ",
+      "subtitle": "Bizi biz yapan üç temel.",
+      "items": {
+        "samimiyet": {
+          "title": "SAMİMİYET",
+          "subtitle": "Üyelerimizle Aile Gibi",
+          "text": "Samimi Spor Kulübü adından da anlaşılacağı gibi, üyelerimize samimi bir ortam sunar. Her gelen kendi evi gibi hisseder; eğitmenler ve üyeler birbirini ismiyle tanır."
+        },
+        "uzmanlik": {
+          "title": "UZMANLIK",
+          "subtitle": "Alanında Deneyimli Eğitmenler",
+          "text": "Her branşta sertifikalı, deneyimli eğitmenlerle çalışıyoruz. Fizyoterapist eşliğinde reformer pilates, uzman antrenörlerle dövüş sanatları — kalite ödün verilmeyen bir önceliğimiz."
+        },
+        "cesitlilik": {
+          "title": "ÇEŞİTLİLİK",
+          "subtitle": "5 Farklı Branş",
+          "text": "Taekwondo, Boks & Kick Boks, Geleneksel Okçuluk, Çocuk Jimnastiği ve Reformer Pilates. Tek tesiste 5 farklı branş — ailenin her ferdine uygun bir seçenek."
+        }
+      },
+      "expand": "Detayı aç",
+      "collapse": "Kapat"
+    },
+    "location": {
+      "title": "BİZE NASIL ULAŞABİLİRSİNİZ?",
+      "addressLabel": "Adres",
+      "phoneLabel": "Telefon",
+      "whatsappLabel": "WhatsApp",
+      "hoursLabel": "Çalışma Saatleri",
+      "mapsCta": "Haritada Göster",
+      "mapTitle": "Samimi Spor Kulübü konumu"
+    },
+    "cta": {
+      "title": "Tanışmaya Gel",
+      "description": "Tesisi gez, sorularını sor, deneme seansını birlikte planlayalım.",
+      "button": "WhatsApp'tan Yaz"
+    }
+  },
+  "Contact": {
+    "hero": {
+      "title": "İLETİŞİM",
+      "subtitle": "Bize ulaşmanın en kolay yolu."
+    },
+    "methods": {
+      "whatsapp": {
+        "title": "WhatsApp'tan Yaz",
+        "description": "En hızlı dönüş — 7/24 mesaj atabilirsin.",
+        "cta": "Mesaj Gönder"
+      },
+      "phone": {
+        "title": "Bizi Ara",
+        "description": "Çalışma saatleri içinde direkt görüşelim.",
+        "cta": "Hemen Ara"
+      },
+      "instagram": {
+        "title": "Instagram",
+        "description": "Tesisten kareler ve haftalık programlar.",
+        "cta": "Profili Aç"
+      }
+    },
+    "location": {
+      "title": "BİZE NASIL GELİRSİNİZ?",
+      "addressLabel": "Adres",
+      "hoursLabel": "Çalışma Saatleri",
+      "transportLabel": "Ulaşım",
+      "transportText": "Demet bölgesinde, Sami Efendi Caddesi üzerinde. Yakın çevrede otopark mevcut; toplu taşımayla Yenimahalle merkezden kısa mesafede.",
+      "mapsCta": "Yol Tarifi Al",
+      "mapTitle": "Samimi Spor Kulübü konumu"
+    },
+    "form": {
+      "title": "MESAJ GÖNDERİN",
+      "subtitle": "Form doldurarak da bize ulaşabilirsiniz.",
+      "fields": {
+        "name": "Ad Soyad",
+        "phone": "Telefon",
+        "email": "E-posta",
+        "subject": "Konu",
+        "message": "Mesaj",
+        "namePlaceholder": "Adınız ve soyadınız",
+        "phonePlaceholder": "05XX XXX XX XX",
+        "emailPlaceholder": "ornek@mail.com",
+        "messagePlaceholder": "Mesajınızı buraya yazın..."
+      },
+      "subjects": {
+        "general": "Genel Bilgi",
+        "reservation": "Rezervasyon",
+        "branch": "Branş Bilgisi",
+        "other": "Diğer"
+      },
+      "optional": "Opsiyonel",
+      "submit": "Mesajı Gönder",
+      "sending": "Gönderiliyor…",
+      "successTitle": "Mesajınız alındı.",
+      "successText": "En kısa sürede dönüş yapacağız. Acil durumlarda WhatsApp'tan ulaşabilirsin.",
+      "successAction": "Yeni mesaj gönder",
+      "errorRequired": "Bu alan zorunlu.",
+      "errorEmail": "Geçerli bir e-posta gir."
+    }
+  },
+  "Tour": {
+    "hero": {
+      "title": "TESİS TURU",
+      "subtitle": "Antrenman yapacağın yeri tanı."
+    },
+    "video": {
+      "title": "Tesisimize hoş geldin",
+      "placeholder": "Video yakında eklenecek",
+      "caption": "Salonumuzun kısa bir gezintisi."
+    },
+    "sections": {
+      "main-hall": {
+        "title": "ANA SALON",
+        "subtitle": "Dövüş Sanatları Alanı",
+        "text": "Taekwondo, boks ve kick boks derslerimiz için özel zemin ve donanım. Geniş alan, yüksek tavan, profesyonel ekipman."
+      },
+      "archery": {
+        "title": "OKÇULUK ALANI",
+        "subtitle": "Geleneksel Türk Okçuluğu",
+        "text": "Geleneksel Türk okçuluğu için özel olarak tasarlanmış güvenli atış alanı. Tüm ekipman tesisimizde mevcut."
+      },
+      "gymnastics": {
+        "title": "ÇOCUK JİMNASTİĞİ ALANI",
+        "subtitle": "4–14 Yaş İçin Güvenli Ortam",
+        "text": "4–14 yaş arası çocuklarımız için güvenli, renkli ve eğlenceli jimnastik alanı. Mat, halat, denge aletleri."
+      },
+      "pilates": {
+        "title": "REFORMER PILATES STÜDYOSU",
+        "subtitle": "Bayanlara Özel",
+        "text": "Bayanlarımıza özel reformer pilates stüdyosu. Profesyonel reformer makineleri, ferah ortam."
+      },
+      "locker": {
+        "title": "SOYUNMA ODALARI",
+        "subtitle": "Konforlu ve Kişisel",
+        "text": "Konforlu soyunma odaları, kişisel dolaplar."
+      }
+    },
+    "cta": {
+      "title": "Tesisi Yerinde Gör",
+      "description": "Randevu al, gel — tesisi birlikte gezelim, sorularını yanıtlayalım.",
+      "button": "WhatsApp'tan Yaz"
+    }
+  },
+  "Faq": {
+    "hero": {
+      "title": "SIKÇA SORULAN SORULAR",
+      "subtitle": "Merak ettiklerinin cevapları burada."
+    },
+    "filter": {
+      "all": "Tümü",
+      "noResults": "Bu kategoride soru yok."
+    },
+    "accordion": {
+      "expand": "Aç",
+      "collapse": "Kapat"
+    },
+    "cta": {
+      "title": "Sorun cevaplanmadı mı?",
+      "description": "WhatsApp'tan yazsana — anında yardımcı olalım.",
+      "button": "WhatsApp'tan Yaz"
+    },
+    "categories": {
+      "membership": "Üyelik",
+      "classes": "Branşlar",
+      "facility": "Tesis",
+      "pilates": "Reformer Pilates",
+      "payment": "Ödeme"
+    }
+  },
+  "Footer": {
+    "tagline": "Ankara Yenimahalle Demet'te samimi bir spor topluluğu. 5 branş, deneyimli eğitmenler, ailece güvenli ortam.",
+    "quickLinks": "Hızlı Linkler",
+    "contactTitle": "İletişim",
+    "hoursTitle": "Çalışma Saatleri",
+    "followUs": "Bizi takip et",
+    "copyright": "© {year} Samimi Spor Kulübü. Tüm hakları saklıdır."
+  }
+}

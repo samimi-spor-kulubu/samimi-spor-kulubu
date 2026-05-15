@@ -1,0 +1,254 @@
+import type {Metadata} from 'next';
+import {getTranslations, setRequestLocale} from 'next-intl/server';
+import {Link} from '@/i18n/navigation';
+import {contact, getWhatsAppUrl} from '@/config/contact';
+import {pageMetadata} from '@/lib/seo';
+
+export async function generateMetadata({
+  params
+}: {
+  params: Promise<{locale: string}>;
+}): Promise<Metadata> {
+  const {locale} = await params;
+  const tSite = await getTranslations({locale, namespace: 'Site'});
+  const tHome = await getTranslations({locale, namespace: 'Home.hero'});
+  return pageMetadata({
+    locale,
+    path: '/',
+    title: tSite('name'),
+    description: tHome('description')
+  });
+}
+
+const BRANCH_KEYS = [
+  'taekwondo',
+  'boxing',
+  'archery',
+  'gymnastics',
+  'pilates'
+] as const;
+
+const BRANCH_EMOJI: Record<(typeof BRANCH_KEYS)[number], string> = {
+  taekwondo: '🥋',
+  boxing: '🥊',
+  archery: '🏹',
+  gymnastics: '🤸',
+  pilates: '🧘'
+};
+
+const TRAINER_KEYS = ['beyza', 'esat'] as const;
+
+const STAT_KEYS = ['branches', 'hours'] as const;
+
+export default async function Home({
+  params
+}: {
+  params: Promise<{locale: string}>;
+}) {
+  const {locale} = await params;
+  setRequestLocale(locale);
+  const t = await getTranslations('Home');
+  const tBranches = await getTranslations('Branches.items');
+  const tTrainers = await getTranslations('Trainers.items');
+
+  return (
+    <>
+      {/* HERO */}
+      <section className="relative overflow-hidden bg-white">
+        <div className="mx-auto grid max-w-7xl items-center gap-12 px-4 py-20 sm:px-6 lg:grid-cols-2 lg:gap-16 lg:px-8 lg:py-28">
+          <div>
+            <p className="font-heading text-base tracking-widest text-brand-gray sm:text-lg">
+              {t.rich('hero.subtitle', {
+                yellow: (chunks) => (
+                  <span className="text-brand-yellow-dark">{chunks}</span>
+                )
+              })}
+            </p>
+            <h1 className="mt-4 font-heading text-4xl leading-[0.95] tracking-wide text-brand-black sm:text-5xl md:text-6xl lg:text-7xl">
+              {t('hero.title')}
+            </h1>
+            <p className="mt-6 max-w-xl text-lg leading-relaxed text-brand-gray">
+              {t('hero.description')}
+            </p>
+            <div className="mt-10 flex flex-wrap gap-4">
+              <a
+                href={getWhatsAppUrl(contact.whatsapp.messages.rezervasyon)}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex h-12 items-center justify-center rounded-full bg-brand-yellow px-8 text-base font-semibold text-brand-black transition-colors hover:bg-brand-yellow-dark"
+              >
+                {t('hero.ctaPrimary')}
+              </a>
+              <Link
+                href="/branslar"
+                className="inline-flex h-12 items-center justify-center rounded-full border-2 border-brand-black px-8 text-base font-semibold text-brand-black transition-colors hover:bg-brand-black hover:text-white"
+              >
+                {t('hero.ctaSecondary')}
+              </Link>
+            </div>
+          </div>
+
+          {/* Dekoratif geometrik alan */}
+          <div className="relative hidden h-[460px] lg:block" aria-hidden="true">
+            <div className="absolute right-4 top-4 h-72 w-72 rounded-full bg-brand-yellow" />
+            <div className="absolute right-40 bottom-6 h-44 w-44 rounded-3xl bg-brand-black" />
+            <div className="absolute left-8 bottom-24 h-28 w-28 rotate-12 rounded-2xl border-4 border-brand-yellow-dark" />
+            <div className="absolute left-44 top-8 h-20 w-20 rounded-full border-4 border-brand-black" />
+          </div>
+        </div>
+      </section>
+
+      {/* STATS */}
+      <section className="border-y border-brand-border bg-brand-surface">
+        <div className="mx-auto grid max-w-3xl grid-cols-2 gap-8 px-4 py-12 sm:gap-16 sm:px-6 lg:px-8">
+          {STAT_KEYS.map((k) => (
+            <div key={k} className="text-center">
+              <p className="font-heading text-4xl leading-none tracking-wider text-brand-yellow-dark sm:text-6xl">
+                {t(`stats.${k}Value`)}
+              </p>
+              <p className="mt-2 text-xs font-semibold uppercase tracking-widest text-brand-gray sm:text-sm">
+                {t(`stats.${k}Label`)}
+              </p>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* BRANCHES */}
+      <section className="bg-white">
+        <div className="mx-auto max-w-7xl px-4 py-20 sm:px-6 lg:px-8">
+          <div className="text-center">
+            <h2 className="font-heading text-4xl tracking-wider text-brand-black sm:text-5xl">
+              {t('branches.title')}
+            </h2>
+            <p className="mt-3 text-brand-gray">{t('branches.subtitle')}</p>
+          </div>
+          <div className="mt-12 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+            {BRANCH_KEYS.map((key) => (
+              <Link
+                key={key}
+                href="/branslar"
+                className="group rounded-2xl border-2 border-brand-border bg-white p-6 transition-all hover:-translate-y-1 hover:border-brand-yellow hover:shadow-lg"
+              >
+                <div className="text-4xl" aria-hidden="true">
+                  {BRANCH_EMOJI[key]}
+                </div>
+                <h3 className="mt-4 font-heading text-2xl tracking-wider text-brand-black">
+                  {tBranches(`${key}.name`)}
+                </h3>
+                <p className="mt-2 text-sm text-brand-gray">
+                  {tBranches(`${key}.schedule`)}
+                </p>
+              </Link>
+            ))}
+          </div>
+          <div className="mt-12 text-center">
+            <Link
+              href="/branslar"
+              className="inline-flex h-12 items-center justify-center rounded-full border-2 border-brand-black px-8 text-base font-semibold text-brand-black transition-colors hover:bg-brand-black hover:text-white"
+            >
+              {t('branches.cta')}
+            </Link>
+          </div>
+        </div>
+      </section>
+
+      {/* TRAINERS */}
+      <section className="bg-brand-surface">
+        <div className="mx-auto max-w-5xl px-4 py-20 sm:px-6 lg:px-8">
+          <div className="text-center">
+            <h2 className="font-heading text-4xl tracking-wider text-brand-black sm:text-5xl">
+              {t('trainers.title')}
+            </h2>
+            <p className="mt-3 text-brand-gray">{t('trainers.subtitle')}</p>
+          </div>
+          <div className="mt-12 grid grid-cols-1 gap-8 sm:grid-cols-2">
+            {TRAINER_KEYS.map((key) => (
+              <Link
+                key={key}
+                href="/egitmenler"
+                className="group overflow-hidden rounded-2xl bg-white shadow-sm transition-all hover:shadow-lg"
+              >
+                <div
+                  className="aspect-[4/3] w-full bg-gradient-to-br from-zinc-200 to-zinc-300"
+                  aria-hidden="true"
+                />
+                <div className="p-6">
+                  <h3 className="font-heading text-2xl tracking-wider text-brand-black">
+                    {tTrainers(`${key}.name`)}
+                  </h3>
+                  <p className="mt-2 text-sm text-brand-gray">
+                    {tTrainers(`${key}.title`)}
+                  </p>
+                </div>
+              </Link>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* FACILITY TOUR CTA */}
+      <section className="bg-brand-surface">
+        <div className="mx-auto max-w-6xl px-4 py-16 sm:px-6 sm:py-20 lg:px-8">
+          <Link
+            href="/tesis-turu"
+            className="group grid grid-cols-1 overflow-hidden rounded-3xl border-2 border-brand-border bg-white transition-all hover:-translate-y-1 hover:border-brand-yellow hover:shadow-lg md:grid-cols-2"
+          >
+            <div className="relative aspect-[4/3] overflow-hidden bg-gradient-to-br from-zinc-200 to-zinc-300 md:aspect-auto md:min-h-[280px]">
+              <div className="absolute inset-0 flex items-center justify-center">
+                <span
+                  aria-hidden="true"
+                  className="text-7xl opacity-60 transition-transform duration-300 group-hover:scale-110 sm:text-8xl"
+                >
+                  🏟️
+                </span>
+              </div>
+            </div>
+            <div className="flex flex-col justify-center p-8 sm:p-10">
+              <span className="text-sm font-semibold uppercase tracking-widest text-brand-yellow-dark">
+                {t('tour.eyebrow')}
+              </span>
+              <h2 className="mt-3 font-heading text-3xl leading-tight tracking-wider text-brand-black sm:text-4xl">
+                {t('tour.title')}
+              </h2>
+              <p className="mt-3 text-base leading-relaxed text-brand-gray">
+                {t('tour.description')}
+              </p>
+              <span className="mt-6 inline-flex h-12 items-center justify-center self-start rounded-full bg-brand-yellow px-7 text-sm font-semibold text-brand-black transition-colors group-hover:bg-brand-yellow-dark">
+                {t('tour.button')} →
+              </span>
+            </div>
+          </Link>
+        </div>
+      </section>
+
+      {/* WHATSAPP CTA */}
+      <section className="bg-brand-yellow">
+        <div className="mx-auto max-w-4xl px-4 py-16 text-center sm:px-6 sm:py-20 lg:px-8">
+          <h2 className="font-heading text-3xl leading-tight tracking-wider text-brand-black sm:text-5xl">
+            {t('cta.title')}
+          </h2>
+          <p className="mt-4 text-base text-brand-black/80 sm:text-lg">
+            {t('cta.description')}
+          </p>
+          <a
+            href={`tel:${contact.phone.tel}`}
+            className="mt-6 inline-block font-heading text-3xl tracking-wider text-brand-black transition-opacity hover:opacity-80 sm:text-4xl"
+          >
+            {contact.phone.display}
+          </a>
+          <div className="mt-8">
+            <a
+              href={getWhatsAppUrl(contact.whatsapp.messages.rezervasyon)}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex h-12 items-center justify-center rounded-full bg-brand-black px-8 text-base font-semibold text-white transition-colors hover:bg-zinc-800"
+            >
+              {t('cta.button')}
+            </a>
+          </div>
+        </div>
+      </section>
+    </>
+  );
+}
