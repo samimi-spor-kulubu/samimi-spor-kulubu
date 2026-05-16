@@ -117,7 +117,7 @@ export default async function AdminHomePage() {
             SON MESAJLAR
           </h2>
           <Link
-            href="/admin/messages"
+            href="/admin/mesajlar"
             className="text-sm font-semibold text-brand-amber hover:text-brand-black"
           >
             Tümünü gör →
@@ -132,19 +132,21 @@ export default async function AdminHomePage() {
           ) : (
             <ul className="divide-y divide-brand-border">
               {recent.map((m) => (
-                <li
-                  key={m.id}
-                  className="flex flex-col gap-1 p-4 sm:flex-row sm:items-center sm:justify-between"
-                >
-                  <div>
-                    <p className="font-semibold text-brand-black">{m.name}</p>
-                    {m.subject && (
-                      <p className="text-sm text-brand-gray">{m.subject}</p>
-                    )}
-                  </div>
-                  <p className="text-xs text-brand-gray">
-                    {formatDate(m.created_at)}
-                  </p>
+                <li key={m.id}>
+                  <Link
+                    href={`/admin/mesajlar/${m.id}`}
+                    className="flex flex-col gap-1 p-4 transition-colors hover:bg-brand-surface sm:flex-row sm:items-center sm:justify-between"
+                  >
+                    <div>
+                      <p className="font-semibold text-brand-black">{m.name}</p>
+                      {m.subject && (
+                        <p className="text-sm text-brand-gray">{m.subject}</p>
+                      )}
+                    </div>
+                    <p className="text-xs text-brand-gray">
+                      {formatDate(m.created_at)}
+                    </p>
+                  </Link>
                 </li>
               ))}
             </ul>

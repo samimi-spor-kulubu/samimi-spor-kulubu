@@ -13,7 +13,7 @@ const NAV_LINKS: ReadonlyArray<NavLink> = [
   {href: '/admin/blog', label: 'Blog'},
   {href: '/admin/gallery', label: 'Galeri'},
   {href: '/admin/faqs', label: 'SSS'},
-  {href: '/admin/messages', label: 'Mesajlar'},
+  {href: '/admin/mesajlar', label: 'Mesajlar'},
   {href: '/admin/settings', label: 'Ayarlar'}
 ];
 
