@@ -40,11 +40,18 @@ export default async function GaleriPage({
   // /galeri regardless of how many photos exist in that bucket. The
   // client uses each category's `matchers` array to filter robustly
   // across legacy English slugs (boxing/archery/…) and new TR slugs.
-  const categories = GALLERY_CATEGORIES.map((c) => ({
-    slug: c.slug,
-    label: locale === 'en' ? c.label_en : c.label_tr,
-    matchers: [c.slug, ...c.aliases]
-  }));
+  // `count` is precomputed server-side so the pill labels can show
+  // "(N)" without the client re-walking the list.
+  const categories = GALLERY_CATEGORIES.map((c) => {
+    const matchers = new Set<string>([c.slug, ...c.aliases]);
+    const count = items.filter((it) => matchers.has(it.category)).length;
+    return {
+      slug: c.slug,
+      label: locale === 'en' ? c.label_en : c.label_tr,
+      matchers: [c.slug, ...c.aliases],
+      count
+    };
+  });
 
   return (
     <>
@@ -67,6 +74,7 @@ export default async function GaleriPage({
             items={items}
             categories={categories}
             allLabel={tFilter('all')}
+            allCount={items.length}
             noResultsLabel={tFilter('noResults')}
             emptyLabel={
               locale === 'en'

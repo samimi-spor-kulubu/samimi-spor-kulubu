@@ -12,6 +12,8 @@ export type GalleryCategoryOption = {
   label: string;
   /** Every slug — canonical + aliases — that should match this category. */
   matchers: string[];
+  /** Total photos in this category, precomputed server-side. */
+  count: number;
 };
 
 type Filter = string; // 'all' | category slug
@@ -20,12 +22,14 @@ export function GalleryClient({
   items,
   categories,
   allLabel,
+  allCount,
   noResultsLabel,
   emptyLabel
 }: {
   items: LocalizedGalleryItem[];
   categories: GalleryCategoryOption[];
   allLabel: string;
+  allCount: number;
   noResultsLabel: string;
   emptyLabel: string;
 }) {
@@ -69,6 +73,7 @@ export function GalleryClient({
         <FilterPill
           active={filter === 'all'}
           onClick={() => changeFilter('all')}
+          count={allCount}
         >
           {allLabel}
         </FilterPill>
@@ -77,6 +82,7 @@ export function GalleryClient({
             key={c.slug}
             active={filter === c.slug}
             onClick={() => changeFilter(c.slug)}
+            count={c.count}
           >
             {c.label}
           </FilterPill>
@@ -125,10 +131,12 @@ export function GalleryClient({
 function FilterPill({
   active,
   onClick,
+  count,
   children
 }: {
   active: boolean;
   onClick: () => void;
+  count?: number;
   children: React.ReactNode;
 }) {
   return (
@@ -136,13 +144,21 @@ function FilterPill({
       type="button"
       onClick={onClick}
       className={
-        'inline-flex h-10 items-center rounded-full border-2 px-5 text-sm font-semibold transition-colors ' +
+        'inline-flex h-10 items-center gap-1.5 rounded-full border-2 px-5 text-sm font-semibold transition-colors ' +
         (active
           ? 'border-brand-black bg-brand-yellow text-brand-black'
           : 'border-brand-border bg-white text-brand-black hover:border-brand-black')
       }
     >
-      {children}
+      <span>{children}</span>
+      {typeof count === 'number' && (
+        <span
+          aria-hidden="true"
+          className="text-xs font-medium opacity-70 tabular-nums"
+        >
+          ({count})
+        </span>
+      )}
     </button>
   );
 }
