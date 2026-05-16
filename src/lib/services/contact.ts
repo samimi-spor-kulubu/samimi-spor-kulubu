@@ -2,6 +2,11 @@ import 'server-only';
 import {cache} from 'react';
 
 import {contact as FALLBACK} from '@/config/contact';
+import {
+  formatPhoneDisplay,
+  formatPhoneTel,
+  formatPhoneWhatsApp
+} from '@/lib/utils/phone';
 
 import {getAllSettings} from './settings';
 
@@ -48,12 +53,26 @@ export type ContactInfo = {
  */
 export const getContactInfo = cache(async (): Promise<ContactInfo> => {
   const s = await getAllSettings();
-  const phoneTel = s.phone_tel || FALLBACK.phone.tel;
-  const whatsappNumber = s.whatsapp_number || FALLBACK.whatsapp.number;
+
+  // Single phone source of truth. The admin types one raw number into
+  // `phone_number`; we derive every format the site needs. Legacy
+  // settings keys (phone_tel / whatsapp_number / phone_display) are
+  // tried as a fallback so the site keeps working even before a
+  // backfill has run.
+  const rawPhone =
+    s.phone_number ||
+    s.phone_tel ||
+    s.whatsapp_number ||
+    s.phone_display ||
+    FALLBACK.phone.tel;
+
+  const phoneDisplay = formatPhoneDisplay(rawPhone);
+  const phoneTel = formatPhoneTel(rawPhone);
+  const whatsappNumber = formatPhoneWhatsApp(rawPhone);
 
   return {
     phone: {
-      display: s.phone_display || FALLBACK.phone.display,
+      display: phoneDisplay,
       tel: phoneTel
     },
     whatsapp: {

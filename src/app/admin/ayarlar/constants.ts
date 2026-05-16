@@ -22,26 +22,15 @@ export type SettingsGroup = {
 export const SETTINGS_GROUPS: SettingsGroup[] = [
   {
     title: 'İletişim',
-    description: 'Telefon, WhatsApp ve Instagram bilgileri.',
+    description: 'Telefon ve Instagram bilgileri.',
     fields: [
       {
-        key: 'phone_display',
-        label: 'Telefon (görünen format)',
-        placeholder: '0533 559 47 97',
-        hint: 'Sitenin ziyaretçilere gösterdiği biçim'
-      },
-      {
-        key: 'phone_tel',
-        label: 'Telefon (link için)',
-        placeholder: '+905335594797',
+        key: 'phone_number',
+        label: 'Telefon Numarası',
+        placeholder: '05335594797',
         type: 'tel',
-        hint: '"Ara" butonları için uluslararası format'
-      },
-      {
-        key: 'whatsapp_number',
-        label: 'WhatsApp numarası',
-        placeholder: '905335594797',
-        hint: 'wa.me linkleri için, başında 90 (artı/işaret yok)'
+        hint:
+          'Hem "Ara" hem WhatsApp butonu bu numarayı kullanır. Boşluksuz girin: 05335594797'
       },
       {
         key: 'instagram_handle',

@@ -15,6 +15,23 @@ async function loadSettings(): Promise<Record<string, string>> {
   for (const row of data ?? []) {
     if (row.value !== null) map[row.key] = row.value;
   }
+
+  // One-time backfill: if `phone_number` hasn't been set yet, seed it
+  // from whichever legacy phone key has a value. Idempotent — once the
+  // row exists the upsert below becomes a no-op for the next visitor.
+  if (!map.phone_number) {
+    const legacy = map.phone_tel || map.whatsapp_number || map.phone_display;
+    if (legacy) {
+      await admin
+        .from('settings')
+        .upsert(
+          {key: 'phone_number', value: legacy},
+          {onConflict: 'key', ignoreDuplicates: true}
+        );
+      map.phone_number = legacy;
+    }
+  }
+
   return map;
 }
 
