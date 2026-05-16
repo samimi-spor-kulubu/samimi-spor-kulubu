@@ -11,6 +11,8 @@ import {
   MapPinIcon
 } from '@/components/icons';
 
+export const revalidate = 60;
+
 export async function generateMetadata({
   params
 }: {

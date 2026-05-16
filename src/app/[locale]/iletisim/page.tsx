@@ -9,6 +9,8 @@ import {
 import {pageMetadata} from '@/lib/seo';
 import {getContactInfo, whatsAppUrl} from '@/lib/services/contact';
 
+export const revalidate = 60;
+
 export async function generateMetadata({
   params
 }: {

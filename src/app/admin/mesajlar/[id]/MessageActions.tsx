@@ -1,9 +1,19 @@
 'use client';
 
-import {useTransition} from 'react';
+import {useState, useTransition} from 'react';
 import {useRouter} from 'next/navigation';
 
 import {Button} from '@/components/ui/button';
+import {
+  Dialog,
+  DialogClose,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger
+} from '@/components/ui/dialog';
 
 import {deleteMessage, markAsNew, markAsRead} from '../actions';
 
@@ -16,6 +26,7 @@ export function MessageActions({
 }) {
   const router = useRouter();
   const [pending, startTransition] = useTransition();
+  const [open, setOpen] = useState(false);
 
   const onToggle = () => {
     startTransition(async () => {
@@ -28,12 +39,9 @@ export function MessageActions({
     });
   };
 
-  const onDelete = () => {
-    if (!confirm('Bu mesajı kalıcı olarak silmek istediğinden emin misin?')) {
-      return;
-    }
+  const onConfirmDelete = () => {
     startTransition(async () => {
-      // Server action will redirect after delete.
+      // Server action redirects to /admin/mesajlar after delete.
       await deleteMessage(id);
     });
   };
@@ -48,15 +56,42 @@ export function MessageActions({
       >
         {isRead ? 'Okunmadı olarak işaretle' : 'Okundu olarak işaretle'}
       </Button>
-      <Button
-        type="button"
-        variant="ghost"
-        onClick={onDelete}
-        disabled={pending}
-        className="border-2 border-red-200 text-red-700 hover:bg-red-50"
-      >
-        Sil
-      </Button>
+
+      <Dialog open={open} onOpenChange={setOpen}>
+        <DialogTrigger asChild>
+          <Button
+            type="button"
+            variant="ghost"
+            disabled={pending}
+            className="border-2 border-red-200 text-red-700 hover:bg-red-50"
+          >
+            Sil
+          </Button>
+        </DialogTrigger>
+        <DialogContent>
+          <DialogHeader>
+            <DialogTitle>Mesajı sil?</DialogTitle>
+            <DialogDescription>
+              Bu işlem geri alınamaz. Mesaj kalıcı olarak silinecek.
+            </DialogDescription>
+          </DialogHeader>
+          <DialogFooter>
+            <DialogClose asChild>
+              <Button variant="ghost" disabled={pending}>
+                İptal
+              </Button>
+            </DialogClose>
+            <Button
+              variant="dark"
+              disabled={pending}
+              onClick={onConfirmDelete}
+              className="bg-red-600 hover:bg-red-700"
+            >
+              {pending ? 'Siliniyor…' : 'Evet, sil'}
+            </Button>
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
     </div>
   );
 }

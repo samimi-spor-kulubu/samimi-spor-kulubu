@@ -4,6 +4,8 @@ import {getContactInfo, whatsAppUrl} from '@/lib/services/contact';
 import {PlayIcon} from '@/components/icons';
 import {pageMetadata} from '@/lib/seo';
 
+export const revalidate = 60;
+
 export async function generateMetadata({
   params
 }: {
