@@ -24,10 +24,7 @@ export async function TrainerDetail({
   const tNav = await getTranslations('Nav');
   const tDetail = await getTranslations('Trainers.detail');
   const contact = await getContactInfo();
-  const reservationWaUrl = whatsAppUrl(
-    contact,
-    contact.whatsapp.messages.rezervasyon
-  );
+  const reservationWaUrl = whatsAppUrl(contact, locale);
 
   const schema = personJsonLd({
     locale,

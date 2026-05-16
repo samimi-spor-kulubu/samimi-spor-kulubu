@@ -100,7 +100,7 @@ export default async function SssPage({
           </a>
           <div className="mt-6">
             <a
-              href={whatsAppUrl(contact, contact.whatsapp.messages.bilgi)}
+              href={whatsAppUrl(contact, locale)}
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex h-12 items-center justify-center rounded-full bg-brand-black px-8 text-base font-semibold text-white transition-colors hover:bg-zinc-800"

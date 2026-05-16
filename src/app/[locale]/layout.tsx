@@ -7,7 +7,7 @@ import {routing} from '@/i18n/routing';
 import {Navbar} from '@/components/layout/Navbar';
 import {Footer} from '@/components/layout/Footer';
 import {organizationJsonLd, pageMetadata, SITE_URL} from '@/lib/seo';
-import {getContactInfo} from '@/lib/services/contact';
+import {getContactInfo, whatsAppUrl} from '@/lib/services/contact';
 import '../globals.css';
 
 const barlow = Barlow({
@@ -59,6 +59,7 @@ export default async function LocaleLayout({
 
   const tNav = await getTranslations({locale, namespace: 'Nav'});
   const contactInfo = await getContactInfo();
+  const navWhatsappUrl = whatsAppUrl(contactInfo, locale);
 
   return (
     <html
@@ -70,7 +71,7 @@ export default async function LocaleLayout({
           <a href="#main" className="skip-link">
             {tNav('skipToContent')}
           </a>
-          <Navbar contact={contactInfo} />
+          <Navbar whatsappUrl={navWhatsappUrl} />
           <main id="main" className="flex flex-1 flex-col">
             {children}
           </main>

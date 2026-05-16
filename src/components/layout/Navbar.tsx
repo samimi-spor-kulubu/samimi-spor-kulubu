@@ -4,7 +4,6 @@ import {useEffect, useRef, useState} from 'react';
 import {useTranslations} from 'next-intl';
 import {Link} from '@/i18n/navigation';
 import {CloseIcon, MenuIcon} from '@/components/icons';
-import type {ContactInfo} from '@/lib/services/contact';
 import {LanguageSwitcher} from './LanguageSwitcher';
 
 const NAV_LINKS = [
@@ -28,9 +27,8 @@ function Logo() {
   );
 }
 
-export function Navbar({contact}: {contact: ContactInfo}) {
+export function Navbar({whatsappUrl}: {whatsappUrl: string}) {
   const t = useTranslations('Nav');
-  const whatsappUrl = `${contact.whatsapp.url}?text=${encodeURIComponent(contact.whatsapp.messages.bilgi)}`;
   const [open, setOpen] = useState(false);
   const toggleBtnRef = useRef<HTMLButtonElement>(null);
   const panelRef = useRef<HTMLDivElement>(null);

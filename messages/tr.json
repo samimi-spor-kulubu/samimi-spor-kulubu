@@ -14,7 +14,7 @@
     "contact": "İletişim",
     "faq": "SSS",
     "tour": "Tesis Turu",
-    "whatsapp": "WhatsApp'tan Yaz",
+    "whatsapp": "WhatsApp'tan Yazın",
     "openMenu": "Menüyü aç",
     "closeMenu": "Menüyü kapat",
     "skipToContent": "İçeriğe atla"
@@ -25,8 +25,8 @@
       "subtitle": "Samimi <yellow>SPOR</yellow> Kulübü",
       "title": "HAREKET ET, GÜÇLEN, KAZAN",
       "description": "Ankara Yenimahalle Demet'te 5 branş, deneyimli eğitmenler ve samimi bir topluluk seni bekliyor.",
-      "ctaPrimary": "Seansını Ayırt",
-      "ctaSecondary": "Branşları Keşfet"
+      "ctaPrimary": "Seansınızı Ayırtın",
+      "ctaSecondary": "Branşları Keşfedin"
     },
     "stats": {
       "branchesValue": "6",
@@ -46,7 +46,7 @@
     "cta": {
       "title": "Seansını Ayırt — WhatsApp'tan Ulaş",
       "description": "Sorularını cevaplayalım, sana uygun planı birlikte belirleyelim.",
-      "button": "WhatsApp'tan Yaz"
+      "button": "WhatsApp'tan Yazın"
     },
     "tour": {
       "eyebrow": "Tesisimizi Tanı",
@@ -97,7 +97,7 @@
           "answer": "Çocuk jimnastiği 4–14 yaş arasıdır. Diğer branşlar her yaşa uygundur."
         }
       },
-      "cta": "Tüm Soruları Gör"
+      "cta": "Tüm Soruları Görün"
     }
   },
   "Branches": {
@@ -125,18 +125,18 @@
     "cta": {
       "title": "Sana en uygun branşı birlikte seçelim.",
       "description": "WhatsApp'tan yaz, deneme seansını planlayalım.",
-      "button": "WhatsApp'tan Yaz"
+      "button": "WhatsApp'tan Yazın"
     },
     "detail": {
       "scheduleLabel": "Program",
       "instructorLabel": "Eğitmen",
       "featuresLabel": "Öne çıkan özellikler",
       "infoBoxTitle": "Bu Branşa Katıl",
-      "bookButton": "WhatsApp'tan Rezervasyon",
+      "bookButton": "WhatsApp'tan Yazın",
       "cta": {
         "title": "Hemen başlamaya hazır mısın?",
         "description": "WhatsApp'tan yaz, sana en uygun gün ve saati birlikte belirleyelim.",
-        "button": "WhatsApp'tan Yaz"
+        "button": "WhatsApp'tan Yazın"
       }
     },
     "items": {
@@ -211,12 +211,12 @@
       "subtitle": "Alanında uzman, deneyimli kadromuz."
     },
     "labels": {
-      "profileLink": "Profili Gör"
+      "profileLink": "Profili İncele"
     },
     "cta": {
       "title": "Bir branşa karar ver, eğitmenle tanış.",
       "description": "WhatsApp'tan yaz, sana uygun planı birlikte belirleyelim.",
-      "button": "WhatsApp'tan Yaz"
+      "button": "WhatsApp'tan Yazın"
     },
     "detail": {
       "aboutLabel": "Hakkında",
@@ -224,7 +224,7 @@
       "expertiseLabel": "Uzmanlık alanları",
       "branchLabel": "Verdiği branş",
       "branchLink": "Branş sayfasına git",
-      "bookButton": "WhatsApp'tan Rezervasyon"
+      "bookButton": "WhatsApp'tan Yazın"
     },
     "items": {
       "beyza": {
@@ -326,7 +326,7 @@
     "cta": {
       "title": "Sorularını WhatsApp'tan sor.",
       "description": "Antrenman, beslenme veya branş seçimi — birlikte konuşalım.",
-      "button": "WhatsApp'tan Yaz"
+      "button": "WhatsApp'tan Yazın"
     },
     "categories": {
       "training": "Antrenman",
@@ -386,30 +386,30 @@
     "cta": {
       "title": "Tanışmaya Gel",
       "description": "Tesisi gez, sorularını sor, deneme seansını birlikte planlayalım.",
-      "button": "WhatsApp'tan Yaz"
+      "button": "WhatsApp'tan Yazın"
     }
   },
   "Contact": {
     "seoDescription": "Samimi Spor Kulübü Ankara — 0533 559 47 97. Sami Efendi Cd. No:31/9, Yenimahalle Demet. WhatsApp, telefon ve form ile hızlı iletişim. Açık 12:00–23:00.",
     "hero": {
       "title": "İLETİŞİM",
-      "subtitle": "Bize ulaşmanın en kolay yolu."
+      "subtitle": "Sorularınız için lütfen bize WhatsApp'tan ulaşın."
     },
     "methods": {
       "whatsapp": {
-        "title": "WhatsApp'tan Yaz",
-        "description": "En hızlı dönüş — 7/24 mesaj atabilirsin.",
-        "cta": "Mesaj Gönder"
+        "title": "WhatsApp'tan Yazın",
+        "description": "En hızlı dönüş — 7/24 mesaj atabilirsiniz.",
+        "cta": "Mesaj Gönderin"
       },
       "phone": {
-        "title": "Bizi Ara",
+        "title": "Bizi Arayın",
         "description": "Çalışma saatleri içinde direkt görüşelim.",
-        "cta": "Hemen Ara"
+        "cta": "Hemen Arayın"
       },
       "instagram": {
         "title": "Instagram",
         "description": "Tesisten kareler ve haftalık programlar.",
-        "cta": "Profili Aç"
+        "cta": "Profili İncele"
       }
     },
     "location": {
@@ -442,14 +442,14 @@
         "other": "Diğer"
       },
       "optional": "Opsiyonel",
-      "submit": "Mesajı Gönder",
+      "submit": "Mesajı Gönderin",
       "sending": "Gönderiliyor…",
       "successTitle": "Mesajınız iletildi.",
       "successText": "En kısa sürede dönüş yapacağız. Acil durumlarda WhatsApp'tan ulaşabilirsin.",
       "successAction": "Yeni mesaj gönder",
       "errorTitle": "Bir sorun oluştu.",
       "errorBanner": "Bir sorun oluştu, lütfen tekrar deneyin veya WhatsApp'tan yazın.",
-      "errorBannerCta": "WhatsApp'tan yaz",
+      "errorBannerCta": "WhatsApp'tan yazın",
       "errorRequired": "Bu alan zorunlu.",
       "errorEmail": "Geçerli bir e-posta gir."
     }
@@ -495,7 +495,7 @@
     "cta": {
       "title": "Tesisi Yerinde Gör",
       "description": "Randevu al, gel — tesisi birlikte gezelim, sorularını yanıtlayalım.",
-      "button": "WhatsApp'tan Yaz"
+      "button": "WhatsApp'tan Yazın"
     }
   },
   "Faq": {
@@ -515,7 +515,7 @@
     "cta": {
       "title": "Sorun cevaplanmadı mı?",
       "description": "WhatsApp'tan yazsana — anında yardımcı olalım.",
-      "button": "WhatsApp'tan Yaz"
+      "button": "WhatsApp'tan Yazın"
     },
     "categories": {
       "membership": "Üyelik",

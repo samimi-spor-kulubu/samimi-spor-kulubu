@@ -234,7 +234,7 @@ export default async function HakkimizdaPage({
               </div>
 
               <a
-                href={whatsAppUrl(contact, contact.whatsapp.messages.bilgi)}
+                href={whatsAppUrl(contact, locale)}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex h-11 w-full items-center justify-center rounded-full bg-brand-yellow px-6 text-sm font-semibold text-brand-black transition-colors hover:bg-brand-yellow-dark"
@@ -275,7 +275,7 @@ export default async function HakkimizdaPage({
           </a>
           <div className="mt-6">
             <a
-              href={whatsAppUrl(contact, contact.whatsapp.messages.bilgi)}
+              href={whatsAppUrl(contact, locale)}
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex h-12 items-center justify-center rounded-full bg-brand-black px-8 text-base font-semibold text-white transition-colors hover:bg-zinc-800"

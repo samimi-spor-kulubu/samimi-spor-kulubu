@@ -39,7 +39,7 @@ export default async function IletisimPage({
   const tForm = await getTranslations('Contact.form');
 
   const contact = await getContactInfo();
-  const waBilgiUrl = whatsAppUrl(contact, contact.whatsapp.messages.bilgi);
+  const waBilgiUrl = whatsAppUrl(contact, locale);
 
   const methods = [
     {

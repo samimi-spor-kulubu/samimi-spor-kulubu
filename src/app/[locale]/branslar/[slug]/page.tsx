@@ -196,7 +196,7 @@ export default async function BranchDetailPage({
               )}
 
               <a
-                href={whatsAppUrl(contact, contact.whatsapp.messages.rezervasyon)}
+                href={whatsAppUrl(contact, locale)}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="mt-6 inline-flex h-12 w-full items-center justify-center rounded-full bg-brand-yellow px-6 text-sm font-semibold text-brand-black transition-colors hover:bg-brand-yellow-dark"
@@ -225,7 +225,7 @@ export default async function BranchDetailPage({
           </p>
           <div className="mt-8">
             <a
-              href={whatsAppUrl(contact, contact.whatsapp.messages.rezervasyon)}
+              href={whatsAppUrl(contact, locale)}
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex h-12 items-center justify-center rounded-full bg-brand-black px-8 text-base font-semibold text-white transition-colors hover:bg-zinc-800"

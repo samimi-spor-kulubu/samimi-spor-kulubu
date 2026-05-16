@@ -107,10 +107,21 @@ export const getContactInfo = cache(async (): Promise<ContactInfo> => {
 });
 
 /**
- * Builds a `wa.me` URL using the live WhatsApp number with an optional
- * prefilled message. Pure helper — no DB calls.
+ * Single prefilled WhatsApp message per locale. Used everywhere on the
+ * site (branch / trainer / contact / footer / navbar) for a consistent
+ * intro — no per-page or per-branch variants.
  */
-export function whatsAppUrl(info: ContactInfo, message?: string): string {
-  const text = message ?? info.whatsapp.messages.bilgi;
+export const WHATSAPP_PREFILL = {
+  tr: 'Merhaba, bilgi almak istiyorum.',
+  en: 'Hello, I would like to get information.'
+} as const;
+
+/**
+ * Builds a `wa.me` URL using the live WhatsApp number plus a single
+ * locale-aware prefill message. Pure helper — no DB calls.
+ */
+export function whatsAppUrl(info: ContactInfo, locale?: string): string {
+  const text =
+    locale === 'en' ? WHATSAPP_PREFILL.en : WHATSAPP_PREFILL.tr;
   return `${info.whatsapp.url}?text=${encodeURIComponent(text)}`;
 }
