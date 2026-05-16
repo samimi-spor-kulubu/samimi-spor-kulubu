@@ -444,9 +444,12 @@
       "optional": "Opsiyonel",
       "submit": "Mesajı Gönder",
       "sending": "Gönderiliyor…",
-      "successTitle": "Mesajınız alındı.",
+      "successTitle": "Mesajınız iletildi.",
       "successText": "En kısa sürede dönüş yapacağız. Acil durumlarda WhatsApp'tan ulaşabilirsin.",
       "successAction": "Yeni mesaj gönder",
+      "errorTitle": "Bir sorun oluştu.",
+      "errorBanner": "Bir sorun oluştu, lütfen tekrar deneyin veya WhatsApp'tan yazın.",
+      "errorBannerCta": "WhatsApp'tan yaz",
       "errorRequired": "Bu alan zorunlu.",
       "errorEmail": "Geçerli bir e-posta gir."
     }

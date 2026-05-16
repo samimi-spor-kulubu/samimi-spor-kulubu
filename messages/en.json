@@ -448,9 +448,12 @@
       "optional": "Optional",
       "submit": "Send Message",
       "sending": "Sending…",
-      "successTitle": "Message received.",
+      "successTitle": "Message sent.",
       "successText": "We'll reply as soon as possible. For urgent matters, reach us on WhatsApp.",
       "successAction": "Send another message",
+      "errorTitle": "Something went wrong.",
+      "errorBanner": "Something went wrong — please try again or message us on WhatsApp.",
+      "errorBannerCta": "Message on WhatsApp",
       "errorRequired": "This field is required.",
       "errorEmail": "Please enter a valid email."
     }

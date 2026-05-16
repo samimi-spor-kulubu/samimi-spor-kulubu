@@ -1,144 +1,134 @@
 'use client';
 
-import {useEffect, useRef, useState, type FormEvent, type ReactNode} from 'react';
-import {useTranslations} from 'next-intl';
+import {
+  useActionState,
+  useEffect,
+  useRef,
+  useState,
+  type ReactNode
+} from 'react';
+import {useLocale, useTranslations} from 'next-intl';
+
+import {contact, getWhatsAppUrl} from '@/config/contact';
+import {
+  submitContactMessage,
+  type ContactFormState
+} from '@/app/[locale]/iletisim/actions';
 
 const SUBJECTS = ['general', 'reservation', 'branch', 'other'] as const;
 type Subject = (typeof SUBJECTS)[number];
 
-type ErrorKey = 'name' | 'phone' | 'email' | 'message';
-type FormErrors = Partial<Record<ErrorKey, string>>;
-
-const ERROR_ORDER: ErrorKey[] = ['name', 'phone', 'email', 'message'];
+const INITIAL_STATE: ContactFormState = {status: 'idle'};
 
 export function ContactForm() {
   const t = useTranslations('Contact.form');
-  const [submitting, setSubmitting] = useState(false);
-  const [submitted, setSubmitted] = useState(false);
-  const [errors, setErrors] = useState<FormErrors>({});
+  const locale = useLocale();
 
-  const formRef = useRef<HTMLFormElement>(null);
-  const successRef = useRef<HTMLDivElement>(null);
-  const nameRef = useRef<HTMLInputElement>(null);
-  const phoneRef = useRef<HTMLInputElement>(null);
-  const emailRef = useRef<HTMLInputElement>(null);
-  const messageRef = useRef<HTMLTextAreaElement>(null);
+  const [state, formAction, pending] = useActionState<
+    ContactFormState,
+    FormData
+  >(submitContactMessage, INITIAL_STATE);
 
-  const fieldRef = (key: ErrorKey) => {
-    switch (key) {
-      case 'name':
-        return nameRef.current;
-      case 'phone':
-        return phoneRef.current;
-      case 'email':
-        return emailRef.current;
-      case 'message':
-        return messageRef.current;
-    }
-  };
+  // Remount counter — when the user clicks "send another", we bump
+  // this to force a fresh useActionState/<form/>, clearing fields and
+  // any lingering state.
+  const [resetTick, setResetTick] = useState(0);
 
-  // Scroll the success card into view when it replaces the form.
-  useEffect(() => {
-    if (submitted) {
-      successRef.current?.scrollIntoView({
-        behavior: 'smooth',
-        block: 'start'
-      });
-    }
-  }, [submitted]);
-
-  const onSubmit = async (e: FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    const form = e.currentTarget;
-    const data = new FormData(form);
-
-    // Honeypot — if filled, silently "succeed" without sending anything.
-    if ((data.get('website') as string)?.trim()) {
-      setSubmitted(true);
-      return;
-    }
-
-    const name = ((data.get('name') as string) ?? '').trim();
-    const phone = ((data.get('phone') as string) ?? '').trim();
-    const email = ((data.get('email') as string) ?? '').trim();
-    const message = ((data.get('message') as string) ?? '').trim();
-
-    const next: FormErrors = {};
-    if (!name) next.name = t('errorRequired');
-    if (!phone) next.phone = t('errorRequired');
-    if (!message) next.message = t('errorRequired');
-    if (email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-      next.email = t('errorEmail');
-    }
-
-    if (Object.keys(next).length > 0) {
-      setErrors(next);
-      const firstKey = ERROR_ORDER.find((k) => next[k]);
-      if (firstKey) {
-        const el = fieldRef(firstKey);
-        el?.focus({preventScroll: true});
-        el?.scrollIntoView({behavior: 'smooth', block: 'center'});
-      }
-      return;
-    }
-
-    setErrors({});
-    setSubmitting(true);
-
-    const payload = {
-      name,
-      phone,
-      email,
-      subject: data.get('subject') as Subject,
-      message
-    };
-
-    // Phase 1: mock submit (Phase 2: POST to /api/contact backed by Resend)
-    console.log('[ContactForm] submit:', payload);
-
-    await new Promise((r) => setTimeout(r, 500));
-
-    form.reset();
-    setSubmitting(false);
-    setSubmitted(true);
-  };
-
-  if (submitted) {
+  if (state.status === 'success') {
     return (
-      <div
-        ref={successRef}
-        className="scroll-mt-24 rounded-2xl border-2 border-brand-yellow bg-white p-8 text-center sm:p-10"
-      >
-        <div
-          aria-hidden="true"
-          className="mx-auto flex h-14 w-14 items-center justify-center rounded-full bg-brand-yellow text-2xl font-bold text-brand-black"
-        >
-          ✓
-        </div>
-        <h3 className="mt-5 font-heading text-2xl tracking-wider text-brand-black">
-          {t('successTitle')}
-        </h3>
-        <p className="mt-3 text-base leading-relaxed text-brand-gray">
-          {t('successText')}
-        </p>
-        <button
-          type="button"
-          onClick={() => setSubmitted(false)}
-          className="mt-6 inline-flex h-11 items-center justify-center rounded-full border-2 border-brand-black px-6 text-sm font-semibold text-brand-black transition-colors hover:bg-brand-black hover:text-white"
-        >
-          {t('successAction')}
-        </button>
-      </div>
+      <SuccessCard
+        title={t('successTitle')}
+        text={t('successText')}
+        actionLabel={t('successAction')}
+        onAction={() => setResetTick((n) => n + 1)}
+      />
     );
   }
 
   return (
+    <FormBody
+      key={resetTick}
+      t={t}
+      locale={locale}
+      formAction={formAction}
+      pending={pending}
+      state={state}
+    />
+  );
+}
+
+function FormBody({
+  t,
+  locale,
+  formAction,
+  pending,
+  state
+}: {
+  t: ReturnType<typeof useTranslations>;
+  locale: string;
+  formAction: (formData: FormData) => void;
+  pending: boolean;
+  state: ContactFormState;
+}) {
+  const errors =
+    state.status === 'error' && state.errors ? state.errors : {};
+  const serverError =
+    state.status === 'error' && state.serverError ? state.serverError : null;
+
+  const nameRef = useRef<HTMLInputElement>(null);
+  const phoneRef = useRef<HTMLInputElement>(null);
+  const emailRef = useRef<HTMLInputElement>(null);
+  const messageRef = useRef<HTMLTextAreaElement>(null);
+  const bannerRef = useRef<HTMLDivElement>(null);
+
+  // After a failed submit, scroll the first invalid field (or the
+  // server-error banner) into view and focus it.
+  useEffect(() => {
+    if (state.status !== 'error') return;
+    if (serverError) {
+      bannerRef.current?.scrollIntoView({behavior: 'smooth', block: 'start'});
+      return;
+    }
+    const order: Array<['name' | 'phone' | 'email' | 'message', HTMLElement | null]> = [
+      ['name', nameRef.current],
+      ['phone', phoneRef.current],
+      ['email', emailRef.current],
+      ['message', messageRef.current]
+    ];
+    const first = order.find(([key]) => errors[key]);
+    if (first?.[1]) {
+      first[1].focus({preventScroll: true});
+      first[1].scrollIntoView({behavior: 'smooth', block: 'center'});
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [state]);
+
+  return (
     <form
-      ref={formRef}
-      onSubmit={onSubmit}
+      action={formAction}
       noValidate
       className="scroll-mt-24 rounded-2xl border-2 border-brand-border bg-white p-6 sm:p-8"
     >
+      <input type="hidden" name="locale" value={locale} />
+
+      {serverError && (
+        <div
+          ref={bannerRef}
+          role="alert"
+          className="mb-6 flex flex-col gap-3 rounded-2xl border-2 border-red-200 bg-red-50 p-4 sm:flex-row sm:items-center sm:justify-between"
+        >
+          <p className="text-sm text-red-700">{serverError}</p>
+          <a
+            href={getWhatsAppUrl(contact.whatsapp.messages.bilgi)}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex h-10 shrink-0 items-center justify-center rounded-full bg-brand-yellow px-5 text-sm font-semibold text-brand-black transition-colors hover:bg-brand-yellow-dark"
+          >
+            {t('errorBannerCta')} →
+          </a>
+        </div>
+      )}
+
       <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
         <Field label={t('fields.name')} required error={errors.name}>
           <input
@@ -229,12 +219,84 @@ export function ContactForm() {
 
       <button
         type="submit"
-        disabled={submitting}
-        className="mt-6 inline-flex h-12 w-full items-center justify-center rounded-full bg-brand-yellow px-8 text-base font-semibold text-brand-black transition-colors hover:bg-brand-yellow-dark disabled:cursor-not-allowed disabled:opacity-60 sm:w-auto"
+        disabled={pending}
+        className="mt-6 inline-flex h-12 w-full items-center justify-center gap-2 rounded-full bg-brand-yellow px-8 text-base font-semibold text-brand-black transition-colors hover:bg-brand-yellow-dark disabled:cursor-not-allowed disabled:opacity-60 sm:w-auto"
       >
-        {submitting ? t('sending') : t('submit')}
+        {pending && <Spinner />}
+        {pending ? t('sending') : t('submit')}
       </button>
     </form>
+  );
+}
+
+function SuccessCard({
+  title,
+  text,
+  actionLabel,
+  onAction
+}: {
+  title: string;
+  text: string;
+  actionLabel: string;
+  onAction: () => void;
+}) {
+  const cardRef = useRef<HTMLDivElement>(null);
+  useEffect(() => {
+    cardRef.current?.scrollIntoView({behavior: 'smooth', block: 'start'});
+  }, []);
+
+  return (
+    <div
+      ref={cardRef}
+      role="status"
+      aria-live="polite"
+      className="scroll-mt-24 rounded-2xl border-2 border-brand-yellow bg-white p-8 text-center sm:p-10"
+    >
+      <div
+        aria-hidden="true"
+        className="mx-auto flex h-14 w-14 items-center justify-center rounded-full bg-brand-yellow text-2xl font-bold text-brand-black"
+      >
+        ✓
+      </div>
+      <h3 className="mt-5 font-heading text-2xl tracking-wider text-brand-black">
+        {title}
+      </h3>
+      <p className="mt-3 text-base leading-relaxed text-brand-gray">{text}</p>
+      <button
+        type="button"
+        onClick={onAction}
+        className="mt-6 inline-flex h-11 items-center justify-center rounded-full border-2 border-brand-black px-6 text-sm font-semibold text-brand-black transition-colors hover:bg-brand-black hover:text-white"
+      >
+        {actionLabel}
+      </button>
+    </div>
+  );
+}
+
+function Spinner() {
+  return (
+    <svg
+      className="h-4 w-4 animate-spin"
+      viewBox="0 0 24 24"
+      aria-hidden="true"
+    >
+      <circle
+        cx="12"
+        cy="12"
+        r="10"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="3"
+        strokeOpacity="0.25"
+      />
+      <path
+        d="M22 12a10 10 0 0 1-10 10"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="3"
+        strokeLinecap="round"
+      />
+    </svg>
   );
 }
 
@@ -286,3 +348,7 @@ function inputClass(hasError: boolean) {
       : 'border-brand-border focus:border-brand-yellow')
   );
 }
+
+// Subject type is used only to validate select default; the action
+// re-validates against SUBJECTS.
+void ({} as Subject);
