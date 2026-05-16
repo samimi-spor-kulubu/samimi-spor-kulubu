@@ -2,9 +2,11 @@ import type {Metadata} from 'next';
 import {getTranslations, setRequestLocale} from 'next-intl/server';
 import {Link} from '@/i18n/navigation';
 import {contact, getWhatsAppUrl} from '@/config/contact';
-import {BRANCHES} from '@/lib/branches';
 import {PilatesPrices} from '@/components/branches/PilatesPrices';
 import {pageMetadata} from '@/lib/seo';
+import {getAllBranches} from '@/lib/services/branches';
+
+export const revalidate = 60;
 
 export async function generateMetadata({
   params
@@ -32,7 +34,8 @@ export default async function BranchesPage({
   const tHero = await getTranslations('Branches.hero');
   const tLabels = await getTranslations('Branches.labels');
   const tCta = await getTranslations('Branches.cta');
-  const tItems = await getTranslations('Branches.items');
+
+  const branches = await getAllBranches(locale);
 
   return (
     <>
@@ -51,54 +54,55 @@ export default async function BranchesPage({
       {/* BRANCH CARDS */}
       <section className="bg-brand-surface">
         <div className="mx-auto max-w-5xl space-y-6 px-4 py-12 sm:px-6 lg:px-8">
-          {BRANCHES.map(({key, slug, emoji}) => {
-            const isPilates = key === 'pilates';
-            return (
-              <article
-                key={key}
-                className="overflow-hidden rounded-2xl border-2 border-brand-border bg-white transition-colors hover:border-brand-yellow"
-              >
-                <div className="flex flex-col gap-6 p-6 sm:p-8 md:flex-row md:items-start md:gap-8">
-                  <div
-                    className="flex h-20 w-20 shrink-0 items-center justify-center rounded-2xl bg-brand-surface text-4xl"
-                    aria-hidden="true"
-                  >
-                    {emoji}
-                  </div>
-
-                  <div className="flex-1">
-                    <div className="flex flex-wrap items-center gap-3">
-                      <h2 className="font-heading text-2xl tracking-wider text-brand-black sm:text-3xl">
-                        {tItems(`${key}.name`)}
-                      </h2>
-                      {isPilates && (
-                        <span className="inline-flex items-center rounded-full bg-brand-yellow px-3 py-1 text-xs font-semibold uppercase tracking-wider text-brand-black">
-                          {tLabels('womenOnly')}
-                        </span>
-                      )}
-                    </div>
-                    <p className="mt-2 text-sm font-medium text-brand-amber">
-                      {tItems(`${key}.schedule`)}
-                    </p>
-                    <p className="mt-3 text-base leading-relaxed text-brand-gray">
-                      {tItems(`${key}.description`)}
-                    </p>
-                  </div>
-
-                  <Link
-                    href={`/branslar/${slug}`}
-                    className="inline-flex h-11 shrink-0 items-center justify-center self-start rounded-full border-2 border-brand-black px-6 text-sm font-semibold text-brand-black transition-colors hover:bg-brand-black hover:text-white md:self-center"
-                  >
-                    {tLabels('detailLink')} →
-                  </Link>
+          {branches.map((b) => (
+            <article
+              key={b.id}
+              className="overflow-hidden rounded-2xl border-2 border-brand-border bg-white transition-colors hover:border-brand-yellow"
+            >
+              <div className="flex flex-col gap-6 p-6 sm:p-8 md:flex-row md:items-start md:gap-8">
+                <div
+                  className="flex h-20 w-20 shrink-0 items-center justify-center rounded-2xl bg-brand-surface text-4xl"
+                  aria-hidden="true"
+                >
+                  {b.emoji}
                 </div>
 
-                {isPilates && (
-                  <PilatesPrices className="border-t-2 border-brand-border bg-brand-surface px-6 py-6 sm:px-8" />
-                )}
-              </article>
-            );
-          })}
+                <div className="flex-1">
+                  <div className="flex flex-wrap items-center gap-3">
+                    <h2 className="font-heading text-2xl tracking-wider text-brand-black sm:text-3xl">
+                      {b.name}
+                    </h2>
+                    {b.women_only && (
+                      <span className="inline-flex items-center rounded-full bg-brand-yellow px-3 py-1 text-xs font-semibold uppercase tracking-wider text-brand-black">
+                        {tLabels('womenOnly')}
+                      </span>
+                    )}
+                  </div>
+                  {b.schedule && (
+                    <p className="mt-2 text-sm font-medium text-brand-amber">
+                      {b.schedule}
+                    </p>
+                  )}
+                  {b.shortDescription && (
+                    <p className="mt-3 text-base leading-relaxed text-brand-gray">
+                      {b.shortDescription}
+                    </p>
+                  )}
+                </div>
+
+                <Link
+                  href={`/branslar/${b.slug}`}
+                  className="inline-flex h-11 shrink-0 items-center justify-center self-start rounded-full border-2 border-brand-black px-6 text-sm font-semibold text-brand-black transition-colors hover:bg-brand-black hover:text-white md:self-center"
+                >
+                  {tLabels('detailLink')} →
+                </Link>
+              </div>
+
+              {b.women_only && (
+                <PilatesPrices className="border-t-2 border-brand-border bg-brand-surface px-6 py-6 sm:px-8" />
+              )}
+            </article>
+          ))}
         </div>
       </section>
 

@@ -1,9 +1,9 @@
 import 'server-only';
-import {createClient} from '@/lib/supabase/server';
+import {createPublicClient} from '@/lib/supabase/public';
 
 /** Get a single setting value by key. Returns null if absent. */
 export async function getSetting(key: string): Promise<string | null> {
-  const supabase = await createClient();
+  const supabase = createPublicClient();
   const {data, error} = await supabase
     .from('settings')
     .select('*')
@@ -19,7 +19,7 @@ export async function getSetting(key: string): Promise<string | null> {
 
 /** All settings as a {key: value} map. */
 export async function getAllSettings(): Promise<Record<string, string>> {
-  const supabase = await createClient();
+  const supabase = createPublicClient();
   const {data, error} = await supabase.from('settings').select('*');
 
   if (error) {

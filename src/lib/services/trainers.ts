@@ -1,5 +1,5 @@
 import 'server-only';
-import {createClient} from '@/lib/supabase/server';
+import {createPublicClient} from '@/lib/supabase/public';
 import type {Trainer} from '@/types/database';
 
 export type LocalizedTrainer = {
@@ -39,7 +39,7 @@ export function localizeTrainer(row: Trainer, locale: string): LocalizedTrainer 
 export async function getAllTrainers(
   locale: string
 ): Promise<LocalizedTrainer[]> {
-  const supabase = await createClient();
+  const supabase = createPublicClient();
   const {data, error} = await supabase
     .from('trainers')
     .select('*')
@@ -53,12 +53,27 @@ export async function getAllTrainers(
   return data?.map((row) => localizeTrainer(row, locale)) ?? [];
 }
 
+/** Just the slugs of active trainers — for generateStaticParams.
+ *  Uses the cookie-less public client since this runs at build time. */
+export async function getAllTrainerSlugs(): Promise<string[]> {
+  const supabase = createPublicClient();
+  const {data, error} = await supabase
+    .from('trainers')
+    .select('slug')
+    .eq('active', true);
+  if (error) {
+    console.error('[trainers.getAllTrainerSlugs]', error);
+    return [];
+  }
+  return data?.map((r) => r.slug) ?? [];
+}
+
 /** Single trainer by slug. Returns null if not found or inactive. */
 export async function getTrainerBySlug(
   slug: string,
   locale: string
 ): Promise<LocalizedTrainer | null> {
-  const supabase = await createClient();
+  const supabase = createPublicClient();
   const {data, error} = await supabase
     .from('trainers')
     .select('*')
@@ -72,4 +87,27 @@ export async function getTrainerBySlug(
   }
   if (!data) return null;
   return localizeTrainer(data, locale);
+}
+
+/** Branch this trainer instructs, if any. Returns just name + slug. */
+export async function getBranchForTrainer(
+  trainerId: string,
+  locale: string
+): Promise<{name: string; slug: string} | null> {
+  const supabase = createPublicClient();
+  const {data, error} = await supabase
+    .from('branches')
+    .select('slug, name_tr, name_en')
+    .eq('instructor_id', trainerId)
+    .eq('active', true)
+    .maybeSingle();
+
+  if (error) {
+    console.error('[trainers.getBranchForTrainer]', error);
+    return null;
+  }
+  if (!data) return null;
+  const name =
+    (locale === 'en' ? data.name_en : data.name_tr) ?? data.name_tr;
+  return {name, slug: data.slug};
 }

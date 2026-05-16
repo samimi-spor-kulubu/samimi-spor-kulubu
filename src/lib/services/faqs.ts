@@ -1,5 +1,5 @@
 import 'server-only';
-import {createClient} from '@/lib/supabase/server';
+import {createPublicClient} from '@/lib/supabase/public';
 import type {Faq} from '@/types/database';
 
 export type LocalizedFaq = {
@@ -34,7 +34,7 @@ function localizeFaq(row: Faq, locale: string): LocalizedFaq {
 
 /** All active FAQs, ordered by category then order_index. */
 export async function getAllFaqs(locale: string): Promise<LocalizedFaq[]> {
-  const supabase = await createClient();
+  const supabase = createPublicClient();
   const {data, error} = await supabase
     .from('faqs')
     .select('*')

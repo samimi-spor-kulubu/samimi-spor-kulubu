@@ -3,12 +3,18 @@ import {getTranslations, setRequestLocale} from 'next-intl/server';
 import {notFound} from 'next/navigation';
 import {Link} from '@/i18n/navigation';
 import {contact, getWhatsAppUrl} from '@/config/contact';
-import {BRANCHES, BRANCH_BY_SLUG, type BranchSlug} from '@/lib/branches';
 import {PilatesPrices} from '@/components/branches/PilatesPrices';
 import {pageMetadata, serviceJsonLd} from '@/lib/seo';
+import {
+  getAllBranchSlugs,
+  getBranchBySlug
+} from '@/lib/services/branches';
 
-export function generateStaticParams() {
-  return BRANCHES.map((b) => ({slug: b.slug}));
+export const revalidate = 60;
+
+export async function generateStaticParams() {
+  const slugs = await getAllBranchSlugs();
+  return slugs.map((slug) => ({slug}));
 }
 
 export async function generateMetadata({
@@ -17,14 +23,13 @@ export async function generateMetadata({
   params: Promise<{locale: string; slug: string}>;
 }): Promise<Metadata> {
   const {locale, slug} = await params;
-  const branch = BRANCH_BY_SLUG.get(slug as BranchSlug);
+  const branch = await getBranchBySlug(slug, locale);
   if (!branch) return {};
-  const t = await getTranslations({locale, namespace: 'Branches.items'});
   return pageMetadata({
     locale,
     path: `/branslar/${slug}`,
-    title: t(`${branch.key}.name`),
-    description: t(`${branch.key}.seoDescription`)
+    title: branch.name,
+    description: branch.shortDescription ?? branch.description ?? branch.name
   });
 }
 
@@ -36,21 +41,20 @@ export default async function BranchDetailPage({
   const {locale, slug} = await params;
   setRequestLocale(locale);
 
-  const branch = BRANCH_BY_SLUG.get(slug as BranchSlug);
+  const branch = await getBranchBySlug(slug, locale);
   if (!branch) notFound();
 
   const tNav = await getTranslations('Nav');
   const tDetail = await getTranslations('Branches.detail');
   const tDetailCta = await getTranslations('Branches.detail.cta');
-  const tItems = await getTranslations('Branches.items');
   const tLabels = await getTranslations('Branches.labels');
 
-  const features = (tItems.raw(`${branch.key}.features`) ?? []) as string[];
-  const instructor = tItems(`${branch.key}.instructor`);
-  const isPilates = branch.key === 'pilates';
-  const name = tItems(`${branch.key}.name`);
-  const description = tItems(`${branch.key}.description`);
-  const schema = serviceJsonLd({locale, name, description, slug: branch.slug});
+  const schema = serviceJsonLd({
+    locale,
+    name: branch.name,
+    description: branch.shortDescription ?? branch.description ?? branch.name,
+    slug: branch.slug
+  });
 
   return (
     <>
@@ -79,7 +83,7 @@ export default async function BranchDetailPage({
             </Link>
           </li>
           <li aria-hidden="true">›</li>
-          <li className="font-medium text-brand-black">{name}</li>
+          <li className="font-medium text-brand-black">{branch.name}</li>
         </ol>
       </nav>
 
@@ -89,60 +93,71 @@ export default async function BranchDetailPage({
           {/* LEFT */}
           <div className="md:col-span-2">
             <div className="flex flex-wrap items-center gap-3">
-              <span className="text-5xl" aria-hidden="true">
-                {branch.emoji}
-              </span>
-              {isPilates && (
+              {branch.emoji && (
+                <span className="text-5xl" aria-hidden="true">
+                  {branch.emoji}
+                </span>
+              )}
+              {branch.women_only && (
                 <span className="inline-flex items-center rounded-full bg-brand-yellow px-3 py-1 text-xs font-semibold uppercase tracking-wider text-brand-black">
                   {tLabels('womenOnly')}
                 </span>
               )}
             </div>
             <h1 className="mt-4 font-heading text-4xl leading-[0.95] tracking-wider text-brand-black sm:text-5xl md:text-6xl lg:text-7xl">
-              {name.toLocaleUpperCase(locale)}
+              {branch.name.toLocaleUpperCase(locale)}
             </h1>
-            <p className="mt-4 text-base font-semibold text-brand-amber sm:text-lg">
-              {tItems(`${branch.key}.scheduleLong`)}
-            </p>
-            <p className="mt-6 text-lg leading-relaxed text-brand-gray">
-              {tItems(`${branch.key}.longDescription`)}
-            </p>
+            {branch.scheduleLong && (
+              <p className="mt-4 text-base font-semibold text-brand-amber sm:text-lg">
+                {branch.scheduleLong}
+              </p>
+            )}
+            {branch.description && (
+              <p className="mt-6 text-lg leading-relaxed text-brand-gray">
+                {branch.description}
+              </p>
+            )}
 
             {/* Features */}
-            <div className="mt-10">
-              <h2 className="font-heading text-2xl tracking-wider text-brand-black">
-                {tDetail('featuresLabel')}
-              </h2>
-              <ul className="mt-4 space-y-3">
-                {features.map((f, i) => (
-                  <li
-                    key={i}
-                    className="flex items-start gap-3 text-base text-brand-black"
-                  >
-                    <span
-                      aria-hidden="true"
-                      className="mt-0.5 inline-flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-brand-yellow text-sm font-bold text-brand-black"
+            {branch.features.length > 0 && (
+              <div className="mt-10">
+                <h2 className="font-heading text-2xl tracking-wider text-brand-black">
+                  {tDetail('featuresLabel')}
+                </h2>
+                <ul className="mt-4 space-y-3">
+                  {branch.features.map((f, i) => (
+                    <li
+                      key={i}
+                      className="flex items-start gap-3 text-base text-brand-black"
                     >
-                      ✓
-                    </span>
-                    <span>{f}</span>
-                  </li>
-                ))}
-              </ul>
-            </div>
+                      <span
+                        aria-hidden="true"
+                        className="mt-0.5 inline-flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-brand-yellow text-sm font-bold text-brand-black"
+                      >
+                        ✓
+                      </span>
+                      <span>{f}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            )}
 
             {/* Instructor */}
-            {instructor && (
+            {branch.instructor && (
               <div className="mt-10">
                 <h2 className="font-heading text-2xl tracking-wider text-brand-black">
                   {tDetail('instructorLabel')}
                 </h2>
-                <p className="mt-3 text-base text-brand-gray">{instructor}</p>
+                <p className="mt-3 text-base text-brand-gray">
+                  {branch.instructor.name}
+                  {branch.instructor.title ? ` — ${branch.instructor.title}` : ''}
+                </p>
               </div>
             )}
 
             {/* Pilates prices */}
-            {isPilates && (
+            {branch.women_only && (
               <PilatesPrices
                 as="h2"
                 className="mt-10 rounded-2xl border-2 border-brand-border bg-brand-surface p-6 sm:p-8"
@@ -157,22 +172,24 @@ export default async function BranchDetailPage({
                 {tDetail('infoBoxTitle')}
               </h3>
 
-              <div className="mt-5">
-                <p className="text-xs font-semibold uppercase tracking-widest text-brand-gray">
-                  {tDetail('scheduleLabel')}
-                </p>
-                <p className="mt-1 text-base font-medium text-brand-black">
-                  {tItems(`${branch.key}.scheduleLong`)}
-                </p>
-              </div>
+              {branch.scheduleLong && (
+                <div className="mt-5">
+                  <p className="text-xs font-semibold uppercase tracking-widest text-brand-gray">
+                    {tDetail('scheduleLabel')}
+                  </p>
+                  <p className="mt-1 text-base font-medium text-brand-black">
+                    {branch.scheduleLong}
+                  </p>
+                </div>
+              )}
 
-              {instructor && (
+              {branch.instructor && (
                 <div className="mt-5">
                   <p className="text-xs font-semibold uppercase tracking-widest text-brand-gray">
                     {tDetail('instructorLabel')}
                   </p>
                   <p className="mt-1 text-base font-medium text-brand-black">
-                    {instructor}
+                    {branch.instructor.name}
                   </p>
                 </div>
               )}

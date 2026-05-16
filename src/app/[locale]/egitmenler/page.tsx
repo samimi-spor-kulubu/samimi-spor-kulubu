@@ -3,8 +3,10 @@ import Image from 'next/image';
 import {getTranslations, setRequestLocale} from 'next-intl/server';
 import {Link} from '@/i18n/navigation';
 import {contact, getWhatsAppUrl} from '@/config/contact';
-import {TRAINERS} from '@/lib/trainers';
 import {pageMetadata} from '@/lib/seo';
+import {getAllTrainers} from '@/lib/services/trainers';
+
+export const revalidate = 60;
 
 export async function generateMetadata({
   params
@@ -32,7 +34,8 @@ export default async function TrainersPage({
   const tHero = await getTranslations('Trainers.hero');
   const tLabels = await getTranslations('Trainers.labels');
   const tCta = await getTranslations('Trainers.cta');
-  const tItems = await getTranslations('Trainers.items');
+
+  const trainers = await getAllTrainers(locale);
 
   return (
     <>
@@ -51,29 +54,31 @@ export default async function TrainersPage({
       {/* TRAINER CARDS */}
       <section className="bg-brand-surface">
         <div className="mx-auto grid max-w-5xl gap-8 px-4 py-12 sm:px-6 sm:py-16 md:grid-cols-2 lg:px-8">
-          {TRAINERS.map(({key, slug, photo}, idx) => (
+          {trainers.map((t, idx) => (
             <Link
-              key={key}
-              href={`/egitmenler/${slug}`}
+              key={t.id}
+              href={`/egitmenler/${t.slug}`}
               className="group overflow-hidden rounded-2xl border-2 border-brand-border bg-white transition-all hover:-translate-y-1 hover:border-brand-yellow hover:shadow-lg"
             >
               <div className="relative h-96 w-full overflow-hidden bg-zinc-200">
-                <Image
-                  src={photo}
-                  alt={tItems(`${key}.name`)}
-                  fill
-                  priority={idx === 0}
-                  sizes="(max-width: 768px) 100vw, 50vw"
-                  className="object-cover object-center transition-transform duration-300 group-hover:scale-105"
-                />
+                {t.photo && (
+                  <Image
+                    src={t.photo}
+                    alt={t.name}
+                    fill
+                    priority={idx === 0}
+                    sizes="(max-width: 768px) 100vw, 50vw"
+                    className="object-cover object-center transition-transform duration-300 group-hover:scale-105"
+                  />
+                )}
               </div>
               <div className="p-6">
                 <h2 className="font-heading text-2xl tracking-wider text-brand-black">
-                  {tItems(`${key}.name`)}
+                  {t.name}
                 </h2>
-                <p className="mt-1 text-sm text-brand-gray">
-                  {tItems(`${key}.title`)}
-                </p>
+                {t.title && (
+                  <p className="mt-1 text-sm text-brand-gray">{t.title}</p>
+                )}
                 <span className="mt-5 inline-flex h-11 items-center justify-center rounded-full border-2 border-brand-black px-6 text-sm font-semibold text-brand-black transition-colors group-hover:bg-brand-black group-hover:text-white">
                   {tLabels('profileLink')} →
                 </span>

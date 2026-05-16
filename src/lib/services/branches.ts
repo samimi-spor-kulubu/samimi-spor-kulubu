@@ -1,5 +1,5 @@
 import 'server-only';
-import {createClient} from '@/lib/supabase/server';
+import {createPublicClient} from '@/lib/supabase/public';
 import type {Branch, BranchPriceInfo, Trainer} from '@/types/database';
 import {localizeTrainer, type LocalizedTrainer} from './trainers';
 
@@ -55,7 +55,7 @@ function localizeBranch(
 
 /** All active branches, ordered by order_index. */
 export async function getAllBranches(locale: string): Promise<LocalizedBranch[]> {
-  const supabase = await createClient();
+  const supabase = createPublicClient();
   const {data, error} = await supabase
     .from('branches')
     .select('*, instructor:trainers!instructor_id(*)')
@@ -71,12 +71,27 @@ export async function getAllBranches(locale: string): Promise<LocalizedBranch[]>
   ) ?? [];
 }
 
+/** Just the slugs of active branches — for generateStaticParams.
+ *  Uses the cookie-less public client since this runs at build time. */
+export async function getAllBranchSlugs(): Promise<string[]> {
+  const supabase = createPublicClient();
+  const {data, error} = await supabase
+    .from('branches')
+    .select('slug')
+    .eq('active', true);
+  if (error) {
+    console.error('[branches.getAllBranchSlugs]', error);
+    return [];
+  }
+  return data?.map((r) => r.slug) ?? [];
+}
+
 /** Single branch by slug. Returns null if not found or inactive. */
 export async function getBranchBySlug(
   slug: string,
   locale: string
 ): Promise<LocalizedBranch | null> {
-  const supabase = await createClient();
+  const supabase = createPublicClient();
   const {data, error} = await supabase
     .from('branches')
     .select('*, instructor:trainers!instructor_id(*)')

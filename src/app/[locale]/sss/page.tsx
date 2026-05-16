@@ -1,9 +1,12 @@
 import type {Metadata} from 'next';
 import {getTranslations, setRequestLocale} from 'next-intl/server';
-import {FAQ_ITEMS, localizeFaq} from '@/lib/faqs';
 import {FaqClient} from '@/components/faq/FaqClient';
 import {contact, getWhatsAppUrl} from '@/config/contact';
 import {pageMetadata} from '@/lib/seo';
+import type {FAQCategory, LocalizedFAQItem} from '@/lib/faqs';
+import {getAllFaqs} from '@/lib/services/faqs';
+
+export const revalidate = 60;
 
 export async function generateMetadata({
   params
@@ -31,12 +34,24 @@ export default async function SssPage({
   const tHero = await getTranslations('Faq.hero');
   const tCta = await getTranslations('Faq.cta');
 
-  const localized = FAQ_ITEMS.map((i) => localizeFaq(i, locale));
+  const faqs = await getAllFaqs(locale);
+
+  // Adapt service shape (`link: {href, label} | null`) to FaqClient's
+  // expected shape (`link?: {label, href}`).
+  const items: LocalizedFAQItem[] = faqs.map((f) => ({
+    id: f.id,
+    category: f.category as FAQCategory,
+    question: f.question,
+    answer: f.answer,
+    link: f.link
+      ? {label: f.link.label, href: f.link.href}
+      : undefined
+  }));
 
   const schema = {
     '@context': 'https://schema.org',
     '@type': 'FAQPage',
-    mainEntity: localized.map((f) => ({
+    mainEntity: items.map((f) => ({
       '@type': 'Question',
       name: f.question,
       acceptedAnswer: {
@@ -63,7 +78,7 @@ export default async function SssPage({
       {/* FAQ */}
       <section className="bg-brand-surface">
         <div className="mx-auto max-w-3xl px-4 py-12 sm:px-6 sm:py-16 lg:px-8">
-          <FaqClient items={localized} />
+          <FaqClient items={items} />
         </div>
       </section>
 
