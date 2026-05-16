@@ -162,6 +162,7 @@ export default async function BranchDetailPage({
               <PilatesPrices
                 as="h2"
                 className="mt-10 rounded-2xl border-2 border-brand-border bg-brand-surface p-6 sm:p-8"
+                packages={branch.price_info?.packages ?? null}
               />
             )}
           </div>

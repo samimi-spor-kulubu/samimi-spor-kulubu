@@ -1,8 +1,9 @@
 import type {MetadataRoute} from 'next';
+
 import {absoluteUrl, localePath, LOCALES} from '@/lib/seo';
-import {BRANCHES} from '@/lib/branches';
-import {TRAINERS} from '@/lib/trainers';
-import {BLOG_POSTS} from '@/lib/blog';
+import {getAllBranchSlugs} from '@/lib/services/branches';
+import {getAllTrainerSlugs} from '@/lib/services/trainers';
+import {getAllPublicBlogSlugs} from '@/lib/services/blog';
 
 const STATIC_PATHS = [
   '/',
@@ -16,12 +17,18 @@ const STATIC_PATHS = [
   '/tesis-turu'
 ];
 
-export default function sitemap(): MetadataRoute.Sitemap {
+export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const now = new Date();
 
-  const branchPaths = BRANCHES.map((b) => `/branslar/${b.slug}`);
-  const trainerPaths = TRAINERS.map((t) => `/egitmenler/${t.slug}`);
-  const blogPaths = BLOG_POSTS.map((p) => `/blog/${p.slug}`);
+  const [branchSlugs, trainerSlugs, blogSlugs] = await Promise.all([
+    getAllBranchSlugs(),
+    getAllTrainerSlugs(),
+    getAllPublicBlogSlugs()
+  ]);
+
+  const branchPaths = branchSlugs.map((s) => `/branslar/${s}`);
+  const trainerPaths = trainerSlugs.map((s) => `/egitmenler/${s}`);
+  const blogPaths = blogSlugs.map((s) => `/blog/${s}`);
 
   const allPaths = [
     ...STATIC_PATHS,
@@ -34,13 +41,11 @@ export default function sitemap(): MetadataRoute.Sitemap {
     const languages = Object.fromEntries(
       LOCALES.map((l) => [l, absoluteUrl(localePath(path, l))])
     );
-    const blogPost = BLOG_POSTS.find((p) => `/blog/${p.slug}` === path);
     return {
       url: absoluteUrl(localePath(path, 'tr')),
-      lastModified: blogPost ? new Date(blogPost.date) : now,
+      lastModified: now,
       changeFrequency: path === '/' ? 'weekly' : 'monthly',
-      priority:
-        path === '/' ? 1 : path.startsWith('/blog/') ? 0.6 : 0.8,
+      priority: path === '/' ? 1 : path.startsWith('/blog/') ? 0.6 : 0.8,
       alternates: {languages}
     };
   });

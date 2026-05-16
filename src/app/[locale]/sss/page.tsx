@@ -3,7 +3,10 @@ import {getTranslations, setRequestLocale} from 'next-intl/server';
 import {FaqClient} from '@/components/faq/FaqClient';
 import {getContactInfo, whatsAppUrl} from '@/lib/services/contact';
 import {pageMetadata} from '@/lib/seo';
-import type {FAQCategory, LocalizedFAQItem} from '@/lib/faqs';
+import type {
+  FAQCategory,
+  LocalizedFAQItem
+} from '@/lib/constants/faq-categories';
 import {getAllFaqs} from '@/lib/services/faqs';
 
 export const revalidate = 60;

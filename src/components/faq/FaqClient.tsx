@@ -4,7 +4,11 @@ import {useMemo, useState} from 'react';
 import {useTranslations} from 'next-intl';
 import {Link} from '@/i18n/navigation';
 import {ChevronDownIcon} from '@/components/icons';
-import {FAQ_CATEGORIES, type FAQCategory, type LocalizedFAQItem} from '@/lib/faqs';
+import {
+  FAQ_CATEGORIES,
+  type FAQCategory,
+  type LocalizedFAQItem
+} from '@/lib/constants/faq-categories';
 
 type Filter = 'all' | FAQCategory;
 

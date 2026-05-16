@@ -1,15 +1,30 @@
 import {getTranslations} from 'next-intl/server';
-import {PILATES_PRICES} from '@/lib/branches';
+
+import type {BranchPricePackage} from '@/types/database';
+
+/** Fallback package list — used when a branch doesn't carry price_info. */
+const FALLBACK_PACKAGES: BranchPricePackage[] = [
+  {key: 'group4', campaign: '4.200 TL', normal: '5.000 TL'},
+  {key: 'group3', campaign: '5.200 TL', normal: '5.750 TL'},
+  {key: 'group2', campaign: '6.500 TL', normal: '6.750 TL'},
+  {key: 'individual', campaign: '9.000 TL', normal: '10.500 TL'}
+];
 
 export async function PilatesPrices({
   className,
-  as: HeadingTag = 'h3'
+  as: HeadingTag = 'h3',
+  packages
 }: {
   className?: string;
-  /** Heading level for the section title. h3 (default) when nested inside another section's h2; h2 when used as a top-level section. */
+  /** Heading level for the section title. h3 (default) when nested
+   *  inside another section's h2; h2 when used as a top-level section. */
   as?: 'h2' | 'h3';
+  /** Packages from the branch row's price_info.packages, or fallback. */
+  packages?: BranchPricePackage[] | null;
 }) {
   const t = await getTranslations('Branches.prices');
+  const rows =
+    packages && packages.length > 0 ? packages : FALLBACK_PACKAGES;
 
   return (
     <div className={className}>
@@ -30,10 +45,14 @@ export async function PilatesPrices({
             </tr>
           </thead>
           <tbody className="divide-y divide-brand-border">
-            {PILATES_PRICES.map((p) => (
+            {rows.map((p) => (
               <tr key={p.key}>
                 <td className="py-3 font-medium text-brand-black">
-                  {t(`packages.${p.key}`)}
+                  {/* Try messages first (group4/group3/group2/individual),
+                      fall back to the raw key for admin-added entries. */}
+                  {t.has(`packages.${p.key}`)
+                    ? t(`packages.${p.key}`)
+                    : p.key}
                 </td>
                 <td className="py-3 text-right font-semibold text-brand-amber">
                   {p.campaign}

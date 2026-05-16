@@ -1,15 +1,18 @@
 import type {Metadata} from 'next';
 import Image from 'next/image';
 import {getTranslations, setRequestLocale} from 'next-intl/server';
+
 import {Link} from '@/i18n/navigation';
 import {getContactInfo, whatsAppUrl} from '@/lib/services/contact';
-import {BRANCHES} from '@/lib/branches';
-import {TRAINERS} from '@/lib/trainers';
+import {getAllBranches} from '@/lib/services/branches';
+import {getAllTrainers} from '@/lib/services/trainers';
 import {
   ValuesAccordion,
   type AccordionItem
 } from '@/components/about/ValuesAccordion';
 import {pageMetadata} from '@/lib/seo';
+
+export const revalidate = 60;
 
 export async function generateMetadata({
   params
@@ -27,14 +30,6 @@ export async function generateMetadata({
   });
 }
 
-const BRANCH_EMOJI: Record<string, string> = {
-  taekwondo: '🥋',
-  boxing: '🥊',
-  archery: '🏹',
-  gymnastics: '🤸',
-  pilates: '🧘'
-};
-
 export default async function HakkimizdaPage({
   params
 }: {
@@ -48,9 +43,11 @@ export default async function HakkimizdaPage({
   const tValues = await getTranslations('About.values');
   const tLocation = await getTranslations('About.location');
   const tCta = await getTranslations('About.cta');
-  const tBranchItems = await getTranslations('Branches.items');
-  const tTrainerItems = await getTranslations('Trainers.items');
   const contact = await getContactInfo();
+  const [branches, trainers] = await Promise.all([
+    getAllBranches(locale),
+    getAllTrainers(locale)
+  ]);
 
   const storyParagraphs = (tStory.raw('paragraphs') ?? []) as string[];
 
@@ -75,28 +72,32 @@ export default async function HakkimizdaPage({
             {tValues('items.uzmanlik.text')}
           </p>
           <div className="mt-5 grid grid-cols-1 gap-3 sm:grid-cols-2">
-            {TRAINERS.map((t) => (
+            {trainers.map((t) => (
               <Link
-                key={t.key}
+                key={t.id}
                 href={`/egitmenler/${t.slug}`}
                 className="flex items-center gap-3 rounded-xl border-2 border-brand-border bg-brand-surface p-3 transition-colors hover:border-brand-yellow hover:bg-white"
               >
                 <div className="relative h-12 w-12 shrink-0 overflow-hidden rounded-full bg-zinc-200">
-                  <Image
-                    src={t.photo}
-                    alt={tTrainerItems(`${t.key}.name`)}
-                    fill
-                    sizes="48px"
-                    className="object-cover object-top"
-                  />
+                  {t.photo && (
+                    <Image
+                      src={t.photo}
+                      alt={t.name}
+                      fill
+                      sizes="48px"
+                      className="object-cover object-top"
+                    />
+                  )}
                 </div>
                 <div className="min-w-0 flex-1">
                   <p className="truncate font-heading text-base tracking-wider text-brand-black">
-                    {tTrainerItems(`${t.key}.name`)}
+                    {t.name}
                   </p>
-                  <p className="truncate text-xs text-brand-gray">
-                    {tTrainerItems(`${t.key}.title`)}
-                  </p>
+                  {t.title && (
+                    <p className="truncate text-xs text-brand-gray">
+                      {t.title}
+                    </p>
+                  )}
                 </div>
               </Link>
             ))}
@@ -114,17 +115,19 @@ export default async function HakkimizdaPage({
             {tValues('items.cesitlilik.text')}
           </p>
           <div className="mt-5 grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-5">
-            {BRANCHES.map((b) => (
+            {branches.map((b) => (
               <Link
-                key={b.key}
+                key={b.id}
                 href={`/branslar/${b.slug}`}
                 className="flex flex-col items-center gap-2 rounded-xl border-2 border-brand-border bg-brand-surface p-3 text-center transition-colors hover:border-brand-yellow hover:bg-white"
               >
-                <span className="text-2xl" aria-hidden="true">
-                  {BRANCH_EMOJI[b.key]}
-                </span>
+                {b.emoji && (
+                  <span className="text-2xl" aria-hidden="true">
+                    {b.emoji}
+                  </span>
+                )}
                 <span className="font-heading text-sm tracking-wider text-brand-black">
-                  {tBranchItems(`${b.key}.name`)}
+                  {b.name}
                 </span>
               </Link>
             ))}

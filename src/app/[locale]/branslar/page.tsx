@@ -100,7 +100,10 @@ export default async function BranchesPage({
               </div>
 
               {b.women_only && (
-                <PilatesPrices className="border-t-2 border-brand-border bg-brand-surface px-6 py-6 sm:px-8" />
+                <PilatesPrices
+                  className="border-t-2 border-brand-border bg-brand-surface px-6 py-6 sm:px-8"
+                  packages={b.price_info?.packages ?? null}
+                />
               )}
             </article>
           ))}
