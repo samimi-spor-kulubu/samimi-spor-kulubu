@@ -3,6 +3,7 @@ import {getTranslations, setRequestLocale} from 'next-intl/server';
 import {GalleryClient} from '@/components/gallery/GalleryClient';
 import {pageMetadata} from '@/lib/seo';
 import {getAllGalleryItems} from '@/lib/services/gallery';
+import {GALLERY_CATEGORIES} from '@/lib/constants/categories';
 
 export const revalidate = 60;
 
@@ -31,18 +32,18 @@ export default async function GaleriPage({
   setRequestLocale(locale);
 
   const tHero = await getTranslations('Gallery.hero');
-  const tCats = await getTranslations('Gallery.categories');
   const tFilter = await getTranslations('Gallery.filter');
 
   const items = await getAllGalleryItems(locale);
 
-  // Distinct categories present in the DB. Known categories use the
-  // localised label from messages; unknown ones (added by an admin
-  // later) fall back to the raw category string.
-  const uniqueCategories = Array.from(new Set(items.map((i) => i.category)));
-  const categories = uniqueCategories.map((cat) => ({
-    key: cat,
-    label: tCats.has(cat) ? tCats(cat) : cat
+  // Fixed category list — every slug is always rendered as a pill on
+  // /galeri regardless of how many photos exist in that bucket. The
+  // client uses each category's `matchers` array to filter robustly
+  // across legacy English slugs (boxing/archery/…) and new TR slugs.
+  const categories = GALLERY_CATEGORIES.map((c) => ({
+    slug: c.slug,
+    label: locale === 'en' ? c.label_en : c.label_tr,
+    matchers: [c.slug, ...c.aliases]
   }));
 
   return (
@@ -62,20 +63,17 @@ export default async function GaleriPage({
       {/* GALLERY */}
       <section className="bg-brand-surface">
         <div className="mx-auto max-w-6xl px-4 py-12 sm:px-6 sm:py-16 lg:px-8">
-          {items.length === 0 ? (
-            <p className="mx-auto max-w-md rounded-2xl border-2 border-dashed border-brand-border bg-white p-10 text-center text-brand-gray">
-              {locale === 'en'
+          <GalleryClient
+            items={items}
+            categories={categories}
+            allLabel={tFilter('all')}
+            noResultsLabel={tFilter('noResults')}
+            emptyLabel={
+              locale === 'en'
                 ? 'No photos yet.'
-                : 'Henüz fotoğraf eklenmedi.'}
-            </p>
-          ) : (
-            <GalleryClient
-              items={items}
-              categories={categories}
-              allLabel={tFilter('all')}
-              noResultsLabel={tFilter('noResults')}
-            />
-          )}
+                : 'Henüz fotoğraf eklenmedi.'
+            }
+          />
         </div>
       </section>
     </>

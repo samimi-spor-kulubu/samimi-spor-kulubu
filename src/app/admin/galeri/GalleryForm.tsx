@@ -126,7 +126,7 @@ export function GalleryForm({
         <Field label="Kategori" required error={errors.category}>
           <Select
             name="category"
-            defaultValue={initial?.category ?? 'facility'}
+            defaultValue={initial?.category ?? 'tesis'}
             aria-invalid={!!errors.category}
             required
           >

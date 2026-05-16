@@ -7,34 +7,60 @@ import {useTranslations} from 'next-intl';
 
 import type {LocalizedGalleryItem} from '@/lib/services/gallery';
 
-export type GalleryCategoryOption = {key: string; label: string};
+export type GalleryCategoryOption = {
+  slug: string;
+  label: string;
+  /** Every slug — canonical + aliases — that should match this category. */
+  matchers: string[];
+};
 
-type Filter = string; // 'all' | category key
+type Filter = string; // 'all' | category slug
 
 export function GalleryClient({
   items,
   categories,
   allLabel,
-  noResultsLabel
+  noResultsLabel,
+  emptyLabel
 }: {
   items: LocalizedGalleryItem[];
   categories: GalleryCategoryOption[];
   allLabel: string;
   noResultsLabel: string;
+  emptyLabel: string;
 }) {
   const [filter, setFilter] = useState<Filter>('all');
   const [openIndex, setOpenIndex] = useState<number | null>(null);
 
-  const filtered = useMemo(
-    () =>
-      filter === 'all' ? items : items.filter((g) => g.category === filter),
-    [filter, items]
-  );
+  const matchersBySlug = useMemo(() => {
+    const map = new Map<string, Set<string>>();
+    for (const c of categories) {
+      map.set(c.slug, new Set(c.matchers));
+    }
+    return map;
+  }, [categories]);
+
+  const filtered = useMemo(() => {
+    if (filter === 'all') return items;
+    const set = matchersBySlug.get(filter);
+    if (!set) return [];
+    return items.filter((g) => set.has(g.category));
+  }, [filter, items, matchersBySlug]);
 
   const changeFilter = (next: Filter) => {
     setFilter(next);
     setOpenIndex(null);
   };
+
+  // Distinct empty states:
+  // - DB has no photos at all → emptyLabel ("Henüz fotoğraf eklenmedi.")
+  // - DB has photos but current filter has none → noResultsLabel
+  const gridEmptyMessage =
+    items.length === 0
+      ? emptyLabel
+      : filtered.length === 0
+        ? noResultsLabel
+        : null;
 
   return (
     <>
@@ -48,9 +74,9 @@ export function GalleryClient({
         </FilterPill>
         {categories.map((c) => (
           <FilterPill
-            key={c.key}
-            active={filter === c.key}
-            onClick={() => changeFilter(c.key)}
+            key={c.slug}
+            active={filter === c.slug}
+            onClick={() => changeFilter(c.slug)}
           >
             {c.label}
           </FilterPill>
@@ -58,8 +84,10 @@ export function GalleryClient({
       </div>
 
       {/* Grid */}
-      {filtered.length === 0 ? (
-        <p className="mt-12 text-center text-brand-gray">{noResultsLabel}</p>
+      {gridEmptyMessage ? (
+        <p className="mx-auto mt-10 max-w-md rounded-2xl border-2 border-dashed border-brand-border bg-white p-10 text-center text-brand-gray">
+          {gridEmptyMessage}
+        </p>
       ) : (
         <div className="mt-10 grid grid-cols-2 gap-4 sm:gap-5 md:grid-cols-3 lg:grid-cols-4">
           {filtered.map((item, idx) => (
