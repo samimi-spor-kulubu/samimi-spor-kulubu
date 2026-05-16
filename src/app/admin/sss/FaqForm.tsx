@@ -1,6 +1,6 @@
 'use client';
 
-import {useActionState} from 'react';
+import {cloneElement, isValidElement, useActionState} from 'react';
 import Link from 'next/link';
 
 import {Button} from '@/components/ui/button';
@@ -62,7 +62,7 @@ export function FaqForm({
       )}
 
       <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
-        <FieldBlock label="Kategori" required error={errors.category}>
+        <FieldBlock id="category" label="Kategori" required error={errors.category}>
           <Select
             name="category"
             defaultValue={initial?.category ?? 'membership'}
@@ -78,6 +78,7 @@ export function FaqForm({
         </FieldBlock>
 
         <FieldBlock
+          id="key"
           label="Anahtar (slug)"
           hint="Boş bırakırsan TR sorudan üretilir"
           error={errors.key}
@@ -90,7 +91,7 @@ export function FaqForm({
         </FieldBlock>
       </div>
 
-      <FieldBlock label="Soru (TR)" required error={errors.question_tr}>
+      <FieldBlock id="question_tr" label="Soru (TR)" required error={errors.question_tr}>
         <Input
           name="question_tr"
           placeholder="Örn. Üyelik nasıl başlar?"
@@ -100,7 +101,7 @@ export function FaqForm({
         />
       </FieldBlock>
 
-      <FieldBlock label="Soru (EN)" error={errors.question_en}>
+      <FieldBlock id="question_en" label="Soru (EN)" error={errors.question_en}>
         <Input
           name="question_en"
           placeholder="e.g. How does a membership start?"
@@ -108,7 +109,7 @@ export function FaqForm({
         />
       </FieldBlock>
 
-      <FieldBlock label="Cevap (TR)" required error={errors.answer_tr}>
+      <FieldBlock id="answer_tr" label="Cevap (TR)" required error={errors.answer_tr}>
         <Textarea
           name="answer_tr"
           rows={6}
@@ -119,7 +120,7 @@ export function FaqForm({
         />
       </FieldBlock>
 
-      <FieldBlock label="Cevap (EN)" error={errors.answer_en}>
+      <FieldBlock id="answer_en" label="Cevap (EN)" error={errors.answer_en}>
         <Textarea
           name="answer_en"
           rows={6}
@@ -136,21 +137,21 @@ export function FaqForm({
           Cevabın altında bir sayfaya bağlantı göstermek için doldurun.
         </p>
         <div className="mt-4 grid grid-cols-1 gap-4 sm:grid-cols-3">
-          <FieldBlock label="Link hedefi" error={errors.link_href}>
+          <FieldBlock id="link_href" label="Link hedefi" error={errors.link_href}>
             <Input
               name="link_href"
               placeholder="/branslar/reformer-pilates"
               defaultValue={initial?.link_href ?? ''}
             />
           </FieldBlock>
-          <FieldBlock label="Etiket (TR)" error={errors.link_label_tr}>
+          <FieldBlock id="link_label_tr" label="Etiket (TR)" error={errors.link_label_tr}>
             <Input
               name="link_label_tr"
               placeholder="Reformer Pilates sayfası"
               defaultValue={initial?.link_label_tr ?? ''}
             />
           </FieldBlock>
-          <FieldBlock label="Etiket (EN)" error={errors.link_label_en}>
+          <FieldBlock id="link_label_en" label="Etiket (EN)" error={errors.link_label_en}>
             <Input
               name="link_label_en"
               placeholder="Reformer Pilates page"
@@ -161,7 +162,7 @@ export function FaqForm({
       </div>
 
       <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
-        <FieldBlock label="Sıra (order_index)" error={errors.order_index}>
+        <FieldBlock id="order_index" label="Sıra (order_index)" error={errors.order_index}>
           <Input
             name="order_index"
             type="number"
@@ -171,11 +172,15 @@ export function FaqForm({
         </FieldBlock>
 
         <div>
-          <Label className="text-sm font-semibold text-brand-black">
+          <Label
+            htmlFor="active"
+            className="text-sm font-semibold text-brand-black"
+          >
             Aktif
           </Label>
           <div className="mt-2 flex items-center gap-3">
             <Switch
+              id="active"
               name="active"
               defaultChecked={initial?.active ?? true}
               value="on"
@@ -202,23 +207,45 @@ export function FaqForm({
   );
 }
 
+type FieldChildProps = {
+  id?: string;
+  'aria-describedby'?: string;
+  'aria-invalid'?: boolean;
+  'aria-required'?: boolean;
+};
+
 function FieldBlock({
+  id,
   label,
   required,
   hint,
   error,
   children
 }: {
+  id: string;
   label: string;
   required?: boolean;
   hint?: string;
   error?: string;
   children: React.ReactNode;
 }) {
+  const errorId = `${id}-error`;
+  const child = isValidElement<FieldChildProps>(children)
+    ? cloneElement(children, {
+        id,
+        'aria-describedby': error ? errorId : undefined,
+        'aria-invalid': error ? true : undefined,
+        'aria-required': required ? true : undefined
+      })
+    : children;
+
   return (
     <div>
       <div className="flex items-baseline justify-between gap-2">
-        <Label className="text-sm font-semibold text-brand-black">
+        <Label
+          htmlFor={id}
+          className="text-sm font-semibold text-brand-black"
+        >
           {label}{' '}
           {required && (
             <span className="text-brand-amber" aria-hidden="true">
@@ -230,8 +257,12 @@ function FieldBlock({
           <span className="text-xs font-normal text-brand-gray">{hint}</span>
         )}
       </div>
-      <div className="mt-1.5">{children}</div>
-      <p className="mt-1 min-h-[1rem] text-xs text-red-600" role="alert">
+      <div className="mt-1.5">{child}</div>
+      <p
+        id={errorId}
+        className="mt-1 min-h-[1rem] text-xs text-red-600"
+        role="alert"
+      >
         {error ?? ''}
       </p>
     </div>

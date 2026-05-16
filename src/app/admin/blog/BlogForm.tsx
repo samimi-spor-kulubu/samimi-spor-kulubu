@@ -1,6 +1,6 @@
 'use client';
 
-import {useActionState, useState} from 'react';
+import {cloneElement, isValidElement, useActionState, useState} from 'react';
 import Link from 'next/link';
 
 import {Button} from '@/components/ui/button';
@@ -89,7 +89,10 @@ export function BlogForm({
       )}
 
       <div className="rounded-2xl border-2 border-brand-border bg-white p-5 sm:p-6">
-        <Label className="text-sm font-semibold text-brand-black">
+        <Label
+          htmlFor="image"
+          className="text-sm font-semibold text-brand-black"
+        >
           Kapak Fotoğrafı
         </Label>
 
@@ -109,10 +112,13 @@ export function BlogForm({
 
         <div className="mt-3">
           <input
+            id="image"
             type="file"
             name="image"
             accept="image/jpeg,image/png,image/webp,image/avif,image/gif"
             onChange={onFileChange}
+            aria-invalid={errors.image ? true : undefined}
+            aria-describedby={errors.image ? 'image-error' : undefined}
             className="block w-full text-sm text-brand-black file:mr-3 file:rounded-full file:border-0 file:bg-brand-yellow file:px-4 file:py-2 file:text-sm file:font-semibold file:text-brand-black hover:file:bg-brand-yellow-dark"
           />
           <p className="mt-2 text-xs text-brand-gray">
@@ -120,7 +126,11 @@ export function BlogForm({
             mevcut kapak korunur.
           </p>
           {errors.image && (
-            <p className="mt-1 text-xs text-red-600" role="alert">
+            <p
+              id="image-error"
+              className="mt-1 text-xs text-red-600"
+              role="alert"
+            >
               {errors.image}
             </p>
           )}
@@ -129,6 +139,7 @@ export function BlogForm({
 
       <div className="grid grid-cols-1 gap-5 sm:grid-cols-3">
         <Field
+          id="slug"
           label="Slug"
           hint="Boşsa TR başlıktan üretilir"
           error={errors.slug}
@@ -139,7 +150,7 @@ export function BlogForm({
             defaultValue={initial?.slug ?? ''}
           />
         </Field>
-        <Field label="Kategori" required error={errors.category}>
+        <Field id="category" label="Kategori" required error={errors.category}>
           <Select
             name="category"
             defaultValue={initial?.category ?? 'genel'}
@@ -153,7 +164,7 @@ export function BlogForm({
             ))}
           </Select>
         </Field>
-        <Field label="Yazar" error={errors.author}>
+        <Field id="author" label="Yazar" error={errors.author}>
           <Input
             name="author"
             placeholder="Örn. Beyza Erdaş"
@@ -163,7 +174,7 @@ export function BlogForm({
       </div>
 
       <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
-        <Field label="Başlık (TR)" required error={errors.title_tr}>
+        <Field id="title_tr" label="Başlık (TR)" required error={errors.title_tr}>
           <Input
             name="title_tr"
             placeholder="Örn. Reformer Pilates Nedir?"
@@ -172,7 +183,7 @@ export function BlogForm({
             required
           />
         </Field>
-        <Field label="Başlık (EN)" required error={errors.title_en}>
+        <Field id="title_en" label="Başlık (EN)" required error={errors.title_en}>
           <Input
             name="title_en"
             placeholder="e.g. What is Reformer Pilates?"
@@ -185,6 +196,7 @@ export function BlogForm({
 
       <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
         <Field
+          id="excerpt_tr"
           label="Özet (TR)"
           hint="Maks. 240 karakter"
           error={errors.excerpt_tr}
@@ -197,6 +209,7 @@ export function BlogForm({
           />
         </Field>
         <Field
+          id="excerpt_en"
           label="Özet (EN)"
           hint="Max 240 chars"
           error={errors.excerpt_en}
@@ -212,6 +225,7 @@ export function BlogForm({
 
       <div className="grid grid-cols-1 gap-5">
         <Field
+          id="content_tr"
           label="İçerik (TR)"
           hint="Markdown destekli"
           error={errors.content_tr}
@@ -224,6 +238,7 @@ export function BlogForm({
           />
         </Field>
         <Field
+          id="content_en"
           label="İçerik (EN)"
           hint="Markdown supported"
           error={errors.content_en}
@@ -239,6 +254,7 @@ export function BlogForm({
 
       <div className="grid grid-cols-1 gap-5 sm:grid-cols-3">
         <Field
+          id="date"
           label="Yayın Tarihi"
           hint="Geçmiş = hemen yayında · Gelecek = zamanlanmış"
           error={errors.date}
@@ -250,6 +266,7 @@ export function BlogForm({
           />
         </Field>
         <Field
+          id="read_time"
           label="Okuma süresi (dk)"
           error={errors.read_time}
         >
@@ -263,11 +280,15 @@ export function BlogForm({
         </Field>
 
         <div>
-          <Label className="text-sm font-semibold text-brand-black">
+          <Label
+            htmlFor="published"
+            className="text-sm font-semibold text-brand-black"
+          >
             Yayında mı?
           </Label>
           <div className="mt-2 flex items-center gap-3">
             <Switch
+              id="published"
               name="published"
               defaultChecked={initial?.published ?? true}
               value="on"
@@ -311,23 +332,45 @@ export function BlogForm({
   );
 }
 
+type FieldChildProps = {
+  id?: string;
+  'aria-describedby'?: string;
+  'aria-invalid'?: boolean;
+  'aria-required'?: boolean;
+};
+
 function Field({
+  id,
   label,
   required,
   hint,
   error,
   children
 }: {
+  id: string;
   label: string;
   required?: boolean;
   hint?: string;
   error?: string;
   children: React.ReactNode;
 }) {
+  const errorId = `${id}-error`;
+  const child = isValidElement<FieldChildProps>(children)
+    ? cloneElement(children, {
+        id,
+        'aria-describedby': error ? errorId : undefined,
+        'aria-invalid': error ? true : undefined,
+        'aria-required': required ? true : undefined
+      })
+    : children;
+
   return (
     <div>
       <div className="flex items-baseline justify-between gap-2">
-        <Label className="text-sm font-semibold text-brand-black">
+        <Label
+          htmlFor={id}
+          className="text-sm font-semibold text-brand-black"
+        >
           {label}{' '}
           {required && (
             <span className="text-brand-amber" aria-hidden="true">
@@ -339,8 +382,12 @@ function Field({
           <span className="text-xs font-normal text-brand-gray">{hint}</span>
         )}
       </div>
-      <div className="mt-1.5">{children}</div>
-      <p className="mt-1 min-h-[1rem] text-xs text-red-600" role="alert">
+      <div className="mt-1.5">{child}</div>
+      <p
+        id={errorId}
+        className="mt-1 min-h-[1rem] text-xs text-red-600"
+        role="alert"
+      >
         {error ?? ''}
       </p>
     </div>
