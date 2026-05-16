@@ -3,7 +3,7 @@ import Image from 'next/image';
 import {getTranslations, setRequestLocale} from 'next-intl/server';
 import {notFound} from 'next/navigation';
 import {Link} from '@/i18n/navigation';
-import {contact, getWhatsAppUrl} from '@/config/contact';
+import {getContactInfo, whatsAppUrl} from '@/lib/services/contact';
 import {
   BLOG_BY_SLUG,
   BLOG_POSTS,
@@ -59,6 +59,7 @@ export default async function BlogDetailPage({
   const tRelated = await getTranslations('Blog.related');
   const tCta = await getTranslations('Blog.cta');
   const tCats = await getTranslations('Blog.categories');
+  const contact = await getContactInfo();
 
   const localized = localizePost(post, locale);
   const related = getRelatedPosts(post, 3).map((p) => localizePost(p, locale));
@@ -230,7 +231,7 @@ export default async function BlogDetailPage({
           </a>
           <div className="mt-6">
             <a
-              href={getWhatsAppUrl(contact.whatsapp.messages.bilgi)}
+              href={whatsAppUrl(contact, contact.whatsapp.messages.bilgi)}
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex h-12 items-center justify-center rounded-full bg-brand-black px-8 text-base font-semibold text-white transition-colors hover:bg-zinc-800"

@@ -1,7 +1,7 @@
 import type {Metadata} from 'next';
 import {getTranslations, setRequestLocale} from 'next-intl/server';
 import {Link} from '@/i18n/navigation';
-import {contact, getWhatsAppUrl} from '@/config/contact';
+import {getContactInfo, whatsAppUrl} from '@/lib/services/contact';
 import {PilatesPrices} from '@/components/branches/PilatesPrices';
 import {pageMetadata} from '@/lib/seo';
 import {getAllBranches} from '@/lib/services/branches';
@@ -36,6 +36,7 @@ export default async function BranchesPage({
   const tCta = await getTranslations('Branches.cta');
 
   const branches = await getAllBranches(locale);
+  const contact = await getContactInfo();
 
   return (
     <>
@@ -123,7 +124,7 @@ export default async function BranchesPage({
           </a>
           <div className="mt-6">
             <a
-              href={getWhatsAppUrl(contact.whatsapp.messages.bilgi)}
+              href={whatsAppUrl(contact, contact.whatsapp.messages.bilgi)}
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex h-12 items-center justify-center rounded-full bg-brand-black px-8 text-base font-semibold text-white transition-colors hover:bg-zinc-800"

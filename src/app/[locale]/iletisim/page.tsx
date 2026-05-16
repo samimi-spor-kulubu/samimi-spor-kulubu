@@ -1,6 +1,5 @@
 import type {Metadata} from 'next';
 import {getTranslations, setRequestLocale} from 'next-intl/server';
-import {contact, getWhatsAppUrl} from '@/config/contact';
 import {ContactForm} from '@/components/contact/ContactForm';
 import {
   InstagramIcon,
@@ -8,6 +7,7 @@ import {
   WhatsAppIcon
 } from '@/components/icons';
 import {pageMetadata} from '@/lib/seo';
+import {getContactInfo, whatsAppUrl} from '@/lib/services/contact';
 
 export async function generateMetadata({
   params
@@ -38,12 +38,15 @@ export default async function IletisimPage({
   const tLoc = await getTranslations('Contact.location');
   const tForm = await getTranslations('Contact.form');
 
+  const contact = await getContactInfo();
+  const waBilgiUrl = whatsAppUrl(contact, contact.whatsapp.messages.bilgi);
+
   const methods = [
     {
       key: 'whatsapp' as const,
       icon: <WhatsAppIcon className="h-7 w-7" />,
       info: contact.phone.display,
-      href: getWhatsAppUrl(contact.whatsapp.messages.bilgi),
+      href: waBilgiUrl,
       external: true,
       ctaStyle: 'primary' as const
     },
@@ -192,7 +195,7 @@ export default async function IletisimPage({
           </h2>
           <p className="mt-3 text-brand-gray">{tForm('subtitle')}</p>
           <div className="relative mt-8">
-            <ContactForm />
+            <ContactForm whatsappFallbackUrl={waBilgiUrl} />
           </div>
         </div>
       </section>

@@ -1,5 +1,6 @@
 import type {Metadata} from 'next';
-import {contact} from '@/config/contact';
+import {contact as FALLBACK_CONTACT} from '@/config/contact';
+import type {ContactInfo} from '@/lib/services/contact';
 
 export const SITE_URL =
   process.env.NEXT_PUBLIC_SITE_URL ?? 'https://samimisporkulubu.com';
@@ -83,26 +84,36 @@ export function pageMetadata({
   };
 }
 
-export function organizationJsonLd(locale: string) {
+export function organizationJsonLd(
+  locale: string,
+  info?: Pick<ContactInfo, 'phone' | 'instagram' | 'address' | 'hours'>
+) {
+  const phoneTel = info?.phone.tel ?? FALLBACK_CONTACT.phone.tel;
+  const instagramUrl = info?.instagram.url ?? FALLBACK_CONTACT.instagram.url;
+  const street = info?.address.street ?? FALLBACK_CONTACT.address.street;
+  const district = info?.address.district ?? FALLBACK_CONTACT.address.district;
+  const city = info?.address.city ?? FALLBACK_CONTACT.address.city;
+  const open = info?.hours.open ?? FALLBACK_CONTACT.hours.open;
+  const close = info?.hours.close ?? FALLBACK_CONTACT.hours.close;
   return {
     '@context': 'https://schema.org',
     '@type': 'SportsClub',
     name: siteName(locale),
     url: absoluteUrl(localePath('/', locale)),
-    telephone: contact.phone.tel,
+    telephone: phoneTel,
     image: absoluteUrl('/og.png'),
-    sameAs: [contact.instagram.url],
+    sameAs: [instagramUrl],
     address: {
       '@type': 'PostalAddress',
-      streetAddress: contact.address.street,
-      addressLocality: contact.address.district,
-      addressRegion: contact.address.city,
+      streetAddress: street,
+      addressLocality: district,
+      addressRegion: city,
       addressCountry: 'TR'
     },
-    openingHours: `Mo-Su ${contact.hours.open}-${contact.hours.close}`,
+    openingHours: `Mo-Su ${open}-${close}`,
     contactPoint: {
       '@type': 'ContactPoint',
-      telephone: contact.phone.tel,
+      telephone: phoneTel,
       contactType: 'customer service',
       availableLanguage: ['Turkish', 'English']
     }

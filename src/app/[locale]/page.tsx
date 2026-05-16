@@ -1,8 +1,8 @@
 import type {Metadata} from 'next';
 import {getTranslations, setRequestLocale} from 'next-intl/server';
 import {Link} from '@/i18n/navigation';
-import {contact, getWhatsAppUrl} from '@/config/contact';
 import {pageMetadata} from '@/lib/seo';
+import {getContactInfo, whatsAppUrl} from '@/lib/services/contact';
 import {
   AwardIcon,
   ClockIcon,
@@ -67,6 +67,7 @@ export default async function Home({
   const t = await getTranslations('Home');
   const tBranches = await getTranslations('Branches.items');
   const tTrainers = await getTranslations('Trainers.items');
+  const contact = await getContactInfo();
 
   return (
     <>
@@ -89,7 +90,7 @@ export default async function Home({
             </p>
             <div className="mt-10 flex flex-wrap gap-4">
               <a
-                href={getWhatsAppUrl(contact.whatsapp.messages.rezervasyon)}
+                href={whatsAppUrl(contact, contact.whatsapp.messages.rezervasyon)}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex h-12 items-center justify-center rounded-full bg-brand-yellow px-8 text-base font-semibold text-brand-black transition-colors hover:bg-brand-yellow-dark"
@@ -323,7 +324,7 @@ export default async function Home({
           </a>
           <div className="mt-8">
             <a
-              href={getWhatsAppUrl(contact.whatsapp.messages.rezervasyon)}
+              href={whatsAppUrl(contact, contact.whatsapp.messages.rezervasyon)}
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex h-12 items-center justify-center rounded-full bg-brand-black px-8 text-base font-semibold text-white transition-colors hover:bg-zinc-800"

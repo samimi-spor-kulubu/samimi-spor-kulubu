@@ -1,8 +1,8 @@
 import Image from 'next/image';
 import {getTranslations, setRequestLocale} from 'next-intl/server';
 import {Link} from '@/i18n/navigation';
-import {contact, getWhatsAppUrl} from '@/config/contact';
 import {personJsonLd} from '@/lib/seo';
+import {getContactInfo, whatsAppUrl} from '@/lib/services/contact';
 import type {LocalizedTrainer} from '@/lib/services/trainers';
 
 export type TrainerBranchInfo = {
@@ -23,6 +23,11 @@ export async function TrainerDetail({
 
   const tNav = await getTranslations('Nav');
   const tDetail = await getTranslations('Trainers.detail');
+  const contact = await getContactInfo();
+  const reservationWaUrl = whatsAppUrl(
+    contact,
+    contact.whatsapp.messages.rezervasyon
+  );
 
   const schema = personJsonLd({
     locale,
@@ -106,7 +111,7 @@ export async function TrainerDetail({
               )}
 
               <a
-                href={getWhatsAppUrl(contact.whatsapp.messages.rezervasyon)}
+                href={reservationWaUrl}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="mt-4 inline-flex h-12 w-full items-center justify-center rounded-full bg-brand-yellow px-6 text-sm font-semibold text-brand-black transition-colors hover:bg-brand-yellow-dark"

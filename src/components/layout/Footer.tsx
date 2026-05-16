@@ -1,7 +1,7 @@
 import {useTranslations} from 'next-intl';
 import {Link} from '@/i18n/navigation';
-import {contact} from '@/config/contact';
 import {InstagramIcon} from '@/components/icons';
+import type {ContactInfo} from '@/lib/services/contact';
 
 const QUICK_LINKS = [
   {href: '/branslar', tKey: 'branches'},
@@ -13,7 +13,7 @@ const QUICK_LINKS = [
   {href: '/sss', tKey: 'faq'}
 ] as const;
 
-export function Footer() {
+export function Footer({contact}: {contact: ContactInfo}) {
   const t = useTranslations('Footer');
   const tNav = useTranslations('Nav');
   const tSite = useTranslations('Site');

@@ -2,7 +2,7 @@ import type {Metadata} from 'next';
 import Image from 'next/image';
 import {getTranslations, setRequestLocale} from 'next-intl/server';
 import {Link} from '@/i18n/navigation';
-import {contact, getWhatsAppUrl} from '@/config/contact';
+import {getContactInfo, whatsAppUrl} from '@/lib/services/contact';
 import {BRANCHES} from '@/lib/branches';
 import {TRAINERS} from '@/lib/trainers';
 import {
@@ -50,6 +50,7 @@ export default async function HakkimizdaPage({
   const tCta = await getTranslations('About.cta');
   const tBranchItems = await getTranslations('Branches.items');
   const tTrainerItems = await getTranslations('Trainers.items');
+  const contact = await getContactInfo();
 
   const storyParagraphs = (tStory.raw('paragraphs') ?? []) as string[];
 
@@ -233,7 +234,7 @@ export default async function HakkimizdaPage({
               </div>
 
               <a
-                href={getWhatsAppUrl(contact.whatsapp.messages.bilgi)}
+                href={whatsAppUrl(contact, contact.whatsapp.messages.bilgi)}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex h-11 w-full items-center justify-center rounded-full bg-brand-yellow px-6 text-sm font-semibold text-brand-black transition-colors hover:bg-brand-yellow-dark"
@@ -274,7 +275,7 @@ export default async function HakkimizdaPage({
           </a>
           <div className="mt-6">
             <a
-              href={getWhatsAppUrl(contact.whatsapp.messages.bilgi)}
+              href={whatsAppUrl(contact, contact.whatsapp.messages.bilgi)}
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex h-12 items-center justify-center rounded-full bg-brand-black px-8 text-base font-semibold text-white transition-colors hover:bg-zinc-800"

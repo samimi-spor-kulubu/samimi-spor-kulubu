@@ -3,8 +3,8 @@
 import {useEffect, useRef, useState} from 'react';
 import {useTranslations} from 'next-intl';
 import {Link} from '@/i18n/navigation';
-import {getWhatsAppUrl} from '@/config/contact';
 import {CloseIcon, MenuIcon} from '@/components/icons';
+import type {ContactInfo} from '@/lib/services/contact';
 import {LanguageSwitcher} from './LanguageSwitcher';
 
 const NAV_LINKS = [
@@ -28,8 +28,9 @@ function Logo() {
   );
 }
 
-export function Navbar() {
+export function Navbar({contact}: {contact: ContactInfo}) {
   const t = useTranslations('Nav');
+  const whatsappUrl = `${contact.whatsapp.url}?text=${encodeURIComponent(contact.whatsapp.messages.bilgi)}`;
   const [open, setOpen] = useState(false);
   const toggleBtnRef = useRef<HTMLButtonElement>(null);
   const panelRef = useRef<HTMLDivElement>(null);
@@ -106,7 +107,7 @@ export function Navbar() {
         <div className="hidden items-center gap-4 lg:flex">
           <LanguageSwitcher />
           <a
-            href={getWhatsAppUrl()}
+            href={whatsappUrl}
             target="_blank"
             rel="noopener noreferrer"
             className="inline-flex h-10 items-center justify-center rounded-full bg-brand-yellow px-5 text-sm font-semibold text-brand-black transition-colors hover:bg-brand-yellow-dark"
@@ -152,7 +153,7 @@ export function Navbar() {
             <div className="mt-3 flex items-center justify-between border-t border-brand-border pt-4">
               <LanguageSwitcher />
               <a
-                href={getWhatsAppUrl()}
+                href={whatsappUrl}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex h-10 items-center justify-center rounded-full bg-brand-yellow px-5 text-sm font-semibold text-brand-black hover:bg-brand-yellow-dark"

@@ -1,7 +1,7 @@
 import type {Metadata} from 'next';
 import {getTranslations, setRequestLocale} from 'next-intl/server';
 import {FaqClient} from '@/components/faq/FaqClient';
-import {contact, getWhatsAppUrl} from '@/config/contact';
+import {getContactInfo, whatsAppUrl} from '@/lib/services/contact';
 import {pageMetadata} from '@/lib/seo';
 import type {FAQCategory, LocalizedFAQItem} from '@/lib/faqs';
 import {getAllFaqs} from '@/lib/services/faqs';
@@ -35,6 +35,7 @@ export default async function SssPage({
   const tCta = await getTranslations('Faq.cta');
 
   const faqs = await getAllFaqs(locale);
+  const contact = await getContactInfo();
 
   // Adapt service shape (`link: {href, label} | null`) to FaqClient's
   // expected shape (`link?: {label, href}`).
@@ -99,7 +100,7 @@ export default async function SssPage({
           </a>
           <div className="mt-6">
             <a
-              href={getWhatsAppUrl(contact.whatsapp.messages.bilgi)}
+              href={whatsAppUrl(contact, contact.whatsapp.messages.bilgi)}
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex h-12 items-center justify-center rounded-full bg-brand-black px-8 text-base font-semibold text-white transition-colors hover:bg-zinc-800"

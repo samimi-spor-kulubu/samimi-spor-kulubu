@@ -1,6 +1,6 @@
 import type {Metadata} from 'next';
 import {getTranslations, setRequestLocale} from 'next-intl/server';
-import {contact, getWhatsAppUrl} from '@/config/contact';
+import {getContactInfo, whatsAppUrl} from '@/lib/services/contact';
 import {PlayIcon} from '@/components/icons';
 import {pageMetadata} from '@/lib/seo';
 
@@ -39,6 +39,7 @@ export default async function TesisTuruPage({
   const tVideo = await getTranslations('Tour.video');
   const tSections = await getTranslations('Tour.sections');
   const tCta = await getTranslations('Tour.cta');
+  const contact = await getContactInfo();
 
   return (
     <>
@@ -140,7 +141,7 @@ export default async function TesisTuruPage({
           </a>
           <div className="mt-6">
             <a
-              href={getWhatsAppUrl(contact.whatsapp.messages.bilgi)}
+              href={whatsAppUrl(contact, contact.whatsapp.messages.bilgi)}
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex h-12 items-center justify-center rounded-full bg-brand-black px-8 text-base font-semibold text-white transition-colors hover:bg-zinc-800"

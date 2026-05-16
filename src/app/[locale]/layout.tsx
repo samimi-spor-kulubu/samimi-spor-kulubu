@@ -7,6 +7,7 @@ import {routing} from '@/i18n/routing';
 import {Navbar} from '@/components/layout/Navbar';
 import {Footer} from '@/components/layout/Footer';
 import {organizationJsonLd, pageMetadata, SITE_URL} from '@/lib/seo';
+import {getContactInfo} from '@/lib/services/contact';
 import '../globals.css';
 
 const barlow = Barlow({
@@ -57,6 +58,7 @@ export default async function LocaleLayout({
   setRequestLocale(locale);
 
   const tNav = await getTranslations({locale, namespace: 'Nav'});
+  const contactInfo = await getContactInfo();
 
   return (
     <html
@@ -68,16 +70,16 @@ export default async function LocaleLayout({
           <a href="#main" className="skip-link">
             {tNav('skipToContent')}
           </a>
-          <Navbar />
+          <Navbar contact={contactInfo} />
           <main id="main" className="flex flex-1 flex-col">
             {children}
           </main>
-          <Footer />
+          <Footer contact={contactInfo} />
         </NextIntlClientProvider>
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
-            __html: JSON.stringify(organizationJsonLd(locale))
+            __html: JSON.stringify(organizationJsonLd(locale, contactInfo))
           }}
         />
       </body>

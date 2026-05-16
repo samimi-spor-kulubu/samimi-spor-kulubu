@@ -9,7 +9,6 @@ import {
 } from 'react';
 import {useLocale, useTranslations} from 'next-intl';
 
-import {contact, getWhatsAppUrl} from '@/config/contact';
 import {
   submitContactMessage,
   type ContactFormState
@@ -20,7 +19,11 @@ type Subject = (typeof SUBJECTS)[number];
 
 const INITIAL_STATE: ContactFormState = {status: 'idle'};
 
-export function ContactForm() {
+export function ContactForm({
+  whatsappFallbackUrl
+}: {
+  whatsappFallbackUrl: string;
+}) {
   const t = useTranslations('Contact.form');
   const locale = useLocale();
 
@@ -53,6 +56,7 @@ export function ContactForm() {
       formAction={formAction}
       pending={pending}
       state={state}
+      whatsappFallbackUrl={whatsappFallbackUrl}
     />
   );
 }
@@ -62,13 +66,15 @@ function FormBody({
   locale,
   formAction,
   pending,
-  state
+  state,
+  whatsappFallbackUrl
 }: {
   t: ReturnType<typeof useTranslations>;
   locale: string;
   formAction: (formData: FormData) => void;
   pending: boolean;
   state: ContactFormState;
+  whatsappFallbackUrl: string;
 }) {
   const errors =
     state.status === 'error' && state.errors ? state.errors : {};
@@ -119,7 +125,7 @@ function FormBody({
         >
           <p className="text-sm text-red-700">{serverError}</p>
           <a
-            href={getWhatsAppUrl(contact.whatsapp.messages.bilgi)}
+            href={whatsappFallbackUrl}
             target="_blank"
             rel="noopener noreferrer"
             className="inline-flex h-10 shrink-0 items-center justify-center rounded-full bg-brand-yellow px-5 text-sm font-semibold text-brand-black transition-colors hover:bg-brand-yellow-dark"

@@ -2,7 +2,7 @@ import type {Metadata} from 'next';
 import {getTranslations, setRequestLocale} from 'next-intl/server';
 import {notFound} from 'next/navigation';
 import {Link} from '@/i18n/navigation';
-import {contact, getWhatsAppUrl} from '@/config/contact';
+import {getContactInfo, whatsAppUrl} from '@/lib/services/contact';
 import {PilatesPrices} from '@/components/branches/PilatesPrices';
 import {pageMetadata, serviceJsonLd} from '@/lib/seo';
 import {
@@ -48,6 +48,7 @@ export default async function BranchDetailPage({
   const tDetail = await getTranslations('Branches.detail');
   const tDetailCta = await getTranslations('Branches.detail.cta');
   const tLabels = await getTranslations('Branches.labels');
+  const contact = await getContactInfo();
 
   const schema = serviceJsonLd({
     locale,
@@ -195,7 +196,7 @@ export default async function BranchDetailPage({
               )}
 
               <a
-                href={getWhatsAppUrl(contact.whatsapp.messages.rezervasyon)}
+                href={whatsAppUrl(contact, contact.whatsapp.messages.rezervasyon)}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="mt-6 inline-flex h-12 w-full items-center justify-center rounded-full bg-brand-yellow px-6 text-sm font-semibold text-brand-black transition-colors hover:bg-brand-yellow-dark"
@@ -224,7 +225,7 @@ export default async function BranchDetailPage({
           </p>
           <div className="mt-8">
             <a
-              href={getWhatsAppUrl(contact.whatsapp.messages.rezervasyon)}
+              href={whatsAppUrl(contact, contact.whatsapp.messages.rezervasyon)}
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex h-12 items-center justify-center rounded-full bg-brand-black px-8 text-base font-semibold text-white transition-colors hover:bg-zinc-800"

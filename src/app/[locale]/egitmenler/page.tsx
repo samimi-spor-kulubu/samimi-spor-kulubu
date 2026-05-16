@@ -2,7 +2,7 @@ import type {Metadata} from 'next';
 import Image from 'next/image';
 import {getTranslations, setRequestLocale} from 'next-intl/server';
 import {Link} from '@/i18n/navigation';
-import {contact, getWhatsAppUrl} from '@/config/contact';
+import {getContactInfo, whatsAppUrl} from '@/lib/services/contact';
 import {pageMetadata} from '@/lib/seo';
 import {getAllTrainers} from '@/lib/services/trainers';
 
@@ -36,6 +36,7 @@ export default async function TrainersPage({
   const tCta = await getTranslations('Trainers.cta');
 
   const trainers = await getAllTrainers(locale);
+  const contact = await getContactInfo();
 
   return (
     <>
@@ -105,7 +106,7 @@ export default async function TrainersPage({
           </a>
           <div className="mt-6">
             <a
-              href={getWhatsAppUrl(contact.whatsapp.messages.bilgi)}
+              href={whatsAppUrl(contact, contact.whatsapp.messages.bilgi)}
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex h-12 items-center justify-center rounded-full bg-brand-black px-8 text-base font-semibold text-white transition-colors hover:bg-zinc-800"
