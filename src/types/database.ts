@@ -163,6 +163,17 @@ export type AdminUserInsert = Insertable<AdminUser, 'email'>;
 export type SettingInsert = Insertable<Setting, 'key'>;
 
 // ─── Supabase Database shape ─────────────────────────────────────
+// Each table needs a Relationships array — Postgrest's generated query
+// types require it. For branches we describe the trainers FK so the
+// `instructor:trainers!instructor_id(*)` join is type-aware.
+type BranchToTrainerFk = {
+  foreignKeyName: 'branches_instructor_id_fkey';
+  columns: ['instructor_id'];
+  isOneToOne: false;
+  referencedRelation: 'trainers';
+  referencedColumns: ['id'];
+};
+
 export type Database = {
   public: {
     Tables: {
@@ -170,41 +181,49 @@ export type Database = {
         Row: Trainer;
         Insert: TrainerInsert;
         Update: Partial<TrainerInsert>;
+        Relationships: [];
       };
       branches: {
         Row: Branch;
         Insert: BranchInsert;
         Update: Partial<BranchInsert>;
+        Relationships: [BranchToTrainerFk];
       };
       blog_posts: {
         Row: BlogPost;
         Insert: BlogPostInsert;
         Update: Partial<BlogPostInsert>;
+        Relationships: [];
       };
       gallery_items: {
         Row: GalleryItem;
         Insert: GalleryItemInsert;
         Update: Partial<GalleryItemInsert>;
+        Relationships: [];
       };
       faqs: {
         Row: Faq;
         Insert: FaqInsert;
         Update: Partial<FaqInsert>;
+        Relationships: [];
       };
       contact_messages: {
         Row: ContactMessage;
         Insert: ContactMessageInsert;
         Update: Partial<ContactMessageInsert>;
+        Relationships: [];
       };
       admin_users: {
         Row: AdminUser;
         Insert: AdminUserInsert;
         Update: Partial<AdminUserInsert>;
+        Relationships: [];
       };
       settings: {
         Row: Setting;
         Insert: SettingInsert;
         Update: Partial<SettingInsert>;
+        Relationships: [];
       };
     };
     Views: {[_ in never]: never};
