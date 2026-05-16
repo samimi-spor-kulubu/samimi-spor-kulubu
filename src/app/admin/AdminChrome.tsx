@@ -8,13 +8,12 @@ type NavLink = {href: string; label: string; exact?: boolean};
 
 const NAV_LINKS: ReadonlyArray<NavLink> = [
   {href: '/admin', label: 'Anasayfa', exact: true},
-  {href: '/admin/branches', label: 'Branşlar'},
-  {href: '/admin/trainers', label: 'Eğitmenler'},
-  {href: '/admin/blog', label: 'Blog'},
-  {href: '/admin/gallery', label: 'Galeri'},
+  {href: '/admin/branslar', label: 'Branşlar'},
+  {href: '/admin/egitmenler', label: 'Eğitmenler'},
+  {href: '/admin/galeri', label: 'Galeri'},
   {href: '/admin/sss', label: 'SSS'},
   {href: '/admin/mesajlar', label: 'Mesajlar'},
-  {href: '/admin/settings', label: 'Ayarlar'}
+  {href: '/admin/ayarlar', label: 'Ayarlar'}
 ];
 
 export function AdminChrome({children}: {children: React.ReactNode}) {
