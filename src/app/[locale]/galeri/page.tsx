@@ -2,6 +2,9 @@ import type {Metadata} from 'next';
 import {getTranslations, setRequestLocale} from 'next-intl/server';
 import {GalleryClient} from '@/components/gallery/GalleryClient';
 import {pageMetadata} from '@/lib/seo';
+import {getAllGalleryItems} from '@/lib/services/gallery';
+
+export const revalidate = 60;
 
 export async function generateMetadata({
   params
@@ -26,7 +29,21 @@ export default async function GaleriPage({
 }) {
   const {locale} = await params;
   setRequestLocale(locale);
+
   const tHero = await getTranslations('Gallery.hero');
+  const tCats = await getTranslations('Gallery.categories');
+  const tFilter = await getTranslations('Gallery.filter');
+
+  const items = await getAllGalleryItems(locale);
+
+  // Distinct categories present in the DB. Known categories use the
+  // localised label from messages; unknown ones (added by an admin
+  // later) fall back to the raw category string.
+  const uniqueCategories = Array.from(new Set(items.map((i) => i.category)));
+  const categories = uniqueCategories.map((cat) => ({
+    key: cat,
+    label: tCats.has(cat) ? tCats(cat) : cat
+  }));
 
   return (
     <>
@@ -45,7 +62,20 @@ export default async function GaleriPage({
       {/* GALLERY */}
       <section className="bg-brand-surface">
         <div className="mx-auto max-w-6xl px-4 py-12 sm:px-6 sm:py-16 lg:px-8">
-          <GalleryClient />
+          {items.length === 0 ? (
+            <p className="mx-auto max-w-md rounded-2xl border-2 border-dashed border-brand-border bg-white p-10 text-center text-brand-gray">
+              {locale === 'en'
+                ? 'No photos yet.'
+                : 'Henüz fotoğraf eklenmedi.'}
+            </p>
+          ) : (
+            <GalleryClient
+              items={items}
+              categories={categories}
+              allLabel={tFilter('all')}
+              noResultsLabel={tFilter('noResults')}
+            />
+          )}
         </div>
       </section>
     </>

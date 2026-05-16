@@ -1,28 +1,35 @@
 'use client';
 
-import {useEffect, useRef, useState} from 'react';
+import {useEffect, useMemo, useRef, useState} from 'react';
 import Image from 'next/image';
 
 import {useTranslations} from 'next-intl';
-import {
-  GALLERY,
-  GALLERY_CATEGORIES,
-  type GalleryCategory,
-  type GalleryItem
-} from '@/lib/gallery';
 
-type Filter = 'all' | GalleryCategory;
+import type {LocalizedGalleryItem} from '@/lib/services/gallery';
 
-export function GalleryClient() {
-  const tFilter = useTranslations('Gallery.filter');
-  const tCats = useTranslations('Gallery.categories');
-  const tItems = useTranslations('Gallery.items');
+export type GalleryCategoryOption = {key: string; label: string};
 
+type Filter = string; // 'all' | category key
+
+export function GalleryClient({
+  items,
+  categories,
+  allLabel,
+  noResultsLabel
+}: {
+  items: LocalizedGalleryItem[];
+  categories: GalleryCategoryOption[];
+  allLabel: string;
+  noResultsLabel: string;
+}) {
   const [filter, setFilter] = useState<Filter>('all');
   const [openIndex, setOpenIndex] = useState<number | null>(null);
 
-  const filtered =
-    filter === 'all' ? GALLERY : GALLERY.filter((g) => g.category === filter);
+  const filtered = useMemo(
+    () =>
+      filter === 'all' ? items : items.filter((g) => g.category === filter),
+    [filter, items]
+  );
 
   const changeFilter = (next: Filter) => {
     setFilter(next);
@@ -37,24 +44,22 @@ export function GalleryClient() {
           active={filter === 'all'}
           onClick={() => changeFilter('all')}
         >
-          {tFilter('all')}
+          {allLabel}
         </FilterPill>
-        {GALLERY_CATEGORIES.map((c) => (
+        {categories.map((c) => (
           <FilterPill
-            key={c}
-            active={filter === c}
-            onClick={() => changeFilter(c)}
+            key={c.key}
+            active={filter === c.key}
+            onClick={() => changeFilter(c.key)}
           >
-            {tCats(c)}
+            {c.label}
           </FilterPill>
         ))}
       </div>
 
       {/* Grid */}
       {filtered.length === 0 ? (
-        <p className="mt-12 text-center text-brand-gray">
-          {tFilter('noResults')}
-        </p>
+        <p className="mt-12 text-center text-brand-gray">{noResultsLabel}</p>
       ) : (
         <div className="mt-10 grid grid-cols-2 gap-4 sm:gap-5 md:grid-cols-3 lg:grid-cols-4">
           {filtered.map((item, idx) => (
@@ -62,17 +67,15 @@ export function GalleryClient() {
               key={item.id}
               type="button"
               onClick={() => setOpenIndex(idx)}
-              aria-label={tItems(`${item.id}.title`)}
+              aria-label={item.title || 'Fotoğraf'}
               className="group relative aspect-square overflow-hidden rounded-2xl border-2 border-brand-border bg-zinc-200 transition-all duration-300 ease-out hover:-translate-y-0.5 hover:border-brand-yellow hover:shadow-lg focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-yellow"
             >
-              <PlaceholderOrImage
-                item={item}
-                title={tItems(`${item.id}.title`)}
-                className="transition-transform duration-300 group-hover:scale-105"
-              />
-              <span className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/60 to-transparent p-3 text-left text-xs font-medium text-white opacity-0 transition-opacity group-hover:opacity-100">
-                {tItems(`${item.id}.title`)}
-              </span>
+              <PlaceholderOrImage item={item} />
+              {item.title && (
+                <span className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/60 to-transparent p-3 text-left text-xs font-medium text-white opacity-0 transition-opacity group-hover:opacity-100">
+                  {item.title}
+                </span>
+              )}
             </button>
           ))}
         </div>
@@ -116,32 +119,23 @@ function FilterPill({
   );
 }
 
-function PlaceholderOrImage({
-  item,
-  title,
-  className
-}: {
-  item: GalleryItem;
-  title: string;
-  className?: string;
-}) {
+function PlaceholderOrImage({item}: {item: LocalizedGalleryItem}) {
   if (item.src) {
     return (
       <Image
         src={item.src}
-        alt={title}
+        alt={item.title || ''}
         fill
+        loading="lazy"
         sizes="(max-width: 768px) 50vw, (max-width: 1024px) 33vw, 25vw"
-        className={`object-cover object-center ${className ?? ''}`}
+        className="object-cover object-center transition-transform duration-300 group-hover:scale-105"
       />
     );
   }
   return (
-    <div
-      className={`flex h-full w-full items-center justify-center bg-gradient-to-br from-zinc-200 to-zinc-300 ${className ?? ''}`}
-    >
+    <div className="flex h-full w-full items-center justify-center bg-gradient-to-br from-zinc-200 to-zinc-300 transition-transform duration-300 group-hover:scale-105">
       <span className="px-3 text-center text-xs font-medium text-brand-gray">
-        {title}
+        {item.title || '—'}
       </span>
     </div>
   );
@@ -153,13 +147,12 @@ function Lightbox({
   onClose,
   onIndexChange
 }: {
-  items: GalleryItem[];
+  items: LocalizedGalleryItem[];
   index: number;
   onClose: () => void;
   onIndexChange: (i: number) => void;
 }) {
   const tLightbox = useTranslations('Gallery.lightbox');
-  const tItems = useTranslations('Gallery.items');
   const item = items[index];
   const total = items.length;
   const hasPrev = index > 0;
@@ -217,13 +210,13 @@ function Lightbox({
     };
   }, [index, hasPrev, hasNext, onClose, onIndexChange]);
 
-  const title = tItems(`${item.id}.title`);
+  const title = item.title || '';
 
   return (
     <div
       role="dialog"
       aria-modal="true"
-      aria-label={title}
+      aria-label={title || 'Galeri'}
       className="fixed inset-0 z-50 flex items-center justify-center bg-black/85 p-4 backdrop-blur-sm"
       onClick={onClose}
     >
@@ -245,7 +238,7 @@ function Lightbox({
           ) : (
             <div className="flex h-full w-full items-center justify-center bg-gradient-to-br from-zinc-700 to-zinc-900">
               <span className="font-heading text-2xl tracking-wider text-white">
-                {title}
+                {title || '—'}
               </span>
             </div>
           )}
