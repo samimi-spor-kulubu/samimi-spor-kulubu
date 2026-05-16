@@ -257,7 +257,7 @@ function Field({
         <span>
           {label}{' '}
           {required && (
-            <span className="text-brand-yellow-dark" aria-hidden="true">
+            <span className="text-brand-amber" aria-hidden="true">
               *
             </span>
           )}

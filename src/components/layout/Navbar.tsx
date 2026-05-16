@@ -96,7 +96,7 @@ export function Navbar() {
             <Link
               key={href}
               href={href}
-              className="text-sm font-medium text-brand-black/80 hover:text-brand-yellow-dark transition-colors"
+              className="text-sm font-medium text-brand-black/80 hover:text-brand-amber transition-colors"
             >
               {t(tKey)}
             </Link>
@@ -136,7 +136,7 @@ export function Navbar() {
         <div
           id="mobile-menu"
           ref={panelRef}
-          className="border-t border-brand-border bg-white lg:hidden"
+          className="origin-top border-t border-brand-border bg-white animate-in fade-in slide-in-from-top-2 animation-duration-200 lg:hidden motion-reduce:animate-none"
         >
           <nav className="mx-auto flex max-w-7xl flex-col gap-1 px-4 py-4 sm:px-6">
             {NAV_LINKS.map(({href, tKey}) => (

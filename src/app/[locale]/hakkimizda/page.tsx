@@ -18,13 +18,12 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const {locale} = await params;
   const tHero = await getTranslations({locale, namespace: 'About.hero'});
-  const tStory = await getTranslations({locale, namespace: 'About.story'});
-  const paragraphs = (tStory.raw('paragraphs') ?? []) as string[];
+  const tAbout = await getTranslations({locale, namespace: 'About'});
   return pageMetadata({
     locale,
     path: '/hakkimizda',
     title: tHero('title'),
-    description: paragraphs[0] ?? tHero('subtitle')
+    description: tAbout('seoDescription')
   });
 }
 
@@ -206,7 +205,7 @@ export default async function HakkimizdaPage({
                   href={contact.address.mapsUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="mt-2 inline-flex items-center gap-1 text-sm font-semibold text-brand-yellow-dark transition-colors hover:text-brand-black"
+                  className="mt-2 inline-flex items-center gap-1 text-sm font-semibold text-brand-amber transition-colors hover:text-brand-black"
                 >
                   {tLocation('mapsCta')} →
                 </a>

@@ -106,7 +106,7 @@ export function FaqClient({items}: {items: LocalizedFAQItem[]}) {
                     {item.link && (
                       <Link
                         href={item.link.href}
-                        className="mt-4 inline-flex items-center gap-1 text-sm font-semibold text-brand-yellow-dark transition-colors hover:text-brand-black"
+                        className="mt-4 inline-flex items-center gap-1 text-sm font-semibold text-brand-amber transition-colors hover:text-brand-black"
                       >
                         {item.link.label} →
                       </Link>

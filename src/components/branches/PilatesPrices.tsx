@@ -35,7 +35,7 @@ export async function PilatesPrices({
                 <td className="py-3 font-medium text-brand-black">
                   {t(`packages.${p.key}`)}
                 </td>
-                <td className="py-3 text-right font-semibold text-brand-yellow-dark">
+                <td className="py-3 text-right font-semibold text-brand-amber">
                   {p.campaign}
                 </td>
                 <td className="py-3 text-right text-brand-gray line-through">

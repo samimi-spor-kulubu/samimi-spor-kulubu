@@ -24,7 +24,7 @@ export async function generateMetadata({
     locale,
     path: `/branslar/${slug}`,
     title: t(`${branch.key}.name`),
-    description: t(`${branch.key}.description`)
+    description: t(`${branch.key}.seoDescription`)
   });
 }
 
@@ -101,7 +101,7 @@ export default async function BranchDetailPage({
             <h1 className="mt-4 font-heading text-4xl leading-[0.95] tracking-wider text-brand-black sm:text-5xl md:text-6xl lg:text-7xl">
               {name.toLocaleUpperCase(locale)}
             </h1>
-            <p className="mt-4 text-base font-semibold text-brand-yellow-dark sm:text-lg">
+            <p className="mt-4 text-base font-semibold text-brand-amber sm:text-lg">
               {tItems(`${branch.key}.scheduleLong`)}
             </p>
             <p className="mt-6 text-lg leading-relaxed text-brand-gray">

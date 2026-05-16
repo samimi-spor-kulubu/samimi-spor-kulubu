@@ -33,7 +33,7 @@ export async function generateMetadata({
       locale,
       path: '/',
       title: t('name'),
-      description: t('tagline')
+      description: t('seoDescription')
     }),
     metadataBase: new URL(SITE_URL)
   };

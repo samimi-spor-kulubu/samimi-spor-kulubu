@@ -172,6 +172,22 @@ function BlogCard({
         <span className="absolute left-3 top-3 inline-flex items-center rounded-full bg-brand-yellow px-3 py-1 text-xs font-semibold uppercase tracking-wider text-brand-black">
           {categoryLabel}
         </span>
+        <span className="absolute right-3 top-3 inline-flex items-center gap-1.5 rounded-full bg-brand-black/85 px-3 py-1 text-xs font-semibold text-white backdrop-blur-sm">
+          <svg
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth={2}
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            aria-hidden="true"
+            className="h-3.5 w-3.5"
+          >
+            <circle cx="12" cy="12" r="10" />
+            <polyline points="12 6 12 12 16 14" />
+          </svg>
+          {readTimeText}
+        </span>
       </div>
       <div className="flex flex-1 flex-col p-6">
         <h2 className="font-heading text-xl tracking-wider text-brand-black">
@@ -180,9 +196,8 @@ function BlogCard({
         <p className="mt-2 line-clamp-3 text-sm leading-relaxed text-brand-gray">
           {post.excerpt}
         </p>
-        <div className="mt-auto flex items-center justify-between pt-5 text-xs text-brand-gray">
-          <span>{dateText}</span>
-          <span>· {readTimeText}</span>
+        <div className="mt-auto pt-5 text-xs text-brand-gray">
+          {dateText}
         </div>
       </div>
     </Link>

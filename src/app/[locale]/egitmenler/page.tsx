@@ -12,12 +12,13 @@ export async function generateMetadata({
   params: Promise<{locale: string}>;
 }): Promise<Metadata> {
   const {locale} = await params;
-  const t = await getTranslations({locale, namespace: 'Trainers.hero'});
+  const tHero = await getTranslations({locale, namespace: 'Trainers.hero'});
+  const t = await getTranslations({locale, namespace: 'Trainers'});
   return pageMetadata({
     locale,
     path: '/egitmenler',
-    title: t('title'),
-    description: t('subtitle')
+    title: tHero('title'),
+    description: t('seoDescription')
   });
 }
 

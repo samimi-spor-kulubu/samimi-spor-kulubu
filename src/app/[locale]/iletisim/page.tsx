@@ -15,12 +15,13 @@ export async function generateMetadata({
   params: Promise<{locale: string}>;
 }): Promise<Metadata> {
   const {locale} = await params;
-  const t = await getTranslations({locale, namespace: 'Contact.hero'});
+  const tHero = await getTranslations({locale, namespace: 'Contact.hero'});
+  const t = await getTranslations({locale, namespace: 'Contact'});
   return pageMetadata({
     locale,
     path: '/iletisim',
-    title: t('title'),
-    description: t('subtitle')
+    title: tHero('title'),
+    description: t('seoDescription')
   });
 }
 
@@ -93,7 +94,7 @@ export default async function IletisimPage({
                 <h2 className="mt-5 font-heading text-2xl tracking-wider text-brand-black">
                   {tMethods(`${m.key}.title`)}
                 </h2>
-                <p className="mt-2 font-heading text-xl tracking-wider text-brand-yellow-dark">
+                <p className="mt-2 font-heading text-xl tracking-wider text-brand-amber">
                   {m.info}
                 </p>
                 <p className="mt-2 flex-1 text-sm leading-relaxed text-brand-gray">

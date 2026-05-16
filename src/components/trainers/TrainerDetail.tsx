@@ -100,7 +100,7 @@ export async function TrainerDetail({
                 </p>
                 <Link
                   href={`/branslar/${trainer.branchSlug}`}
-                  className="mt-3 inline-flex items-center gap-1 text-sm font-semibold text-brand-yellow-dark transition-colors hover:text-brand-black"
+                  className="mt-3 inline-flex items-center gap-1 text-sm font-semibold text-brand-amber transition-colors hover:text-brand-black"
                 >
                   {tDetail('branchLink')} →
                 </Link>

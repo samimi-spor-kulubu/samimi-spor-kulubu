@@ -9,12 +9,13 @@ export async function generateMetadata({
   params: Promise<{locale: string}>;
 }): Promise<Metadata> {
   const {locale} = await params;
-  const t = await getTranslations({locale, namespace: 'Gallery.hero'});
+  const tHero = await getTranslations({locale, namespace: 'Gallery.hero'});
+  const t = await getTranslations({locale, namespace: 'Gallery'});
   return pageMetadata({
     locale,
     path: '/galeri',
-    title: t('title'),
-    description: t('subtitle')
+    title: tHero('title'),
+    description: t('seoDescription')
   });
 }
 

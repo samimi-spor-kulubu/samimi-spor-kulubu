@@ -12,12 +12,13 @@ export async function generateMetadata({
   params: Promise<{locale: string}>;
 }): Promise<Metadata> {
   const {locale} = await params;
-  const t = await getTranslations({locale, namespace: 'Branches.hero'});
+  const tHero = await getTranslations({locale, namespace: 'Branches.hero'});
+  const t = await getTranslations({locale, namespace: 'Branches'});
   return pageMetadata({
     locale,
     path: '/branslar',
-    title: t('title'),
-    description: t('subtitle')
+    title: tHero('title'),
+    description: t('seoDescription')
   });
 }
 
@@ -76,7 +77,7 @@ export default async function BranchesPage({
                         </span>
                       )}
                     </div>
-                    <p className="mt-2 text-sm font-medium text-brand-yellow-dark">
+                    <p className="mt-2 text-sm font-medium text-brand-amber">
                       {tItems(`${key}.schedule`)}
                     </p>
                     <p className="mt-3 text-base leading-relaxed text-brand-gray">

@@ -14,7 +14,7 @@ export async function generateMetadata({
     locale,
     path: '/egitmenler/beyza-erdas',
     title: t('name'),
-    description: t('shortBio')
+    description: t('seoDescription')
   });
 }
 

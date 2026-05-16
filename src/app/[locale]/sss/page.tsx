@@ -11,12 +11,13 @@ export async function generateMetadata({
   params: Promise<{locale: string}>;
 }): Promise<Metadata> {
   const {locale} = await params;
-  const t = await getTranslations({locale, namespace: 'Faq.hero'});
+  const tHero = await getTranslations({locale, namespace: 'Faq.hero'});
+  const t = await getTranslations({locale, namespace: 'Faq'});
   return pageMetadata({
     locale,
     path: '/sss',
-    title: t('title'),
-    description: t('subtitle')
+    title: tHero('title'),
+    description: t('seoDescription')
   });
 }
 

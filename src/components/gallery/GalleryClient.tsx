@@ -63,7 +63,7 @@ export function GalleryClient() {
               type="button"
               onClick={() => setOpenIndex(idx)}
               aria-label={tItems(`${item.id}.title`)}
-              className="group relative aspect-square overflow-hidden rounded-2xl border-2 border-brand-border bg-zinc-200 transition-all hover:border-brand-yellow hover:shadow-lg focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-yellow"
+              className="group relative aspect-square overflow-hidden rounded-2xl border-2 border-brand-border bg-zinc-200 transition-all duration-300 ease-out hover:-translate-y-0.5 hover:border-brand-yellow hover:shadow-lg focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-yellow"
             >
               <PlaceholderOrImage
                 item={item}

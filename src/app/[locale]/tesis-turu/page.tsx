@@ -10,12 +10,13 @@ export async function generateMetadata({
   params: Promise<{locale: string}>;
 }): Promise<Metadata> {
   const {locale} = await params;
-  const t = await getTranslations({locale, namespace: 'Tour.hero'});
+  const tHero = await getTranslations({locale, namespace: 'Tour.hero'});
+  const t = await getTranslations({locale, namespace: 'Tour'});
   return pageMetadata({
     locale,
     path: '/tesis-turu',
-    title: t('title'),
-    description: t('subtitle')
+    title: tHero('title'),
+    description: t('seoDescription')
   });
 }
 
@@ -103,7 +104,7 @@ export default async function TesisTuruPage({
 
                 {/* Text */}
                 <div className="md:[direction:ltr]">
-                  <p className="text-sm font-semibold uppercase tracking-widest text-brand-yellow-dark">
+                  <p className="text-sm font-semibold uppercase tracking-widest text-brand-amber">
                     {String(i + 1).padStart(2, '0')}
                   </p>
                   <h2 className="mt-2 font-heading text-3xl leading-tight tracking-wider text-brand-black sm:text-4xl lg:text-5xl">

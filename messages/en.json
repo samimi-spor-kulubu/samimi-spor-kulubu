@@ -1,7 +1,8 @@
 {
   "Site": {
     "name": "Samimi Sports Club",
-    "tagline": "Taekwondo, Boxing, Archery, Gymnastics and Reformer Pilates in Ankara Yenimahalle."
+    "tagline": "Taekwondo, Boxing, Archery, Gymnastics and Reformer Pilates in Ankara Yenimahalle.",
+    "seoDescription": "Taekwondo, boxing & kickboxing, traditional archery, kids gymnastics and Reformer Pilates in Ankara Yenimahalle Demet. Book a trial session on WhatsApp."
   },
   "Nav": {
     "home": "Home",
@@ -19,6 +20,7 @@
     "skipToContent": "Skip to content"
   },
   "Home": {
+    "seoDescription": "Taekwondo, boxing & kickboxing, traditional archery, kids gymnastics and Reformer Pilates in Ankara Yenimahalle Demet. Book a trial session on WhatsApp.",
     "hero": {
       "subtitle": "Samimi <yellow>SPORTS</yellow> Club",
       "title": "MOVE, GROW, WIN",
@@ -51,9 +53,55 @@
       "title": "SEE WHERE YOU'LL TRAIN",
       "description": "From the martial arts hall to the reformer studio, the archery range to the kids gymnastics area — take a short facility tour.",
       "button": "Facility Tour"
+    },
+    "why": {
+      "title": "Why Samimi Sports Club?",
+      "subtitle": "A warm sports community where the whole family feels at home.",
+      "items": {
+        "community": {
+          "title": "Warm Community",
+          "text": "We know our members by name and offer a safe, family-friendly environment."
+        },
+        "trainers": {
+          "title": "Expert Trainers",
+          "text": "Experienced staff with a physiotherapist and certified coaches."
+        },
+        "variety": {
+          "title": "Five Disciplines",
+          "text": "Taekwondo, boxing, archery, gymnastics and reformer pilates — all under one roof."
+        },
+        "location": {
+          "title": "In Yenimahalle Demet",
+          "text": "Centrally located in Ankara, easy to reach by car or public transport."
+        },
+        "hours": {
+          "title": "Wide Opening Hours",
+          "text": "Open every day, 12:00–23:00."
+        }
+      }
+    },
+    "faq": {
+      "title": "Frequently Asked Questions",
+      "subtitle": "Short answers to the things people ask the most.",
+      "items": {
+        "beginner": {
+          "question": "I've never trained before — can I still join?",
+          "answer": "Of course. Every class is open to all levels and our trainers tailor the program to where you are."
+        },
+        "pilatesWomen": {
+          "question": "Is reformer pilates women-only?",
+          "answer": "Yes, our reformer pilates classes are women-only and led by a physiotherapist."
+        },
+        "ageGroups": {
+          "question": "What age groups do you serve?",
+          "answer": "Kids gymnastics is for ages 4–14. Our other classes welcome every age."
+        }
+      },
+      "cta": "See All FAQs"
     }
   },
   "Branches": {
+    "seoDescription": "Five disciplines under one roof in Ankara Yenimahalle: taekwondo, boxing & kickboxing, traditional archery, kids gymnastics, reformer pilates. Book a trial.",
     "hero": {
       "title": "OUR CLASSES",
       "subtitle": "Five disciplines for every level, led by expert trainers."
@@ -96,6 +144,7 @@
         "name": "Taekwondo",
         "schedule": "Mon / Wed / Fri · 18:00 – 19:30",
         "scheduleLong": "Monday / Wednesday / Friday · 18:00 – 19:30",
+        "seoDescription": "Taekwondo in Ankara — Samimi Sports Club Yenimahalle Demet, kids and adult groups. Discipline, balance and confidence. Mon/Wed/Fri 18:00–19:30.",
         "description": "A timeless Korean martial art that builds discipline, balance and confidence. Kids and adult groups.",
         "longDescription": "Korea's national martial art. Builds discipline, confidence and reflexes. Suitable for every age and level.",
         "instructor": "Esat Mahmut Akın",
@@ -109,6 +158,7 @@
         "name": "Boxing & Kickboxing",
         "schedule": "Mon / Wed / Fri · 19:30 – 21:00",
         "scheduleLong": "Monday / Wednesday / Friday · 19:30 – 21:00",
+        "seoDescription": "Boxing & kickboxing in Ankara — conditioning, reflexes and self-defense at Samimi Sports Club. Mon/Wed/Fri 19:30–21:00. Message us for a trial class.",
         "description": "High-tempo, mixed training that develops conditioning and reflexes.",
         "longDescription": "Conditioning, power and self-defense combined. For beginners and experienced alike.",
         "instructor": "",
@@ -122,6 +172,7 @@
         "name": "Traditional Archery",
         "schedule": "Tue / Thu · 16:30 – 17:30",
         "scheduleLong": "Tuesday / Thursday · 16:30 – 17:30",
+        "seoDescription": "Traditional Turkish archery in Ankara — tirendaz technique for focus, posture and breath control. Tue/Thu 16:30–17:30. Equipment provided at the studio.",
         "description": "Traditional 'tirendaz' technique with focus on posture, breath and concentration.",
         "longDescription": "Carry on the Turkish archery tradition. Focus, patience and technique.",
         "instructor": "",
@@ -135,6 +186,7 @@
         "name": "Kids Gymnastics",
         "schedule": "Thu 17:30 · Sat 14:00 (45 min)",
         "scheduleLong": "Thursday 17:30 · Saturday 14:00 (45 min)",
+        "seoDescription": "Kids gymnastics in Ankara Yenimahalle — ages 4–14, balance, flexibility and motor development. Thu 17:30 and Sat 14:00, 45 minutes. WhatsApp to enroll.",
         "description": "Foundational gymnastics, balance and flexibility for ages 4–14.",
         "longDescription": "Playful gymnastics classes that support kids' motor development.",
         "instructor": "",
@@ -144,6 +196,7 @@
         "name": "Reformer Pilates",
         "schedule": "Tue / Thu / Sat / Sun · 12:00 – 23:00",
         "scheduleLong": "Tuesday / Thursday / Saturday / Sunday · 12:00 – 23:00",
+        "seoDescription": "Reformer Pilates in Ankara (women-only) — with physiotherapist Beyza Erdaş. 8-session packages, Tue/Thu/Sat/Sun 12:00–23:00. Promo prices available now.",
         "description": "Women-only full-body work on the reformer, sold as 8-session packages.",
         "longDescription": "Reformer pilates with physiotherapist Beyza Erdaş. 8-session packages, 2 sessions per week.",
         "instructor": "Beyza Erdaş (Physiotherapist)",
@@ -156,6 +209,7 @@
     }
   },
   "Trainers": {
+    "seoDescription": "Meet the trainers at Samimi Sports Club Ankara: physiotherapist Beyza Erdaş (reformer pilates) and Esat Mahmut Akın (taekwondo). Certified, experienced.",
     "hero": {
       "title": "OUR TRAINERS",
       "subtitle": "Experts in their fields, with a warm approach."
@@ -181,6 +235,7 @@
         "name": "Beyza Erdaş",
         "title": "Physiotherapist · Reformer Pilates",
         "shortBio": "Graduate of Dokuz Eylül University, Physical Therapy and Rehabilitation.",
+        "seoDescription": "Beyza Erdaş — physiotherapist and reformer pilates trainer in Ankara. Dokuz Eylül University graduate, manual therapy specialist. Book a women-only session.",
         "about": [
           "Dokuz Eylül University, Physical Therapy and Rehabilitation graduate (2024).",
           "Practiced sports physiotherapy, pilates and manual therapy at G Therapy Ankara.",
@@ -201,6 +256,7 @@
         "name": "Esat Mahmut Akın",
         "title": "Taekwondo Coach",
         "shortBio": "Experienced coach of our taekwondo program.",
+        "seoDescription": "Esat Mahmut Akın — taekwondo coach at Samimi Sports Club Ankara. Kids and adult groups, Mon/Wed/Fri 18:00. Message us on WhatsApp for a trial class.",
         "about": [
           "Our taekwondo coach. More details coming soon."
         ],
@@ -210,6 +266,7 @@
     }
   },
   "Gallery": {
+    "seoDescription": "Photos from Samimi Sports Club Ankara — taekwondo, boxing, archery, gymnastics and reformer pilates at our Yenimahalle Demet studio.",
     "hero": {
       "title": "GALLERY",
       "subtitle": "Snapshots from our studio."
@@ -248,6 +305,7 @@
     }
   },
   "Blog": {
+    "seoDescription": "Samimi Sports Club blog — practical notes on training, nutrition, reformer pilates and martial arts. Tips for a healthier, stronger life from Ankara.",
     "hero": {
       "title": "BLOG",
       "subtitle": "Notes on health, training and sport."
@@ -284,6 +342,7 @@
     }
   },
   "About": {
+    "seoDescription": "A warm sports community in Ankara Yenimahalle Demet — five disciplines, certified trainers and a family-friendly atmosphere. Read our story.",
     "hero": {
       "title": "ABOUT US",
       "subtitle": "Samimi Sports Club"
@@ -335,6 +394,7 @@
     }
   },
   "Contact": {
+    "seoDescription": "Samimi Sports Club Ankara — +90 533 559 47 97. Sami Efendi Cd. No:31/9, Yenimahalle Demet. Reach us by WhatsApp, phone or form. Open 12:00–23:00.",
     "hero": {
       "title": "CONTACT",
       "subtitle": "The easiest ways to reach us."
@@ -396,6 +456,7 @@
     }
   },
   "Tour": {
+    "seoDescription": "Tour Samimi Sports Club Ankara — see our martial arts hall, reformer pilates studio and traditional archery range in Yenimahalle Demet.",
     "hero": {
       "title": "FACILITY TOUR",
       "subtitle": "Get to know where you'll train."
@@ -439,6 +500,7 @@
     }
   },
   "Faq": {
+    "seoDescription": "FAQs about Samimi Sports Club Ankara: membership, trial classes, reformer pilates prices, equipment and facility. Quick answers to common questions.",
     "hero": {
       "title": "FREQUENTLY ASKED QUESTIONS",
       "subtitle": "Quick answers to the things people ask the most."

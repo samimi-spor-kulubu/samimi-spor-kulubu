@@ -21,12 +21,12 @@ export function MarkdownContent({content}: {content: string}) {
             </p>
           ),
           ul: ({children}) => (
-            <ul className="mt-4 list-disc space-y-2 pl-6 text-brand-gray marker:text-brand-yellow-dark">
+            <ul className="mt-4 list-disc space-y-2 pl-6 text-brand-gray marker:text-brand-amber">
               {children}
             </ul>
           ),
           ol: ({children}) => (
-            <ol className="mt-4 list-decimal space-y-2 pl-6 text-brand-gray marker:text-brand-yellow-dark">
+            <ol className="mt-4 list-decimal space-y-2 pl-6 text-brand-gray marker:text-brand-amber">
               {children}
             </ol>
           ),
@@ -40,7 +40,7 @@ export function MarkdownContent({content}: {content: string}) {
           a: ({href, children}) => (
             <a
               href={href}
-              className="text-brand-yellow-dark underline underline-offset-2 hover:text-brand-black"
+              className="text-brand-amber underline underline-offset-2 hover:text-brand-black"
             >
               {children}
             </a>

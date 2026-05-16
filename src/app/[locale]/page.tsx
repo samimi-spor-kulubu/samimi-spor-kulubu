@@ -3,6 +3,13 @@ import {getTranslations, setRequestLocale} from 'next-intl/server';
 import {Link} from '@/i18n/navigation';
 import {contact, getWhatsAppUrl} from '@/config/contact';
 import {pageMetadata} from '@/lib/seo';
+import {
+  AwardIcon,
+  ClockIcon,
+  HeartIcon,
+  LayersIcon,
+  MapPinIcon
+} from '@/components/icons';
 
 export async function generateMetadata({
   params
@@ -11,12 +18,12 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const {locale} = await params;
   const tSite = await getTranslations({locale, namespace: 'Site'});
-  const tHome = await getTranslations({locale, namespace: 'Home.hero'});
+  const tHome = await getTranslations({locale, namespace: 'Home'});
   return pageMetadata({
     locale,
     path: '/',
     title: tSite('name'),
-    description: tHome('description')
+    description: tHome('seoDescription')
   });
 }
 
@@ -40,6 +47,16 @@ const TRAINER_KEYS = ['beyza', 'esat'] as const;
 
 const STAT_KEYS = ['branches', 'hours'] as const;
 
+const WHY_ITEMS = [
+  {key: 'community', Icon: HeartIcon},
+  {key: 'trainers', Icon: AwardIcon},
+  {key: 'variety', Icon: LayersIcon},
+  {key: 'location', Icon: MapPinIcon},
+  {key: 'hours', Icon: ClockIcon}
+] as const;
+
+const FAQ_ITEMS = ['beginner', 'pilatesWomen', 'ageGroups'] as const;
+
 export default async function Home({
   params
 }: {
@@ -60,7 +77,7 @@ export default async function Home({
             <p className="font-heading text-base tracking-widest text-brand-gray sm:text-lg">
               {t.rich('hero.subtitle', {
                 yellow: (chunks) => (
-                  <span className="text-brand-yellow-dark">{chunks}</span>
+                  <span className="text-brand-amber">{chunks}</span>
                 )
               })}
             </p>
@@ -103,7 +120,7 @@ export default async function Home({
         <div className="mx-auto grid max-w-3xl grid-cols-2 gap-8 px-4 py-12 sm:gap-16 sm:px-6 lg:px-8">
           {STAT_KEYS.map((k) => (
             <div key={k} className="text-center">
-              <p className="font-heading text-4xl leading-none tracking-wider text-brand-yellow-dark sm:text-6xl">
+              <p className="font-heading text-4xl leading-none tracking-wider text-brand-amber sm:text-6xl">
                 {t(`stats.${k}Value`)}
               </p>
               <p className="mt-2 text-xs font-semibold uppercase tracking-widest text-brand-gray sm:text-sm">
@@ -153,8 +170,40 @@ export default async function Home({
         </div>
       </section>
 
-      {/* TRAINERS */}
+      {/* WHY US */}
       <section className="bg-brand-surface">
+        <div className="mx-auto max-w-6xl px-4 py-20 sm:px-6 lg:px-8">
+          <div className="text-center">
+            <h2 className="font-heading text-4xl tracking-wider text-brand-black sm:text-5xl">
+              {t('why.title')}
+            </h2>
+            <p className="mx-auto mt-3 max-w-2xl text-brand-gray">
+              {t('why.subtitle')}
+            </p>
+          </div>
+          <ul className="mt-12 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-5">
+            {WHY_ITEMS.map(({key, Icon}) => (
+              <li
+                key={key}
+                className="flex flex-col items-center rounded-2xl border-2 border-brand-border bg-white p-6 text-center transition-colors hover:border-brand-yellow"
+              >
+                <span className="inline-flex h-14 w-14 items-center justify-center rounded-full bg-brand-yellow text-brand-black">
+                  <Icon className="h-7 w-7" />
+                </span>
+                <h3 className="mt-5 font-heading text-xl tracking-wider text-brand-black">
+                  {t(`why.items.${key}.title`)}
+                </h3>
+                <p className="mt-2 text-sm leading-relaxed text-brand-gray">
+                  {t(`why.items.${key}.text`)}
+                </p>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </section>
+
+      {/* TRAINERS */}
+      <section className="bg-white">
         <div className="mx-auto max-w-5xl px-4 py-20 sm:px-6 lg:px-8">
           <div className="text-center">
             <h2 className="font-heading text-4xl tracking-wider text-brand-black sm:text-5xl">
@@ -205,7 +254,7 @@ export default async function Home({
               </div>
             </div>
             <div className="flex flex-col justify-center p-8 sm:p-10">
-              <span className="text-sm font-semibold uppercase tracking-widest text-brand-yellow-dark">
+              <span className="text-sm font-semibold uppercase tracking-widest text-brand-amber">
                 {t('tour.eyebrow')}
               </span>
               <h2 className="mt-3 font-heading text-3xl leading-tight tracking-wider text-brand-black sm:text-4xl">
@@ -219,6 +268,41 @@ export default async function Home({
               </span>
             </div>
           </Link>
+        </div>
+      </section>
+
+      {/* FAQ TEASER */}
+      <section className="bg-white">
+        <div className="mx-auto max-w-3xl px-4 py-20 sm:px-6 lg:px-8">
+          <div className="text-center">
+            <h2 className="font-heading text-4xl tracking-wider text-brand-black sm:text-5xl">
+              {t('faq.title')}
+            </h2>
+            <p className="mt-3 text-brand-gray">{t('faq.subtitle')}</p>
+          </div>
+          <dl className="mt-10 space-y-4">
+            {FAQ_ITEMS.map((key) => (
+              <div
+                key={key}
+                className="rounded-2xl border-2 border-brand-border bg-white p-6 transition-colors hover:border-brand-yellow"
+              >
+                <dt className="font-heading text-lg tracking-wider text-brand-black sm:text-xl">
+                  {t(`faq.items.${key}.question`)}
+                </dt>
+                <dd className="mt-2 text-base leading-relaxed text-brand-gray">
+                  {t(`faq.items.${key}.answer`)}
+                </dd>
+              </div>
+            ))}
+          </dl>
+          <div className="mt-10 text-center">
+            <Link
+              href="/sss"
+              className="inline-flex h-12 items-center justify-center rounded-full border-2 border-brand-black px-8 text-base font-semibold text-brand-black transition-colors hover:bg-brand-black hover:text-white"
+            >
+              {t('faq.cta')} →
+            </Link>
+          </div>
         </div>
       </section>
 
