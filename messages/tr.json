@@ -398,12 +398,12 @@
     "methods": {
       "whatsapp": {
         "title": "WhatsApp'tan Yazın",
-        "description": "En hızlı dönüş — 7/24 mesaj atabilirsiniz.",
+        "description": "7/24 mesaj gönderebilirsiniz.",
         "cta": "Mesaj Gönderin"
       },
       "phone": {
         "title": "Bizi Arayın",
-        "description": "Çalışma saatleri içinde direkt görüşelim.",
+        "description": "En hızlı iletişim.",
         "cta": "Hemen Arayın"
       },
       "instagram": {

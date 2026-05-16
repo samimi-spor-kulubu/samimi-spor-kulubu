@@ -402,12 +402,12 @@
     "methods": {
       "whatsapp": {
         "title": "Message on WhatsApp",
-        "description": "Fastest reply — message us 24/7.",
+        "description": "You can message us 24/7.",
         "cta": "Send a Message"
       },
       "phone": {
         "title": "Call Us",
-        "description": "Talk to us during opening hours.",
+        "description": "Fastest contact.",
         "cta": "Call Now"
       },
       "instagram": {
