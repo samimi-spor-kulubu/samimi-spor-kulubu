@@ -1,8 +1,15 @@
 import type {Metadata} from 'next';
 import {getTranslations, setRequestLocale} from 'next-intl/server';
-import {BLOG_POSTS, localizePost} from '@/lib/blog';
+
 import {BlogClient} from '@/components/blog/BlogClient';
 import {pageMetadata} from '@/lib/seo';
+import {getAllBlogPosts} from '@/lib/services/blog';
+import {
+  BLOG_CATEGORIES,
+  blogCategoryLabel
+} from '@/lib/constants/blog-categories';
+
+export const revalidate = 60;
 
 export async function generateMetadata({
   params
@@ -29,11 +36,24 @@ export default async function BlogPage({
   setRequestLocale(locale);
   const tHero = await getTranslations('Blog.hero');
 
-  const posts = BLOG_POSTS.map((p) => {
-    const localized = localizePost(p, locale);
-    // strip content from list view to keep payload small
-    return {...localized, content: ''};
-  }).sort((a, b) => (a.date < b.date ? 1 : -1));
+  const posts = await getAllBlogPosts(locale);
+
+  const categories = BLOG_CATEGORIES.map((c) => ({
+    slug: c.slug,
+    label: locale === 'en' ? c.label_en : c.label_tr,
+    matchers: [c.slug, ...c.aliases]
+  }));
+
+  // Per-post category label (handles legacy aliases gracefully).
+  const categoryLabelMap: Record<string, string> = {};
+  for (const post of posts) {
+    if (!categoryLabelMap[post.category]) {
+      categoryLabelMap[post.category] = blogCategoryLabel(
+        post.category,
+        locale
+      );
+    }
+  }
 
   return (
     <>
@@ -52,7 +72,11 @@ export default async function BlogPage({
       {/* GRID */}
       <section className="bg-brand-surface">
         <div className="mx-auto max-w-6xl px-4 py-12 sm:px-6 sm:py-16 lg:px-8">
-          <BlogClient posts={posts} />
+          <BlogClient
+            posts={posts}
+            categories={categories}
+            categoryLabels={categoryLabelMap}
+          />
         </div>
       </section>
     </>

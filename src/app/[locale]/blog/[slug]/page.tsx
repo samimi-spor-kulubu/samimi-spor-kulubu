@@ -2,19 +2,23 @@ import type {Metadata} from 'next';
 import Image from 'next/image';
 import {getTranslations, setRequestLocale} from 'next-intl/server';
 import {notFound} from 'next/navigation';
+
 import {Link} from '@/i18n/navigation';
 import {getContactInfo, whatsAppUrl} from '@/lib/services/contact';
 import {
-  BLOG_BY_SLUG,
-  BLOG_POSTS,
-  getRelatedPosts,
-  localizePost
-} from '@/lib/blog';
+  getAllBlogPosts,
+  getAllPublicBlogSlugs,
+  getBlogPostBySlug
+} from '@/lib/services/blog';
+import {blogCategoryLabel} from '@/lib/constants/blog-categories';
 import {MarkdownContent} from '@/components/blog/MarkdownContent';
 import {articleJsonLd, pageMetadata} from '@/lib/seo';
 
-export function generateStaticParams() {
-  return BLOG_POSTS.map((p) => ({slug: p.slug}));
+export const revalidate = 60;
+
+export async function generateStaticParams() {
+  const slugs = await getAllPublicBlogSlugs();
+  return slugs.map((slug) => ({slug}));
 }
 
 export async function generateMetadata({
@@ -23,14 +27,13 @@ export async function generateMetadata({
   params: Promise<{locale: string; slug: string}>;
 }): Promise<Metadata> {
   const {locale, slug} = await params;
-  const post = BLOG_BY_SLUG[slug];
+  const post = await getBlogPostBySlug(slug, locale);
   if (!post) return {};
-  const localized = localizePost(post, locale);
   return pageMetadata({
     locale,
     path: `/blog/${slug}`,
-    title: localized.title,
-    description: localized.excerpt,
+    title: post.title,
+    description: post.excerpt,
     ogType: 'article'
   });
 }
@@ -51,27 +54,36 @@ export default async function BlogDetailPage({
   const {locale, slug} = await params;
   setRequestLocale(locale);
 
-  const post = BLOG_BY_SLUG[slug];
+  const post = await getBlogPostBySlug(slug, locale);
   if (!post) notFound();
 
   const tNav = await getTranslations('Nav');
   const tCard = await getTranslations('Blog.card');
   const tRelated = await getTranslations('Blog.related');
   const tCta = await getTranslations('Blog.cta');
-  const tCats = await getTranslations('Blog.categories');
   const contact = await getContactInfo();
 
-  const localized = localizePost(post, locale);
-  const related = getRelatedPosts(post, 3).map((p) => localizePost(p, locale));
+  // Related posts: same category first (matched via the canonical
+  // category slug), then the most recent posts from other categories.
+  const allPosts = await getAllBlogPosts(locale);
+  const sameCat = allPosts.filter(
+    (p) => p.slug !== post.slug && p.category === post.category
+  );
+  const others = allPosts.filter(
+    (p) => p.slug !== post.slug && p.category !== post.category
+  );
+  const related = [...sameCat, ...others].slice(0, 3);
+
   const dateText = formatDate(post.date, locale);
+  const postCategoryLabel = blogCategoryLabel(post.category, locale);
 
   const schema = articleJsonLd({
     locale,
-    title: localized.title,
-    description: localized.excerpt,
-    author: post.author,
+    title: post.title,
+    description: post.excerpt,
+    author: post.author ?? '',
     datePublished: post.date,
-    image: localized.image || undefined,
+    image: post.image ?? undefined,
     slug: post.slug
   });
 
@@ -103,7 +115,7 @@ export default async function BlogDetailPage({
           </li>
           <li aria-hidden="true">›</li>
           <li className="line-clamp-1 font-medium text-brand-black">
-            {localized.title}
+            {post.title}
           </li>
         </ol>
       </nav>
@@ -112,10 +124,10 @@ export default async function BlogDetailPage({
       <section className="bg-white">
         <div className="mx-auto max-w-4xl px-4 pt-10 sm:px-6 lg:px-8">
           <div className="relative aspect-[16/9] w-full overflow-hidden rounded-2xl bg-zinc-200">
-            {localized.image ? (
+            {post.image ? (
               <Image
-                src={localized.image}
-                alt={localized.title}
+                src={post.image}
+                alt={post.title}
                 fill
                 sizes="(max-width: 1024px) 100vw, 1024px"
                 priority
@@ -124,12 +136,12 @@ export default async function BlogDetailPage({
             ) : (
               <div className="flex h-full w-full items-center justify-center bg-gradient-to-br from-zinc-200 to-zinc-300">
                 <span className="px-6 text-center font-heading text-2xl tracking-wider text-brand-gray sm:text-3xl">
-                  {localized.title}
+                  {post.title}
                 </span>
               </div>
             )}
             <span className="absolute left-4 top-4 inline-flex items-center rounded-full bg-brand-yellow px-3 py-1 text-xs font-semibold uppercase tracking-wider text-brand-black">
-              {tCats(post.category)}
+              {postCategoryLabel}
             </span>
           </div>
         </div>
@@ -139,24 +151,30 @@ export default async function BlogDetailPage({
       <article className="bg-white">
         <div className="mx-auto max-w-3xl px-4 py-10 sm:px-6 lg:px-8">
           <h1 className="font-heading text-4xl leading-tight tracking-wider text-brand-black sm:text-5xl">
-            {localized.title}
+            {post.title}
           </h1>
           <div className="mt-5 flex flex-wrap items-center gap-x-3 gap-y-1 text-sm text-brand-gray">
-            <span className="font-medium text-brand-black">
-              {localized.author}
-            </span>
-            <span aria-hidden="true">·</span>
+            {post.author && (
+              <>
+                <span className="font-medium text-brand-black">
+                  {post.author}
+                </span>
+                <span aria-hidden="true">·</span>
+              </>
+            )}
             <span>{dateText}</span>
             <span aria-hidden="true">·</span>
-            <span>{tCard('readTime', {minutes: localized.readTime})}</span>
+            <span>{tCard('readTime', {minutes: post.readTime})}</span>
           </div>
 
-          <p className="mt-6 border-l-4 border-brand-yellow pl-5 text-lg leading-relaxed text-brand-gray">
-            {localized.excerpt}
-          </p>
+          {post.excerpt && (
+            <p className="mt-6 border-l-4 border-brand-yellow pl-5 text-lg leading-relaxed text-brand-gray">
+              {post.excerpt}
+            </p>
+          )}
 
           <div className="mt-8">
-            <MarkdownContent content={localized.content} />
+            <MarkdownContent content={post.content} />
           </div>
         </div>
       </article>
@@ -192,7 +210,7 @@ export default async function BlogDetailPage({
                       </div>
                     )}
                     <span className="absolute left-3 top-3 inline-flex items-center rounded-full bg-brand-yellow px-3 py-1 text-xs font-semibold uppercase tracking-wider text-brand-black">
-                      {tCats(p.category)}
+                      {blogCategoryLabel(p.category, locale)}
                     </span>
                   </div>
                   <div className="flex flex-1 flex-col p-5">

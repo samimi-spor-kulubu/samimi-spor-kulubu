@@ -10,6 +10,7 @@ const NAV_LINKS: ReadonlyArray<NavLink> = [
   {href: '/admin', label: 'Anasayfa', exact: true},
   {href: '/admin/branslar', label: 'Branşlar'},
   {href: '/admin/egitmenler', label: 'Eğitmenler'},
+  {href: '/admin/blog', label: 'Blog'},
   {href: '/admin/galeri', label: 'Galeri'},
   {href: '/admin/sss', label: 'SSS'},
   {href: '/admin/mesajlar', label: 'Mesajlar'},

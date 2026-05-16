@@ -4,14 +4,16 @@ import {useMemo, useState} from 'react';
 import Image from 'next/image';
 import {useLocale, useTranslations} from 'next-intl';
 import {Link} from '@/i18n/navigation';
-import {
-  BLOG_CATEGORIES,
-  BLOG_POSTS_PER_PAGE,
-  type BlogCategory,
-  type LocalizedBlogPost
-} from '@/lib/blog';
 
-type Filter = 'all' | BlogCategory;
+import type {LocalizedBlogListItem} from '@/lib/services/blog';
+
+const POSTS_PER_PAGE = 9;
+
+export type BlogCategoryOption = {
+  slug: string;
+  label: string;
+  matchers: string[];
+};
 
 function formatDate(iso: string, locale: string) {
   return new Intl.DateTimeFormat(locale === 'en' ? 'en-US' : 'tr-TR', {
@@ -21,27 +23,44 @@ function formatDate(iso: string, locale: string) {
   }).format(new Date(iso));
 }
 
-export function BlogClient({posts}: {posts: LocalizedBlogPost[]}) {
+export function BlogClient({
+  posts,
+  categories,
+  categoryLabels
+}: {
+  posts: LocalizedBlogListItem[];
+  categories: BlogCategoryOption[];
+  categoryLabels: Record<string, string>;
+}) {
   const locale = useLocale();
   const tFilter = useTranslations('Blog.filter');
   const tCard = useTranslations('Blog.card');
   const tPagination = useTranslations('Blog.pagination');
-  const tCats = useTranslations('Blog.categories');
 
-  const [filter, setFilter] = useState<Filter>('all');
+  const [filter, setFilter] = useState<string>('all');
   const [page, setPage] = useState(1);
 
-  const filtered = useMemo(
-    () => (filter === 'all' ? posts : posts.filter((p) => p.category === filter)),
-    [filter, posts]
-  );
+  const matchersBySlug = useMemo(() => {
+    const map = new Map<string, Set<string>>();
+    for (const c of categories) {
+      map.set(c.slug, new Set(c.matchers));
+    }
+    return map;
+  }, [categories]);
 
-  const totalPages = Math.max(1, Math.ceil(filtered.length / BLOG_POSTS_PER_PAGE));
+  const filtered = useMemo(() => {
+    if (filter === 'all') return posts;
+    const set = matchersBySlug.get(filter);
+    if (!set) return [];
+    return posts.filter((p) => set.has(p.category));
+  }, [filter, posts, matchersBySlug]);
+
+  const totalPages = Math.max(1, Math.ceil(filtered.length / POSTS_PER_PAGE));
   const currentPage = Math.min(page, totalPages);
-  const start = (currentPage - 1) * BLOG_POSTS_PER_PAGE;
-  const paginated = filtered.slice(start, start + BLOG_POSTS_PER_PAGE);
+  const start = (currentPage - 1) * POSTS_PER_PAGE;
+  const paginated = filtered.slice(start, start + POSTS_PER_PAGE);
 
-  const setFilterAndReset = (next: Filter) => {
+  const setFilterAndReset = (next: string) => {
     setFilter(next);
     setPage(1);
   };
@@ -56,20 +75,28 @@ export function BlogClient({posts}: {posts: LocalizedBlogPost[]}) {
         >
           {tFilter('all')}
         </FilterPill>
-        {BLOG_CATEGORIES.map((c) => (
+        {categories.map((c) => (
           <FilterPill
-            key={c}
-            active={filter === c}
-            onClick={() => setFilterAndReset(c)}
+            key={c.slug}
+            active={filter === c.slug}
+            onClick={() => setFilterAndReset(c.slug)}
           >
-            {tCats(c)}
+            {c.label}
           </FilterPill>
         ))}
       </div>
 
       {/* Grid */}
-      {paginated.length === 0 ? (
-        <p className="mt-12 text-center text-brand-gray">{tFilter('noResults')}</p>
+      {posts.length === 0 ? (
+        <p className="mx-auto mt-12 max-w-md rounded-2xl border-2 border-dashed border-brand-border bg-white p-10 text-center text-brand-gray">
+          {locale === 'en'
+            ? 'No blog posts yet.'
+            : 'Henüz blog yazısı yok.'}
+        </p>
+      ) : paginated.length === 0 ? (
+        <p className="mt-12 text-center text-brand-gray">
+          {tFilter('noResults')}
+        </p>
       ) : (
         <div className="mt-10 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {paginated.map((post) => (
@@ -77,7 +104,7 @@ export function BlogClient({posts}: {posts: LocalizedBlogPost[]}) {
               key={post.slug}
               post={post}
               dateText={formatDate(post.date, locale)}
-              categoryLabel={tCats(post.category)}
+              categoryLabel={categoryLabels[post.category] ?? post.category}
               readTimeText={tCard('readTime', {minutes: post.readTime})}
             />
           ))}
@@ -143,7 +170,7 @@ function BlogCard({
   categoryLabel,
   readTimeText
 }: {
-  post: LocalizedBlogPost;
+  post: LocalizedBlogListItem;
   dateText: string;
   categoryLabel: string;
   readTimeText: string;
@@ -159,6 +186,7 @@ function BlogCard({
             src={post.image}
             alt={post.title}
             fill
+            loading="lazy"
             sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
             className="object-cover transition-transform duration-300 group-hover:scale-105"
           />
@@ -196,9 +224,7 @@ function BlogCard({
         <p className="mt-2 line-clamp-3 text-sm leading-relaxed text-brand-gray">
           {post.excerpt}
         </p>
-        <div className="mt-auto pt-5 text-xs text-brand-gray">
-          {dateText}
-        </div>
+        <div className="mt-auto pt-5 text-xs text-brand-gray">{dateText}</div>
       </div>
     </Link>
   );
