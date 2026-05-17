@@ -5,6 +5,7 @@ import {Link} from '@/i18n/navigation';
 import {getContactInfo, whatsAppUrl} from '@/lib/services/contact';
 import {pageMetadata} from '@/lib/seo';
 import {getAllTrainers} from '@/lib/services/trainers';
+import {TrainerPhotoPlaceholder} from '@/components/trainers/TrainerPhotoPlaceholder';
 
 export const revalidate = 60;
 
@@ -62,7 +63,7 @@ export default async function TrainersPage({
               className="group overflow-hidden rounded-2xl border-2 border-brand-border bg-white transition-all hover:-translate-y-1 hover:border-brand-yellow hover:shadow-lg"
             >
               <div className="relative h-96 w-full overflow-hidden bg-zinc-200">
-                {t.photo && (
+                {t.photo ? (
                   <Image
                     src={t.photo}
                     alt={t.name}
@@ -71,6 +72,8 @@ export default async function TrainersPage({
                     sizes="(max-width: 768px) 100vw, 50vw"
                     className="object-cover object-center transition-transform duration-300 group-hover:scale-105"
                   />
+                ) : (
+                  <TrainerPhotoPlaceholder label={t.name} />
                 )}
               </div>
               <div className="p-6">

@@ -4,6 +4,7 @@ import {Link} from '@/i18n/navigation';
 import {personJsonLd} from '@/lib/seo';
 import {getContactInfo, whatsAppUrl} from '@/lib/services/contact';
 import type {LocalizedTrainer} from '@/lib/services/trainers';
+import {TrainerPhotoPlaceholder} from './TrainerPhotoPlaceholder';
 
 export type TrainerBranchInfo = {
   name: string;
@@ -72,7 +73,7 @@ export async function TrainerDetail({
           <aside className="md:col-span-1">
             <div className="md:sticky md:top-20">
               <div className="relative aspect-[4/5] w-full overflow-hidden rounded-2xl bg-zinc-200">
-                {trainer.photo && (
+                {trainer.photo ? (
                   <Image
                     src={trainer.photo}
                     alt={trainer.name}
@@ -81,6 +82,8 @@ export async function TrainerDetail({
                     priority
                     className="object-cover object-top"
                   />
+                ) : (
+                  <TrainerPhotoPlaceholder label={trainer.name} />
                 )}
               </div>
               <h1 className="mt-6 font-heading text-4xl tracking-wider text-brand-black sm:text-5xl">
