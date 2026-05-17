@@ -327,6 +327,13 @@
     "related": {
       "title": "Related Posts"
     },
+    "share": {
+      "title": "Share this post",
+      "whatsapp": "Share on WhatsApp",
+      "twitter": "Share on X",
+      "copy": "Copy link",
+      "copied": "Link copied"
+    },
     "cta": {
       "title": "Ask us on WhatsApp.",
       "description": "Training, nutrition or class choice — let's talk it through.",

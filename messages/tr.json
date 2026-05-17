@@ -323,6 +323,13 @@
     "related": {
       "title": "İlgili Yazılar"
     },
+    "share": {
+      "title": "Bu yazıyı paylaş",
+      "whatsapp": "WhatsApp'ta paylaş",
+      "twitter": "X'te paylaş",
+      "copy": "Bağlantıyı kopyala",
+      "copied": "Bağlantı kopyalandı"
+    },
     "cta": {
       "title": "Sorularını WhatsApp'tan sor.",
       "description": "Antrenman, beslenme veya branş seçimi — birlikte konuşalım.",

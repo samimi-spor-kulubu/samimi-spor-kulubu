@@ -12,7 +12,13 @@ import {
 } from '@/lib/services/blog';
 import {blogCategoryLabel} from '@/lib/constants/blog-categories';
 import {MarkdownContent} from '@/components/blog/MarkdownContent';
-import {articleJsonLd, pageMetadata} from '@/lib/seo';
+import {ShareButtons} from '@/components/blog/ShareButtons';
+import {
+  absoluteUrl,
+  articleJsonLd,
+  localePath,
+  pageMetadata
+} from '@/lib/seo';
 
 export const revalidate = 60;
 
@@ -29,13 +35,21 @@ export async function generateMetadata({
   const {locale, slug} = await params;
   const post = await getBlogPostBySlug(slug, locale);
   if (!post) return {};
-  return pageMetadata({
+  const base = pageMetadata({
     locale,
     path: `/blog/${slug}`,
     title: post.title,
     description: post.excerpt,
     ogType: 'article'
   });
+  // Override og:image / twitter:image when the post has its own cover so
+  // social previews use the article art instead of the generic OG image.
+  if (post.image) {
+    const img = absoluteUrl(post.image);
+    base.openGraph = {...base.openGraph, images: [{url: img}]};
+    base.twitter = {...base.twitter, images: [img]};
+  }
+  return base;
 }
 
 function formatDate(iso: string, locale: string) {
@@ -44,6 +58,12 @@ function formatDate(iso: string, locale: string) {
     month: 'long',
     year: 'numeric'
   }).format(new Date(iso));
+}
+
+/** ~200 wpm reading speed, rounded up to the nearest minute (minimum 1). */
+function computeReadTime(content: string): number {
+  const words = content.trim().split(/\s+/).filter(Boolean).length;
+  return Math.max(1, Math.ceil(words / 200));
 }
 
 export default async function BlogDetailPage({
@@ -76,6 +96,8 @@ export default async function BlogDetailPage({
 
   const dateText = formatDate(post.date, locale);
   const postCategoryLabel = blogCategoryLabel(post.category, locale);
+  const readTime = computeReadTime(post.content);
+  const shareUrl = absoluteUrl(localePath(`/blog/${post.slug}`, locale));
 
   const schema = articleJsonLd({
     locale,
@@ -164,7 +186,7 @@ export default async function BlogDetailPage({
             )}
             <span>{dateText}</span>
             <span aria-hidden="true">·</span>
-            <span>{tCard('readTime', {minutes: post.readTime})}</span>
+            <span>{tCard('readTime', {minutes: readTime})}</span>
           </div>
 
           {post.excerpt && (
@@ -176,6 +198,8 @@ export default async function BlogDetailPage({
           <div className="mt-8">
             <MarkdownContent content={post.content} />
           </div>
+
+          <ShareButtons url={shareUrl} title={post.title} />
         </div>
       </article>
 
