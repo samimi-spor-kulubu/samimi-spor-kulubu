@@ -6,8 +6,10 @@ import {notFound} from 'next/navigation';
 import {routing} from '@/i18n/routing';
 import {Navbar} from '@/components/layout/Navbar';
 import {Footer} from '@/components/layout/Footer';
+import {JsonLd} from '@/components/JsonLd';
 import {organizationJsonLd, pageMetadata, SITE_URL} from '@/lib/seo';
 import {getContactInfo, whatsAppUrl} from '@/lib/services/contact';
+import {getAllBranches} from '@/lib/services/branches';
 import '../globals.css';
 
 const barlow = Barlow({
@@ -58,8 +60,14 @@ export default async function LocaleLayout({
   setRequestLocale(locale);
 
   const tNav = await getTranslations({locale, namespace: 'Nav'});
-  const contactInfo = await getContactInfo();
+  const tSite = await getTranslations({locale, namespace: 'Site'});
+  const [contactInfo, branches] = await Promise.all([
+    getContactInfo(),
+    getAllBranches(locale)
+  ]);
   const navWhatsappUrl = whatsAppUrl(contactInfo, locale);
+  const sports = branches.map((b) => b.name);
+  const siteDescription = tSite('seoDescription');
 
   return (
     <html
@@ -77,11 +85,12 @@ export default async function LocaleLayout({
           </main>
           <Footer contact={contactInfo} />
         </NextIntlClientProvider>
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{
-            __html: JSON.stringify(organizationJsonLd(locale, contactInfo))
-          }}
+        <JsonLd
+          id="ld-organization"
+          data={organizationJsonLd(locale, contactInfo, {
+            description: siteDescription,
+            sports
+          })}
         />
       </body>
     </html>

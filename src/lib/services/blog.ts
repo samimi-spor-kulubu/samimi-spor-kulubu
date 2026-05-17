@@ -125,6 +125,24 @@ export async function getAllPublicBlogSlugs(): Promise<string[]> {
   return (data ?? []).map((r) => r.slug);
 }
 
+/** Slug + updated_at for currently-public posts (for sitemap.xml). */
+export async function getAllPublicBlogSitemapEntries(): Promise<
+  {slug: string; updatedAt: string}[]
+> {
+  const supabase = createPublicClient();
+  const {data, error} = await supabase
+    .from('blog_posts')
+    .select('slug, updated_at')
+    .eq('published', true)
+    .lte('date', todayIso());
+
+  if (error) {
+    console.error('[blog.getAllPublicBlogSitemapEntries]', error);
+    return [];
+  }
+  return (data ?? []).map((r) => ({slug: r.slug, updatedAt: r.updated_at}));
+}
+
 // =============================================================
 // Admin-facing helpers — use the admin client (RLS bypass) and
 // don't apply published/date filters. Importing these from a

@@ -3,7 +3,7 @@ import {contact as FALLBACK_CONTACT} from '@/config/contact';
 import type {ContactInfo} from '@/lib/services/contact';
 
 export const SITE_URL =
-  process.env.NEXT_PUBLIC_SITE_URL ?? 'https://samimisporkulubu.com';
+  process.env.NEXT_PUBLIC_SITE_URL ?? 'https://samimisportsclub.com';
 
 export const DEFAULT_LOCALE = 'tr';
 export const LOCALES = ['tr', 'en'] as const;
@@ -84,9 +84,15 @@ export function pageMetadata({
   };
 }
 
+export type OrganizationJsonLdInput = {
+  description?: string;
+  sports?: string[];
+};
+
 export function organizationJsonLd(
   locale: string,
-  info?: Pick<ContactInfo, 'phone' | 'instagram' | 'address' | 'hours'>
+  info?: Pick<ContactInfo, 'phone' | 'instagram' | 'address' | 'hours'>,
+  extra?: OrganizationJsonLdInput
 ) {
   const phoneTel = info?.phone.tel ?? FALLBACK_CONTACT.phone.tel;
   const instagramUrl = info?.instagram.url ?? FALLBACK_CONTACT.instagram.url;
@@ -97,12 +103,15 @@ export function organizationJsonLd(
   const close = info?.hours.close ?? FALLBACK_CONTACT.hours.close;
   return {
     '@context': 'https://schema.org',
-    '@type': 'SportsClub',
+    '@type': ['SportsClub', 'LocalBusiness'],
     name: siteName(locale),
+    description: extra?.description,
     url: absoluteUrl(localePath('/', locale)),
     telephone: phoneTel,
     image: absoluteUrl('/og.png'),
+    priceRange: 'TL',
     sameAs: [instagramUrl],
+    sport: extra?.sports,
     address: {
       '@type': 'PostalAddress',
       streetAddress: street,
@@ -111,6 +120,22 @@ export function organizationJsonLd(
       addressCountry: 'TR'
     },
     openingHours: `Mo-Su ${open}-${close}`,
+    openingHoursSpecification: [
+      {
+        '@type': 'OpeningHoursSpecification',
+        dayOfWeek: [
+          'Monday',
+          'Tuesday',
+          'Wednesday',
+          'Thursday',
+          'Friday',
+          'Saturday',
+          'Sunday'
+        ],
+        opens: open,
+        closes: close
+      }
+    ],
     contactPoint: {
       '@type': 'ContactPoint',
       telephone: phoneTel,
