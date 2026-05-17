@@ -2,6 +2,7 @@ import type {Metadata} from 'next';
 import {getTranslations, setRequestLocale} from 'next-intl/server';
 import {Link} from '@/i18n/navigation';
 import {pageMetadata} from '@/lib/seo';
+import {getAllBranches} from '@/lib/services/branches';
 import {getContactInfo, whatsAppUrl} from '@/lib/services/contact';
 import {
   AwardIcon,
@@ -28,22 +29,6 @@ export async function generateMetadata({
     description: tHome('seoDescription')
   });
 }
-
-const BRANCH_KEYS = [
-  'taekwondo',
-  'boxing',
-  'archery',
-  'gymnastics',
-  'pilates'
-] as const;
-
-const BRANCH_EMOJI: Record<(typeof BRANCH_KEYS)[number], string> = {
-  taekwondo: '🥋',
-  boxing: '🥊',
-  archery: '🏹',
-  gymnastics: '🤸',
-  pilates: '🧘'
-};
 
 const TRAINER_KEYS = ['beyza', 'esat'] as const;
 
@@ -77,9 +62,11 @@ export default async function Home({
   const {locale} = await params;
   setRequestLocale(locale);
   const t = await getTranslations('Home');
-  const tBranches = await getTranslations('Branches.items');
   const tTrainers = await getTranslations('Trainers.items');
-  const contact = await getContactInfo();
+  const [contact, branches] = await Promise.all([
+    getContactInfo(),
+    getAllBranches(locale)
+  ]);
 
   return (
     <>
@@ -165,21 +152,19 @@ export default async function Home({
             <p className="mt-3 text-brand-gray">{t('branches.subtitle')}</p>
           </div>
           <div className="mt-12 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
-            {BRANCH_KEYS.map((key) => (
+            {branches.map((b) => (
               <Link
-                key={key}
-                href="/branslar"
+                key={b.slug}
+                href={`/branslar/${b.slug}`}
                 className="group rounded-2xl border-2 border-brand-border bg-white p-6 transition-all hover:-translate-y-1 hover:border-brand-yellow hover:shadow-lg"
               >
                 <div className="text-4xl" aria-hidden="true">
-                  {BRANCH_EMOJI[key]}
+                  {b.emoji ?? '🏅'}
                 </div>
                 <h3 className="mt-4 font-heading text-2xl tracking-wider text-brand-black">
-                  {tBranches(`${key}.name`)}
+                  {b.name}
                 </h3>
-                <p className="mt-2 text-sm text-brand-gray">
-                  {tBranches(`${key}.schedule`)}
-                </p>
+                <p className="mt-2 text-sm text-brand-gray">{b.schedule}</p>
               </Link>
             ))}
           </div>
