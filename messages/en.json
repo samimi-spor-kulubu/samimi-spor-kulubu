@@ -29,10 +29,13 @@
       "ctaSecondary": "Explore Classes"
     },
     "stats": {
-      "branchesValue": "6",
-      "branchesLabel": "Classes",
-      "hoursValue": "Every day 12:00 - 23:00",
-      "hoursLabel": "Open Hours"
+      "branchesValue": "5",
+      "branchesLabel": "Disciplines",
+      "hoursPrefix": "Every day",
+      "hoursValue": "12:00 - 23:00",
+      "hoursLabel": "open daily",
+      "whatsappValue": "24/7",
+      "whatsappLabel": "WhatsApp"
     },
     "branches": {
       "title": "Our Classes",

@@ -29,10 +29,13 @@
       "ctaSecondary": "Branşları Keşfedin"
     },
     "stats": {
-      "branchesValue": "6",
+      "branchesValue": "5",
       "branchesLabel": "Branş",
-      "hoursValue": "Her gün 12:00 - 23:00",
-      "hoursLabel": "Açık Saat"
+      "hoursPrefix": "Her gün",
+      "hoursValue": "12:00 - 23:00",
+      "hoursLabel": "saatleri arası açık",
+      "whatsappValue": "7/24",
+      "whatsappLabel": "WhatsApp"
     },
     "branches": {
       "title": "Branşlarımız",

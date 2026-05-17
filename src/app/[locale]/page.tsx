@@ -47,7 +47,17 @@ const BRANCH_EMOJI: Record<(typeof BRANCH_KEYS)[number], string> = {
 
 const TRAINER_KEYS = ['beyza', 'esat'] as const;
 
-const STAT_KEYS = ['branches', 'hours'] as const;
+type StatKey = 'branches' | 'hours' | 'whatsapp';
+const STATS: {key: StatKey; prefixKey?: string; valueKey: string; labelKey: string}[] = [
+  {key: 'branches', valueKey: 'branchesValue', labelKey: 'branchesLabel'},
+  {
+    key: 'hours',
+    prefixKey: 'hoursPrefix',
+    valueKey: 'hoursValue',
+    labelKey: 'hoursLabel'
+  },
+  {key: 'whatsapp', valueKey: 'whatsappValue', labelKey: 'whatsappLabel'}
+];
 
 const WHY_ITEMS = [
   {key: 'community', Icon: HeartIcon},
@@ -120,29 +130,28 @@ export default async function Home({
 
       {/* STATS */}
       <section className="border-y border-brand-border bg-brand-surface">
-        <div className="mx-auto grid max-w-3xl grid-cols-2 gap-8 px-4 py-12 sm:gap-16 sm:px-6 lg:px-8">
-          {STAT_KEYS.map((k) => {
-            // Branches value is a short number ("6") — keep the big display.
-            // Hours value is a phrase ("Her gün 12:00 - 23:00") so step the
-            // size down and let it wrap at the "Her gün"/time boundary on
-            // narrow viewports.
-            const valueClasses =
-              k === 'hours'
-                ? 'text-2xl leading-tight sm:text-4xl'
-                : 'text-4xl leading-none sm:text-6xl';
-            return (
-              <div key={k} className="text-center">
-                <p
-                  className={`font-heading tracking-wider text-brand-amber ${valueClasses}`}
-                >
-                  {t(`stats.${k}Value`)}
-                </p>
-                <p className="mt-2 text-xs font-semibold uppercase tracking-widest text-brand-gray sm:text-sm">
-                  {t(`stats.${k}Label`)}
-                </p>
-              </div>
-            );
-          })}
+        <div className="mx-auto grid max-w-4xl grid-cols-1 gap-8 px-4 py-12 sm:grid-cols-3 sm:gap-10 sm:px-6 lg:gap-12 lg:px-8">
+          {STATS.map(({key, prefixKey, valueKey, labelKey}) => (
+            <div key={key} className="text-center">
+              {/* Prefix row — rendered as an invisible spacer for stats
+                  that don't use it so the big value lines up across all
+                  three columns on desktop. */}
+              <p
+                className={`text-xs font-semibold uppercase tracking-widest text-brand-gray sm:text-sm ${
+                  prefixKey ? '' : 'invisible'
+                }`}
+                aria-hidden={prefixKey ? undefined : true}
+              >
+                {prefixKey ? t(`stats.${prefixKey}`) : '·'}
+              </p>
+              <p className="mt-1 font-heading text-3xl leading-tight tracking-wider text-brand-amber sm:text-4xl">
+                {t(`stats.${valueKey}`)}
+              </p>
+              <p className="mt-2 text-xs font-semibold uppercase tracking-widest text-brand-gray sm:text-sm">
+                {t(`stats.${labelKey}`)}
+              </p>
+            </div>
+          ))}
         </div>
       </section>
 
