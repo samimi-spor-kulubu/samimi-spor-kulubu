@@ -1,9 +1,12 @@
 import type {Metadata} from 'next';
 import {getTranslations, setRequestLocale} from 'next-intl/server';
+import Image from 'next/image';
 import {Link} from '@/i18n/navigation';
 import {pageMetadata} from '@/lib/seo';
 import {getAllBranches} from '@/lib/services/branches';
 import {getContactInfo, whatsAppUrl} from '@/lib/services/contact';
+import {getAllTrainers} from '@/lib/services/trainers';
+import {TrainerPhotoPlaceholder} from '@/components/trainers/TrainerPhotoPlaceholder';
 import {
   AwardIcon,
   ClockIcon,
@@ -29,8 +32,6 @@ export async function generateMetadata({
     description: tHome('seoDescription')
   });
 }
-
-const TRAINER_KEYS = ['beyza', 'esat'] as const;
 
 type StatKey = 'branches' | 'hours' | 'whatsapp';
 const STATS: {key: StatKey; prefixKey?: string; valueKey: string; labelKey: string}[] = [
@@ -62,11 +63,19 @@ export default async function Home({
   const {locale} = await params;
   setRequestLocale(locale);
   const t = await getTranslations('Home');
-  const tTrainers = await getTranslations('Trainers.items');
-  const [contact, branches] = await Promise.all([
+  const tTrainerLabels = await getTranslations('Trainers.labels');
+  const [contact, branches, trainers] = await Promise.all([
     getContactInfo(),
-    getAllBranches(locale)
+    getAllBranches(locale),
+    getAllTrainers(locale)
   ]);
+
+  // Map trainer.id → branch name so each trainer card can show the
+  // branch they teach without an extra round-trip per trainer.
+  const branchByTrainerId = new Map<string, string>();
+  for (const b of branches) {
+    if (b.instructor?.id) branchByTrainerId.set(b.instructor.id, b.name);
+  }
 
   return (
     <>
@@ -213,34 +222,59 @@ export default async function Home({
 
       {/* TRAINERS */}
       <section className="bg-white">
-        <div className="mx-auto max-w-5xl px-4 py-20 sm:px-6 lg:px-8">
+        <div className="mx-auto max-w-6xl px-4 py-20 sm:px-6 lg:px-8">
           <div className="text-center">
             <h2 className="font-heading text-4xl tracking-wider text-brand-black sm:text-5xl">
               {t('trainers.title')}
             </h2>
             <p className="mt-3 text-brand-gray">{t('trainers.subtitle')}</p>
           </div>
-          <div className="mt-12 grid grid-cols-1 gap-8 sm:grid-cols-2">
-            {TRAINER_KEYS.map((key) => (
-              <Link
-                key={key}
-                href="/egitmenler"
-                className="group overflow-hidden rounded-2xl bg-white shadow-sm transition-all hover:shadow-lg"
-              >
-                <div
-                  className="aspect-[4/3] w-full bg-gradient-to-br from-zinc-200 to-zinc-300"
-                  aria-hidden="true"
-                />
-                <div className="p-6">
-                  <h3 className="font-heading text-2xl tracking-wider text-brand-black">
-                    {tTrainers(`${key}.name`)}
-                  </h3>
-                  <p className="mt-2 text-sm text-brand-gray">
-                    {tTrainers(`${key}.title`)}
-                  </p>
-                </div>
-              </Link>
-            ))}
+          <div className="mt-12 grid grid-cols-1 gap-6 sm:grid-cols-3 sm:gap-5 lg:gap-8">
+            {trainers.map((tr) => {
+              const branchName = branchByTrainerId.get(tr.id);
+              return (
+                <Link
+                  key={tr.id}
+                  href={`/egitmenler/${tr.slug}`}
+                  className="group flex flex-col overflow-hidden rounded-2xl border-2 border-brand-border bg-white transition-all hover:-translate-y-1 hover:border-brand-yellow hover:shadow-lg"
+                >
+                  <div className="relative aspect-[4/5] w-full overflow-hidden bg-zinc-200">
+                    {tr.photo ? (
+                      <Image
+                        src={tr.photo}
+                        alt={tr.name}
+                        fill
+                        sizes="(max-width: 640px) 100vw, 33vw"
+                        className="object-cover object-top transition-transform duration-300 group-hover:scale-105"
+                      />
+                    ) : (
+                      <TrainerPhotoPlaceholder label={tr.name} />
+                    )}
+                  </div>
+                  <div className="flex flex-1 flex-col p-5">
+                    <h3 className="font-heading text-xl leading-tight tracking-wider text-brand-black sm:text-2xl">
+                      {tr.name}
+                    </h3>
+                    {tr.title && (
+                      <p className="mt-1 text-sm text-brand-gray">{tr.title}</p>
+                    )}
+                    {branchName && (
+                      <p className="mt-2 inline-flex w-fit items-center rounded-full bg-brand-yellow/15 px-3 py-1 text-xs font-semibold uppercase tracking-widest text-brand-amber">
+                        {branchName}
+                      </p>
+                    )}
+                    {tr.shortBio && (
+                      <p className="mt-3 line-clamp-2 text-sm leading-relaxed text-brand-gray">
+                        {tr.shortBio}
+                      </p>
+                    )}
+                    <span className="mt-auto pt-4 text-sm font-semibold text-brand-black underline-offset-4 group-hover:underline">
+                      {tTrainerLabels('profileLink')} →
+                    </span>
+                  </div>
+                </Link>
+              );
+            })}
           </div>
         </div>
       </section>
