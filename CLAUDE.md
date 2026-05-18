@@ -6,7 +6,7 @@
 - **Ad:** Samimi Spor Kulübü
 - **Adres:** Sami Efendi Caddesi No:31/9, Yenimahalle (Demet), Ankara
 - **Telefon / WhatsApp:** 0533 559 47 97
-- **Instagram:** [@samimi_sportsclup](https://instagram.com/samimi_sportsclup)
+- **Instagram:** [@samimi_sportsclub](https://instagram.com/samimi_sportsclub)
 - **Çalışma Saatleri:** 12:00 – 23:00
 - **Üye Sayısı:** 28
 

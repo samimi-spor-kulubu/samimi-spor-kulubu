@@ -19,6 +19,11 @@
     "closeMenu": "Menüyü kapat",
     "skipToContent": "İçeriğe atla"
   },
+  "NotFound": {
+    "title": "SAYFA BULUNAMADI",
+    "description": "Aradığınız sayfa kaldırılmış veya hiç var olmamış olabilir. Aşağıdan ana sayfaya dönebilirsiniz.",
+    "cta": "Ana Sayfaya Dön"
+  },
   "Home": {
     "seoDescription": "Ankara Yenimahalle Demet'te Taekwondo, Boks & Kick Boks, Geleneksel Okçuluk, Çocuk Jimnastiği ve Reformer Pilates. WhatsApp'tan deneme seansı ayır.",
     "hero": {
@@ -226,6 +231,7 @@
       "certificatesLabel": "Sertifikalar",
       "expertiseLabel": "Uzmanlık alanları",
       "branchLabel": "Verdiği branş",
+      "branchesLabel": "Verdiği branşlar",
       "branchLink": "Branş sayfasına git",
       "bookButton": "WhatsApp'tan Yazın"
     },

@@ -8,17 +8,21 @@ export const metadata: Metadata = {
   robots: {index: false, follow: true}
 };
 
-// Fallback `useTranslations` doesn't fire here (this file is outside the
-// localised render tree on a 404), so we render a locale-agnostic page
-// that links back to both TR and EN home routes.
 export default async function NotFound() {
-  // best-effort locale lookup; falls back to TR labels if it throws.
-  let homeLabel = 'Anasayfaya dön';
+  let title = 'SAYFA BULUNAMADI';
+  let description =
+    'Aradığınız sayfa kaldırılmış veya hiç var olmamış olabilir. Aşağıdan ana sayfaya dönebilirsiniz.';
+  let cta = 'Ana Sayfaya Dön';
+  let subtitle = "The page you're looking for can't be found.";
+
   try {
-    const t = await getTranslations('Nav');
-    homeLabel = t('home');
+    const t = await getTranslations('NotFound');
+    title = t('title');
+    description = t('description');
+    cta = t('cta');
+    subtitle = '';
   } catch {
-    // ignore — happens when no locale context is available.
+    // No locale context — keep TR fallbacks with EN subtitle.
   }
 
   return (
@@ -28,20 +32,19 @@ export default async function NotFound() {
           404
         </p>
         <h1 className="mt-4 font-heading text-3xl tracking-wider text-brand-black">
-          SAYFA BULUNAMADI
+          {title}
         </h1>
         <p className="mt-3 text-base leading-relaxed text-brand-gray">
-          Aradığınız sayfa kaldırılmış veya hiç var olmamış olabilir. Aşağıdan
-          ana sayfaya dönebilirsiniz.
+          {description}
         </p>
-        <p className="mt-1 text-sm text-brand-gray">
-          The page you’re looking for can’t be found.
-        </p>
+        {subtitle && (
+          <p className="mt-1 text-sm text-brand-gray">{subtitle}</p>
+        )}
         <Link
           href="/"
           className="mt-6 inline-flex h-12 items-center justify-center rounded-full bg-brand-yellow px-8 text-base font-semibold text-brand-black transition-colors hover:bg-brand-yellow-dark"
         >
-          {homeLabel} →
+          {cta} →
         </Link>
       </div>
     </main>

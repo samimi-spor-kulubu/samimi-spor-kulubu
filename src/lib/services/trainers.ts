@@ -89,25 +89,42 @@ export async function getTrainerBySlug(
   return localizeTrainer(data, locale);
 }
 
-/** Branch this trainer instructs, if any. Returns just name + slug. */
-export async function getBranchForTrainer(
+/** Branches this trainer teaches. Sourced from the trainer_branches
+ *  junction so a single trainer can be linked to multiple branches.
+ *  Returns an ordered list of {name, slug}. */
+export async function getBranchesForTrainer(
   trainerId: string,
   locale: string
-): Promise<{name: string; slug: string} | null> {
+): Promise<{name: string; slug: string}[]> {
   const supabase = createPublicClient();
   const {data, error} = await supabase
-    .from('branches')
-    .select('slug, name_tr, name_en')
-    .eq('instructor_id', trainerId)
-    .eq('active', true)
-    .maybeSingle();
+    .from('trainer_branches')
+    .select('branches!inner(slug, name_tr, name_en, order_index, active)')
+    .eq('trainer_id', trainerId)
+    .eq('branches.active', true);
 
   if (error) {
-    console.error('[trainers.getBranchForTrainer]', error);
-    return null;
+    console.error('[trainers.getBranchesForTrainer]', error);
+    return [];
   }
-  if (!data) return null;
-  const name =
-    (locale === 'en' ? data.name_en : data.name_tr) ?? data.name_tr;
-  return {name, slug: data.slug};
+  if (!data) return [];
+
+  type Row = {
+    branches: {
+      slug: string;
+      name_tr: string;
+      name_en: string | null;
+      order_index: number;
+      active: boolean;
+    } | null;
+  };
+
+  return (data as unknown as Row[])
+    .map((row) => row.branches)
+    .filter((b): b is NonNullable<typeof b> => b !== null)
+    .sort((a, b) => a.order_index - b.order_index)
+    .map((b) => ({
+      name: (locale === 'en' ? b.name_en : b.name_tr) ?? b.name_tr,
+      slug: b.slug
+    }));
 }

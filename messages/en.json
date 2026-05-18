@@ -19,6 +19,11 @@
     "closeMenu": "Close menu",
     "skipToContent": "Skip to content"
   },
+  "NotFound": {
+    "title": "PAGE NOT FOUND",
+    "description": "The page you're looking for may have been removed or never existed. Head back to the home page below.",
+    "cta": "Back to Home"
+  },
   "Home": {
     "seoDescription": "Taekwondo, boxing & kickboxing, traditional archery, kids gymnastics and Reformer Pilates in Ankara Yenimahalle Demet. Book a trial session on WhatsApp.",
     "hero": {
@@ -230,6 +235,7 @@
       "certificatesLabel": "Certificates",
       "expertiseLabel": "Areas of expertise",
       "branchLabel": "Class taught",
+      "branchesLabel": "Classes taught",
       "branchLink": "Go to class page",
       "bookButton": "Book via WhatsApp"
     },

@@ -149,6 +149,12 @@ export type Setting = {
   updated_at: string;
 };
 
+export type TrainerBranch = {
+  trainer_id: string;
+  branch_id: string;
+  created_at: string;
+};
+
 // ─── Insert / Update helper types ────────────────────────────────
 type Insertable<T, Required extends keyof T = never> = Partial<T> &
   Pick<T, Required>;
@@ -161,6 +167,7 @@ export type FaqInsert = Insertable<Faq, 'key' | 'category' | 'question_tr' | 'an
 export type ContactMessageInsert = Insertable<ContactMessage, 'name' | 'message'>;
 export type AdminUserInsert = Insertable<AdminUser, 'email'>;
 export type SettingInsert = Insertable<Setting, 'key'>;
+export type TrainerBranchInsert = Insertable<TrainerBranch, 'trainer_id' | 'branch_id'>;
 
 // ─── Supabase Database shape ─────────────────────────────────────
 // Each table needs a Relationships array — Postgrest's generated query
@@ -224,6 +231,27 @@ export type Database = {
         Insert: SettingInsert;
         Update: Partial<SettingInsert>;
         Relationships: [];
+      };
+      trainer_branches: {
+        Row: TrainerBranch;
+        Insert: TrainerBranchInsert;
+        Update: Partial<TrainerBranchInsert>;
+        Relationships: [
+          {
+            foreignKeyName: 'trainer_branches_trainer_id_fkey';
+            columns: ['trainer_id'];
+            isOneToOne: false;
+            referencedRelation: 'trainers';
+            referencedColumns: ['id'];
+          },
+          {
+            foreignKeyName: 'trainer_branches_branch_id_fkey';
+            columns: ['branch_id'];
+            isOneToOne: false;
+            referencedRelation: 'branches';
+            referencedColumns: ['id'];
+          }
+        ];
       };
     };
     Views: {[_ in never]: never};

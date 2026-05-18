@@ -35,12 +35,12 @@ export const SETTINGS_GROUPS: SettingsGroup[] = [
       {
         key: 'instagram_handle',
         label: 'Instagram kullanıcı adı',
-        placeholder: '@samimi_sportsclup'
+        placeholder: '@samimi_sportsclub'
       },
       {
         key: 'instagram_url',
         label: 'Instagram URL',
-        placeholder: 'https://instagram.com/samimi_sportsclup',
+        placeholder: 'https://instagram.com/samimi_sportsclub',
         type: 'url'
       }
     ]

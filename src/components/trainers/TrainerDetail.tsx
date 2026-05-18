@@ -13,11 +13,11 @@ export type TrainerBranchInfo = {
 
 export async function TrainerDetail({
   trainer,
-  branch,
+  branches,
   locale
 }: {
   trainer: LocalizedTrainer;
-  branch: TrainerBranchInfo | null;
+  branches: TrainerBranchInfo[];
   locale: string;
 }) {
   setRequestLocale(locale);
@@ -93,20 +93,28 @@ export async function TrainerDetail({
                 <p className="mt-2 text-base text-brand-gray">{trainer.title}</p>
               )}
 
-              {branch && (
+              {branches.length > 0 && (
                 <div className="mt-6 rounded-2xl border-2 border-brand-border bg-brand-surface p-5">
                   <p className="text-xs font-semibold uppercase tracking-widest text-brand-gray">
-                    {tDetail('branchLabel')}
+                    {branches.length === 1
+                      ? tDetail('branchLabel')
+                      : tDetail('branchesLabel')}
                   </p>
-                  <p className="mt-1 font-heading text-xl tracking-wider text-brand-black">
-                    {branch.name}
-                  </p>
-                  <Link
-                    href={`/branslar/${branch.slug}`}
-                    className="mt-3 inline-flex items-center gap-1 text-sm font-semibold text-brand-amber transition-colors hover:text-brand-black"
-                  >
-                    {tDetail('branchLink')} →
-                  </Link>
+                  <ul className="mt-2 space-y-3">
+                    {branches.map((b) => (
+                      <li key={b.slug}>
+                        <p className="font-heading text-xl tracking-wider text-brand-black">
+                          {b.name}
+                        </p>
+                        <Link
+                          href={`/branslar/${b.slug}`}
+                          className="mt-1 inline-flex items-center gap-1 text-sm font-semibold text-brand-amber transition-colors hover:text-brand-black"
+                        >
+                          {tDetail('branchLink')} →
+                        </Link>
+                      </li>
+                    ))}
+                  </ul>
                 </div>
               )}
 

@@ -13,8 +13,8 @@ export const contact = {
     }
   },
   instagram: {
-    handle: '@samimi_sportsclup',
-    url: 'https://instagram.com/samimi_sportsclup'
+    handle: '@samimi_sportsclub',
+    url: 'https://instagram.com/samimi_sportsclub'
   },
   address: {
     street: 'Sami Efendi Caddesi No:31/9',

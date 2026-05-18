@@ -4,7 +4,7 @@ import {TrainerDetail} from '@/components/trainers/TrainerDetail';
 import {pageMetadata} from '@/lib/seo';
 import {
   getAllTrainerSlugs,
-  getBranchForTrainer,
+  getBranchesForTrainer,
   getTrainerBySlug
 } from '@/lib/services/trainers';
 
@@ -40,7 +40,9 @@ export default async function TrainerDetailPage({
   const trainer = await getTrainerBySlug(slug, locale);
   if (!trainer) notFound();
 
-  const branch = await getBranchForTrainer(trainer.id, locale);
+  const branches = await getBranchesForTrainer(trainer.id, locale);
 
-  return <TrainerDetail trainer={trainer} branch={branch} locale={locale} />;
+  return (
+    <TrainerDetail trainer={trainer} branches={branches} locale={locale} />
+  );
 }
