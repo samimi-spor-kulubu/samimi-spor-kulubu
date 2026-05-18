@@ -1,7 +1,9 @@
 'use server';
 
 import {revalidatePath} from 'next/cache';
+import {headers} from 'next/headers';
 
+import {sendContactEmail} from '@/lib/email/resend';
 import {createPublicClient} from '@/lib/supabase/public';
 
 const SUBJECTS = ['general', 'reservation', 'branch', 'other'] as const;
@@ -25,6 +27,8 @@ const TR = {
     'Telefon numaranızı 10 haneli olarak girin (örn. 0532 123 45 67).',
   emailInvalid: 'Geçerli bir e-posta girin.',
   messageTooShort: 'Mesajınızı en az 10 karakter olarak yazın.',
+  rateLimited:
+    'Çok hızlı gönderim yapıldı. Lütfen bir dakika sonra tekrar deneyin.',
   serverError:
     'Bir sorun oluştu, lütfen tekrar deneyin veya WhatsApp’tan yazın.'
 };
@@ -35,9 +39,42 @@ const EN = {
     'Please enter a phone number with at least 10 digits (e.g. +90 532 123 45 67).',
   emailInvalid: 'Please enter a valid email.',
   messageTooShort: 'Your message must be at least 10 characters.',
+  rateLimited: 'Too many submissions. Please try again in a minute.',
   serverError:
     'Something went wrong — please try again or message us on WhatsApp.'
 };
+
+const RATE_WINDOW_MS = 60_000;
+const RATE_MAX = 3;
+const rateBuckets = new Map<string, number[]>();
+
+function rateLimit(key: string): boolean {
+  const now = Date.now();
+  const cutoff = now - RATE_WINDOW_MS;
+  const hits = (rateBuckets.get(key) ?? []).filter((t) => t > cutoff);
+  if (hits.length >= RATE_MAX) {
+    rateBuckets.set(key, hits);
+    return false;
+  }
+  hits.push(now);
+  rateBuckets.set(key, hits);
+
+  if (rateBuckets.size > 1000) {
+    for (const [k, v] of rateBuckets) {
+      const fresh = v.filter((t) => t > cutoff);
+      if (fresh.length === 0) rateBuckets.delete(k);
+      else rateBuckets.set(k, fresh);
+    }
+  }
+  return true;
+}
+
+async function clientIp(): Promise<string> {
+  const h = await headers();
+  const fwd = h.get('x-forwarded-for');
+  if (fwd) return fwd.split(',')[0].trim();
+  return h.get('x-real-ip') ?? 'unknown';
+}
 
 export async function submitContactMessage(
   _prev: ContactFormState,
@@ -50,6 +87,11 @@ export async function submitContactMessage(
 
   const locale = String(formData.get('locale') ?? 'tr');
   const t = locale === 'en' ? EN : TR;
+
+  const ip = await clientIp();
+  if (!rateLimit(ip)) {
+    return {status: 'error', serverError: t.rateLimited};
+  }
 
   const name = String(formData.get('name') ?? '').trim();
   const phone = String(formData.get('phone') ?? '').trim();
@@ -79,18 +121,34 @@ export async function submitContactMessage(
     : null;
 
   const supabase = createPublicClient();
-  const {error} = await supabase.from('contact_messages').insert({
-    name,
-    phone: phone || null,
-    email: email || null,
-    subject,
-    message,
-    status: 'new'
-  });
+  const [insertRes, emailRes] = await Promise.all([
+    supabase.from('contact_messages').insert({
+      name,
+      phone: phone || null,
+      email: email || null,
+      subject,
+      message,
+      status: 'new'
+    }),
+    sendContactEmail({
+      name,
+      phone,
+      email: email || null,
+      subject,
+      message,
+      locale: locale === 'en' ? 'en' : 'tr'
+    })
+  ]);
 
-  if (error) {
-    console.error('[contact.submitContactMessage]', error);
+  if (insertRes.error) {
+    console.error('[contact.submitContactMessage] supabase', insertRes.error);
     return {status: 'error', serverError: t.serverError};
+  }
+
+  if (!emailRes.ok) {
+    console.error('[contact.submitContactMessage] resend', emailRes.reason);
+    // Supabase kaydı tutuldu; admin dashboard'dan görülebilir.
+    // Kullanıcıya hata göstermiyoruz çünkü mesaj kaydedildi.
   }
 
   // Refresh the admin views so the new message shows up immediately
