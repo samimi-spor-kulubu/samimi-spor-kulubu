@@ -1,11 +1,7 @@
 import type {Metadata} from 'next';
-import Image from 'next/image';
 import {getTranslations, setRequestLocale} from 'next-intl/server';
 
-import {Link} from '@/i18n/navigation';
 import {getContactInfo, whatsAppUrl} from '@/lib/services/contact';
-import {getAllBranches} from '@/lib/services/branches';
-import {getAllTrainers} from '@/lib/services/trainers';
 import {
   ValuesAccordion,
   type AccordionItem
@@ -44,98 +40,20 @@ export default async function HakkimizdaPage({
   const tLocation = await getTranslations('About.location');
   const tCta = await getTranslations('About.cta');
   const contact = await getContactInfo();
-  const [branches, trainers] = await Promise.all([
-    getAllBranches(locale),
-    getAllTrainers(locale)
-  ]);
 
   const storyParagraphs = (tStory.raw('paragraphs') ?? []) as string[];
 
-  const items: AccordionItem[] = [
-    {
-      id: 'samimiyet',
-      title: tValues('items.samimiyet.title'),
-      subtitle: tValues('items.samimiyet.subtitle'),
-      content: (
-        <p className="text-base leading-relaxed text-brand-gray">
-          {tValues('items.samimiyet.text')}
-        </p>
-      )
-    },
-    {
-      id: 'uzmanlik',
-      title: tValues('items.uzmanlik.title'),
-      subtitle: tValues('items.uzmanlik.subtitle'),
-      content: (
-        <>
-          <p className="text-base leading-relaxed text-brand-gray">
-            {tValues('items.uzmanlik.text')}
-          </p>
-          <div className="mt-5 grid grid-cols-1 gap-3 sm:grid-cols-2">
-            {trainers.map((t) => (
-              <Link
-                key={t.id}
-                href={`/egitmenler/${t.slug}`}
-                className="flex items-center gap-3 rounded-xl border-2 border-brand-border bg-brand-surface p-3 transition-colors hover:border-brand-yellow hover:bg-white"
-              >
-                <div className="relative h-12 w-12 shrink-0 overflow-hidden rounded-full bg-zinc-200">
-                  {t.photo && (
-                    <Image
-                      src={t.photo}
-                      alt={t.name}
-                      fill
-                      sizes="48px"
-                      className="object-cover object-top"
-                    />
-                  )}
-                </div>
-                <div className="min-w-0 flex-1">
-                  <p className="truncate font-heading text-base tracking-wider text-brand-black">
-                    {t.name}
-                  </p>
-                  {t.title && (
-                    <p className="truncate text-xs text-brand-gray">
-                      {t.title}
-                    </p>
-                  )}
-                </div>
-              </Link>
-            ))}
-          </div>
-        </>
-      )
-    },
-    {
-      id: 'cesitlilik',
-      title: tValues('items.cesitlilik.title'),
-      subtitle: tValues('items.cesitlilik.subtitle'),
-      content: (
-        <>
-          <p className="text-base leading-relaxed text-brand-gray">
-            {tValues('items.cesitlilik.text')}
-          </p>
-          <div className="mt-5 grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-5">
-            {branches.map((b) => (
-              <Link
-                key={b.id}
-                href={`/branslar/${b.slug}`}
-                className="flex flex-col items-center gap-2 rounded-xl border-2 border-brand-border bg-brand-surface p-3 text-center transition-colors hover:border-brand-yellow hover:bg-white"
-              >
-                {b.emoji && (
-                  <span className="text-2xl" aria-hidden="true">
-                    {b.emoji}
-                  </span>
-                )}
-                <span className="font-heading text-sm tracking-wider text-brand-black">
-                  {b.name}
-                </span>
-              </Link>
-            ))}
-          </div>
-        </>
-      )
-    }
-  ];
+  const valueIds = ['samimiyet', 'ahlak', 'guvenli'] as const;
+  const items: AccordionItem[] = valueIds.map((id) => ({
+    id,
+    title: tValues(`items.${id}.title`),
+    subtitle: tValues(`items.${id}.subtitle`),
+    content: (
+      <p className="text-base leading-relaxed text-brand-gray">
+        {tValues(`items.${id}.text`)}
+      </p>
+    )
+  }));
 
   return (
     <>

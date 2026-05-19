@@ -364,11 +364,9 @@
       "subtitle": "Samimi Sports Club"
     },
     "story": {
-      "title": "WHO WE ARE",
+      "title": "OUR STORY",
       "paragraphs": [
-        "Samimi Sports Club is a small but heartfelt sports community founded in Ankara Yenimahalle Demet, where members are treated like family.",
-        "Under one roof we offer five disciplines: Taekwondo, Boxing & Kickboxing, Traditional Archery, Kids Gymnastics and women-only Reformer Pilates — each led by certified, experienced trainers.",
-        "From children to adults, beginners to advanced, we built a place that fits every age and level. Our goal: bring healthy living, disciplined training and a welcoming sports culture under the same roof."
+        "Samimi Sports Club was founded in 2024 and began operations in 2025. It was established by champion coaches devoted to sports, with the mission of instilling sports culture in younger generations."
       ]
     },
     "values": {
@@ -376,19 +374,19 @@
       "subtitle": "Three principles that make us who we are.",
       "items": {
         "samimiyet": {
-          "title": "WARMTH",
-          "subtitle": "A Family-Like Community",
-          "text": "True to our name (\"Samimi\" means warm, sincere), we offer a personal atmosphere. Everyone feels at home; trainers and members know each other by name."
+          "title": "SINCERITY",
+          "subtitle": "Not pretense — real attention",
+          "text": "Just like our name, we approach our work with genuine sincerity. We treat every athlete, every family, every child with authentic care. Not pretense — real attention."
         },
-        "uzmanlik": {
-          "title": "EXPERTISE",
-          "subtitle": "Experienced, Certified Trainers",
-          "text": "Every discipline is led by certified, experienced trainers. Reformer pilates with a physiotherapist, martial arts with seasoned coaches — quality is non-negotiable."
+        "ahlak": {
+          "title": "UNIVERSAL MORAL VALUES",
+          "subtitle": "Discipline, respect, honesty",
+          "text": "Discipline, respect, honesty, and mutual trust. Sport is not just physical development — it's character building. We aim to teach our athletes these values by living them."
         },
-        "cesitlilik": {
-          "title": "DIVERSITY",
-          "subtitle": "Five Disciplines, One Place",
-          "text": "Taekwondo, Boxing & Kickboxing, Traditional Archery, Kids Gymnastics and Reformer Pilates. Five disciplines under one roof — something for every member of the family."
+        "guvenli": {
+          "title": "TRUSTED & REFINED ENVIRONMENT",
+          "subtitle": "Safe for families and women",
+          "text": "We are a refined establishment where families can confidently entrust their children, and women can feel completely safe. We serve you with our champion coaches, modern facilities, and meticulous hygiene."
         }
       },
       "expand": "Expand",

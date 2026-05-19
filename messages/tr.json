@@ -360,11 +360,9 @@
       "subtitle": "Samimi Spor Kulübü"
     },
     "story": {
-      "title": "BİZ KİMİZ?",
+      "title": "KURULUŞ HİKAYEMİZ",
       "paragraphs": [
-        "Samimi Spor Kulübü, Ankara Yenimahalle Demet'te kurulmuş, üyelerini bir aile gibi gören küçük ama içten bir spor topluluğudur.",
-        "Tek tesiste 5 farklı branşta hizmet veriyoruz: Taekwondo, Boks & Kick Boks, Geleneksel Okçuluk, Çocuk Jimnastiği ve Bayanlara özel Reformer Pilates. Her branş, alanında sertifikalı ve deneyimli eğitmenler tarafından yönetiliyor.",
-        "Çocuktan yetişkine, yeni başlayandan ileri seviyeye her yaşa ve seviyeye uygun bir ortam kurduk. Hedefimiz; sağlıklı yaşamı, disiplinli antrenmanı ve samimi bir spor kültürünü aynı çatı altında buluşturmak."
+        "Samimi Spor Kulübü 2024 yılında kuruldu, 2025 yılında faaliyete geçti. Spora gönül vermiş şampiyon hocalar tarafından, genç nesillere spor kültürünü aşılamak amacıyla açıldı."
       ]
     },
     "values": {
@@ -373,18 +371,18 @@
       "items": {
         "samimiyet": {
           "title": "SAMİMİYET",
-          "subtitle": "Üyelerimizle Aile Gibi",
-          "text": "Samimi Spor Kulübü adından da anlaşılacağı gibi, üyelerimize samimi bir ortam sunar. Her gelen kendi evi gibi hisseder; eğitmenler ve üyeler birbirini ismiyle tanır."
+          "subtitle": "Numara değil — gerçek ilgi",
+          "text": "Kulübümüzün ismi gibi, işimizi samimi bir şekilde yapıyoruz. Her sporcumuza, her aileye, her çocuğa içtenlikle yaklaşıyoruz. Numara değil — gerçek ilgi."
         },
-        "uzmanlik": {
-          "title": "UZMANLIK",
-          "subtitle": "Alanında Deneyimli Eğitmenler",
-          "text": "Her branşta sertifikalı, deneyimli eğitmenlerle çalışıyoruz. Fizyoterapist eşliğinde reformer pilates, uzman antrenörlerle dövüş sanatları — kalite ödün verilmeyen bir önceliğimiz."
+        "ahlak": {
+          "title": "EVRENSEL AHLAKİ DEĞERLER",
+          "subtitle": "Disiplin, saygı, dürüstlük",
+          "text": "Disiplin, saygı, dürüstlük ve karşılıklı güven. Spor sadece beden gelişimi değil — karakter inşasıdır. Sporcularımıza bu değerleri yaşayarak öğretmeyi hedefliyoruz."
         },
-        "cesitlilik": {
-          "title": "ÇEŞİTLİLİK",
-          "subtitle": "5 Farklı Branş",
-          "text": "Taekwondo, Boks & Kick Boks, Geleneksel Okçuluk, Çocuk Jimnastiği ve Reformer Pilates. Tek tesiste 5 farklı branş — ailenin her ferdine uygun bir seçenek."
+        "guvenli": {
+          "title": "GÜVENİLİR VE NEZİH ORTAM",
+          "subtitle": "Aileler ve bayanlar için güvenli",
+          "text": "Ailelerin çocuklarını rahatlıkla emanet edebileceği, bayanlarımızın kendini güvende hissedeceği nezih bir işletmeyiz. Şampiyon hocalarımız, modern tesisimiz ve titiz hijyenimizle hizmetinizdeyiz."
         }
       },
       "expand": "Detayı aç",
