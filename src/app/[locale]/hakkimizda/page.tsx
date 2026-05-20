@@ -39,6 +39,7 @@ export default async function HakkimizdaPage({
   const tValues = await getTranslations('About.values');
   const tLocation = await getTranslations('About.location');
   const tCta = await getTranslations('About.cta');
+  const tCommon = await getTranslations('Common');
   const contact = await getContactInfo();
 
   const storyParagraphs = (tStory.raw('paragraphs') ?? []) as string[];
@@ -58,9 +59,9 @@ export default async function HakkimizdaPage({
   return (
     <>
       {/* HERO */}
-      <section className="bg-white">
+      <section className="bg-white dark:bg-zinc-900">
         <div className="mx-auto max-w-5xl px-4 py-16 text-center sm:px-6 sm:py-20 lg:px-8">
-          <h1 className="font-heading text-4xl tracking-wider text-brand-black sm:text-5xl md:text-6xl lg:text-7xl">
+          <h1 className="font-heading text-4xl tracking-wider text-brand-black dark:text-white sm:text-5xl md:text-6xl lg:text-7xl">
             {tHero('title')}
           </h1>
           <p className="mx-auto mt-4 max-w-2xl text-lg text-brand-gray">
@@ -72,7 +73,7 @@ export default async function HakkimizdaPage({
       {/* STORY */}
       <section className="bg-brand-surface">
         <div className="mx-auto max-w-3xl px-4 py-16 sm:px-6 sm:py-20 lg:px-8">
-          <h2 className="font-heading text-3xl tracking-wider text-brand-black sm:text-4xl">
+          <h2 className="font-heading text-3xl tracking-wider text-brand-black dark:text-white sm:text-4xl">
             {tStory('title')}
           </h2>
           <div className="mt-6 space-y-5">
@@ -89,10 +90,10 @@ export default async function HakkimizdaPage({
       </section>
 
       {/* VALUES */}
-      <section className="bg-white">
+      <section className="bg-white dark:bg-zinc-900">
         <div className="mx-auto max-w-4xl px-4 py-16 sm:px-6 sm:py-20 lg:px-8">
           <div className="text-center">
-            <h2 className="font-heading text-3xl tracking-wider text-brand-black sm:text-4xl">
+            <h2 className="font-heading text-3xl tracking-wider text-brand-black dark:text-white sm:text-4xl">
               {tValues('title')}
             </h2>
             <p className="mt-3 text-brand-gray">{tValues('subtitle')}</p>
@@ -110,24 +111,24 @@ export default async function HakkimizdaPage({
       {/* LOCATION */}
       <section className="bg-brand-surface">
         <div className="mx-auto max-w-6xl px-4 py-16 sm:px-6 sm:py-20 lg:px-8">
-          <h2 className="font-heading text-3xl tracking-wider text-brand-black sm:text-4xl">
+          <h2 className="font-heading text-3xl tracking-wider text-brand-black dark:text-white sm:text-4xl">
             {tLocation('title')}
           </h2>
           <div className="mt-8 grid grid-cols-1 gap-8 md:grid-cols-2">
             {/* Info */}
-            <div className="space-y-5 rounded-2xl border-2 border-brand-border bg-white p-6 sm:p-8">
+            <div className="space-y-5 rounded-2xl border-2 border-brand-border bg-white dark:bg-zinc-900 p-6 sm:p-8">
               <div>
                 <p className="text-xs font-semibold uppercase tracking-widest text-brand-gray">
                   {tLocation('addressLabel')}
                 </p>
-                <p className="mt-1 text-base font-medium text-brand-black">
+                <p className="mt-1 text-base font-medium text-brand-black dark:text-white">
                   {contact.address.full}
                 </p>
                 <a
                   href={contact.address.mapsUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="mt-2 inline-flex items-center gap-1 text-sm font-semibold text-brand-amber transition-colors hover:text-brand-black"
+                  className="mt-2 inline-flex items-center gap-1 text-sm font-semibold text-brand-amber transition-colors hover:text-brand-black dark:hover:text-white"
                 >
                   {tLocation('mapsCta')} →
                 </a>
@@ -139,7 +140,7 @@ export default async function HakkimizdaPage({
                 </p>
                 <a
                   href={`tel:${contact.phone.tel}`}
-                  className="mt-1 inline-block font-heading text-2xl tracking-wider text-brand-black transition-opacity hover:opacity-80"
+                  className="mt-1 inline-block font-heading text-2xl tracking-wider text-brand-black dark:text-white transition-opacity hover:opacity-80"
                 >
                   {contact.phone.display}
                 </a>
@@ -149,7 +150,7 @@ export default async function HakkimizdaPage({
                 <p className="text-xs font-semibold uppercase tracking-widest text-brand-gray">
                   {tLocation('hoursLabel')}
                 </p>
-                <p className="mt-1 text-base font-medium text-brand-black">
+                <p className="mt-1 text-base font-medium text-brand-black dark:text-white">
                   {contact.hours.days}: {contact.hours.weekdays}
                 </p>
               </div>
@@ -192,7 +193,7 @@ export default async function HakkimizdaPage({
             href={`tel:${contact.phone.tel}`}
             className="mt-6 inline-block font-heading text-2xl tracking-wider text-brand-black transition-opacity hover:opacity-80 sm:text-3xl"
           >
-            {contact.phone.display}
+            {tCommon('callNow')} — {contact.phone.display}
           </a>
           <div className="mt-6">
             <a

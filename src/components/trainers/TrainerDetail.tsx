@@ -48,7 +48,7 @@ export async function TrainerDetail({
       >
         <ol className="mx-auto flex max-w-6xl items-center gap-2 px-4 py-3 text-sm text-brand-gray sm:px-6 lg:px-8">
           <li>
-            <Link href="/" className="transition-colors hover:text-brand-black">
+            <Link href="/" className="transition-colors hover:text-brand-black dark:hover:text-white">
               {tNav('home')}
             </Link>
           </li>
@@ -56,23 +56,23 @@ export async function TrainerDetail({
           <li>
             <Link
               href="/egitmenler"
-              className="transition-colors hover:text-brand-black"
+              className="transition-colors hover:text-brand-black dark:hover:text-white"
             >
               {tNav('trainers')}
             </Link>
           </li>
           <li aria-hidden="true">›</li>
-          <li className="font-medium text-brand-black">{trainer.name}</li>
+          <li className="font-medium text-brand-black dark:text-white">{trainer.name}</li>
         </ol>
       </nav>
 
       {/* MAIN — two-column */}
-      <section className="bg-white">
+      <section className="bg-white dark:bg-zinc-900">
         <div className="mx-auto grid max-w-6xl items-start gap-10 px-4 py-12 sm:px-6 sm:py-16 md:grid-cols-3 md:gap-12 lg:px-8">
           {/* LEFT — identity */}
           <aside className="md:col-span-1">
             <div className="md:sticky md:top-20">
-              <div className="relative aspect-[4/5] w-full overflow-hidden rounded-2xl bg-zinc-200">
+              <div className="relative aspect-[4/5] w-full overflow-hidden rounded-2xl bg-zinc-200 dark:bg-zinc-800">
                 {trainer.photo ? (
                   <Image
                     src={trainer.photo}
@@ -86,7 +86,7 @@ export async function TrainerDetail({
                   <TrainerPhotoPlaceholder label={trainer.name} />
                 )}
               </div>
-              <h1 className="mt-6 font-heading text-4xl tracking-wider text-brand-black sm:text-5xl">
+              <h1 className="mt-6 font-heading text-4xl tracking-wider text-brand-black dark:text-white sm:text-5xl">
                 {trainer.name}
               </h1>
               {trainer.title && (
@@ -103,12 +103,12 @@ export async function TrainerDetail({
                   <ul className="mt-2 space-y-3">
                     {branches.map((b) => (
                       <li key={b.slug}>
-                        <p className="font-heading text-xl tracking-wider text-brand-black">
+                        <p className="font-heading text-xl tracking-wider text-brand-black dark:text-white">
                           {b.name}
                         </p>
                         <Link
                           href={`/branslar/${b.slug}`}
-                          className="mt-1 inline-flex items-center gap-1 text-sm font-semibold text-brand-amber transition-colors hover:text-brand-black"
+                          className="mt-1 inline-flex items-center gap-1 text-sm font-semibold text-brand-amber transition-colors hover:text-brand-black dark:hover:text-white"
                         >
                           {tDetail('branchLink')} →
                         </Link>
@@ -131,7 +131,7 @@ export async function TrainerDetail({
 
           {/* RIGHT — about + cert + expertise */}
           <div className="md:col-span-2">
-            <h2 className="font-heading text-3xl tracking-wider text-brand-black sm:text-4xl">
+            <h2 className="font-heading text-3xl tracking-wider text-brand-black dark:text-white sm:text-4xl">
               {tDetail('aboutLabel')}
             </h2>
             <div className="mt-4 space-y-4 text-base leading-relaxed text-brand-gray">
@@ -142,14 +142,14 @@ export async function TrainerDetail({
 
             {trainer.certifications.length > 0 && (
               <div className="mt-10">
-                <h2 className="font-heading text-2xl tracking-wider text-brand-black">
+                <h2 className="font-heading text-2xl tracking-wider text-brand-black dark:text-white">
                   {tDetail('certificatesLabel')}
                 </h2>
                 <ul className="mt-4 space-y-3">
                   {trainer.certifications.map((c, i) => (
                     <li
                       key={i}
-                      className="flex items-start gap-3 text-base text-brand-black"
+                      className="flex items-start gap-3 text-base text-brand-black dark:text-white"
                     >
                       <span
                         aria-hidden="true"
@@ -166,14 +166,14 @@ export async function TrainerDetail({
 
             {trainer.specialties.length > 0 && (
               <div className="mt-10">
-                <h2 className="font-heading text-2xl tracking-wider text-brand-black">
+                <h2 className="font-heading text-2xl tracking-wider text-brand-black dark:text-white">
                   {tDetail('expertiseLabel')}
                 </h2>
                 <ul className="mt-4 flex flex-wrap gap-2">
                   {trainer.specialties.map((e, i) => (
                     <li
                       key={i}
-                      className="rounded-full border-2 border-brand-border bg-brand-surface px-4 py-1.5 text-sm font-medium text-brand-black"
+                      className="rounded-full border-2 border-brand-border bg-brand-surface px-4 py-1.5 text-sm font-medium text-brand-black dark:text-white"
                     >
                       {e}
                     </li>

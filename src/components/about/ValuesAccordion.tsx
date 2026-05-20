@@ -55,7 +55,7 @@ export function ValuesAccordion({
             key={item.id}
             id={item.id}
             className={
-              'scroll-mt-24 overflow-hidden rounded-2xl border-2 bg-white transition-colors ' +
+              'scroll-mt-24 overflow-hidden rounded-2xl border-2 bg-white dark:bg-zinc-900 transition-colors ' +
               (isOpen ? 'border-brand-yellow' : 'border-brand-border')
             }
           >
@@ -67,7 +67,7 @@ export function ValuesAccordion({
               className="flex w-full items-center justify-between gap-4 p-6 text-left transition-colors hover:bg-brand-surface"
             >
               <div className="flex-1">
-                <h3 className="font-heading text-2xl tracking-wider text-brand-black sm:text-3xl">
+                <h3 className="font-heading text-2xl tracking-wider text-brand-black dark:text-white sm:text-3xl">
                   {item.title}
                 </h3>
                 <p className="mt-1 text-sm text-brand-gray sm:text-base">

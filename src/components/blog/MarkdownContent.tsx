@@ -2,16 +2,16 @@ import ReactMarkdown from 'react-markdown';
 
 export function MarkdownContent({content}: {content: string}) {
   return (
-    <div className="text-base leading-relaxed text-brand-black">
+    <div className="text-base leading-relaxed text-brand-black dark:text-white">
       <ReactMarkdown
         components={{
           h2: ({children}) => (
-            <h2 className="mt-10 font-heading text-2xl tracking-wider text-brand-black sm:text-3xl">
+            <h2 className="mt-10 font-heading text-2xl tracking-wider text-brand-black dark:text-white sm:text-3xl">
               {children}
             </h2>
           ),
           h3: ({children}) => (
-            <h3 className="mt-8 font-heading text-xl tracking-wider text-brand-black">
+            <h3 className="mt-8 font-heading text-xl tracking-wider text-brand-black dark:text-white">
               {children}
             </h3>
           ),
@@ -32,7 +32,7 @@ export function MarkdownContent({content}: {content: string}) {
           ),
           li: ({children}) => <li className="leading-relaxed">{children}</li>,
           strong: ({children}) => (
-            <strong className="font-semibold text-brand-black">
+            <strong className="font-semibold text-brand-black dark:text-white">
               {children}
             </strong>
           ),
@@ -40,7 +40,7 @@ export function MarkdownContent({content}: {content: string}) {
           a: ({href, children}) => (
             <a
               href={href}
-              className="text-brand-amber underline underline-offset-2 hover:text-brand-black"
+              className="text-brand-amber underline underline-offset-2 hover:text-brand-black dark:hover:text-white"
             >
               {children}
             </a>

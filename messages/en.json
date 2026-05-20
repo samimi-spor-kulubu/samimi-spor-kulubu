@@ -4,6 +4,14 @@
     "tagline": "Taekwondo, Boxing, Archery, Gymnastics and Reformer Pilates in Ankara Yenimahalle.",
     "seoDescription": "Taekwondo, boxing & kickboxing, traditional archery, kids gymnastics and Reformer Pilates in Ankara Yenimahalle Demet. Book a trial session on WhatsApp."
   },
+  "Common": {
+    "callNow": "Call Now"
+  },
+  "Theme": {
+    "toggle": "Toggle theme",
+    "toLight": "Switch to light mode",
+    "toDark": "Switch to dark mode"
+  },
   "Nav": {
     "home": "Home",
     "branches": "Classes",
@@ -141,6 +149,7 @@
       "featuresLabel": "Highlights",
       "infoBoxTitle": "Join This Class",
       "bookButton": "Book via WhatsApp",
+      "freeTrialBadge": "✨ First Trial Session FREE",
       "cta": {
         "title": "Ready to start?",
         "description": "Message us on WhatsApp and we'll pick the right day and time together.",
@@ -514,6 +523,39 @@
       "title": "See It in Person",
       "description": "Book a visit — we'll show you around and answer your questions.",
       "button": "Message on WhatsApp"
+    },
+    "onboarding": {
+      "next": "Next",
+      "prev": "Back",
+      "done": "Finish",
+      "progress": "{{current}} / {{total}}",
+      "replay": "Replay site tour",
+      "steps": {
+        "hero": {
+          "title": "Welcome to Samimi Sports Club",
+          "description": "We offer 5 different classes in Ankara Yenimahalle Demet. Want a quick tour?"
+        },
+        "branches": {
+          "title": "Our 5 classes",
+          "description": "Taekwondo, Boxing & Kickboxing, Traditional Archery, Kids Gymnastics and Reformer Pilates. Discover them all here."
+        },
+        "trainers": {
+          "title": "Our trainers",
+          "description": "Profiles of our professional trainers — background, classes and certifications."
+        },
+        "whatsapp": {
+          "title": "Quick contact on WhatsApp",
+          "description": "Reach us instantly for a free trial session, prices and availability."
+        },
+        "faq": {
+          "title": "FAQ — Frequently Asked Questions",
+          "description": "Quick answers — membership, payment and everything about our facility."
+        },
+        "theme": {
+          "title": "Dark mode",
+          "description": "Toggle between light and dark themes. Your preference is remembered."
+        }
+      }
     }
   },
   "Faq": {

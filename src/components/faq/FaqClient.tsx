@@ -17,7 +17,7 @@ export function FaqClient({items}: {items: LocalizedFAQItem[]}) {
   const tAccordion = useTranslations('Faq.accordion');
   const tCats = useTranslations('Faq.categories');
   const [filter, setFilter] = useState<Filter>('all');
-  const [openIds, setOpenIds] = useState<Set<string>>(new Set());
+  const [openId, setOpenId] = useState<string | null>(null);
 
   const filtered = useMemo(
     () => (filter === 'all' ? items : items.filter((i) => i.category === filter)),
@@ -37,12 +37,7 @@ export function FaqClient({items}: {items: LocalizedFAQItem[]}) {
   }, [items]);
 
   const toggle = (id: string) =>
-    setOpenIds((prev) => {
-      const next = new Set(prev);
-      if (next.has(id)) next.delete(id);
-      else next.add(id);
-      return next;
-    });
+    setOpenId((prev) => (prev === id ? null : id));
 
   return (
     <>
@@ -68,13 +63,15 @@ export function FaqClient({items}: {items: LocalizedFAQItem[]}) {
       ) : (
         <div className="mt-10 space-y-3">
           {filtered.map((item) => {
-            const isOpen = openIds.has(item.id);
+            const isOpen = openId === item.id;
             return (
               <div
                 key={item.id}
                 className={
-                  'overflow-hidden rounded-2xl border-2 bg-white transition-colors ' +
-                  (isOpen ? 'border-brand-yellow' : 'border-brand-border')
+                  'overflow-hidden rounded-2xl border-2 bg-white dark:bg-zinc-900 transition-colors ' +
+                  (isOpen
+                    ? 'border-brand-yellow'
+                    : 'border-brand-border hover:border-brand-yellow')
                 }
               >
                 <h3 className="m-0">
@@ -85,13 +82,13 @@ export function FaqClient({items}: {items: LocalizedFAQItem[]}) {
                     aria-controls={`${item.id}-panel`}
                     className="flex w-full items-center justify-between gap-4 p-5 text-left transition-colors hover:bg-brand-surface sm:p-6"
                   >
-                    <span className="flex-1 font-heading text-lg tracking-wide text-brand-black sm:text-xl">
+                    <span className="flex-1 font-heading text-lg tracking-wide text-brand-black dark:text-white sm:text-xl">
                       {item.question}
                     </span>
                     <span
                       aria-label={isOpen ? tAccordion('collapse') : tAccordion('expand')}
                       className={
-                        'inline-flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-brand-yellow text-brand-black transition-transform ' +
+                        'inline-flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-brand-yellow text-brand-black transition-transform duration-200 ' +
                         (isOpen ? 'rotate-180' : '')
                       }
                     >
@@ -110,7 +107,7 @@ export function FaqClient({items}: {items: LocalizedFAQItem[]}) {
                     {item.link && (
                       <Link
                         href={item.link.href}
-                        className="mt-4 inline-flex items-center gap-1 text-sm font-semibold text-brand-amber transition-colors hover:text-brand-black"
+                        className="mt-4 inline-flex items-center gap-1 text-sm font-semibold text-brand-amber transition-colors hover:text-brand-black dark:hover:text-white"
                       >
                         {item.link.label} →
                       </Link>
@@ -143,7 +140,7 @@ function FilterPill({
         'inline-flex h-10 items-center rounded-full border-2 px-5 text-sm font-semibold transition-colors ' +
         (active
           ? 'border-brand-black bg-brand-yellow text-brand-black'
-          : 'border-brand-border bg-white text-brand-black hover:border-brand-black')
+          : 'border-brand-border bg-white dark:bg-zinc-900 text-brand-black dark:text-white hover:border-brand-black')
       }
     >
       {children}

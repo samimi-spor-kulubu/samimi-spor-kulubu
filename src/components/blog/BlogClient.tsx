@@ -88,7 +88,7 @@ export function BlogClient({
 
       {/* Grid */}
       {posts.length === 0 ? (
-        <p className="mx-auto mt-12 max-w-md rounded-2xl border-2 border-dashed border-brand-border bg-white p-10 text-center text-brand-gray">
+        <p className="mx-auto mt-12 max-w-md rounded-2xl border-2 border-dashed border-brand-border bg-white dark:bg-zinc-900 p-10 text-center text-brand-gray">
           {locale === 'en'
             ? 'No blog posts yet.'
             : 'Henüz blog yazısı yok.'}
@@ -118,7 +118,7 @@ export function BlogClient({
             type="button"
             onClick={() => setPage((p) => Math.max(1, p - 1))}
             disabled={currentPage === 1}
-            className="inline-flex h-10 items-center rounded-full border-2 border-brand-black px-5 text-sm font-semibold text-brand-black transition-colors hover:bg-brand-black hover:text-white disabled:opacity-40 disabled:hover:bg-transparent disabled:hover:text-brand-black"
+            className="inline-flex h-10 items-center rounded-full border-2 border-brand-black px-5 text-sm font-semibold text-brand-black dark:text-white transition-colors hover:bg-brand-black hover:text-white disabled:opacity-40 disabled:hover:bg-transparent disabled:hover:text-brand-black"
           >
             ← {tPagination('prev')}
           </button>
@@ -129,7 +129,7 @@ export function BlogClient({
             type="button"
             onClick={() => setPage((p) => Math.min(totalPages, p + 1))}
             disabled={currentPage === totalPages}
-            className="inline-flex h-10 items-center rounded-full border-2 border-brand-black px-5 text-sm font-semibold text-brand-black transition-colors hover:bg-brand-black hover:text-white disabled:opacity-40 disabled:hover:bg-transparent disabled:hover:text-brand-black"
+            className="inline-flex h-10 items-center rounded-full border-2 border-brand-black px-5 text-sm font-semibold text-brand-black dark:text-white transition-colors hover:bg-brand-black hover:text-white disabled:opacity-40 disabled:hover:bg-transparent disabled:hover:text-brand-black"
           >
             {tPagination('next')} →
           </button>
@@ -156,7 +156,7 @@ function FilterPill({
         'inline-flex h-10 items-center rounded-full border-2 px-5 text-sm font-semibold transition-colors ' +
         (active
           ? 'border-brand-black bg-brand-yellow text-brand-black'
-          : 'border-brand-border bg-white text-brand-black hover:border-brand-black')
+          : 'border-brand-border bg-white dark:bg-zinc-900 text-brand-black dark:text-white hover:border-brand-black')
       }
     >
       {children}
@@ -178,9 +178,9 @@ function BlogCard({
   return (
     <Link
       href={`/blog/${post.slug}`}
-      className="group flex flex-col overflow-hidden rounded-2xl border-2 border-brand-border bg-white transition-all hover:-translate-y-1 hover:border-brand-yellow hover:shadow-lg"
+      className="group flex flex-col overflow-hidden rounded-2xl border-2 border-brand-border bg-white dark:bg-zinc-900 transition-all hover:-translate-y-1 hover:border-brand-yellow hover:shadow-lg active:scale-[0.98] active:border-brand-yellow active:bg-brand-yellow/5"
     >
-      <div className="relative aspect-[16/10] w-full overflow-hidden bg-zinc-200">
+      <div className="relative aspect-[16/10] w-full overflow-hidden bg-zinc-200 dark:bg-zinc-800">
         {post.image ? (
           <Image
             src={post.image}
@@ -218,7 +218,7 @@ function BlogCard({
         </span>
       </div>
       <div className="flex flex-1 flex-col p-6">
-        <h2 className="font-heading text-xl tracking-wider text-brand-black">
+        <h2 className="font-heading text-xl tracking-wider text-brand-black dark:text-white">
           {post.title}
         </h2>
         <p className="mt-2 line-clamp-3 text-sm leading-relaxed text-brand-gray">

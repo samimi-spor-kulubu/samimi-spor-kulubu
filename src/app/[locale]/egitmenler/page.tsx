@@ -4,7 +4,7 @@ import {getTranslations, setRequestLocale} from 'next-intl/server';
 import {Link} from '@/i18n/navigation';
 import {getContactInfo, whatsAppUrl} from '@/lib/services/contact';
 import {pageMetadata} from '@/lib/seo';
-import {getAllTrainers} from '@/lib/services/trainers';
+import {getAllTrainers, getBranchesByTrainer} from '@/lib/services/trainers';
 import {TrainerPhotoPlaceholder} from '@/components/trainers/TrainerPhotoPlaceholder';
 
 export const revalidate = 60;
@@ -35,16 +35,20 @@ export default async function TrainersPage({
   const tHero = await getTranslations('Trainers.hero');
   const tLabels = await getTranslations('Trainers.labels');
   const tCta = await getTranslations('Trainers.cta');
+  const tCommon = await getTranslations('Common');
 
-  const trainers = await getAllTrainers(locale);
-  const contact = await getContactInfo();
+  const [trainers, branchesByTrainer, contact] = await Promise.all([
+    getAllTrainers(locale),
+    getBranchesByTrainer(locale),
+    getContactInfo()
+  ]);
 
   return (
     <>
       {/* HEADER */}
-      <section className="bg-white">
+      <section className="bg-white dark:bg-zinc-900">
         <div className="mx-auto max-w-5xl px-4 py-16 text-center sm:px-6 sm:py-20 lg:px-8">
-          <h1 className="font-heading text-4xl tracking-wider text-brand-black sm:text-5xl md:text-6xl lg:text-7xl">
+          <h1 className="font-heading text-4xl tracking-wider text-brand-black dark:text-white sm:text-5xl md:text-6xl lg:text-7xl">
             {tHero('title')}
           </h1>
           <p className="mx-auto mt-4 max-w-2xl text-lg text-brand-gray">
@@ -56,39 +60,54 @@ export default async function TrainersPage({
       {/* TRAINER CARDS */}
       <section className="bg-brand-surface">
         <div className="mx-auto grid max-w-5xl gap-8 px-4 py-12 sm:px-6 sm:py-16 md:grid-cols-2 lg:px-8">
-          {trainers.map((t, idx) => (
-            <Link
-              key={t.id}
-              href={`/egitmenler/${t.slug}`}
-              className="group overflow-hidden rounded-2xl border-2 border-brand-border bg-white transition-all hover:-translate-y-1 hover:border-brand-yellow hover:shadow-lg"
-            >
-              <div className="relative h-96 w-full overflow-hidden bg-zinc-200">
-                {t.photo ? (
-                  <Image
-                    src={t.photo}
-                    alt={t.name}
-                    fill
-                    priority={idx === 0}
-                    sizes="(max-width: 768px) 100vw, 50vw"
-                    className="object-cover object-center transition-transform duration-300 group-hover:scale-105"
-                  />
-                ) : (
-                  <TrainerPhotoPlaceholder label={t.name} />
-                )}
-              </div>
-              <div className="p-6">
-                <h2 className="font-heading text-2xl tracking-wider text-brand-black">
-                  {t.name}
-                </h2>
-                {t.title && (
-                  <p className="mt-1 text-sm text-brand-gray">{t.title}</p>
-                )}
-                <span className="mt-5 inline-flex h-11 items-center justify-center rounded-full border-2 border-brand-black px-6 text-sm font-semibold text-brand-black transition-colors group-hover:bg-brand-black group-hover:text-white">
-                  {tLabels('profileLink')} →
-                </span>
-              </div>
-            </Link>
-          ))}
+          {trainers.map((t, idx) => {
+            const trainerBranches = branchesByTrainer.get(t.id) ?? [];
+            return (
+              <Link
+                key={t.id}
+                href={`/egitmenler/${t.slug}`}
+                className="group overflow-hidden rounded-2xl border-2 border-brand-border bg-white dark:bg-zinc-900 transition-all hover:-translate-y-1 hover:border-brand-yellow hover:shadow-lg active:scale-[0.98] active:border-brand-yellow active:bg-brand-yellow/5"
+              >
+                <div className="relative h-96 w-full overflow-hidden bg-zinc-200 dark:bg-zinc-800">
+                  {t.photo ? (
+                    <Image
+                      src={t.photo}
+                      alt={t.name}
+                      fill
+                      priority={idx === 0}
+                      sizes="(max-width: 768px) 100vw, 50vw"
+                      className="object-cover object-center transition-transform duration-300 group-hover:scale-105"
+                    />
+                  ) : (
+                    <TrainerPhotoPlaceholder label={t.name} />
+                  )}
+                </div>
+                <div className="p-6">
+                  <h2 className="font-heading text-2xl tracking-wider text-brand-black dark:text-white">
+                    {t.name}
+                  </h2>
+                  {t.title && (
+                    <p className="mt-1 text-sm text-brand-gray">{t.title}</p>
+                  )}
+                  {trainerBranches.length > 0 && (
+                    <div className="mt-3 flex flex-wrap gap-1.5">
+                      {trainerBranches.map((b) => (
+                        <span
+                          key={b.slug}
+                          className="inline-flex items-center rounded-full bg-brand-yellow/15 px-3 py-1 text-xs font-semibold uppercase tracking-widest text-brand-amber"
+                        >
+                          {b.name}
+                        </span>
+                      ))}
+                    </div>
+                  )}
+                  <span className="mt-5 inline-flex h-11 items-center justify-center rounded-full border-2 border-brand-black px-6 text-sm font-semibold text-brand-black dark:text-white transition-colors group-hover:bg-brand-black group-hover:text-white">
+                    {tLabels('profileLink')} →
+                  </span>
+                </div>
+              </Link>
+            );
+          })}
         </div>
       </section>
 
@@ -105,7 +124,7 @@ export default async function TrainersPage({
             href={`tel:${contact.phone.tel}`}
             className="mt-6 inline-block font-heading text-2xl tracking-wider text-brand-black transition-opacity hover:opacity-80 sm:text-3xl"
           >
-            {contact.phone.display}
+            {tCommon('callNow')} — {contact.phone.display}
           </a>
           <div className="mt-6">
             <a

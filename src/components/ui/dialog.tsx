@@ -34,7 +34,7 @@ export const DialogContent = React.forwardRef<
     <RadixDialog.Content
       ref={ref}
       className={cn(
-        'fixed left-1/2 top-1/2 z-50 grid w-full max-w-md -translate-x-1/2 -translate-y-1/2 gap-4 rounded-2xl border-2 border-brand-border bg-white p-6 shadow-lg data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out data-[state=open]:fade-in data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95',
+        'fixed left-1/2 top-1/2 z-50 grid w-full max-w-md -translate-x-1/2 -translate-y-1/2 gap-4 rounded-2xl border-2 border-brand-border bg-white dark:bg-zinc-900 p-6 shadow-lg data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out data-[state=open]:fade-in data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95',
         className
       )}
       {...props}
@@ -79,7 +79,7 @@ export const DialogTitle = React.forwardRef<
   <RadixDialog.Title
     ref={ref}
     className={cn(
-      'font-heading text-2xl tracking-wider text-brand-black',
+      'font-heading text-2xl tracking-wider text-brand-black dark:text-white',
       className
     )}
     {...props}

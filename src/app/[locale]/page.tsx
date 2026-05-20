@@ -5,7 +5,7 @@ import {Link} from '@/i18n/navigation';
 import {pageMetadata} from '@/lib/seo';
 import {getAllBranches} from '@/lib/services/branches';
 import {getContactInfo, whatsAppUrl} from '@/lib/services/contact';
-import {getAllTrainers} from '@/lib/services/trainers';
+import {getAllTrainers, getBranchesByTrainer} from '@/lib/services/trainers';
 import {TrainerPhotoPlaceholder} from '@/components/trainers/TrainerPhotoPlaceholder';
 import {
   AwardIcon,
@@ -64,23 +64,18 @@ export default async function Home({
   setRequestLocale(locale);
   const t = await getTranslations('Home');
   const tTrainerLabels = await getTranslations('Trainers.labels');
-  const [contact, branches, trainers] = await Promise.all([
+  const tCommon = await getTranslations('Common');
+  const [contact, branches, trainers, branchesByTrainer] = await Promise.all([
     getContactInfo(),
     getAllBranches(locale),
-    getAllTrainers(locale)
+    getAllTrainers(locale),
+    getBranchesByTrainer(locale)
   ]);
-
-  // Map trainer.id → branch name so each trainer card can show the
-  // branch they teach without an extra round-trip per trainer.
-  const branchByTrainerId = new Map<string, string>();
-  for (const b of branches) {
-    if (b.instructor?.id) branchByTrainerId.set(b.instructor.id, b.name);
-  }
 
   return (
     <>
       {/* HERO */}
-      <section className="relative overflow-hidden bg-white">
+      <section className="relative overflow-hidden bg-white dark:bg-zinc-900">
         <div className="mx-auto grid max-w-7xl items-center gap-12 px-4 py-20 sm:px-6 lg:grid-cols-2 lg:gap-16 lg:px-8 lg:py-28">
           <div>
             <p className="font-heading text-base tracking-widest text-brand-gray sm:text-lg">
@@ -90,7 +85,10 @@ export default async function Home({
                 )
               })}
             </p>
-            <h1 className="mt-4 font-heading text-4xl leading-[0.95] tracking-wide text-brand-black sm:text-5xl md:text-6xl lg:text-7xl">
+            <h1
+              data-tour="hero"
+              className="mt-4 font-heading text-4xl leading-[0.95] tracking-wide text-brand-black dark:text-white sm:text-5xl md:text-6xl lg:text-7xl"
+            >
               {t('hero.title')}
             </h1>
             <p className="mt-6 max-w-xl text-lg leading-relaxed text-brand-gray">
@@ -107,7 +105,7 @@ export default async function Home({
               </a>
               <Link
                 href="/branslar"
-                className="inline-flex h-12 items-center justify-center rounded-full border-2 border-brand-black px-8 text-base font-semibold text-brand-black transition-colors hover:bg-brand-black hover:text-white"
+                className="inline-flex h-12 items-center justify-center rounded-full border-2 border-brand-black px-8 text-base font-semibold text-brand-black dark:text-white transition-colors hover:bg-brand-black hover:text-white"
               >
                 {t('hero.ctaSecondary')}
               </Link>
@@ -152,10 +150,10 @@ export default async function Home({
       </section>
 
       {/* BRANCHES */}
-      <section className="bg-white">
+      <section className="bg-white dark:bg-zinc-900" data-tour="branches">
         <div className="mx-auto max-w-7xl px-4 py-20 sm:px-6 lg:px-8">
           <div className="text-center">
-            <h2 className="font-heading text-4xl tracking-wider text-brand-black sm:text-5xl">
+            <h2 className="font-heading text-4xl tracking-wider text-brand-black dark:text-white sm:text-5xl">
               {t('branches.title')}
             </h2>
             <p className="mt-3 text-brand-gray">{t('branches.subtitle')}</p>
@@ -165,25 +163,17 @@ export default async function Home({
               <Link
                 key={b.slug}
                 href={`/branslar/${b.slug}`}
-                className="group rounded-2xl border-2 border-brand-border bg-white p-6 transition-all hover:-translate-y-1 hover:border-brand-yellow hover:shadow-lg"
+                className="group rounded-2xl border-2 border-brand-border bg-white dark:bg-zinc-900 p-6 transition-all hover:-translate-y-1 hover:border-brand-yellow hover:shadow-lg active:scale-[0.98] active:border-brand-yellow active:bg-brand-yellow/5"
               >
                 <div className="text-4xl" aria-hidden="true">
                   {b.emoji ?? '🏅'}
                 </div>
-                <h3 className="mt-4 font-heading text-2xl tracking-wider text-brand-black">
+                <h3 className="mt-4 font-heading text-2xl tracking-wider text-brand-black dark:text-white">
                   {b.name}
                 </h3>
                 <p className="mt-2 text-sm text-brand-gray">{b.schedule}</p>
               </Link>
             ))}
-          </div>
-          <div className="mt-12 text-center">
-            <Link
-              href="/branslar"
-              className="inline-flex h-12 items-center justify-center rounded-full border-2 border-brand-black px-8 text-base font-semibold text-brand-black transition-colors hover:bg-brand-black hover:text-white"
-            >
-              {t('branches.cta')}
-            </Link>
           </div>
         </div>
       </section>
@@ -192,7 +182,7 @@ export default async function Home({
       <section className="bg-brand-surface">
         <div className="mx-auto max-w-6xl px-4 py-20 sm:px-6 lg:px-8">
           <div className="text-center">
-            <h2 className="font-heading text-4xl tracking-wider text-brand-black sm:text-5xl">
+            <h2 className="font-heading text-4xl tracking-wider text-brand-black dark:text-white sm:text-5xl">
               {t('why.title')}
             </h2>
             <p className="mx-auto mt-3 max-w-2xl text-brand-gray">
@@ -203,12 +193,12 @@ export default async function Home({
             {WHY_ITEMS.map(({key, Icon}) => (
               <li
                 key={key}
-                className="flex flex-col items-center rounded-2xl border-2 border-brand-border bg-white p-6 text-center transition-colors hover:border-brand-yellow"
+                className="flex flex-col items-center rounded-2xl border-2 border-brand-border bg-white dark:bg-zinc-900 p-6 text-center transition-colors hover:border-brand-yellow"
               >
                 <span className="inline-flex h-14 w-14 items-center justify-center rounded-full bg-brand-yellow text-brand-black">
                   <Icon className="h-7 w-7" />
                 </span>
-                <h3 className="mt-5 font-heading text-xl tracking-wider text-brand-black">
+                <h3 className="mt-5 font-heading text-xl tracking-wider text-brand-black dark:text-white">
                   {t(`why.items.${key}.title`)}
                 </h3>
                 <p className="mt-2 text-sm leading-relaxed text-brand-gray">
@@ -221,24 +211,24 @@ export default async function Home({
       </section>
 
       {/* TRAINERS */}
-      <section className="bg-white">
+      <section className="bg-white dark:bg-zinc-900" data-tour="trainers">
         <div className="mx-auto max-w-6xl px-4 py-20 sm:px-6 lg:px-8">
           <div className="text-center">
-            <h2 className="font-heading text-4xl tracking-wider text-brand-black sm:text-5xl">
+            <h2 className="font-heading text-4xl tracking-wider text-brand-black dark:text-white sm:text-5xl">
               {t('trainers.title')}
             </h2>
             <p className="mt-3 text-brand-gray">{t('trainers.subtitle')}</p>
           </div>
           <div className="mt-12 grid grid-cols-1 gap-6 sm:grid-cols-3 sm:gap-5 lg:gap-8">
             {trainers.map((tr) => {
-              const branchName = branchByTrainerId.get(tr.id);
+              const trainerBranches = branchesByTrainer.get(tr.id) ?? [];
               return (
                 <Link
                   key={tr.id}
                   href={`/egitmenler/${tr.slug}`}
-                  className="group flex flex-col overflow-hidden rounded-2xl border-2 border-brand-border bg-white transition-all hover:-translate-y-1 hover:border-brand-yellow hover:shadow-lg"
+                  className="group flex flex-col overflow-hidden rounded-2xl border-2 border-brand-border bg-white dark:bg-zinc-900 transition-all hover:-translate-y-1 hover:border-brand-yellow hover:shadow-lg active:scale-[0.98] active:border-brand-yellow active:bg-brand-yellow/5"
                 >
-                  <div className="relative aspect-[4/5] w-full overflow-hidden bg-zinc-200">
+                  <div className="relative aspect-[4/5] w-full overflow-hidden bg-zinc-200 dark:bg-zinc-800">
                     {tr.photo ? (
                       <Image
                         src={tr.photo}
@@ -252,23 +242,30 @@ export default async function Home({
                     )}
                   </div>
                   <div className="flex flex-1 flex-col p-5">
-                    <h3 className="font-heading text-xl leading-tight tracking-wider text-brand-black sm:text-2xl">
+                    <h3 className="font-heading text-xl leading-tight tracking-wider text-brand-black dark:text-white sm:text-2xl">
                       {tr.name}
                     </h3>
                     {tr.title && (
                       <p className="mt-1 text-sm text-brand-gray">{tr.title}</p>
                     )}
-                    {branchName && (
-                      <p className="mt-2 inline-flex w-fit items-center rounded-full bg-brand-yellow/15 px-3 py-1 text-xs font-semibold uppercase tracking-widest text-brand-amber">
-                        {branchName}
-                      </p>
+                    {trainerBranches.length > 0 && (
+                      <div className="mt-2 flex flex-wrap gap-1.5">
+                        {trainerBranches.map((b) => (
+                          <span
+                            key={b.slug}
+                            className="inline-flex items-center rounded-full bg-brand-yellow/15 px-3 py-1 text-xs font-semibold uppercase tracking-widest text-brand-amber"
+                          >
+                            {b.name}
+                          </span>
+                        ))}
+                      </div>
                     )}
                     {tr.shortBio && (
                       <p className="mt-3 line-clamp-2 text-sm leading-relaxed text-brand-gray">
                         {tr.shortBio}
                       </p>
                     )}
-                    <span className="mt-auto pt-4 text-sm font-semibold text-brand-black underline-offset-4 group-hover:underline">
+                    <span className="mt-auto pt-4 text-sm font-semibold text-brand-black dark:text-white underline-offset-4 group-hover:underline">
                       {tTrainerLabels('profileLink')} →
                     </span>
                   </div>
@@ -284,7 +281,7 @@ export default async function Home({
         <div className="mx-auto max-w-6xl px-4 py-16 sm:px-6 sm:py-20 lg:px-8">
           <Link
             href="/tesis-turu"
-            className="group grid grid-cols-1 overflow-hidden rounded-3xl border-2 border-brand-border bg-white transition-all hover:-translate-y-1 hover:border-brand-yellow hover:shadow-lg md:grid-cols-2"
+            className="group grid grid-cols-1 overflow-hidden rounded-3xl border-2 border-brand-border bg-white dark:bg-zinc-900 transition-all hover:-translate-y-1 hover:border-brand-yellow hover:shadow-lg active:scale-[0.99] active:border-brand-yellow active:bg-brand-yellow/5 md:grid-cols-2"
           >
             <div className="relative aspect-[4/3] overflow-hidden bg-gradient-to-br from-zinc-200 to-zinc-300 md:aspect-auto md:min-h-[280px]">
               <div className="absolute inset-0 flex items-center justify-center">
@@ -300,7 +297,7 @@ export default async function Home({
               <span className="text-sm font-semibold uppercase tracking-widest text-brand-amber">
                 {t('tour.eyebrow')}
               </span>
-              <h2 className="mt-3 font-heading text-3xl leading-tight tracking-wider text-brand-black sm:text-4xl">
+              <h2 className="mt-3 font-heading text-3xl leading-tight tracking-wider text-brand-black dark:text-white sm:text-4xl">
                 {t('tour.title')}
               </h2>
               <p className="mt-3 text-base leading-relaxed text-brand-gray">
@@ -315,10 +312,10 @@ export default async function Home({
       </section>
 
       {/* FAQ TEASER */}
-      <section className="bg-white">
+      <section className="bg-white dark:bg-zinc-900">
         <div className="mx-auto max-w-3xl px-4 py-20 sm:px-6 lg:px-8">
           <div className="text-center">
-            <h2 className="font-heading text-4xl tracking-wider text-brand-black sm:text-5xl">
+            <h2 className="font-heading text-4xl tracking-wider text-brand-black dark:text-white sm:text-5xl">
               {t('faq.title')}
             </h2>
             <p className="mt-3 text-brand-gray">{t('faq.subtitle')}</p>
@@ -327,9 +324,9 @@ export default async function Home({
             {FAQ_ITEMS.map((key) => (
               <div
                 key={key}
-                className="rounded-2xl border-2 border-brand-border bg-white p-6 transition-colors hover:border-brand-yellow"
+                className="rounded-2xl border-2 border-brand-border bg-white dark:bg-zinc-900 p-6 transition-colors hover:border-brand-yellow"
               >
-                <dt className="font-heading text-lg tracking-wider text-brand-black sm:text-xl">
+                <dt className="font-heading text-lg tracking-wider text-brand-black dark:text-white sm:text-xl">
                   {t(`faq.items.${key}.question`)}
                 </dt>
                 <dd className="mt-2 text-base leading-relaxed text-brand-gray">
@@ -341,7 +338,7 @@ export default async function Home({
           <div className="mt-10 text-center">
             <Link
               href="/sss"
-              className="inline-flex h-12 items-center justify-center rounded-full border-2 border-brand-black px-8 text-base font-semibold text-brand-black transition-colors hover:bg-brand-black hover:text-white"
+              className="inline-flex h-12 items-center justify-center rounded-full border-2 border-brand-black px-8 text-base font-semibold text-brand-black dark:text-white transition-colors hover:bg-brand-black hover:text-white"
             >
               {t('faq.cta')} →
             </Link>
@@ -362,7 +359,7 @@ export default async function Home({
             href={`tel:${contact.phone.tel}`}
             className="mt-6 inline-block font-heading text-3xl tracking-wider text-brand-black transition-opacity hover:opacity-80 sm:text-4xl"
           >
-            {contact.phone.display}
+            {tCommon('callNow')} — {contact.phone.display}
           </a>
           <div className="mt-8">
             <a

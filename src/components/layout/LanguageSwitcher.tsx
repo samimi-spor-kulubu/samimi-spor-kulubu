@@ -33,8 +33,8 @@ export function LanguageSwitcher() {
             disabled={isPending}
             className={
               l === locale
-                ? 'text-brand-black underline underline-offset-4 decoration-2 decoration-brand-yellow'
-                : 'text-zinc-500 hover:text-brand-black transition-colors'
+                ? 'text-brand-black dark:text-white underline underline-offset-4 decoration-2 decoration-brand-yellow'
+                : 'text-zinc-500 dark:text-zinc-400 hover:text-brand-black dark:hover:text-white transition-colors'
             }
           >
             {l.toUpperCase()}

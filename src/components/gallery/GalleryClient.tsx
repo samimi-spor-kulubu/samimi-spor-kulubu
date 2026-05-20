@@ -91,7 +91,7 @@ export function GalleryClient({
 
       {/* Grid */}
       {gridEmptyMessage ? (
-        <p className="mx-auto mt-10 max-w-md rounded-2xl border-2 border-dashed border-brand-border bg-white p-10 text-center text-brand-gray">
+        <p className="mx-auto mt-10 max-w-md rounded-2xl border-2 border-dashed border-brand-border bg-white dark:bg-zinc-900 p-10 text-center text-brand-gray">
           {gridEmptyMessage}
         </p>
       ) : (
@@ -102,7 +102,7 @@ export function GalleryClient({
               type="button"
               onClick={() => setOpenIndex(idx)}
               aria-label={item.title || 'Fotoğraf'}
-              className="group relative aspect-square overflow-hidden rounded-2xl border-2 border-brand-border bg-zinc-200 transition-all duration-300 ease-out hover:-translate-y-0.5 hover:border-brand-yellow hover:shadow-lg focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-yellow"
+              className="group relative aspect-square overflow-hidden rounded-2xl border-2 border-brand-border bg-zinc-200 dark:bg-zinc-800 transition-all duration-300 ease-out hover:-translate-y-0.5 hover:border-brand-yellow hover:shadow-lg active:scale-[0.97] active:border-brand-yellow focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-yellow"
             >
               <PlaceholderOrImage item={item} />
               {item.title && (
@@ -147,7 +147,7 @@ function FilterPill({
         'inline-flex h-10 items-center gap-1.5 rounded-full border-2 px-5 text-sm font-semibold transition-colors ' +
         (active
           ? 'border-brand-black bg-brand-yellow text-brand-black'
-          : 'border-brand-border bg-white text-brand-black hover:border-brand-black')
+          : 'border-brand-border bg-white dark:bg-zinc-900 text-brand-black dark:text-white hover:border-brand-black')
       }
     >
       <span>{children}</span>
@@ -310,7 +310,7 @@ function Lightbox({
             type="button"
             onClick={() => onIndexChange(index - 1)}
             aria-label={tLightbox('prev')}
-            className="absolute left-2 top-1/2 inline-flex h-12 w-12 -translate-y-1/2 items-center justify-center rounded-full bg-white/90 text-2xl font-bold text-brand-black shadow-lg transition-colors hover:bg-white sm:-left-6"
+            className="absolute left-2 top-1/2 inline-flex h-12 w-12 -translate-y-1/2 items-center justify-center rounded-full bg-white/90 text-2xl font-bold text-brand-black dark:text-white shadow-lg transition-colors hover:bg-white dark:bg-zinc-900 sm:-left-6"
           >
             ‹
           </button>
@@ -320,7 +320,7 @@ function Lightbox({
             type="button"
             onClick={() => onIndexChange(index + 1)}
             aria-label={tLightbox('next')}
-            className="absolute right-2 top-1/2 inline-flex h-12 w-12 -translate-y-1/2 items-center justify-center rounded-full bg-white/90 text-2xl font-bold text-brand-black shadow-lg transition-colors hover:bg-white sm:-right-6"
+            className="absolute right-2 top-1/2 inline-flex h-12 w-12 -translate-y-1/2 items-center justify-center rounded-full bg-white/90 text-2xl font-bold text-brand-black dark:text-white shadow-lg transition-colors hover:bg-white dark:bg-zinc-900 sm:-right-6"
           >
             ›
           </button>

@@ -2,7 +2,6 @@ import type {Metadata} from 'next';
 import {getTranslations, setRequestLocale} from 'next-intl/server';
 import {Link} from '@/i18n/navigation';
 import {getContactInfo, whatsAppUrl} from '@/lib/services/contact';
-import {PilatesPrices} from '@/components/branches/PilatesPrices';
 import {pageMetadata} from '@/lib/seo';
 import {getAllBranches} from '@/lib/services/branches';
 
@@ -34,6 +33,7 @@ export default async function BranchesPage({
   const tHero = await getTranslations('Branches.hero');
   const tLabels = await getTranslations('Branches.labels');
   const tCta = await getTranslations('Branches.cta');
+  const tCommon = await getTranslations('Common');
 
   const branches = await getAllBranches(locale);
   const contact = await getContactInfo();
@@ -41,9 +41,9 @@ export default async function BranchesPage({
   return (
     <>
       {/* HEADER */}
-      <section className="bg-white">
+      <section className="bg-white dark:bg-zinc-900">
         <div className="mx-auto max-w-5xl px-4 py-16 text-center sm:px-6 sm:py-20 lg:px-8">
-          <h1 className="font-heading text-4xl tracking-wider text-brand-black sm:text-5xl md:text-6xl lg:text-7xl">
+          <h1 className="font-heading text-4xl tracking-wider text-brand-black dark:text-white sm:text-5xl md:text-6xl lg:text-7xl">
             {tHero('title')}
           </h1>
           <p className="mx-auto mt-4 max-w-2xl text-lg text-brand-gray">
@@ -58,7 +58,7 @@ export default async function BranchesPage({
           {branches.map((b) => (
             <article
               key={b.id}
-              className="overflow-hidden rounded-2xl border-2 border-brand-border bg-white transition-colors hover:border-brand-yellow"
+              className="overflow-hidden rounded-2xl border-2 border-brand-border bg-white dark:bg-zinc-900 transition-colors hover:border-brand-yellow active:border-brand-yellow active:bg-brand-yellow/5"
             >
               <div className="flex flex-col gap-6 p-6 sm:p-8 md:flex-row md:items-start md:gap-8">
                 <div
@@ -70,7 +70,7 @@ export default async function BranchesPage({
 
                 <div className="flex-1">
                   <div className="flex flex-wrap items-center gap-3">
-                    <h2 className="font-heading text-2xl tracking-wider text-brand-black sm:text-3xl">
+                    <h2 className="font-heading text-2xl tracking-wider text-brand-black dark:text-white sm:text-3xl">
                       {b.name}
                     </h2>
                     {b.women_only && (
@@ -93,18 +93,11 @@ export default async function BranchesPage({
 
                 <Link
                   href={`/branslar/${b.slug}`}
-                  className="inline-flex h-11 shrink-0 items-center justify-center self-start rounded-full border-2 border-brand-black px-6 text-sm font-semibold text-brand-black transition-colors hover:bg-brand-black hover:text-white md:self-center"
+                  className="inline-flex h-11 shrink-0 items-center justify-center self-start rounded-full border-2 border-brand-black px-6 text-sm font-semibold text-brand-black dark:text-white transition-colors hover:bg-brand-black hover:text-white md:self-center"
                 >
                   {tLabels('detailLink')} →
                 </Link>
               </div>
-
-              {b.women_only && (
-                <PilatesPrices
-                  className="border-t-2 border-brand-border bg-brand-surface px-6 py-6 sm:px-8"
-                  packages={b.price_info?.packages ?? null}
-                />
-              )}
             </article>
           ))}
         </div>
@@ -123,7 +116,7 @@ export default async function BranchesPage({
             href={`tel:${contact.phone.tel}`}
             className="mt-6 inline-block font-heading text-2xl tracking-wider text-brand-black transition-opacity hover:opacity-80 sm:text-3xl"
           >
-            {contact.phone.display}
+            {tCommon('callNow')} — {contact.phone.display}
           </a>
           <div className="mt-6">
             <a

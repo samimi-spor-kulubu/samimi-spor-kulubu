@@ -73,9 +73,9 @@ export default async function IletisimPage({
   return (
     <>
       {/* HERO */}
-      <section className="bg-white">
+      <section className="bg-white dark:bg-zinc-900">
         <div className="mx-auto max-w-5xl px-4 py-16 text-center sm:px-6 sm:py-20 lg:px-8">
-          <h1 className="font-heading text-4xl tracking-wider text-brand-black sm:text-5xl md:text-6xl lg:text-7xl">
+          <h1 className="font-heading text-4xl tracking-wider text-brand-black dark:text-white sm:text-5xl md:text-6xl lg:text-7xl">
             {tHero('title')}
           </h1>
           <p className="mx-auto mt-4 max-w-2xl text-lg text-brand-gray">
@@ -91,12 +91,12 @@ export default async function IletisimPage({
             {methods.map((m) => (
               <div
                 key={m.key}
-                className="flex flex-col rounded-2xl border-2 border-brand-border bg-white p-6 transition-colors hover:border-brand-yellow sm:p-8"
+                className="flex flex-col rounded-2xl border-2 border-brand-border bg-white dark:bg-zinc-900 p-6 transition-colors hover:border-brand-yellow sm:p-8"
               >
                 <span className="inline-flex h-14 w-14 items-center justify-center rounded-full bg-brand-yellow text-brand-black">
                   {m.icon}
                 </span>
-                <h2 className="mt-5 font-heading text-2xl tracking-wider text-brand-black">
+                <h2 className="mt-5 font-heading text-2xl tracking-wider text-brand-black dark:text-white">
                   {tMethods(`${m.key}.title`)}
                 </h2>
                 <p className="mt-2 font-heading text-xl tracking-wider text-brand-amber">
@@ -114,7 +114,7 @@ export default async function IletisimPage({
                     'mt-6 inline-flex h-11 items-center justify-center rounded-full px-6 text-sm font-semibold transition-colors ' +
                     (m.ctaStyle === 'primary'
                       ? 'bg-brand-yellow text-brand-black hover:bg-brand-yellow-dark'
-                      : 'border-2 border-brand-black text-brand-black hover:bg-brand-black hover:text-white')
+                      : 'border-2 border-brand-black text-brand-black dark:text-white hover:bg-brand-black hover:text-white')
                   }
                 >
                   {tMethods(`${m.key}.cta`)}
@@ -126,9 +126,9 @@ export default async function IletisimPage({
       </section>
 
       {/* LOCATION */}
-      <section className="bg-white">
+      <section className="bg-white dark:bg-zinc-900">
         <div className="mx-auto max-w-6xl px-4 py-16 sm:px-6 sm:py-20 lg:px-8">
-          <h2 className="font-heading text-3xl tracking-wider text-brand-black sm:text-4xl">
+          <h2 className="font-heading text-3xl tracking-wider text-brand-black dark:text-white sm:text-4xl">
             {tLoc('title')}
           </h2>
 
@@ -139,7 +139,7 @@ export default async function IletisimPage({
                 <p className="text-xs font-semibold uppercase tracking-widest text-brand-gray">
                   {tLoc('addressLabel')}
                 </p>
-                <p className="mt-1 text-base font-medium text-brand-black">
+                <p className="mt-1 text-base font-medium text-brand-black dark:text-white">
                   {contact.address.full}
                 </p>
                 <a
@@ -156,10 +156,10 @@ export default async function IletisimPage({
                 <p className="text-xs font-semibold uppercase tracking-widest text-brand-gray">
                   {tLoc('hoursLabel')}
                 </p>
-                <p className="mt-1 text-base text-brand-black">
+                <p className="mt-1 text-base text-brand-black dark:text-white">
                   {contact.hours.days}
                 </p>
-                <p className="text-base font-medium text-brand-black">
+                <p className="text-base font-medium text-brand-black dark:text-white">
                   {contact.hours.weekdays}
                 </p>
               </div>
@@ -192,7 +192,7 @@ export default async function IletisimPage({
       {/* FORM */}
       <section className="bg-brand-surface">
         <div className="mx-auto max-w-3xl px-4 py-16 sm:px-6 sm:py-20 lg:px-8">
-          <h2 className="font-heading text-3xl tracking-wider text-brand-black sm:text-4xl">
+          <h2 className="font-heading text-3xl tracking-wider text-brand-black dark:text-white sm:text-4xl">
             {tForm('title')}
           </h2>
           <p className="mt-3 text-brand-gray">{tForm('subtitle')}</p>

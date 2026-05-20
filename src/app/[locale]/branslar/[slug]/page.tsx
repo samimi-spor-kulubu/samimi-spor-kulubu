@@ -48,6 +48,7 @@ export default async function BranchDetailPage({
   const tDetail = await getTranslations('Branches.detail');
   const tDetailCta = await getTranslations('Branches.detail.cta');
   const tLabels = await getTranslations('Branches.labels');
+  const tCommon = await getTranslations('Common');
   const contact = await getContactInfo();
 
   const schema = serviceJsonLd({
@@ -70,7 +71,7 @@ export default async function BranchDetailPage({
       >
         <ol className="mx-auto flex max-w-6xl items-center gap-2 px-4 py-3 text-sm text-brand-gray sm:px-6 lg:px-8">
           <li>
-            <Link href="/" className="transition-colors hover:text-brand-black">
+            <Link href="/" className="transition-colors hover:text-brand-black dark:hover:text-white">
               {tNav('home')}
             </Link>
           </li>
@@ -78,18 +79,18 @@ export default async function BranchDetailPage({
           <li>
             <Link
               href="/branslar"
-              className="transition-colors hover:text-brand-black"
+              className="transition-colors hover:text-brand-black dark:hover:text-white"
             >
               {tNav('branches')}
             </Link>
           </li>
           <li aria-hidden="true">›</li>
-          <li className="font-medium text-brand-black">{branch.name}</li>
+          <li className="font-medium text-brand-black dark:text-white">{branch.name}</li>
         </ol>
       </nav>
 
       {/* MAIN — two-column */}
-      <section className="bg-white">
+      <section className="bg-white dark:bg-zinc-900">
         <div className="mx-auto grid max-w-6xl items-start gap-10 px-4 py-12 sm:px-6 sm:py-16 md:grid-cols-3 md:gap-12 lg:px-8">
           {/* LEFT */}
           <div className="md:col-span-2">
@@ -105,7 +106,12 @@ export default async function BranchDetailPage({
                 </span>
               )}
             </div>
-            <h1 className="mt-4 font-heading text-4xl leading-[0.95] tracking-wider text-brand-black sm:text-5xl md:text-6xl lg:text-7xl">
+            {branch.slug === 'reformer-pilates' && (
+              <div className="mt-5 inline-flex items-center rounded-full bg-brand-yellow px-5 py-2.5 text-sm font-bold tracking-wide text-brand-black shadow-md sm:text-base">
+                {tDetail('freeTrialBadge')}
+              </div>
+            )}
+            <h1 className="mt-4 font-heading text-4xl leading-[0.95] tracking-wider text-brand-black dark:text-white sm:text-5xl md:text-6xl lg:text-7xl">
               {branch.name.toLocaleUpperCase(locale)}
             </h1>
             {branch.scheduleLong && (
@@ -122,14 +128,14 @@ export default async function BranchDetailPage({
             {/* Features */}
             {branch.features.length > 0 && (
               <div className="mt-10">
-                <h2 className="font-heading text-2xl tracking-wider text-brand-black">
+                <h2 className="font-heading text-2xl tracking-wider text-brand-black dark:text-white">
                   {tDetail('featuresLabel')}
                 </h2>
                 <ul className="mt-4 space-y-3">
                   {branch.features.map((f, i) => (
                     <li
                       key={i}
-                      className="flex items-start gap-3 text-base text-brand-black"
+                      className="flex items-start gap-3 text-base text-brand-black dark:text-white"
                     >
                       <span
                         aria-hidden="true"
@@ -147,7 +153,7 @@ export default async function BranchDetailPage({
             {/* Instructor */}
             {branch.instructor && (
               <div className="mt-10">
-                <h2 className="font-heading text-2xl tracking-wider text-brand-black">
+                <h2 className="font-heading text-2xl tracking-wider text-brand-black dark:text-white">
                   {tDetail('instructorLabel')}
                 </h2>
                 <p className="mt-3 text-base text-brand-gray">
@@ -169,8 +175,8 @@ export default async function BranchDetailPage({
 
           {/* RIGHT — info box */}
           <aside className="md:col-span-1">
-            <div className="rounded-2xl border-2 border-brand-black bg-white p-6 shadow-sm md:sticky md:top-20">
-              <h3 className="font-heading text-xl tracking-wider text-brand-black">
+            <div className="rounded-2xl border-2 border-brand-black bg-white dark:bg-zinc-900 p-6 shadow-sm md:sticky md:top-20">
+              <h3 className="font-heading text-xl tracking-wider text-brand-black dark:text-white">
                 {tDetail('infoBoxTitle')}
               </h3>
 
@@ -179,7 +185,7 @@ export default async function BranchDetailPage({
                   <p className="text-xs font-semibold uppercase tracking-widest text-brand-gray">
                     {tDetail('scheduleLabel')}
                   </p>
-                  <p className="mt-1 text-base font-medium text-brand-black">
+                  <p className="mt-1 text-base font-medium text-brand-black dark:text-white">
                     {branch.scheduleLong}
                   </p>
                 </div>
@@ -190,7 +196,7 @@ export default async function BranchDetailPage({
                   <p className="text-xs font-semibold uppercase tracking-widest text-brand-gray">
                     {tDetail('instructorLabel')}
                   </p>
-                  <p className="mt-1 text-base font-medium text-brand-black">
+                  <p className="mt-1 text-base font-medium text-brand-black dark:text-white">
                     {branch.instructor.name}
                   </p>
                 </div>
@@ -206,9 +212,9 @@ export default async function BranchDetailPage({
               </a>
               <a
                 href={`tel:${contact.phone.tel}`}
-                className="mt-3 block text-center text-sm text-brand-gray transition-colors hover:text-brand-black"
+                className="mt-3 block text-center text-sm text-brand-gray transition-colors hover:text-brand-black dark:hover:text-white"
               >
-                {contact.phone.display}
+                {tCommon('callNow')} — {contact.phone.display}
               </a>
             </div>
           </aside>

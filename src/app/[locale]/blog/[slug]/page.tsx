@@ -81,6 +81,7 @@ export default async function BlogDetailPage({
   const tCard = await getTranslations('Blog.card');
   const tRelated = await getTranslations('Blog.related');
   const tCta = await getTranslations('Blog.cta');
+  const tCommon = await getTranslations('Common');
   const contact = await getContactInfo();
 
   // Related posts: same category first (matched via the canonical
@@ -122,7 +123,7 @@ export default async function BlogDetailPage({
       >
         <ol className="mx-auto flex max-w-4xl items-center gap-2 px-4 py-3 text-sm text-brand-gray sm:px-6 lg:px-8">
           <li>
-            <Link href="/" className="transition-colors hover:text-brand-black">
+            <Link href="/" className="transition-colors hover:text-brand-black dark:hover:text-white">
               {tNav('home')}
             </Link>
           </li>
@@ -130,22 +131,22 @@ export default async function BlogDetailPage({
           <li>
             <Link
               href="/blog"
-              className="transition-colors hover:text-brand-black"
+              className="transition-colors hover:text-brand-black dark:hover:text-white"
             >
               {tNav('blog')}
             </Link>
           </li>
           <li aria-hidden="true">›</li>
-          <li className="line-clamp-1 font-medium text-brand-black">
+          <li className="line-clamp-1 font-medium text-brand-black dark:text-white">
             {post.title}
           </li>
         </ol>
       </nav>
 
       {/* COVER */}
-      <section className="bg-white">
+      <section className="bg-white dark:bg-zinc-900">
         <div className="mx-auto max-w-4xl px-4 pt-10 sm:px-6 lg:px-8">
-          <div className="relative aspect-[16/9] w-full overflow-hidden rounded-2xl bg-zinc-200">
+          <div className="relative aspect-[16/9] w-full overflow-hidden rounded-2xl bg-zinc-200 dark:bg-zinc-800">
             {post.image ? (
               <Image
                 src={post.image}
@@ -170,15 +171,15 @@ export default async function BlogDetailPage({
       </section>
 
       {/* TITLE + META + CONTENT */}
-      <article className="bg-white">
+      <article className="bg-white dark:bg-zinc-900">
         <div className="mx-auto max-w-3xl px-4 py-10 sm:px-6 lg:px-8">
-          <h1 className="font-heading text-4xl leading-tight tracking-wider text-brand-black sm:text-5xl">
+          <h1 className="font-heading text-4xl leading-tight tracking-wider text-brand-black dark:text-white sm:text-5xl">
             {post.title}
           </h1>
           <div className="mt-5 flex flex-wrap items-center gap-x-3 gap-y-1 text-sm text-brand-gray">
             {post.author && (
               <>
-                <span className="font-medium text-brand-black">
+                <span className="font-medium text-brand-black dark:text-white">
                   {post.author}
                 </span>
                 <span aria-hidden="true">·</span>
@@ -207,7 +208,7 @@ export default async function BlogDetailPage({
       {related.length > 0 && (
         <section className="bg-brand-surface">
           <div className="mx-auto max-w-6xl px-4 py-16 sm:px-6 lg:px-8">
-            <h2 className="font-heading text-3xl tracking-wider text-brand-black sm:text-4xl">
+            <h2 className="font-heading text-3xl tracking-wider text-brand-black dark:text-white sm:text-4xl">
               {tRelated('title')}
             </h2>
             <div className="mt-8 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
@@ -215,9 +216,9 @@ export default async function BlogDetailPage({
                 <Link
                   key={p.slug}
                   href={`/blog/${p.slug}`}
-                  className="group flex flex-col overflow-hidden rounded-2xl border-2 border-brand-border bg-white transition-all hover:-translate-y-1 hover:border-brand-yellow hover:shadow-lg"
+                  className="group flex flex-col overflow-hidden rounded-2xl border-2 border-brand-border bg-white dark:bg-zinc-900 transition-all hover:-translate-y-1 hover:border-brand-yellow hover:shadow-lg active:scale-[0.98] active:border-brand-yellow active:bg-brand-yellow/5"
                 >
-                  <div className="relative aspect-[16/10] w-full overflow-hidden bg-zinc-200">
+                  <div className="relative aspect-[16/10] w-full overflow-hidden bg-zinc-200 dark:bg-zinc-800">
                     {p.image ? (
                       <Image
                         src={p.image}
@@ -238,7 +239,7 @@ export default async function BlogDetailPage({
                     </span>
                   </div>
                   <div className="flex flex-1 flex-col p-5">
-                    <h3 className="font-heading text-lg tracking-wider text-brand-black">
+                    <h3 className="font-heading text-lg tracking-wider text-brand-black dark:text-white">
                       {p.title}
                     </h3>
                     <p className="mt-2 line-clamp-2 text-sm text-brand-gray">
@@ -269,7 +270,7 @@ export default async function BlogDetailPage({
             href={`tel:${contact.phone.tel}`}
             className="mt-6 inline-block font-heading text-2xl tracking-wider text-brand-black transition-opacity hover:opacity-80 sm:text-3xl"
           >
-            {contact.phone.display}
+            {tCommon('callNow')} — {contact.phone.display}
           </a>
           <div className="mt-6">
             <a

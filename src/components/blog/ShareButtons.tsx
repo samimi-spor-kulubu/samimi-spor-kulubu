@@ -30,7 +30,7 @@ export function ShareButtons({url, title}: ShareButtonsProps) {
 
   return (
     <div className="mt-10 flex flex-wrap items-center gap-3 border-t border-brand-border pt-8">
-      <span className="mr-2 font-heading text-sm tracking-wider text-brand-black uppercase sm:text-base">
+      <span className="mr-2 font-heading text-sm tracking-wider text-brand-black dark:text-white uppercase sm:text-base">
         {t('title')}
       </span>
       <a
@@ -38,7 +38,7 @@ export function ShareButtons({url, title}: ShareButtonsProps) {
         target="_blank"
         rel="noopener noreferrer"
         aria-label={t('whatsapp')}
-        className="inline-flex h-10 items-center justify-center gap-2 rounded-full border-2 border-brand-border bg-white px-4 text-sm font-semibold text-brand-black transition-colors hover:border-brand-yellow hover:bg-brand-yellow"
+        className="inline-flex h-10 items-center justify-center gap-2 rounded-full border-2 border-brand-border bg-white dark:bg-zinc-900 px-4 text-sm font-semibold text-brand-black transition-colors hover:border-brand-yellow hover:bg-brand-yellow"
       >
         <WhatsAppGlyph className="h-4 w-4" />
         <span>WhatsApp</span>
@@ -48,7 +48,7 @@ export function ShareButtons({url, title}: ShareButtonsProps) {
         target="_blank"
         rel="noopener noreferrer"
         aria-label={t('twitter')}
-        className="inline-flex h-10 items-center justify-center gap-2 rounded-full border-2 border-brand-border bg-white px-4 text-sm font-semibold text-brand-black transition-colors hover:border-brand-yellow hover:bg-brand-yellow"
+        className="inline-flex h-10 items-center justify-center gap-2 rounded-full border-2 border-brand-border bg-white dark:bg-zinc-900 px-4 text-sm font-semibold text-brand-black transition-colors hover:border-brand-yellow hover:bg-brand-yellow"
       >
         <XGlyph className="h-4 w-4" />
         <span>X</span>
@@ -58,7 +58,7 @@ export function ShareButtons({url, title}: ShareButtonsProps) {
         onClick={handleCopy}
         aria-label={t('copy')}
         aria-live="polite"
-        className="inline-flex h-10 items-center justify-center gap-2 rounded-full border-2 border-brand-border bg-white px-4 text-sm font-semibold text-brand-black transition-colors hover:border-brand-yellow hover:bg-brand-yellow"
+        className="inline-flex h-10 items-center justify-center gap-2 rounded-full border-2 border-brand-border bg-white dark:bg-zinc-900 px-4 text-sm font-semibold text-brand-black transition-colors hover:border-brand-yellow hover:bg-brand-yellow"
       >
         <LinkGlyph className="h-4 w-4" />
         <span>{copied ? t('copied') : t('copy')}</span>

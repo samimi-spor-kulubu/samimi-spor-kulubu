@@ -4,6 +4,14 @@
     "tagline": "Ankara Yenimahalle'de Taekwondo, Boks, Okçuluk, Jimnastik ve Reformer Pilates.",
     "seoDescription": "Ankara Yenimahalle Demet'te Taekwondo, Boks & Kick Boks, Geleneksel Okçuluk, Çocuk Jimnastiği ve Reformer Pilates. WhatsApp'tan deneme seansı ayır."
   },
+  "Common": {
+    "callNow": "Hemen Ara"
+  },
+  "Theme": {
+    "toggle": "Tema değiştir",
+    "toLight": "Açık moda geç",
+    "toDark": "Karanlık moda geç"
+  },
   "Nav": {
     "home": "Ana Sayfa",
     "branches": "Branşlar",
@@ -141,6 +149,7 @@
       "featuresLabel": "Öne çıkan özellikler",
       "infoBoxTitle": "Bu Branşa Katıl",
       "bookButton": "WhatsApp'tan Yazın",
+      "freeTrialBadge": "✨ İlk Deneme Seansı ÜCRETSİZ",
       "cta": {
         "title": "Hemen başlamaya hazır mısın?",
         "description": "WhatsApp'tan yaz, sana en uygun gün ve saati birlikte belirleyelim.",
@@ -306,7 +315,7 @@
       "pl-1": {"title": "Reformer pilates seansı"},
       "pl-2": {"title": "Pilates grup dersi"},
       "fc-1": {"title": "Salon görünümü"},
-      "fc-2": {"title": "Soyunma odaları"}
+      "fc-2": {"title": "Giyinme odaları"}
     }
   },
   "Blog": {
@@ -501,15 +510,48 @@
         "text": "Bayanlarımıza özel reformer pilates stüdyosu. Profesyonel reformer makineleri, ferah ortam."
       },
       "locker": {
-        "title": "SOYUNMA ODALARI",
+        "title": "GİYİNME ODALARI",
         "subtitle": "Konforlu ve Kişisel",
-        "text": "Konforlu soyunma odaları, kişisel dolaplar."
+        "text": "Konforlu giyinme odaları, kişisel dolaplar."
       }
     },
     "cta": {
       "title": "Tesisi Yerinde Gör",
       "description": "Randevu al, gel — tesisi birlikte gezelim, sorularını yanıtlayalım.",
       "button": "WhatsApp'tan Yazın"
+    },
+    "onboarding": {
+      "next": "Sonraki",
+      "prev": "Geri",
+      "done": "Tamamla",
+      "progress": "{{current}} / {{total}}",
+      "replay": "Site turunu tekrar göster",
+      "steps": {
+        "hero": {
+          "title": "Samimi Spor Kulübü'ne hoş geldiniz",
+          "description": "Ankara Yenimahalle Demet'te 5 farklı branşta dersler veriyoruz. Kısa bir tur atalım mı?"
+        },
+        "branches": {
+          "title": "5 branşımız",
+          "description": "Tekvando, Boks & Kick Boks, Geleneksel Okçuluk, Çocuk Jimnastiği ve Reformer Pilates. Hepsini buradan keşfedebilirsiniz."
+        },
+        "trainers": {
+          "title": "Eğitmenlerimiz",
+          "description": "Profesyonel eğitmenlerimizin profilleri burada — özgeçmiş, branşlar ve sertifikalar."
+        },
+        "whatsapp": {
+          "title": "WhatsApp ile hızlı iletişim",
+          "description": "Ücretsiz deneme seansı, fiyat ve müsaitlik için anında bize ulaşın."
+        },
+        "faq": {
+          "title": "SSS — Sıkça Sorulan Sorular",
+          "description": "Aklınızdaki sorulara hızlı cevaplar — üyelik, ödeme, salonumuz hakkında her şey."
+        },
+        "theme": {
+          "title": "Karanlık mod",
+          "description": "Bu düğmeyle açık/karanlık temayı değiştirebilirsiniz. Tercihiniz hatırlanır."
+        }
+      }
     }
   },
   "Faq": {

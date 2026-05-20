@@ -2,6 +2,7 @@ import {useTranslations} from 'next-intl';
 import {Link} from '@/i18n/navigation';
 import {InstagramIcon} from '@/components/icons';
 import type {ContactInfo} from '@/lib/services/contact';
+import {TourReplayLink} from '@/components/tour/SiteTour';
 
 const QUICK_LINKS = [
   {href: '/branslar', tKey: 'branches'},
@@ -17,6 +18,8 @@ export function Footer({contact}: {contact: ContactInfo}) {
   const t = useTranslations('Footer');
   const tNav = useTranslations('Nav');
   const tSite = useTranslations('Site');
+  const tCommon = useTranslations('Common');
+  const tTour = useTranslations('Tour.onboarding');
   const year = new Date().getFullYear();
 
   return (
@@ -51,6 +54,7 @@ export function Footer({contact}: {contact: ContactInfo}) {
                 <li key={href}>
                   <Link
                     href={href}
+                    data-tour={href === '/sss' ? 'faq-link' : undefined}
                     className="text-zinc-300 hover:text-white transition-colors"
                   >
                     {tNav(tKey)}
@@ -70,7 +74,7 @@ export function Footer({contact}: {contact: ContactInfo}) {
                   href={`tel:${contact.phone.tel}`}
                   className="hover:text-white transition-colors"
                 >
-                  {contact.phone.display}
+                  {tCommon('callNow')} — {contact.phone.display}
                 </a>
               </li>
               <li>
@@ -99,6 +103,8 @@ export function Footer({contact}: {contact: ContactInfo}) {
 
         <div className="mt-12 border-t border-white/10 pt-6 text-center text-xs text-zinc-400">
           {t('copyright', {year})} · {tSite('name')}
+          <span aria-hidden="true" className="mx-2">·</span>
+          <TourReplayLink label={tTour('replay')} />
         </div>
       </div>
     </footer>

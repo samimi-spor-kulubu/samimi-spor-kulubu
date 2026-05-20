@@ -36,6 +36,7 @@ export default async function SssPage({
   setRequestLocale(locale);
   const tHero = await getTranslations('Faq.hero');
   const tCta = await getTranslations('Faq.cta');
+  const tCommon = await getTranslations('Common');
 
   const faqs = await getAllFaqs(locale);
   const contact = await getContactInfo();
@@ -68,9 +69,9 @@ export default async function SssPage({
   return (
     <>
       {/* HERO */}
-      <section className="bg-white">
+      <section className="bg-white dark:bg-zinc-900">
         <div className="mx-auto max-w-5xl px-4 py-16 text-center sm:px-6 sm:py-20 lg:px-8">
-          <h1 className="font-heading text-4xl tracking-wider text-brand-black sm:text-5xl md:text-6xl lg:text-7xl">
+          <h1 className="font-heading text-4xl tracking-wider text-brand-black dark:text-white sm:text-5xl md:text-6xl lg:text-7xl">
             {tHero('title')}
           </h1>
           <p className="mx-auto mt-4 max-w-2xl text-lg text-brand-gray">
@@ -99,7 +100,7 @@ export default async function SssPage({
             href={`tel:${contact.phone.tel}`}
             className="mt-6 inline-block font-heading text-2xl tracking-wider text-brand-black transition-opacity hover:opacity-80 sm:text-3xl"
           >
-            {contact.phone.display}
+            {tCommon('callNow')} — {contact.phone.display}
           </a>
           <div className="mt-6">
             <a

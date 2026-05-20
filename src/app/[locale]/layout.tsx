@@ -7,6 +7,8 @@ import {routing} from '@/i18n/routing';
 import {Navbar} from '@/components/layout/Navbar';
 import {Footer} from '@/components/layout/Footer';
 import {JsonLd} from '@/components/JsonLd';
+import {ThemeProvider} from '@/components/theme/ThemeProvider';
+import {SiteTour} from '@/components/tour/SiteTour';
 import {organizationJsonLd, pageMetadata, SITE_URL} from '@/lib/seo';
 import {getContactInfo, whatsAppUrl} from '@/lib/services/contact';
 import {getAllBranches} from '@/lib/services/branches';
@@ -73,18 +75,22 @@ export default async function LocaleLayout({
     <html
       lang={locale}
       className={`${barlow.variable} ${bebasNeue.variable} h-full antialiased`}
+      suppressHydrationWarning
     >
-      <body className="min-h-full flex flex-col">
-        <NextIntlClientProvider>
-          <a href="#main" className="skip-link">
-            {tNav('skipToContent')}
-          </a>
-          <Navbar whatsappUrl={navWhatsappUrl} />
-          <main id="main" className="flex flex-1 flex-col">
-            {children}
-          </main>
-          <Footer contact={contactInfo} />
-        </NextIntlClientProvider>
+      <body className="min-h-full flex flex-col bg-background text-foreground">
+        <ThemeProvider>
+          <NextIntlClientProvider>
+            <a href="#main" className="skip-link">
+              {tNav('skipToContent')}
+            </a>
+            <Navbar whatsappUrl={navWhatsappUrl} />
+            <main id="main" className="flex flex-1 flex-col">
+              {children}
+            </main>
+            <Footer contact={contactInfo} />
+            <SiteTour />
+          </NextIntlClientProvider>
+        </ThemeProvider>
         <JsonLd
           id="ld-organization"
           data={organizationJsonLd(locale, contactInfo, {

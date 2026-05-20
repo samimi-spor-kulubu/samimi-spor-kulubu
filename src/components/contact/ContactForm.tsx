@@ -113,7 +113,7 @@ function FormBody({
     <form
       action={formAction}
       noValidate
-      className="scroll-mt-24 rounded-2xl border-2 border-brand-border bg-white p-6 sm:p-8"
+      className="scroll-mt-24 rounded-2xl border-2 border-brand-border bg-white dark:bg-zinc-900 p-6 sm:p-8"
     >
       <input type="hidden" name="locale" value={locale} />
 
@@ -256,7 +256,7 @@ function SuccessCard({
       ref={cardRef}
       role="status"
       aria-live="polite"
-      className="scroll-mt-24 rounded-2xl border-2 border-brand-yellow bg-white p-8 text-center sm:p-10"
+      className="scroll-mt-24 rounded-2xl border-2 border-brand-yellow bg-white dark:bg-zinc-900 p-8 text-center sm:p-10"
     >
       <div
         aria-hidden="true"
@@ -264,14 +264,14 @@ function SuccessCard({
       >
         ✓
       </div>
-      <h3 className="mt-5 font-heading text-2xl tracking-wider text-brand-black">
+      <h3 className="mt-5 font-heading text-2xl tracking-wider text-brand-black dark:text-white">
         {title}
       </h3>
       <p className="mt-3 text-base leading-relaxed text-brand-gray">{text}</p>
       <button
         type="button"
         onClick={onAction}
-        className="mt-6 inline-flex h-11 items-center justify-center rounded-full border-2 border-brand-black px-6 text-sm font-semibold text-brand-black transition-colors hover:bg-brand-black hover:text-white"
+        className="mt-6 inline-flex h-11 items-center justify-center rounded-full border-2 border-brand-black px-6 text-sm font-semibold text-brand-black dark:text-white transition-colors hover:bg-brand-black hover:text-white"
       >
         {actionLabel}
       </button>
@@ -321,7 +321,7 @@ function Field({
 }) {
   return (
     <label className="block">
-      <span className="flex items-center justify-between text-sm font-semibold text-brand-black">
+      <span className="flex items-center justify-between text-sm font-semibold text-brand-black dark:text-white">
         <span>
           {label}{' '}
           {required && (
@@ -348,7 +348,7 @@ function Field({
 
 function inputClass(hasError: boolean) {
   return (
-    'w-full rounded-xl border-2 bg-white px-4 py-2.5 text-base text-brand-black placeholder:text-zinc-400 transition-colors focus:outline-none ' +
+    'w-full rounded-xl border-2 bg-white dark:bg-zinc-900 px-4 py-2.5 text-base text-brand-black dark:text-white placeholder:text-zinc-400 transition-colors focus:outline-none ' +
     (hasError
       ? 'border-red-500 focus:border-red-500'
       : 'border-brand-border focus:border-brand-yellow')

@@ -28,7 +28,7 @@ export async function PilatesPrices({
 
   return (
     <div className={className}>
-      <HeadingTag className="font-heading text-lg tracking-wider text-brand-black">
+      <HeadingTag className="font-heading text-lg tracking-wider text-brand-black dark:text-white">
         {t('title')}
       </HeadingTag>
       <div className="mt-4 overflow-x-auto">
@@ -47,7 +47,7 @@ export async function PilatesPrices({
           <tbody className="divide-y divide-brand-border">
             {rows.map((p) => (
               <tr key={p.key}>
-                <td className="py-3 font-medium text-brand-black">
+                <td className="py-3 font-medium text-brand-black dark:text-white">
                   {/* Try messages first (group4/group3/group2/individual),
                       fall back to the raw key for admin-added entries. */}
                   {t.has(`packages.${p.key}`)

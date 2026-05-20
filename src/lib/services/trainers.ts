@@ -128,3 +128,63 @@ export async function getBranchesForTrainer(
       slug: b.slug
     }));
 }
+
+/** All trainer_branches rows joined to active branches, grouped per
+ *  trainer. Lets list pages render every trainer's full branch set in
+ *  one round-trip instead of N. */
+export async function getBranchesByTrainer(
+  locale: string
+): Promise<Map<string, {name: string; slug: string}[]>> {
+  const supabase = createPublicClient();
+  const {data, error} = await supabase
+    .from('trainer_branches')
+    .select(
+      'trainer_id, branches!inner(slug, name_tr, name_en, order_index, active)'
+    )
+    .eq('branches.active', true);
+
+  if (error) {
+    console.error('[trainers.getBranchesByTrainer]', error);
+    return new Map();
+  }
+  if (!data) return new Map();
+
+  type Row = {
+    trainer_id: string;
+    branches: {
+      slug: string;
+      name_tr: string;
+      name_en: string | null;
+      order_index: number;
+      active: boolean;
+    } | null;
+  };
+
+  const grouped = new Map<
+    string,
+    {name: string; slug: string; order_index: number}[]
+  >();
+  for (const row of data as unknown as Row[]) {
+    if (!row.branches) continue;
+    const list = grouped.get(row.trainer_id) ?? [];
+    list.push({
+      name:
+        (locale === 'en' ? row.branches.name_en : row.branches.name_tr) ??
+        row.branches.name_tr,
+      slug: row.branches.slug,
+      order_index: row.branches.order_index
+    });
+    grouped.set(row.trainer_id, list);
+  }
+
+  const out = new Map<string, {name: string; slug: string}[]>();
+  for (const [id, list] of grouped.entries()) {
+    out.set(
+      id,
+      list
+        .sort((a, b) => a.order_index - b.order_index)
+        .map(({name, slug}) => ({name, slug}))
+    );
+  }
+  return out;
+}

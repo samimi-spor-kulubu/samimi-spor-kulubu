@@ -11,8 +11,8 @@ const buttonVariants = cva(
         default:
           'bg-brand-yellow text-brand-black hover:bg-brand-yellow-dark',
         outline:
-          'border-2 border-brand-black text-brand-black hover:bg-brand-black hover:text-white',
-        ghost: 'text-brand-black hover:bg-brand-surface',
+          'border-2 border-brand-black text-brand-black dark:text-white hover:bg-brand-black hover:text-white',
+        ghost: 'text-brand-black dark:text-white hover:bg-brand-surface',
         dark:
           'bg-brand-black text-white hover:bg-zinc-800'
       },

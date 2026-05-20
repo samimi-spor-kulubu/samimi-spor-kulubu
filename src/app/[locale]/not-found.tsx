@@ -27,11 +27,11 @@ export default async function NotFound() {
 
   return (
     <main className="flex min-h-[70vh] items-center justify-center bg-brand-surface px-4 py-20">
-      <div className="mx-auto max-w-md rounded-2xl border-2 border-brand-border bg-white p-8 text-center sm:p-10">
+      <div className="mx-auto max-w-md rounded-2xl border-2 border-brand-border bg-white dark:bg-zinc-900 p-8 text-center sm:p-10">
         <p className="font-heading text-7xl tracking-wider text-brand-amber">
           404
         </p>
-        <h1 className="mt-4 font-heading text-3xl tracking-wider text-brand-black">
+        <h1 className="mt-4 font-heading text-3xl tracking-wider text-brand-black dark:text-white">
           {title}
         </h1>
         <p className="mt-3 text-base leading-relaxed text-brand-gray">
