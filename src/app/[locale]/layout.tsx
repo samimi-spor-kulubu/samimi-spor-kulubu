@@ -6,7 +6,6 @@ import {notFound} from 'next/navigation';
 import {routing} from '@/i18n/routing';
 import {Navbar} from '@/components/layout/Navbar';
 import {Footer} from '@/components/layout/Footer';
-import {ScrollToTopOnNavigate} from '@/components/layout/ScrollToTopOnNavigate';
 import {JsonLd} from '@/components/JsonLd';
 import {ThemeProvider} from '@/components/theme/ThemeProvider';
 import {SiteTour} from '@/components/tour/SiteTour';
@@ -81,7 +80,6 @@ export default async function LocaleLayout({
       <body className="min-h-full flex flex-col bg-background text-foreground">
         <ThemeProvider>
           <NextIntlClientProvider>
-            <ScrollToTopOnNavigate />
             <a href="#main" className="skip-link">
               {tNav('skipToContent')}
             </a>

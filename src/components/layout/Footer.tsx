@@ -1,6 +1,6 @@
 import {useTranslations} from 'next-intl';
-import {Link} from '@/i18n/navigation';
 import {InstagramIcon} from '@/components/icons';
+import {SmoothScrollLink} from '@/components/common/SmoothScrollLink';
 import type {ContactInfo} from '@/lib/services/contact';
 import {TourReplayLink} from '@/components/tour/SiteTour';
 
@@ -52,13 +52,13 @@ export function Footer({contact}: {contact: ContactInfo}) {
             <ul className="mt-4 space-y-2 text-sm">
               {QUICK_LINKS.map(({href, tKey}) => (
                 <li key={href}>
-                  <Link
+                  <SmoothScrollLink
                     href={href}
                     data-tour={href === '/sss' ? 'faq-link' : undefined}
                     className="text-zinc-300 hover:text-white transition-colors"
                   >
                     {tNav(tKey)}
-                  </Link>
+                  </SmoothScrollLink>
                 </li>
               ))}
             </ul>

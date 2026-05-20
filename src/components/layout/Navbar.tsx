@@ -2,8 +2,8 @@
 
 import {useEffect, useRef, useState} from 'react';
 import {useTranslations} from 'next-intl';
-import {Link} from '@/i18n/navigation';
 import {CloseIcon, MenuIcon} from '@/components/icons';
+import {SmoothScrollLink} from '@/components/common/SmoothScrollLink';
 import {LanguageSwitcher} from './LanguageSwitcher';
 import {ThemeToggle} from '@/components/theme/ThemeToggle';
 
@@ -19,12 +19,12 @@ const NAV_LINKS = [
 
 function Logo() {
   return (
-    <Link
+    <SmoothScrollLink
       href="/"
       className="font-heading text-2xl tracking-wider text-brand-black dark:text-white"
     >
       SAMİMİ <span className="text-brand-yellow">SPOR</span> KULÜBÜ
-    </Link>
+    </SmoothScrollLink>
   );
 }
 
@@ -102,13 +102,13 @@ export function Navbar({whatsappUrl}: {whatsappUrl: string}) {
 
         <nav className="hidden items-center gap-7 lg:flex">
           {NAV_LINKS.map(({href, tKey}) => (
-            <Link
+            <SmoothScrollLink
               key={href}
               href={href}
               className="text-sm font-medium text-brand-black/80 hover:text-brand-amber transition-colors dark:text-white/80 dark:hover:text-brand-yellow"
             >
               {t(tKey)}
-            </Link>
+            </SmoothScrollLink>
           ))}
         </nav>
 
@@ -156,14 +156,14 @@ export function Navbar({whatsappUrl}: {whatsappUrl: string}) {
         >
           <nav className="mx-auto flex max-w-7xl flex-col gap-1 px-4 py-4 sm:px-6">
             {NAV_LINKS.map(({href, tKey}) => (
-              <Link
+              <SmoothScrollLink
                 key={href}
                 href={href}
                 onClick={handleNavLinkClick}
                 className="rounded-md px-3 py-2 text-base font-medium text-brand-black hover:bg-brand-surface dark:text-white dark:hover:bg-zinc-800"
               >
                 {t(tKey)}
-              </Link>
+              </SmoothScrollLink>
             ))}
             <div className="mt-3 flex items-center justify-between border-t border-brand-border pt-4">
               <LanguageSwitcher />
