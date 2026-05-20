@@ -124,7 +124,8 @@
     },
     "labels": {
       "detailLink": "Detay",
-      "womenOnly": "Bayanlara özel"
+      "womenOnly": "Bayanlara özel",
+      "firstClassFree": "İlk Ders Ücretsiz"
     },
     "prices": {
       "title": "Paket Fiyatları (8 Seans)",

@@ -124,7 +124,8 @@
     },
     "labels": {
       "detailLink": "Details",
-      "womenOnly": "Women only"
+      "womenOnly": "Women only",
+      "firstClassFree": "First Class Free"
     },
     "prices": {
       "title": "Package Prices (8 Sessions)",

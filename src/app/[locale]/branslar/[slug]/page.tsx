@@ -106,11 +106,6 @@ export default async function BranchDetailPage({
                 </span>
               )}
             </div>
-            {branch.slug === 'reformer-pilates' && (
-              <div className="mt-5 inline-flex items-center rounded-full bg-brand-yellow px-5 py-2.5 text-sm font-bold tracking-wide text-brand-black shadow-md sm:text-base">
-                {tDetail('freeTrialBadge')}
-              </div>
-            )}
             <h1 className="mt-4 font-heading text-4xl leading-[0.95] tracking-wider text-brand-black dark:text-white sm:text-5xl md:text-6xl lg:text-7xl">
               {branch.name.toLocaleUpperCase(locale)}
             </h1>
@@ -165,11 +160,20 @@ export default async function BranchDetailPage({
 
             {/* Pilates prices */}
             {branch.women_only && (
-              <PilatesPrices
-                as="h2"
-                className="mt-10 rounded-2xl border-2 border-brand-border bg-brand-surface p-6 sm:p-8"
-                packages={branch.price_info?.packages ?? null}
-              />
+              <div className="mt-10 overflow-hidden rounded-2xl border-2 border-brand-border bg-brand-surface">
+                {branch.slug === 'reformer-pilates' && (
+                  <div className="flex justify-center bg-brand-yellow px-6 py-3 shadow-sm">
+                    <span className="text-center text-sm font-bold tracking-wide text-brand-black sm:text-base">
+                      {tDetail('freeTrialBadge')}
+                    </span>
+                  </div>
+                )}
+                <PilatesPrices
+                  as="h2"
+                  className="p-6 sm:p-8"
+                  packages={branch.price_info?.packages ?? null}
+                />
+              </div>
             )}
           </div>
 

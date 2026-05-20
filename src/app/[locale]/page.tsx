@@ -8,6 +8,10 @@ import {getContactInfo, whatsAppUrl} from '@/lib/services/contact';
 import {getAllTrainers, getBranchesByTrainer} from '@/lib/services/trainers';
 import {TrainerPhotoPlaceholder} from '@/components/trainers/TrainerPhotoPlaceholder';
 import {
+  HomeFaqAccordion,
+  type HomeFaqItem
+} from '@/components/faq/HomeFaqAccordion';
+import {
   AwardIcon,
   ClockIcon,
   HeartIcon,
@@ -320,21 +324,13 @@ export default async function Home({
             </h2>
             <p className="mt-3 text-brand-gray">{t('faq.subtitle')}</p>
           </div>
-          <dl className="mt-10 space-y-4">
-            {FAQ_ITEMS.map((key) => (
-              <div
-                key={key}
-                className="rounded-2xl border-2 border-brand-border bg-white dark:bg-zinc-900 p-6 transition-colors hover:border-brand-yellow"
-              >
-                <dt className="font-heading text-lg tracking-wider text-brand-black dark:text-white sm:text-xl">
-                  {t(`faq.items.${key}.question`)}
-                </dt>
-                <dd className="mt-2 text-base leading-relaxed text-brand-gray">
-                  {t(`faq.items.${key}.answer`)}
-                </dd>
-              </div>
-            ))}
-          </dl>
+          <HomeFaqAccordion
+            items={FAQ_ITEMS.map<HomeFaqItem>((key) => ({
+              id: key,
+              question: t(`faq.items.${key}.question`),
+              answer: t(`faq.items.${key}.answer`)
+            }))}
+          />
           <div className="mt-10 text-center">
             <Link
               href="/sss"

@@ -24,6 +24,7 @@ export async function TrainerDetail({
 
   const tNav = await getTranslations('Nav');
   const tDetail = await getTranslations('Trainers.detail');
+  const tCommon = await getTranslations('Common');
   const contact = await getContactInfo();
   const reservationWaUrl = whatsAppUrl(contact, locale);
 
@@ -125,6 +126,12 @@ export async function TrainerDetail({
                 className="mt-4 inline-flex h-12 w-full items-center justify-center rounded-full bg-brand-yellow px-6 text-sm font-semibold text-brand-black transition-colors hover:bg-brand-yellow-dark"
               >
                 {tDetail('bookButton')}
+              </a>
+              <a
+                href={`tel:${contact.phone.tel}`}
+                className="mt-3 inline-flex h-12 w-full items-center justify-center rounded-full border-2 border-brand-black px-6 text-sm font-semibold text-brand-black dark:border-white dark:text-white transition-colors hover:bg-brand-black hover:text-white dark:hover:bg-white dark:hover:text-brand-black"
+              >
+                {tCommon('callNow')} — {contact.phone.display}
               </a>
             </div>
           </aside>

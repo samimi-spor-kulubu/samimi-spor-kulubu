@@ -78,6 +78,11 @@ export default async function BranchesPage({
                         {tLabels('womenOnly')}
                       </span>
                     )}
+                    {b.slug === 'reformer-pilates' && (
+                      <span className="inline-flex items-center rounded-full bg-brand-yellow px-3 py-1 text-xs font-semibold uppercase tracking-wider text-brand-black">
+                        ✨ {tLabels('firstClassFree')}
+                      </span>
+                    )}
                   </div>
                   {b.schedule && (
                     <p className="mt-2 text-sm font-medium text-brand-amber">
