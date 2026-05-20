@@ -32,9 +32,13 @@ export function absoluteUrl(path: string): string {
   return `${SITE_URL}${clean === '/' ? '' : clean}`;
 }
 
-export function buildAlternates(path: string) {
+export function buildAlternates(path: string, locale: string = DEFAULT_LOCALE) {
   return {
-    canonical: absoluteUrl(localePath(path, DEFAULT_LOCALE)),
+    // Canonical points at the *current* locale's URL — each language
+    // version is its own canonical, with hreflang declaring the
+    // alternatives. Pointing every locale's canonical at TR caused
+    // Google to drop the EN pages from the index.
+    canonical: absoluteUrl(localePath(path, locale)),
     languages: {
       tr: absoluteUrl(localePath(path, 'tr')),
       en: absoluteUrl(localePath(path, 'en')),
@@ -67,7 +71,7 @@ export function pageMetadata({
   return {
     title: fullTitle,
     description,
-    alternates: buildAlternates(path),
+    alternates: buildAlternates(path, locale),
     openGraph: {
       title: fullTitle,
       description,
