@@ -40,6 +40,12 @@ export const BLOG_CATEGORIES: ReadonlyArray<BlogCategoryDef> = [
     aliases: ['training']
   },
   {
+    slug: 'okculuk',
+    label_tr: 'Okçuluk',
+    label_en: 'Archery',
+    aliases: []
+  },
+  {
     slug: 'genel',
     label_tr: 'Genel',
     label_en: 'General',
