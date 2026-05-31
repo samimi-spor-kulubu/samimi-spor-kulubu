@@ -55,6 +55,19 @@ export function BlogClient({
     return posts.filter((p) => set.has(p.category));
   }, [filter, posts, matchersBySlug]);
 
+  // Post count per category slug (handles legacy aliases via matchers).
+  const countBySlug = useMemo(() => {
+    const map = new Map<string, number>();
+    for (const c of categories) {
+      const set = matchersBySlug.get(c.slug);
+      map.set(
+        c.slug,
+        set ? posts.filter((p) => set.has(p.category)).length : 0
+      );
+    }
+    return map;
+  }, [categories, posts, matchersBySlug]);
+
   const totalPages = Math.max(1, Math.ceil(filtered.length / POSTS_PER_PAGE));
   const currentPage = Math.min(page, totalPages);
   const start = (currentPage - 1) * POSTS_PER_PAGE;
@@ -73,7 +86,7 @@ export function BlogClient({
           active={filter === 'all'}
           onClick={() => setFilterAndReset('all')}
         >
-          {tFilter('all')}
+          {tFilter('all')} ({posts.length})
         </FilterPill>
         {categories.map((c) => (
           <FilterPill
@@ -81,7 +94,7 @@ export function BlogClient({
             active={filter === c.slug}
             onClick={() => setFilterAndReset(c.slug)}
           >
-            {c.label}
+            {c.label} ({countBySlug.get(c.slug) ?? 0})
           </FilterPill>
         ))}
       </div>
