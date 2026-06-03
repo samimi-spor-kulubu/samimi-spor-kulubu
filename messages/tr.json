@@ -1,0 +1,593 @@
+{
+  "Site": {
+    "name": "Samimi Spor Kulübü",
+    "tagline": "Ankara Yenimahalle'de Taekwondo, Boks, Okçuluk, Jimnastik ve Reformer Pilates.",
+    "seoDescription": "Ankara Yenimahalle Demet'te Taekwondo, Boks & Kick Boks, Geleneksel Okçuluk, Çocuk Jimnastiği ve Reformer Pilates. WhatsApp'tan deneme seansı ayır."
+  },
+  "Common": {
+    "callNow": "Hemen Ara"
+  },
+  "Theme": {
+    "toggle": "Tema değiştir",
+    "toLight": "Açık moda geç",
+    "toDark": "Karanlık moda geç"
+  },
+  "Nav": {
+    "home": "Ana Sayfa",
+    "branches": "Branşlar",
+    "trainers": "Eğitmenler",
+    "gallery": "Galeri",
+    "blog": "Blog",
+    "about": "Hakkımızda",
+    "contact": "İletişim",
+    "faq": "SSS",
+    "tour": "Tesis Turu",
+    "whatsapp": "WhatsApp'tan Yazın",
+    "openMenu": "Menüyü aç",
+    "closeMenu": "Menüyü kapat",
+    "skipToContent": "İçeriğe atla"
+  },
+  "NotFound": {
+    "title": "SAYFA BULUNAMADI",
+    "description": "Aradığınız sayfa kaldırılmış veya hiç var olmamış olabilir. Aşağıdan ana sayfaya dönebilirsiniz.",
+    "cta": "Ana Sayfaya Dön"
+  },
+  "Home": {
+    "seoDescription": "Ankara Yenimahalle Demet'te Taekwondo, Boks & Kick Boks, Geleneksel Okçuluk, Çocuk Jimnastiği ve Reformer Pilates. WhatsApp'tan deneme seansı ayır.",
+    "hero": {
+      "subtitle": "Samimi <yellow>SPOR</yellow> Kulübü",
+      "title": "HAREKET ET, GÜÇLEN, KAZAN",
+      "description": "Ankara Yenimahalle Demet'te 5 branş, deneyimli eğitmenler ve samimi bir topluluk seni bekliyor.",
+      "ctaPrimary": "Seansınızı Ayırtın",
+      "ctaSecondary": "Branşları Keşfedin"
+    },
+    "stats": {
+      "branchesValue": "5",
+      "branchesLabel": "Branş",
+      "hoursPrefix": "Her gün",
+      "hoursValue": "12:00 - 23:00",
+      "hoursLabel": "saatleri arası açık",
+      "whatsappValue": "7/24",
+      "whatsappLabel": "WhatsApp"
+    },
+    "branches": {
+      "title": "Branşlarımız",
+      "subtitle": "Sana uygun branşı seç, hemen başla.",
+      "cta": "Tüm Branşlar"
+    },
+    "trainers": {
+      "title": "Eğitmenlerimiz",
+      "subtitle": "Alanında uzman, samimi ekibimiz."
+    },
+    "cta": {
+      "title": "Seansını Ayırt — WhatsApp'tan Ulaş",
+      "description": "Sorularını cevaplayalım, sana uygun planı birlikte belirleyelim.",
+      "button": "WhatsApp'tan Yazın"
+    },
+    "tour": {
+      "eyebrow": "Tesisimizi Tanı",
+      "title": "ANTRENMAN YAPACAĞIN YERİ GÖR",
+      "description": "Dövüş sanatları salonundan reformer stüdyosuna, okçuluk alanından çocuk jimnastiği bölümüne — kısa bir tesis turuna çık.",
+      "button": "Tesis Turu"
+    },
+    "why": {
+      "title": "Neden Samimi Spor Kulübü?",
+      "subtitle": "Ailece güvenle gelebileceğin, samimi bir spor topluluğu.",
+      "items": {
+        "community": {
+          "title": "Samimi Topluluk",
+          "text": "Üyelerimizi isimleriyle tanır, ailece güvenli bir ortam sunarız."
+        },
+        "trainers": {
+          "title": "Uzman Eğitmenler",
+          "text": "Fizyoterapist ve sertifikalı antrenörlerle alanında deneyimli kadro."
+        },
+        "variety": {
+          "title": "5 Farklı Branş",
+          "text": "Taekwondo, Boks, Okçuluk, Jimnastik ve Reformer Pilates — tek tesiste."
+        },
+        "location": {
+          "title": "Yenimahalle Demet'te",
+          "text": "Ankara'nın merkezinde, kolay ulaşılabilir bir konumda."
+        },
+        "hours": {
+          "title": "Geniş Saatler",
+          "text": "Hafta içi ve hafta sonu 12:00–23:00 arası açık."
+        }
+      }
+    },
+    "faq": {
+      "title": "Sıkça Sorulan Sorular",
+      "subtitle": "Merak ettiklerinin kısa cevapları.",
+      "items": {
+        "beginner": {
+          "question": "Daha önce hiç spor yapmadım, başlayabilir miyim?",
+          "answer": "Elbette. Tüm branşlarımız her seviyeye uygundur. Eğitmenlerimiz seviyene göre programı düzenler."
+        },
+        "pilatesWomen": {
+          "question": "Reformer pilates sadece bayanlara mı özeldir?",
+          "answer": "Evet, reformer pilates derslerimiz bayanlarımıza özeldir ve fizyoterapist eşliğinde yapılır."
+        },
+        "ageGroups": {
+          "question": "Hangi yaş gruplarına hizmet veriyorsunuz?",
+          "answer": "Çocuk jimnastiği 4–14 yaş arasıdır. Diğer branşlar her yaşa uygundur."
+        }
+      },
+      "cta": "Tüm Soruları Görün"
+    }
+  },
+  "Branches": {
+    "seoDescription": "Ankara spor kulübü Samimi'de 5 branş: Taekwondo, Boks & Kick Boks, Geleneksel Okçuluk, Çocuk Jimnastiği, Reformer Pilates. Programları gör, deneme seansı ayır.",
+    "hero": {
+      "title": "BRANŞLARIMIZ",
+      "subtitle": "Her seviyeye uygun, uzman eğitmenlerle 5 branş."
+    },
+    "labels": {
+      "detailLink": "Detay",
+      "womenOnly": "Bayanlara özel",
+      "firstClassFree": "İlk Ders Ücretsiz"
+    },
+    "prices": {
+      "title": "Paket Fiyatları (8 Seans)",
+      "package": "Paket",
+      "campaign": "Kampanyalı",
+      "normal": "Normal",
+      "packages": {
+        "group4": "4 Kişilik Grup",
+        "group3": "3 Kişilik Grup",
+        "group2": "2 Kişilik Grup",
+        "individual": "Bireysel"
+      }
+    },
+    "cta": {
+      "title": "Sana en uygun branşı birlikte seçelim.",
+      "description": "WhatsApp'tan yaz, deneme seansını planlayalım.",
+      "button": "WhatsApp'tan Yazın"
+    },
+    "detail": {
+      "scheduleLabel": "Program",
+      "instructorLabel": "Eğitmen",
+      "featuresLabel": "Öne çıkan özellikler",
+      "infoBoxTitle": "Bu Branşa Katıl",
+      "bookButton": "WhatsApp'tan Yazın",
+      "freeTrialBadge": "✨ İlk Deneme Seansı ÜCRETSİZ",
+      "cta": {
+        "title": "Hemen başlamaya hazır mısın?",
+        "description": "WhatsApp'tan yaz, sana en uygun gün ve saati birlikte belirleyelim.",
+        "button": "WhatsApp'tan Yazın"
+      }
+    },
+    "items": {
+      "taekwondo": {
+        "name": "Taekwondo",
+        "schedule": "Pzt / Çrş / Cum · 18:00 – 19:30",
+        "scheduleLong": "Pazartesi / Çarşamba / Cuma · 18:00 – 19:30",
+        "seoDescription": "Taekwondo Ankara — Samimi Spor Kulübü Yenimahalle Demet'te çocuk ve yetişkin gruplarıyla disiplin, denge ve özgüven antrenmanı. Pzt/Çrş/Cum 18:00–19:30.",
+        "description": "Disiplin, denge ve özgüven kazandıran köklü bir Kore dövüş sanatı. Çocuk ve yetişkin grupları.",
+        "longDescription": "Kore'nin milli dövüş sanatı. Disiplin, özgüven ve refleks geliştirme. Her yaş ve seviyeye uygun.",
+        "instructor": "Esat Mahmut Akın",
+        "features": [
+          "Her yaşa uygun",
+          "Disiplin ve özgüven",
+          "Öz savunma teknikleri"
+        ]
+      },
+      "boxing": {
+        "name": "Boks & Kick Boks",
+        "schedule": "Pzt / Çrş / Cum · 19:30 – 21:00",
+        "scheduleLong": "Pazartesi / Çarşamba / Cuma · 19:30 – 21:00",
+        "seoDescription": "Boks ve kick boks Ankara — Samimi Spor Kulübü'nde kondisyon, refleks ve öz savunma antrenmanı. Pzt/Çrş/Cum 19:30–21:00. WhatsApp'tan deneme dersi ayır.",
+        "description": "Yüksek tempolu, kondisyon ve refleks geliştiren karma antrenman.",
+        "longDescription": "Kondisyon, güç ve öz savunma bir arada. Hem yeni başlayanlar hem deneyimliler için.",
+        "instructor": "",
+        "features": ["Yoğun kondisyon", "Öz savunma", "Her seviyeye uygun"]
+      },
+      "archery": {
+        "name": "Geleneksel Okçuluk",
+        "schedule": "Sal / Per · 16:30 – 17:30",
+        "scheduleLong": "Salı / Perşembe · 16:30 – 17:30",
+        "seoDescription": "Geleneksel okçuluk Ankara — tirendaz tekniğiyle odaklanma, postür ve nefes çalışması. Sal/Per 16:30–17:30. Tüm ekipman tesiste, deneme dersi için yaz.",
+        "description": "Geleneksel tirendaz tekniğiyle odaklanma, postür ve nefes çalışması.",
+        "longDescription": "Türk okçuluk geleneğini yaşat. Konsantrasyon, sabır ve teknik gelişim.",
+        "instructor": "",
+        "features": [
+          "Geleneksel Türk okçuluğu",
+          "Konsantrasyon gelişimi",
+          "Tüm ekipman sağlanır"
+        ]
+      },
+      "gymnastics": {
+        "name": "Çocuk Jimnastiği",
+        "schedule": "Per 17:30 · Cmt 14:00 (45 dk)",
+        "scheduleLong": "Perşembe 17:30 · Cumartesi 14:00 (45 dakika)",
+        "seoDescription": "Çocuk jimnastiği Ankara Yenimahalle — 4–14 yaş için denge, esneklik ve motor gelişim. Per 17:30 ve Cmt 14:00, 45 dakika. WhatsApp'tan kayıt yaptır.",
+        "description": "4–14 yaş çocuklar için temel jimnastik becerileri, denge ve esneklik.",
+        "longDescription": "Çocukların motor gelişimini destekleyen eğlenceli jimnastik dersleri.",
+        "instructor": "",
+        "features": ["4–14 yaş", "Motor gelişim", "Eğlenceli ortam"]
+      },
+      "pilates": {
+        "name": "Reformer Pilates",
+        "schedule": "Sal / Per / Cmt / Paz · 12:00 – 23:00",
+        "scheduleLong": "Salı / Perşembe / Cumartesi / Pazar · 12:00 – 23:00",
+        "seoDescription": "Reformer Pilates Ankara (bayanlara özel) — Fizyoterapist Beyza Erdaş ile 8 seanslık paketler. Sal/Per/Cmt/Paz 12:00–23:00. Kampanyalı fiyatlarla başla.",
+        "description": "Bayanlara özel, 8 seanslık paketlerle reformer üzerinde tam vücut çalışması.",
+        "longDescription": "Fizyoterapist Beyza Erdaş eşliğinde reformer pilates. 8 seanslık paketler, haftada 2 seans.",
+        "instructor": "Beyza Erdaş (Fizyoterapist)",
+        "features": [
+          "Bayanlara özel",
+          "Fizyoterapist eğitmen",
+          "Küçük gruplar"
+        ]
+      }
+    }
+  },
+  "Trainers": {
+    "seoDescription": "Samimi Spor Kulübü eğitmenleri: Fizyoterapist Beyza Erdaş (Reformer Pilates) ve Esat Mahmut Akın (Taekwondo). Sertifikalı kadromuzla tanış, randevu al.",
+    "hero": {
+      "title": "EĞİTMENLERİMİZ",
+      "subtitle": "Alanında uzman, deneyimli kadromuz."
+    },
+    "labels": {
+      "profileLink": "Profili İncele"
+    },
+    "cta": {
+      "title": "Bir branşa karar ver, eğitmenle tanış.",
+      "description": "WhatsApp'tan yaz, sana uygun planı birlikte belirleyelim.",
+      "button": "WhatsApp'tan Yazın"
+    },
+    "detail": {
+      "aboutLabel": "Hakkında",
+      "certificatesLabel": "Sertifikalar",
+      "expertiseLabel": "Uzmanlık alanları",
+      "branchLabel": "Verdiği branş",
+      "branchesLabel": "Verdiği branşlar",
+      "branchLink": "Branş sayfasına git",
+      "bookButton": "WhatsApp'tan Yazın"
+    },
+    "items": {
+      "beyza": {
+        "name": "Beyza Erdaş",
+        "title": "Fizyoterapist · Reformer Pilates",
+        "shortBio": "Dokuz Eylül Üniversitesi Fizik Tedavi ve Rehabilitasyon mezunu.",
+        "seoDescription": "Fizyoterapist Beyza Erdaş — Reformer Pilates Ankara eğitmeni. DEÜ mezunu, manuel terapi ve pilates uzmanı. Bayanlara özel seansını WhatsApp'tan ayır.",
+        "about": [
+          "Dokuz Eylül Üniversitesi Fizik Tedavi ve Rehabilitasyon mezunu (2024).",
+          "G Therapy Ankara'da sporcu fizyoterapistliği, pilates ve manuel terapi pratikleri yürüttü.",
+          "2025'ten itibaren aynı kurumda müdür olarak görev yapıyor."
+        ],
+        "certificates": [
+          "MPT — Manuel-Manipülatif Fizik Tedavi",
+          "Hacamat ve Kupa Masajı"
+        ],
+        "expertise": [
+          "Manuel terapi",
+          "Kinezyo bantlama",
+          "Pilates",
+          "Kuru iğneleme"
+        ]
+      },
+      "esat": {
+        "name": "Esat Mahmut Akın",
+        "title": "Taekwondo Eğitmeni",
+        "shortBio": "Taekwondo branşının deneyimli eğitmeni.",
+        "seoDescription": "Esat Mahmut Akın — Samimi Spor Kulübü Taekwondo Ankara eğitmeni. Çocuk ve yetişkin grupları, Pzt/Çrş/Cum 18:00. Deneme dersi için WhatsApp'tan yaz.",
+        "about": [
+          "Taekwondo eğitmenimiz. Detaylı bilgiler yakında eklenecek."
+        ],
+        "certificates": [],
+        "expertise": []
+      }
+    }
+  },
+  "Gallery": {
+    "seoDescription": "Samimi Spor Kulübü galerisi — Ankara Yenimahalle Demet salonumuzdan kareler. Taekwondo, boks, okçuluk, jimnastik ve Reformer Pilates antrenmanları.",
+    "hero": {
+      "title": "GALERİ",
+      "subtitle": "Tesisimizden kareler."
+    },
+    "filter": {
+      "all": "Tümü",
+      "noResults": "Bu kategoride henüz fotoğraf yok."
+    },
+    "lightbox": {
+      "close": "Kapat",
+      "prev": "Önceki",
+      "next": "Sonraki",
+      "imageCounter": "{current} / {total}"
+    },
+    "categories": {
+      "taekwondo": "Taekwondo",
+      "boxing": "Boks & Kick Boks",
+      "archery": "Okçuluk",
+      "gymnastics": "Jimnastik",
+      "pilates": "Reformer Pilates",
+      "facility": "Tesis"
+    },
+    "items": {
+      "tw-1": {"title": "Taekwondo antrenmanı"},
+      "tw-2": {"title": "Taekwondo gösterisi"},
+      "bx-1": {"title": "Boks antrenmanı"},
+      "bx-2": {"title": "Kick boks dersi"},
+      "ar-1": {"title": "Geleneksel okçuluk"},
+      "ar-2": {"title": "Okçuluk konsantrasyonu"},
+      "gy-1": {"title": "Çocuk jimnastiği"},
+      "gy-2": {"title": "Denge çalışması"},
+      "pl-1": {"title": "Reformer pilates seansı"},
+      "pl-2": {"title": "Pilates grup dersi"},
+      "fc-1": {"title": "Salon görünümü"},
+      "fc-2": {"title": "Giyinme odaları"}
+    }
+  },
+  "Blog": {
+    "seoDescription": "Samimi Spor Kulübü blog — antrenman, beslenme, Reformer Pilates ve dövüş sanatları üzerine pratik yazılar. Sağlıklı yaşam için Ankara'dan ipuçları.",
+    "hero": {
+      "title": "BLOG",
+      "subtitle": "Sağlık, antrenman ve spor üzerine yazılar."
+    },
+    "filter": {
+      "all": "Tümü",
+      "noResults": "Bu kategoride henüz yazı yok."
+    },
+    "card": {
+      "readMore": "Devamını oku",
+      "readTime": "{minutes} dk okuma",
+      "byAuthor": "Yazar"
+    },
+    "pagination": {
+      "prev": "Önceki",
+      "next": "Sonraki",
+      "pageOf": "Sayfa {current} / {total}"
+    },
+    "related": {
+      "title": "İlgili Yazılar"
+    },
+    "share": {
+      "title": "Bu yazıyı paylaş",
+      "whatsapp": "WhatsApp'ta paylaş",
+      "twitter": "X'te paylaş",
+      "copy": "Bağlantıyı kopyala",
+      "copied": "Bağlantı kopyalandı"
+    },
+    "cta": {
+      "title": "Sorularını WhatsApp'tan sor.",
+      "description": "Antrenman, beslenme veya branş seçimi — birlikte konuşalım.",
+      "button": "WhatsApp'tan Yazın"
+    },
+    "categories": {
+      "training": "Antrenman",
+      "nutrition": "Beslenme",
+      "pilates": "Pilates",
+      "martial-arts": "Dövüş Sanatları",
+      "kids-sports": "Çocuk Sporu",
+      "general": "Genel"
+    }
+  },
+  "About": {
+    "seoDescription": "Ankara Yenimahalle Demet'te samimi bir spor topluluğu. 5 branş, sertifikalı eğitmenler, ailece güvenli ortam. Hikayemizi okuyun, gelip tanışın.",
+    "hero": {
+      "title": "HAKKIMIZDA",
+      "subtitle": "Samimi Spor Kulübü"
+    },
+    "story": {
+      "title": "KURULUŞ HİKAYEMİZ",
+      "paragraphs": [
+        "Samimi Spor Kulübü 2024 yılında kuruldu, 2025 yılında faaliyete geçti. Spora gönül vermiş şampiyon hocalar tarafından, genç nesillere spor kültürünü aşılamak amacıyla açıldı."
+      ]
+    },
+    "values": {
+      "title": "DEĞERLERİMİZ",
+      "subtitle": "Bizi biz yapan üç temel.",
+      "items": {
+        "samimiyet": {
+          "title": "SAMİMİYET",
+          "subtitle": "Numara değil — gerçek ilgi",
+          "text": "Kulübümüzün ismi gibi, işimizi samimi bir şekilde yapıyoruz. Her sporcumuza, her aileye, her çocuğa içtenlikle yaklaşıyoruz. Numara değil — gerçek ilgi."
+        },
+        "ahlak": {
+          "title": "EVRENSEL AHLAKİ DEĞERLER",
+          "subtitle": "Disiplin, saygı, dürüstlük",
+          "text": "Disiplin, saygı, dürüstlük ve karşılıklı güven. Spor sadece beden gelişimi değil — karakter inşasıdır. Sporcularımıza bu değerleri yaşayarak öğretmeyi hedefliyoruz."
+        },
+        "guvenli": {
+          "title": "GÜVENİLİR VE NEZİH ORTAM",
+          "subtitle": "Aileler ve bayanlar için güvenli",
+          "text": "Ailelerin çocuklarını rahatlıkla emanet edebileceği, bayanlarımızın kendini güvende hissedeceği nezih bir işletmeyiz. Şampiyon hocalarımız, modern tesisimiz ve titiz hijyenimizle hizmetinizdeyiz."
+        }
+      },
+      "expand": "Detayı aç",
+      "collapse": "Kapat"
+    },
+    "location": {
+      "title": "BİZE NASIL ULAŞABİLİRSİNİZ?",
+      "addressLabel": "Adres",
+      "phoneLabel": "Telefon",
+      "whatsappLabel": "WhatsApp",
+      "hoursLabel": "Çalışma Saatleri",
+      "mapsCta": "Haritada Göster",
+      "mapTitle": "Samimi Spor Kulübü konumu"
+    },
+    "cta": {
+      "title": "Tanışmaya Gel",
+      "description": "Tesisi gez, sorularını sor, deneme seansını birlikte planlayalım.",
+      "button": "WhatsApp'tan Yazın"
+    }
+  },
+  "Contact": {
+    "seoDescription": "Samimi Spor Kulübü Ankara — 0533 559 47 97. Sami Efendi Cd. No:31/9, Yenimahalle Demet. WhatsApp, telefon ve form ile hızlı iletişim. Açık 12:00–23:00.",
+    "hero": {
+      "title": "İLETİŞİM",
+      "subtitle": "Sorularınız için lütfen bize WhatsApp'tan ulaşın."
+    },
+    "methods": {
+      "whatsapp": {
+        "title": "WhatsApp'tan Yazın",
+        "description": "7/24 mesaj gönderebilirsiniz.",
+        "cta": "Mesaj Gönderin"
+      },
+      "phone": {
+        "title": "Bizi Arayın",
+        "description": "En hızlı iletişim.",
+        "cta": "Hemen Arayın"
+      },
+      "instagram": {
+        "title": "Instagram",
+        "description": "Tesisten kareler ve haftalık programlar.",
+        "cta": "Profili İncele"
+      }
+    },
+    "location": {
+      "title": "BİZE NASIL GELİRSİNİZ?",
+      "addressLabel": "Adres",
+      "hoursLabel": "Çalışma Saatleri",
+      "transportLabel": "Ulaşım",
+      "transportText": "Demet bölgesinde, Sami Efendi Caddesi üzerinde. Yakın çevrede otopark mevcut; toplu taşımayla Yenimahalle merkezden kısa mesafede.",
+      "mapsCta": "Yol Tarifi Al",
+      "mapTitle": "Samimi Spor Kulübü konumu"
+    },
+    "form": {
+      "title": "MESAJ GÖNDERİN",
+      "subtitle": "Form doldurarak da bize ulaşabilirsiniz.",
+      "fields": {
+        "name": "Ad Soyad",
+        "phone": "Telefon",
+        "email": "E-posta",
+        "subject": "Konu",
+        "message": "Mesaj",
+        "namePlaceholder": "Adınız ve soyadınız",
+        "phonePlaceholder": "05XX XXX XX XX",
+        "emailPlaceholder": "ornek@mail.com",
+        "messagePlaceholder": "Mesajınızı buraya yazın..."
+      },
+      "subjects": {
+        "general": "Genel Bilgi",
+        "reservation": "Rezervasyon",
+        "branch": "Branş Bilgisi",
+        "other": "Diğer"
+      },
+      "optional": "Opsiyonel",
+      "submit": "Mesajı Gönderin",
+      "sending": "Gönderiliyor…",
+      "successTitle": "Mesajınız iletildi.",
+      "successText": "En kısa sürede dönüş yapacağız. Acil durumlarda WhatsApp'tan ulaşabilirsin.",
+      "successAction": "Yeni mesaj gönder",
+      "errorTitle": "Bir sorun oluştu.",
+      "errorBanner": "Bir sorun oluştu, lütfen tekrar deneyin veya WhatsApp'tan yazın.",
+      "errorBannerCta": "WhatsApp'tan yazın",
+      "errorRequired": "Bu alan zorunlu.",
+      "errorEmail": "Geçerli bir e-posta gir."
+    }
+  },
+  "Tour": {
+    "seoDescription": "Samimi Spor Kulübü tesis turu — Ankara Yenimahalle Demet salonumuzu gör. Dövüş sanatları alanı, Reformer Pilates stüdyosu ve geleneksel okçuluk alanı.",
+    "hero": {
+      "title": "TESİS TURU",
+      "subtitle": "Antrenman yapacağın yeri tanı."
+    },
+    "video": {
+      "title": "Tesisimize hoş geldin",
+      "placeholder": "Video yakında eklenecek",
+      "caption": "Salonumuzun kısa bir gezintisi."
+    },
+    "sections": {
+      "main-hall": {
+        "title": "ANA SALON",
+        "subtitle": "Dövüş Sanatları Alanı",
+        "text": "Taekwondo, boks ve kick boks derslerimiz için özel zemin ve donanım. Geniş alan, yüksek tavan, profesyonel ekipman."
+      },
+      "archery": {
+        "title": "OKÇULUK ALANI",
+        "subtitle": "Geleneksel Türk Okçuluğu",
+        "text": "Geleneksel Türk okçuluğu için özel olarak tasarlanmış güvenli atış alanı. Tüm ekipman tesisimizde mevcut."
+      },
+      "gymnastics": {
+        "title": "ÇOCUK JİMNASTİĞİ ALANI",
+        "subtitle": "4–14 Yaş İçin Güvenli Ortam",
+        "text": "4–14 yaş arası çocuklarımız için güvenli, renkli ve eğlenceli jimnastik alanı. Mat, halat, denge aletleri."
+      },
+      "pilates": {
+        "title": "REFORMER PILATES STÜDYOSU",
+        "subtitle": "Bayanlara Özel",
+        "text": "Bayanlarımıza özel reformer pilates stüdyosu. Profesyonel reformer makineleri, ferah ortam."
+      },
+      "locker": {
+        "title": "GİYİNME ODALARI",
+        "subtitle": "Konforlu ve Kişisel",
+        "text": "Konforlu giyinme odaları, kişisel dolaplar."
+      }
+    },
+    "cta": {
+      "title": "Tesisi Yerinde Gör",
+      "description": "Randevu al, gel — tesisi birlikte gezelim, sorularını yanıtlayalım.",
+      "button": "WhatsApp'tan Yazın"
+    },
+    "onboarding": {
+      "next": "Sonraki",
+      "prev": "Geri",
+      "done": "Tamamla",
+      "progress": "{{current}} / {{total}}",
+      "replay": "Site turunu tekrar göster",
+      "steps": {
+        "hero": {
+          "title": "Samimi Spor Kulübü'ne hoş geldiniz",
+          "description": "Ankara Yenimahalle Demet'te 5 farklı branşta dersler veriyoruz. Kısa bir tur atalım mı?"
+        },
+        "branches": {
+          "title": "5 branşımız",
+          "description": "Tekvando, Boks & Kick Boks, Geleneksel Okçuluk, Çocuk Jimnastiği ve Reformer Pilates. Hepsini buradan keşfedebilirsiniz."
+        },
+        "trainers": {
+          "title": "Eğitmenlerimiz",
+          "description": "Profesyonel eğitmenlerimizin profilleri burada — özgeçmiş, branşlar ve sertifikalar."
+        },
+        "whatsapp": {
+          "title": "WhatsApp ile hızlı iletişim",
+          "description": "Ücretsiz deneme seansı, fiyat ve müsaitlik için anında bize ulaşın."
+        },
+        "faq": {
+          "title": "SSS — Sıkça Sorulan Sorular",
+          "description": "Aklınızdaki sorulara hızlı cevaplar — üyelik, ödeme, salonumuz hakkında her şey."
+        },
+        "theme": {
+          "title": "Karanlık mod",
+          "description": "Bu düğmeyle açık/karanlık temayı değiştirebilirsiniz. Tercihiniz hatırlanır."
+        }
+      }
+    }
+  },
+  "Faq": {
+    "seoDescription": "Samimi Spor Kulübü Ankara SSS: üyelik, deneme dersi, Reformer Pilates fiyatları, ekipman ve tesis hakkında merak ettiklerinin cevapları burada.",
+    "hero": {
+      "title": "SIKÇA SORULAN SORULAR",
+      "subtitle": "Merak ettiklerinin cevapları burada."
+    },
+    "filter": {
+      "all": "Tümü",
+      "noResults": "Bu kategoride soru yok."
+    },
+    "accordion": {
+      "expand": "Aç",
+      "collapse": "Kapat"
+    },
+    "cta": {
+      "title": "Sorun cevaplanmadı mı?",
+      "description": "WhatsApp'tan yazsana — anında yardımcı olalım.",
+      "button": "WhatsApp'tan Yazın"
+    },
+    "categories": {
+      "membership": "Üyelik",
+      "classes": "Branşlar",
+      "facility": "Tesis",
+      "pilates": "Reformer Pilates",
+      "payment": "Ödeme"
+    }
+  },
+  "Footer": {
+    "tagline": "Ankara Yenimahalle Demet'te samimi bir spor topluluğu. 5 branş, deneyimli eğitmenler, ailece güvenli ortam.",
+    "quickLinks": "Hızlı Linkler",
+    "contactTitle": "İletişim",
+    "hoursTitle": "Çalışma Saatleri",
+    "followUs": "Bizi takip et",
+    "copyright": "© {year} Samimi Spor Kulübü. Tüm hakları saklıdır."
+  }
+}

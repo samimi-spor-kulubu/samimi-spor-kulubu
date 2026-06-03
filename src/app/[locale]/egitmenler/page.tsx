@@ -1,0 +1,143 @@
+import type {Metadata} from 'next';
+import Image from 'next/image';
+import {getTranslations, setRequestLocale} from 'next-intl/server';
+import {Link} from '@/i18n/navigation';
+import {getContactInfo, whatsAppUrl} from '@/lib/services/contact';
+import {pageMetadata} from '@/lib/seo';
+import {getAllTrainers, getBranchesByTrainer} from '@/lib/services/trainers';
+import {TrainerPhotoPlaceholder} from '@/components/trainers/TrainerPhotoPlaceholder';
+
+export const revalidate = 60;
+
+export async function generateMetadata({
+  params
+}: {
+  params: Promise<{locale: string}>;
+}): Promise<Metadata> {
+  const {locale} = await params;
+  const tHero = await getTranslations({locale, namespace: 'Trainers.hero'});
+  const t = await getTranslations({locale, namespace: 'Trainers'});
+  return pageMetadata({
+    locale,
+    path: '/egitmenler',
+    title: tHero('title'),
+    description: t('seoDescription')
+  });
+}
+
+export default async function TrainersPage({
+  params
+}: {
+  params: Promise<{locale: string}>;
+}) {
+  const {locale} = await params;
+  setRequestLocale(locale);
+  const tHero = await getTranslations('Trainers.hero');
+  const tLabels = await getTranslations('Trainers.labels');
+  const tCta = await getTranslations('Trainers.cta');
+  const tCommon = await getTranslations('Common');
+
+  const [trainers, branchesByTrainer, contact] = await Promise.all([
+    getAllTrainers(locale),
+    getBranchesByTrainer(locale),
+    getContactInfo()
+  ]);
+
+  return (
+    <>
+      {/* HEADER */}
+      <section className="bg-white dark:bg-zinc-900">
+        <div className="mx-auto max-w-5xl px-4 py-16 text-center sm:px-6 sm:py-20 lg:px-8">
+          <h1 className="font-heading text-4xl tracking-wider text-brand-black dark:text-white sm:text-5xl md:text-6xl lg:text-7xl">
+            {tHero('title')}
+          </h1>
+          <p className="mx-auto mt-4 max-w-2xl text-lg text-brand-gray">
+            {tHero('subtitle')}
+          </p>
+        </div>
+      </section>
+
+      {/* TRAINER CARDS */}
+      <section className="bg-brand-surface">
+        <div className="mx-auto grid max-w-5xl gap-8 px-4 py-12 sm:px-6 sm:py-16 md:grid-cols-2 lg:px-8">
+          {trainers.map((t, idx) => {
+            const trainerBranches = branchesByTrainer.get(t.id) ?? [];
+            return (
+              <Link
+                key={t.id}
+                href={`/egitmenler/${t.slug}`}
+                className="group overflow-hidden rounded-2xl border-2 border-brand-border bg-white dark:bg-zinc-900 transition-all hover:-translate-y-1 hover:border-brand-yellow hover:shadow-lg active:scale-[0.98] active:border-brand-yellow active:bg-brand-yellow/5"
+              >
+                <div className="relative h-96 w-full overflow-hidden bg-zinc-200 dark:bg-zinc-800">
+                  {t.photo ? (
+                    <Image
+                      src={t.photo}
+                      alt={t.name}
+                      fill
+                      priority={idx === 0}
+                      sizes="(max-width: 768px) 100vw, 50vw"
+                      className="object-cover object-center transition-transform duration-300 group-hover:scale-105"
+                    />
+                  ) : (
+                    <TrainerPhotoPlaceholder label={t.name} />
+                  )}
+                </div>
+                <div className="p-6">
+                  <h2 className="font-heading text-2xl tracking-wider text-brand-black dark:text-white">
+                    {t.name}
+                  </h2>
+                  {t.title && (
+                    <p className="mt-1 text-sm text-brand-gray">{t.title}</p>
+                  )}
+                  {trainerBranches.length > 0 && (
+                    <div className="mt-3 flex flex-wrap gap-1.5">
+                      {trainerBranches.map((b) => (
+                        <span
+                          key={b.slug}
+                          className="inline-flex items-center rounded-full bg-brand-yellow/15 px-3 py-1 text-xs font-semibold uppercase tracking-widest text-brand-amber"
+                        >
+                          {b.name}
+                        </span>
+                      ))}
+                    </div>
+                  )}
+                  <span className="mt-5 inline-flex h-11 items-center justify-center rounded-full border-2 border-brand-black px-6 text-sm font-semibold text-brand-black dark:text-white transition-colors group-hover:bg-brand-black group-hover:text-white">
+                    {tLabels('profileLink')} →
+                  </span>
+                </div>
+              </Link>
+            );
+          })}
+        </div>
+      </section>
+
+      {/* WHATSAPP CTA */}
+      <section className="bg-brand-yellow">
+        <div className="mx-auto max-w-3xl px-4 py-16 text-center sm:px-6 sm:py-20 lg:px-8">
+          <h2 className="font-heading text-3xl leading-tight tracking-wider text-brand-black sm:text-4xl">
+            {tCta('title')}
+          </h2>
+          <p className="mt-4 text-base text-brand-black/80 sm:text-lg">
+            {tCta('description')}
+          </p>
+          <a
+            href={`tel:${contact.phone.tel}`}
+            className="mt-6 inline-block font-heading text-2xl tracking-wider text-brand-black transition-opacity hover:opacity-80 sm:text-3xl"
+          >
+            {tCommon('callNow')} — {contact.phone.display}
+          </a>
+          <div className="mt-6">
+            <a
+              href={whatsAppUrl(contact, locale)}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex h-12 items-center justify-center rounded-full bg-brand-black px-8 text-base font-semibold text-white transition-colors hover:bg-zinc-800"
+            >
+              {tCta('button')}
+            </a>
+          </div>
+        </div>
+      </section>
+    </>
+  );
+}
