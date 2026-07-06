@@ -219,6 +219,25 @@
   color: var(--card-foreground) !important;
 }
 
+/* Hero headline staggered line reveal animation. */
+@keyframes hero-line-in {
+  from {
+    transform: translateY(110%);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+.hero-line {
+  display: block;
+  animation: hero-line-in 0.75s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+@media (prefers-reduced-motion: reduce) {
+  .hero-line { animation: none; }
+}
+
 /* Gold shimmer separator lines — standalone element or pseudo-element borders. */
 .gold-line {
   height: 1px;

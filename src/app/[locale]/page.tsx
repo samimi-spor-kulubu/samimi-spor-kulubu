@@ -90,14 +90,24 @@ export default async function Home({
           </p>
           <h1
             data-tour="hero"
-            className="mt-4 font-heading leading-none tracking-wide text-white"
+            className="mt-4 font-heading leading-[1.0] tracking-wide text-white"
             style={{fontSize: 'clamp(3rem, 11vw, 11rem)'}}
           >
-            {t.rich('hero.title', {
-              cyan: (chunks) => (
-                <span className="text-brand-cyan">{chunks}</span>
-              )
-            })}
+            <div className="overflow-hidden">
+              <span className="hero-line text-brand-cyan" style={{animationDelay: '0.1s'}}>
+                {t('hero.titleLine1')}
+              </span>
+            </div>
+            <div className="overflow-hidden">
+              <span className="hero-line" style={{animationDelay: '0.25s'}}>
+                {t('hero.titleLine2')}
+              </span>
+            </div>
+            <div className="overflow-hidden">
+              <span className="hero-line text-brand-cyan" style={{animationDelay: '0.4s'}}>
+                {t('hero.titleLine3')}
+              </span>
+            </div>
           </h1>
           <p className="mt-6 max-w-2xl text-lg leading-relaxed text-brand-gray">
             {t('hero.description')}
