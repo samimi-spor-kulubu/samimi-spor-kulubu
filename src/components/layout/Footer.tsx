@@ -101,7 +101,8 @@ export function Footer({contact}: {contact: ContactInfo}) {
           </div>
         </div>
 
-        <div className="mt-12 border-t border-white/10 pt-6 text-center text-xs text-zinc-400">
+        <div className="mt-12 pt-6 text-center text-xs text-zinc-400">
+          <div className="gold-line mb-6" />
           {t('copyright', {year})} · {tSite('name')}
           <span aria-hidden="true" className="mx-2">·</span>
           <TourReplayLink label={tTour('replay')} />

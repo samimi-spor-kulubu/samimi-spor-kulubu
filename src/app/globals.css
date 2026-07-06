@@ -219,6 +219,41 @@
   color: var(--card-foreground) !important;
 }
 
+/* Gold shimmer separator lines — standalone element or pseudo-element borders. */
+.gold-line {
+  height: 1px;
+  background: linear-gradient(90deg, transparent 0%, #7d5a00 10%, #c8960c 25%, #f5c518 45%, #ffe066 50%, #f5c518 55%, #c8960c 75%, #7d5a00 90%, transparent 100%);
+  background-size: 200% auto;
+  animation: gold-shimmer 3s linear infinite;
+}
+.gold-border-b {
+  position: relative;
+}
+.gold-border-b::after {
+  content: '';
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent 0%, #7d5a00 10%, #c8960c 25%, #f5c518 45%, #ffe066 50%, #f5c518 55%, #c8960c 75%, #7d5a00 90%, transparent 100%);
+  background-size: 200% auto;
+  animation: gold-shimmer 3s linear infinite;
+}
+.gold-border-y {
+  position: relative;
+}
+.gold-border-y::before,
+.gold-border-y::after {
+  content: '';
+  position: absolute;
+  left: 0; right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent 0%, #7d5a00 10%, #c8960c 25%, #f5c518 45%, #ffe066 50%, #f5c518 55%, #c8960c 75%, #7d5a00 90%, transparent 100%);
+  background-size: 200% auto;
+  animation: gold-shimmer 3s linear infinite;
+}
+.gold-border-y::before { top: 0; }
+.gold-border-y::after  { bottom: 0; }
+
 /* Gold shimmer animation — applied to accent text elements. */
 @keyframes gold-shimmer {
   0% { background-position: 200% center; }

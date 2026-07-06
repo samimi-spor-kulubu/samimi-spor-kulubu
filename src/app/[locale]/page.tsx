@@ -79,59 +79,49 @@ export default async function Home({
   return (
     <>
       {/* HERO */}
-      <section className="relative overflow-hidden bg-white dark:bg-zinc-900">
-        <div className="mx-auto grid max-w-7xl items-center gap-12 px-4 py-20 sm:px-6 lg:grid-cols-2 lg:gap-16 lg:px-8 lg:py-28">
-          <div>
-            <p className="font-heading text-base tracking-widest text-brand-gray sm:text-lg">
-              {t.rich('hero.subtitle', {
-                yellow: (chunks) => (
-                  <span className="gold-shimmer">{chunks}</span>
-                )
-              })}
-            </p>
-            <h1
-              data-tour="hero"
-              className="mt-4 font-heading text-4xl leading-[0.95] tracking-wide text-brand-black dark:text-white sm:text-5xl md:text-6xl lg:text-7xl"
+      <section className="relative overflow-hidden bg-background">
+        <div className="mx-auto max-w-4xl px-4 py-20 sm:px-6 lg:px-8 lg:py-32">
+          <p className="font-heading text-base tracking-widest text-brand-gray sm:text-lg">
+            {t.rich('hero.subtitle', {
+              yellow: (chunks) => (
+                <span className="gold-shimmer">{chunks}</span>
+              )
+            })}
+          </p>
+          <h1
+            data-tour="hero"
+            className="mt-4 font-heading text-5xl leading-[0.95] tracking-wide text-white sm:text-6xl md:text-7xl lg:text-8xl"
+          >
+            {t.rich('hero.title', {
+              cyan: (chunks) => (
+                <span className="text-brand-cyan">{chunks}</span>
+              )
+            })}
+          </h1>
+          <p className="mt-6 max-w-2xl text-lg leading-relaxed text-brand-gray">
+            {t('hero.description')}
+          </p>
+          <div className="mt-10 flex flex-wrap gap-4">
+            <a
+              href={whatsAppUrl(contact, locale)}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex h-12 items-center justify-center rounded-full bg-brand-yellow px-8 text-base font-semibold text-brand-black transition-colors hover:bg-brand-yellow-dark"
             >
-              {t.rich('hero.title', {
-                cyan: (chunks) => (
-                  <span className="text-brand-cyan">{chunks}</span>
-                )
-              })}
-            </h1>
-            <p className="mt-6 max-w-xl text-lg leading-relaxed text-brand-gray">
-              {t('hero.description')}
-            </p>
-            <div className="mt-10 flex flex-wrap gap-4">
-              <a
-                href={whatsAppUrl(contact, locale)}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex h-12 items-center justify-center rounded-full bg-brand-yellow px-8 text-base font-semibold text-brand-black transition-colors hover:bg-brand-yellow-dark"
-              >
-                {t('hero.ctaPrimary')}
-              </a>
-              <Link
-                href="/branslar"
-                className="inline-flex h-12 items-center justify-center rounded-full border-2 border-brand-black px-8 text-base font-semibold text-brand-black dark:text-white transition-colors hover:bg-brand-black hover:text-white"
-              >
-                {t('hero.ctaSecondary')}
-              </Link>
-            </div>
-          </div>
-
-          {/* Dekoratif geometrik alan */}
-          <div className="relative hidden h-[460px] lg:block" aria-hidden="true">
-            <div className="absolute right-4 top-4 h-72 w-72 rounded-full bg-brand-yellow" />
-            <div className="absolute right-40 bottom-6 h-44 w-44 rounded-3xl bg-brand-black" />
-            <div className="absolute left-8 bottom-24 h-28 w-28 rotate-12 rounded-2xl border-4 border-brand-yellow-dark" />
-            <div className="absolute left-44 top-8 h-20 w-20 rounded-full border-4 border-brand-black" />
+              {t('hero.ctaPrimary')}
+            </a>
+            <Link
+              href="/branslar"
+              className="inline-flex h-12 items-center justify-center rounded-full border-2 border-white/30 px-8 text-base font-semibold text-white transition-colors hover:border-white hover:bg-white/10"
+            >
+              {t('hero.ctaSecondary')}
+            </Link>
           </div>
         </div>
       </section>
 
       {/* STATS */}
-      <section className="border-y border-brand-border bg-brand-surface">
+      <section className="gold-border-y bg-brand-surface">
         <div className="mx-auto grid max-w-4xl grid-cols-1 gap-8 px-4 py-12 sm:grid-cols-3 sm:gap-10 sm:px-6 lg:gap-12 lg:px-8">
           {STATS.map(({key, prefixKey, valueKey, labelKey}) => (
             <div key={key} className="text-center">

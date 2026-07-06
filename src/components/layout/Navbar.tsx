@@ -95,7 +95,7 @@ export function Navbar({whatsappUrl}: {whatsappUrl: string}) {
   };
 
   return (
-    <header className="sticky top-0 z-50 w-full border-b border-brand-border bg-brand-black/95 backdrop-blur">
+    <header className="sticky top-0 z-50 w-full gold-border-b bg-brand-black/95 backdrop-blur">
       <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
         <Logo />
 
