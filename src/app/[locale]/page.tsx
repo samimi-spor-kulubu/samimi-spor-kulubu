@@ -85,13 +85,13 @@ export default async function Home({
             <p className="font-heading text-base tracking-widest text-brand-gray sm:text-lg">
               {t.rich('hero.subtitle', {
                 yellow: (chunks) => (
-                  <span className="text-brand-amber">{chunks}</span>
+                  <span className="gold-shimmer">{chunks}</span>
                 )
               })}
             </p>
             <h1
               data-tour="hero"
-              className="mt-4 font-heading text-4xl leading-[0.95] tracking-wide text-brand-black dark:text-white sm:text-5xl md:text-6xl lg:text-7xl"
+              className="mt-4 font-heading text-4xl leading-[0.95] tracking-wide text-brand-black dark:text-brand-cyan sm:text-5xl md:text-6xl lg:text-7xl"
             >
               {t('hero.title')}
             </h1>

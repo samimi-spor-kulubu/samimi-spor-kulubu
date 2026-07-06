@@ -28,7 +28,7 @@ export function Footer({contact}: {contact: ContactInfo}) {
         <div className="grid grid-cols-1 gap-10 md:grid-cols-2 lg:grid-cols-4">
           <div className="lg:col-span-1">
             <p className="font-heading text-2xl tracking-wider">
-              SAMİMİ <span className="text-brand-yellow">SPOR</span> KULÜBÜ
+              SAMİMİ <span className="gold-shimmer">SPOR</span> KULÜBÜ
             </p>
             <p className="mt-4 text-sm leading-relaxed text-zinc-400">
               {t('tagline')}
@@ -46,7 +46,7 @@ export function Footer({contact}: {contact: ContactInfo}) {
           </div>
 
           <div>
-            <h3 className="font-heading text-lg tracking-wider text-brand-yellow">
+            <h3 className="font-heading text-lg tracking-wider gold-shimmer">
               {t('quickLinks')}
             </h3>
             <ul className="mt-4 space-y-2 text-sm">
@@ -65,7 +65,7 @@ export function Footer({contact}: {contact: ContactInfo}) {
           </div>
 
           <div>
-            <h3 className="font-heading text-lg tracking-wider text-brand-yellow">
+            <h3 className="font-heading text-lg tracking-wider gold-shimmer">
               {t('contactTitle')}
             </h3>
             <ul className="mt-4 space-y-3 text-sm text-zinc-300">
@@ -91,7 +91,7 @@ export function Footer({contact}: {contact: ContactInfo}) {
           </div>
 
           <div>
-            <h3 className="font-heading text-lg tracking-wider text-brand-yellow">
+            <h3 className="font-heading text-lg tracking-wider gold-shimmer">
               {t('hoursTitle')}
             </h3>
             <ul className="mt-4 space-y-2 text-sm text-zinc-300">

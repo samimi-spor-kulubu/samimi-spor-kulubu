@@ -23,7 +23,7 @@ function Logo() {
       href="/"
       className="font-heading text-2xl tracking-wider text-brand-black dark:text-white"
     >
-      SAMİMİ <span className="text-brand-yellow">SPOR</span> KULÜBÜ
+      SAMİMİ <span className="gold-shimmer">SPOR</span> KULÜBÜ
     </SmoothScrollLink>
   );
 }
