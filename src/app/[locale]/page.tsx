@@ -80,7 +80,7 @@ export default async function Home({
     <>
       {/* HERO */}
       <section className="relative overflow-hidden bg-background">
-        <div className="mx-auto max-w-4xl px-4 py-20 sm:px-6 lg:px-8 lg:py-32">
+        <div className="w-full px-4 py-20 sm:px-8 lg:px-16 lg:py-28">
           <p className="font-heading text-base tracking-widest text-brand-gray sm:text-lg">
             {t.rich('hero.subtitle', {
               yellow: (chunks) => (
@@ -90,7 +90,8 @@ export default async function Home({
           </p>
           <h1
             data-tour="hero"
-            className="mt-4 font-heading text-5xl leading-[0.95] tracking-wide text-white sm:text-6xl md:text-7xl lg:text-8xl"
+            className="mt-4 font-heading leading-none tracking-wide text-white"
+            style={{fontSize: 'clamp(3rem, 11vw, 11rem)'}}
           >
             {t.rich('hero.title', {
               cyan: (chunks) => (

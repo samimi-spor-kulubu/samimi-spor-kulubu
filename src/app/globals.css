@@ -57,15 +57,15 @@
 }
 
 :root {
-  --brand-yellow: #c8960c;
-  --brand-yellow-dark: #a07808;
+  --brand-yellow: #f5c518;
+  --brand-yellow-dark: #c8960c;
   --brand-amber: #f5c518;
   --brand-black: #142847;
   --brand-gray: #8ca8c8;
   --brand-cyan: #00b4f0;
   --brand-surface: #1c3358;
   --brand-border: rgba(255, 255, 255, 0.1);
-  --gold-gradient: linear-gradient(90deg, #7d5a00 0%, #c8960c 20%, #f5c518 40%, #ffe066 50%, #f5c518 60%, #c8960c 80%, #7d5a00 100%);
+  --gold-gradient: linear-gradient(90deg, #7d5a00 0%, #c8960c 20%, #f5c518 40%, #ffe47a 50%, #f5c518 60%, #c8960c 80%, #7d5a00 100%);
 
   --background: #f0f6ff;
   --foreground: #142847;
