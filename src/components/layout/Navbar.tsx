@@ -105,7 +105,7 @@ export function Navbar({whatsappUrl}: {whatsappUrl: string}) {
             <SmoothScrollLink
               key={href}
               href={href}
-              className="text-sm font-medium text-brand-black/80 hover:text-brand-amber transition-colors dark:text-white/80 dark:hover:text-brand-yellow"
+              className="text-sm font-medium text-brand-cyan hover:text-brand-amber transition-colors dark:text-brand-cyan dark:hover:text-brand-amber"
             >
               {t(tKey)}
             </SmoothScrollLink>
@@ -160,7 +160,7 @@ export function Navbar({whatsappUrl}: {whatsappUrl: string}) {
                 key={href}
                 href={href}
                 onClick={handleNavLinkClick}
-                className="rounded-md px-3 py-2 text-base font-medium text-brand-black hover:bg-brand-surface dark:text-white dark:hover:bg-zinc-800"
+                className="rounded-md px-3 py-2 text-base font-medium text-brand-cyan hover:bg-brand-surface dark:text-brand-cyan dark:hover:bg-zinc-800"
               >
                 {t(tKey)}
               </SmoothScrollLink>

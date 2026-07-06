@@ -91,9 +91,13 @@ export default async function Home({
             </p>
             <h1
               data-tour="hero"
-              className="mt-4 font-heading text-4xl leading-[0.95] tracking-wide text-brand-black dark:text-brand-cyan sm:text-5xl md:text-6xl lg:text-7xl"
+              className="mt-4 font-heading text-4xl leading-[0.95] tracking-wide text-brand-black dark:text-white sm:text-5xl md:text-6xl lg:text-7xl"
             >
-              {t('hero.title')}
+              {t.rich('hero.title', {
+                cyan: (chunks) => (
+                  <span className="text-brand-cyan">{chunks}</span>
+                )
+              })}
             </h1>
             <p className="mt-6 max-w-xl text-lg leading-relaxed text-brand-gray">
               {t('hero.description')}
@@ -157,7 +161,7 @@ export default async function Home({
       <section className="bg-white dark:bg-zinc-900" data-tour="branches">
         <div className="mx-auto max-w-7xl px-4 py-20 sm:px-6 lg:px-8">
           <div className="text-center">
-            <h2 className="font-heading text-4xl tracking-wider text-brand-black dark:text-white sm:text-5xl">
+            <h2 className="font-heading text-4xl tracking-wider text-brand-black dark:text-brand-cyan sm:text-5xl">
               {t('branches.title')}
             </h2>
             <p className="mt-3 text-brand-gray">{t('branches.subtitle')}</p>
@@ -186,7 +190,7 @@ export default async function Home({
       <section className="bg-brand-surface">
         <div className="mx-auto max-w-6xl px-4 py-20 sm:px-6 lg:px-8">
           <div className="text-center">
-            <h2 className="font-heading text-4xl tracking-wider text-brand-black dark:text-white sm:text-5xl">
+            <h2 className="font-heading text-4xl tracking-wider text-brand-black dark:text-brand-cyan sm:text-5xl">
               {t('why.title')}
             </h2>
             <p className="mx-auto mt-3 max-w-2xl text-brand-gray">
@@ -218,7 +222,7 @@ export default async function Home({
       <section className="bg-white dark:bg-zinc-900" data-tour="trainers">
         <div className="mx-auto max-w-6xl px-4 py-20 sm:px-6 lg:px-8">
           <div className="text-center">
-            <h2 className="font-heading text-4xl tracking-wider text-brand-black dark:text-white sm:text-5xl">
+            <h2 className="font-heading text-4xl tracking-wider text-brand-black dark:text-brand-cyan sm:text-5xl">
               {t('trainers.title')}
             </h2>
             <p className="mt-3 text-brand-gray">{t('trainers.subtitle')}</p>
@@ -301,7 +305,7 @@ export default async function Home({
               <span className="text-sm font-semibold uppercase tracking-widest text-brand-amber">
                 {t('tour.eyebrow')}
               </span>
-              <h2 className="mt-3 font-heading text-3xl leading-tight tracking-wider text-brand-black dark:text-white sm:text-4xl">
+              <h2 className="mt-3 font-heading text-3xl leading-tight tracking-wider text-brand-black dark:text-brand-cyan sm:text-4xl">
                 {t('tour.title')}
               </h2>
               <p className="mt-3 text-base leading-relaxed text-brand-gray">
@@ -319,7 +323,7 @@ export default async function Home({
       <section className="bg-white dark:bg-zinc-900">
         <div className="mx-auto max-w-3xl px-4 py-20 sm:px-6 lg:px-8">
           <div className="text-center">
-            <h2 className="font-heading text-4xl tracking-wider text-brand-black dark:text-white sm:text-5xl">
+            <h2 className="font-heading text-4xl tracking-wider text-brand-black dark:text-brand-cyan sm:text-5xl">
               {t('faq.title')}
             </h2>
             <p className="mt-3 text-brand-gray">{t('faq.subtitle')}</p>
