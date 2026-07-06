@@ -6,10 +6,8 @@ export function ThemeProvider({children}: {children: React.ReactNode}) {
   return (
     <NextThemesProvider
       attribute="class"
-      defaultTheme="system"
-      enableSystem
+      forcedTheme="dark"
       disableTransitionOnChange={false}
-      storageKey="samimi-theme"
     >
       {children}
     </NextThemesProvider>

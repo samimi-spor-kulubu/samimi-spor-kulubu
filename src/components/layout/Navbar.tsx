@@ -5,7 +5,6 @@ import {useTranslations} from 'next-intl';
 import {CloseIcon, MenuIcon} from '@/components/icons';
 import {SmoothScrollLink} from '@/components/common/SmoothScrollLink';
 import {LanguageSwitcher} from './LanguageSwitcher';
-import {ThemeToggle} from '@/components/theme/ThemeToggle';
 
 const NAV_LINKS = [
   {href: '/', tKey: 'home'},
@@ -21,7 +20,7 @@ function Logo() {
   return (
     <SmoothScrollLink
       href="/"
-      className="font-heading text-2xl tracking-wider text-brand-black dark:text-white"
+      className="font-heading text-2xl tracking-wider text-white"
     >
       SAMİMİ <span className="gold-shimmer">SPOR</span> KULÜBÜ
     </SmoothScrollLink>
@@ -96,7 +95,7 @@ export function Navbar({whatsappUrl}: {whatsappUrl: string}) {
   };
 
   return (
-    <header className="sticky top-0 z-50 w-full border-b border-brand-border bg-white/95 backdrop-blur dark:bg-zinc-950/95">
+    <header className="sticky top-0 z-50 w-full border-b border-brand-border bg-brand-black/95 backdrop-blur">
       <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
         <Logo />
 
@@ -114,9 +113,6 @@ export function Navbar({whatsappUrl}: {whatsappUrl: string}) {
 
         <div className="hidden items-center gap-4 lg:flex">
           <LanguageSwitcher />
-          <span data-tour="theme-toggle">
-            <ThemeToggle />
-          </span>
           <a
             href={whatsappUrl}
             target="_blank"
@@ -129,7 +125,6 @@ export function Navbar({whatsappUrl}: {whatsappUrl: string}) {
         </div>
 
         <div className="flex items-center gap-2 lg:hidden">
-          <ThemeToggle />
           <button
             ref={toggleBtnRef}
             type="button"
@@ -137,7 +132,7 @@ export function Navbar({whatsappUrl}: {whatsappUrl: string}) {
             aria-label={open ? t('closeMenu') : t('openMenu')}
             aria-expanded={open}
             aria-controls="mobile-menu"
-            className="inline-flex h-10 w-10 items-center justify-center rounded-md text-brand-black dark:text-white"
+            className="inline-flex h-10 w-10 items-center justify-center rounded-md text-white"
           >
             {open ? (
               <CloseIcon className="h-6 w-6" />
