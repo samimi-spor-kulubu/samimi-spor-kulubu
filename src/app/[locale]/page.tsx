@@ -18,6 +18,7 @@ import {
   LayersIcon,
   MapPinIcon
 } from '@/components/icons';
+import {HeroHeading} from '@/components/hero/HeroHeading';
 
 export const revalidate = 60;
 
@@ -88,27 +89,11 @@ export default async function Home({
               )
             })}
           </p>
-          <h1
-            data-tour="hero"
-            className="mt-4 font-heading leading-[1.0] tracking-wide text-white"
-            style={{fontSize: 'clamp(3rem, 11vw, 11rem)'}}
-          >
-            <div className="overflow-hidden">
-              <span className="hero-line text-brand-cyan" style={{animationDelay: '0.1s'}}>
-                {t('hero.titleLine1')}
-              </span>
-            </div>
-            <div className="overflow-hidden">
-              <span className="hero-line" style={{animationDelay: '0.25s'}}>
-                {t('hero.titleLine2')}
-              </span>
-            </div>
-            <div className="overflow-hidden">
-              <span className="hero-line text-brand-cyan" style={{animationDelay: '0.4s'}}>
-                {t('hero.titleLine3')}
-              </span>
-            </div>
-          </h1>
+          <HeroHeading
+            line1={t('hero.titleLine1')}
+            line2={t('hero.titleLine2')}
+            line3={t('hero.titleLine3')}
+          />
           <p className="mt-6 max-w-2xl text-lg leading-relaxed text-brand-gray">
             {t('hero.description')}
           </p>

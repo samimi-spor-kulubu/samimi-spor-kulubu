@@ -169,17 +169,18 @@
   border-radius: 0.375rem;
 }
 
-/* driver.js: align popover styling with brand identity and dark mode. */
+/* driver.js: align popover styling with brand identity and dark mode.
+   !important required — driver.js loads its own CSS after globals and wins otherwise. */
 .driver-popover {
-  background-color: var(--background);
-  color: var(--foreground);
-  border: 2px solid var(--brand-yellow);
-  border-radius: 14px;
-  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.25);
+  background-color: #142847 !important;
+  color: #ffffff !important;
+  border: 2px solid var(--brand-yellow) !important;
+  border-radius: 14px !important;
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.4) !important;
 }
 .driver-popover-title,
 .driver-popover-description {
-  color: var(--foreground);
+  color: #ffffff !important;
 }
 .driver-popover-progress-text {
   color: var(--brand-amber);
@@ -217,25 +218,6 @@
 .dark .bg-white {
   background-color: var(--card) !important;
   color: var(--card-foreground) !important;
-}
-
-/* Hero headline staggered line reveal animation. */
-@keyframes hero-line-in {
-  from {
-    transform: translateY(110%);
-    opacity: 0;
-  }
-  to {
-    transform: translateY(0);
-    opacity: 1;
-  }
-}
-.hero-line {
-  display: block;
-  animation: hero-line-in 0.75s cubic-bezier(0.16, 1, 0.3, 1) both;
-}
-@media (prefers-reduced-motion: reduce) {
-  .hero-line { animation: none; }
 }
 
 /* Gold shimmer separator lines — standalone element or pseudo-element borders. */
