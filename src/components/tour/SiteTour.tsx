@@ -16,8 +16,7 @@ const STEPS = [
   {element: '[data-tour="branches"]', tKey: 'branches'},
   {element: '[data-tour="trainers"]', tKey: 'trainers'},
   {element: '[data-tour="whatsapp"]', tKey: 'whatsapp'},
-  {element: '[data-tour="faq-link"]', tKey: 'faq'},
-  {element: '[data-tour="theme-toggle"]', tKey: 'theme'}
+  {element: '[data-tour="faq-link"]', tKey: 'faq'}
 ] as const;
 
 export function SiteTour() {
@@ -47,6 +46,7 @@ export function SiteTour() {
     if (steps.length === 0) return;
 
     const d: Driver = driver({
+      popoverClass: 'samimi-driver',
       showProgress: true,
       progressText: t('progress'),
       nextBtnText: t('next'),

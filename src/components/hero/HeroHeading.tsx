@@ -8,41 +8,45 @@ interface Props {
   line3: string;
 }
 
+const EASING = 'cubic-bezier(0, 0, 0.2, 1)';
+
 export function HeroHeading({line1, line2, line3}: Props) {
   const [visible, setVisible] = useState(false);
 
   useEffect(() => {
-    const id = requestAnimationFrame(() => setVisible(true));
-    return () => cancelAnimationFrame(id);
+    // Double RAF: ensures the browser paints the hidden state
+    // at least once before we trigger the transition.
+    let id2: number;
+    const id1 = requestAnimationFrame(() => {
+      id2 = requestAnimationFrame(() => setVisible(true));
+    });
+    return () => {
+      cancelAnimationFrame(id1);
+      cancelAnimationFrame(id2);
+    };
   }, []);
 
-  const base =
-    'block transition-[opacity,transform] duration-700 ease-out';
-  const hidden = 'opacity-0 translate-y-6';
-  const shown = 'opacity-100 translate-y-0';
+  const lineStyle = (delay: number): React.CSSProperties => ({
+    display: 'block',
+    opacity: visible ? 1 : 0,
+    transform: visible ? 'translateY(0)' : 'translateY(1.5rem)',
+    transition: `opacity 700ms ${EASING}, transform 700ms ${EASING}`,
+    transitionDelay: `${visible ? delay : 0}ms`,
+  });
 
   return (
     <h1
       data-tour="hero"
-      className="mt-4 font-heading leading-[1.0] tracking-wide text-white"
+      className="mt-4 font-heading leading-[1.0] tracking-wide"
       style={{fontSize: 'clamp(3rem, 11vw, 11rem)'}}
     >
-      <span
-        className={`${base} text-brand-cyan ${visible ? shown : hidden}`}
-        style={{transitionDelay: visible ? '0ms' : '0ms'}}
-      >
+      <span className="text-brand-cyan" style={lineStyle(0)}>
         {line1}
       </span>
-      <span
-        className={`${base} ${visible ? shown : hidden}`}
-        style={{transitionDelay: visible ? '150ms' : '0ms'}}
-      >
+      <span className="text-white" style={lineStyle(150)}>
         {line2}
       </span>
-      <span
-        className={`${base} text-brand-cyan ${visible ? shown : hidden}`}
-        style={{transitionDelay: visible ? '300ms' : '0ms'}}
-      >
+      <span className="text-brand-cyan" style={lineStyle(300)}>
         {line3}
       </span>
     </h1>
