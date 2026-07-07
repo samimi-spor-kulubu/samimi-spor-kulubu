@@ -81,7 +81,7 @@ export default async function Home({
     <>
       {/* HERO */}
       <section className="relative overflow-hidden bg-background">
-        <div className="w-full px-4 py-20 sm:px-8 lg:px-16 lg:py-28">
+        <div className="mx-auto max-w-7xl px-4 py-20 sm:px-6 lg:px-8 lg:py-28">
           <p className="font-heading text-base tracking-widest text-brand-gray sm:text-lg">
             {t.rich('hero.subtitle', {
               yellow: (chunks) => (
