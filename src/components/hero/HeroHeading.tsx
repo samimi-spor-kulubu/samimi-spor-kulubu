@@ -38,15 +38,15 @@ export function HeroHeading({line1, line2, line3}: Props) {
     <h1
       data-tour="hero"
       className="mt-4 font-heading leading-[1.0] tracking-wide"
-      style={{fontSize: 'clamp(3rem, 11vw, 11rem)'}}
+      style={{fontSize: 'clamp(3rem, 11vw, 11rem)', textAlign: 'center'}}
     >
       <span className="text-brand-cyan" style={lineStyle(0)}>
         {line1}
       </span>
-      <span className="text-white" style={lineStyle(150)}>
+      <span className="text-white" style={lineStyle(500)}>
         {line2}
       </span>
-      <span className="text-brand-cyan" style={lineStyle(300)}>
+      <span className="text-brand-cyan" style={lineStyle(1000)}>
         {line3}
       </span>
     </h1>

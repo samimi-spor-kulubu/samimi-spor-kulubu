@@ -82,7 +82,7 @@ export default async function Home({
       {/* HERO */}
       <section className="relative overflow-hidden bg-background">
         <div className="mx-auto max-w-7xl px-4 py-20 sm:px-6 lg:px-8 lg:py-28">
-          <p className="font-heading text-base tracking-widest text-brand-gray sm:text-lg">
+          <p className="font-heading text-base tracking-widest text-brand-gray sm:text-lg text-center">
             {t.rich('hero.subtitle', {
               yellow: (chunks) => (
                 <span className="gold-shimmer">{chunks}</span>
@@ -94,10 +94,10 @@ export default async function Home({
             line2={t('hero.titleLine2')}
             line3={t('hero.titleLine3')}
           />
-          <p className="mt-6 max-w-2xl text-lg leading-relaxed text-brand-gray">
+          <p className="mx-auto mt-6 max-w-2xl text-center text-lg leading-relaxed text-brand-gray">
             {t('hero.description')}
           </p>
-          <div className="mt-10 flex flex-wrap gap-4">
+          <div className="mt-10 flex flex-wrap justify-center gap-4">
             <a
               href={whatsAppUrl(contact, locale)}
               target="_blank"
