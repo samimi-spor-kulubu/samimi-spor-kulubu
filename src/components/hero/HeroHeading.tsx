@@ -1,6 +1,6 @@
 'use client';
 
-import {useEffect, useState} from 'react';
+import {useEffect, useState, type CSSProperties} from 'react';
 
 interface Props {
   line1: string;
@@ -26,7 +26,7 @@ export function HeroHeading({line1, line2, line3}: Props) {
     };
   }, []);
 
-  const lineStyle = (delay: number): React.CSSProperties => ({
+  const lineStyle = (delay: number): CSSProperties => ({
     display: 'block',
     opacity: visible ? 1 : 0,
     transform: visible ? 'translateY(0)' : 'translateY(1.5rem)',
