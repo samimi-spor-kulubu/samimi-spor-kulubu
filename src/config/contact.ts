@@ -22,8 +22,7 @@ export const contact = {
     city: 'Ankara',
     country: 'Türkiye',
     full: 'Sami Efendi Caddesi No:31/9, Yenimahalle (Demet), Ankara',
-    mapsUrl:
-      'https://www.google.com/maps/search/?api=1&query=Sami+Efendi+Caddesi+No+31%2F9+Yenimahalle+Demet+Ankara',
+    mapsUrl: 'https://maps.app.goo.gl/HDKehaKLXqAVDyv39',
     // Approximate area embed (no API key). Replace with exact pb=... URL from
     // Google Maps "Share → Embed a map" once the precise location is set.
     embedUrl:
