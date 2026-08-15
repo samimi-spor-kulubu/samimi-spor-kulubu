@@ -149,7 +149,7 @@ export default async function TesisTuruPage({
       </section>
 
       {/* CTA */}
-      <section className="bg-brand-yellow">
+      <section className="hidden bg-brand-yellow">
         <div className="mx-auto max-w-3xl px-4 py-16 text-center sm:px-6 sm:py-20 lg:px-8">
           <h2 className="font-heading text-3xl leading-tight tracking-wider text-brand-black sm:text-4xl">
             {tCta('title')}
