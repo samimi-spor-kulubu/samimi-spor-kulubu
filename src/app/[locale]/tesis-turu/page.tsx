@@ -30,7 +30,7 @@ async function getTesisPhotos() {
   const supabase = createPublicClient();
   const {data, error} = await supabase
     .from('gallery_items')
-    .select('id, slug, title_tr, title_en, src, image')
+    .select('id, title_tr, title_en, src')
     .eq('category', 'tesis')
     .eq('active', true)
     .order('order_index', {ascending: true});
