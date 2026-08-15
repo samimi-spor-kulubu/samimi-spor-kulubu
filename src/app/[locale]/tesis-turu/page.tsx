@@ -1,8 +1,11 @@
 import type {Metadata} from 'next';
 import {getTranslations, setRequestLocale} from 'next-intl/server';
+import Image from 'next/image';
 import {getContactInfo, whatsAppUrl} from '@/lib/services/contact';
+import {getAllBlogPosts} from '@/lib/services/blog';
 import {PlayIcon} from '@/components/icons';
 import {pageMetadata} from '@/lib/seo';
+import {createPublicClient} from '@/lib/supabase/public';
 
 export const revalidate = 60;
 
@@ -22,13 +25,23 @@ export async function generateMetadata({
   });
 }
 
-const SECTIONS = [
-  {id: 'main-hall', emoji: '🥋'},
-  {id: 'archery', emoji: '🏹'},
-  {id: 'gymnastics', emoji: '🤸'},
-  {id: 'pilates', emoji: '🧘'},
-  {id: 'locker', emoji: '🚪'}
-] as const;
+// Fetch gallery photos from 'tesis' category
+async function getTesisPhotos() {
+  const supabase = createPublicClient();
+  const {data, error} = await supabase
+    .from('gallery_items')
+    .select('id, slug, title_tr, title_en, src, image')
+    .eq('category', 'tesis')
+    .eq('active', true)
+    .order('order_index', {ascending: true});
+
+  if (error || !data) {
+    console.error('[tesis-turu] Gallery fetch error:', error);
+    return [];
+  }
+
+  return data;
+}
 
 export default async function TesisTuruPage({
   params
@@ -43,6 +56,7 @@ export default async function TesisTuruPage({
   const tCta = await getTranslations('Tour.cta');
   const tCommon = await getTranslations('Common');
   const contact = await getContactInfo();
+  const tesisPhotos = await getTesisPhotos();
 
   return (
     <>
@@ -82,11 +96,12 @@ export default async function TesisTuruPage({
       {/* ZIGZAG SECTIONS */}
       <section className="bg-white dark:bg-zinc-900">
         <div className="mx-auto max-w-6xl space-y-16 px-4 py-16 sm:space-y-24 sm:px-6 sm:py-20 lg:px-8">
-          {SECTIONS.map(({id, emoji}, i) => {
+          {tesisPhotos.map((photo, i) => {
             const reversed = i % 2 === 1;
+            const photoTitle = locale === 'en' ? photo.title_en : photo.title_tr;
             return (
               <div
-                key={id}
+                key={photo.id}
                 className={
                   'grid grid-cols-1 items-center gap-8 md:grid-cols-2 md:gap-12 ' +
                   (reversed ? 'md:[direction:rtl]' : '')
@@ -94,16 +109,22 @@ export default async function TesisTuruPage({
               >
                 {/* Photo */}
                 <div className="md:[direction:ltr]">
-                  <div className="relative aspect-[4/3] w-full overflow-hidden rounded-2xl border-2 border-brand-border bg-zinc-200 dark:bg-zinc-800">
-                    <div className="absolute inset-0 flex items-center justify-center bg-gradient-to-br from-zinc-200 to-zinc-300">
-                      <span
-                        aria-hidden="true"
-                        className="text-7xl opacity-60 sm:text-8xl"
-                      >
-                        {emoji}
-                      </span>
+                  {photo.src ? (
+                    <div className="relative aspect-[4/3] w-full overflow-hidden rounded-2xl border-2 border-brand-border bg-zinc-200 dark:bg-zinc-800">
+                      <Image
+                        src={photo.src}
+                        alt={photoTitle || 'Tesis Fotoğrafı'}
+                        fill
+                        sizes="(max-width: 768px) 100vw, 50vw"
+                        className="object-cover"
+                        priority={i < 2}
+                      />
                     </div>
-                  </div>
+                  ) : (
+                    <div className="relative aspect-[4/3] w-full overflow-hidden rounded-2xl border-2 border-brand-border bg-zinc-200 dark:bg-zinc-800">
+                      <div className="absolute inset-0 flex items-center justify-center bg-gradient-to-br from-zinc-200 to-zinc-300" />
+                    </div>
+                  )}
                 </div>
 
                 {/* Text */}
@@ -112,13 +133,13 @@ export default async function TesisTuruPage({
                     {String(i + 1).padStart(2, '0')}
                   </p>
                   <h2 className="mt-2 font-heading text-3xl leading-tight tracking-wider text-brand-black dark:text-white sm:text-4xl lg:text-5xl">
-                    {tSections(`${id}.title`)}
+                    {photoTitle}
                   </h2>
                   <p className="mt-3 font-heading text-lg tracking-wide text-brand-gray">
-                    {tSections(`${id}.subtitle`)}
+                    Samimi Spor Kulübü Tesisleri
                   </p>
                   <p className="mt-5 text-base leading-relaxed text-brand-gray sm:text-lg">
-                    {tSections(`${id}.text`)}
+                    Tesislerimiz, en modern ekipmanlarla donatılmış ve rahat ortam sağlamak için tasarlanmıştır.
                   </p>
                 </div>
               </div>
