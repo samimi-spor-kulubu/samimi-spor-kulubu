@@ -1,8 +1,8 @@
 {
   "Site": {
     "name": "Samimi Spor Kulübü",
-    "tagline": "Ankara Yenimahalle Demetevler'de spor kulübü ve gençlik merkezi: Taekwondo, Boks, Okçuluk, Jimnastik ve Reformer Pilates.",
-    "seoDescription": "Ankara Yenimahalle Demet / Demetevler'de spor kulübü ve gençlik merkezi: Taekwondo, Boks & Kick Boks, Geleneksel Okçuluk, Çocuk Jimnastiği ve Reformer Pilates. WhatsApp'tan deneme seansı ayır."
+    "tagline": "Ankara Yenimahalle Demetevler'de spor kulübü ve gençlik merkezi: Taekwondo, Boks, Okçuluk, Jimnastik, Kort Tenisi ve Reformer Pilates.",
+    "seoDescription": "Ankara Yenimahalle Demet / Demetevler'de spor kulübü ve gençlik merkezi: Taekwondo, Boks & Kick Boks, Geleneksel Okçuluk, Çocuk Jimnastiği, Kort Tenisi ve Reformer Pilates. WhatsApp'tan deneme seansı ayır."
   },
   "Common": {
     "callNow": "Hemen Ara"
@@ -34,19 +34,19 @@
     "cta": "Ana Sayfaya Dön"
   },
   "Home": {
-    "seoDescription": "Ankara Yenimahalle Demet / Demetevler'de spor kulübü ve gençlik merkezi: Taekwondo, Boks & Kick Boks, Geleneksel Okçuluk, Çocuk Jimnastiği ve Reformer Pilates. WhatsApp'tan deneme seansı ayır.",
+    "seoDescription": "Ankara Yenimahalle Demet / Demetevler'de spor kulübü ve gençlik merkezi: Taekwondo, Boks & Kick Boks, Geleneksel Okçuluk, Çocuk Jimnastiği, Kort Tenisi ve Reformer Pilates. WhatsApp'tan deneme seansı ayır.",
     "hero": {
       "subtitle": "Samimi <yellow>SPOR</yellow> Kulübü",
       "title": "<cyan>HAREKET ET,</cyan> GÜÇLEN, <cyan>KAZAN</cyan>",
       "titleLine1": "HAREKET ET,",
       "titleLine2": "GÜÇLEN,",
       "titleLine3": "KAZAN",
-      "description": "Ankara Yenimahalle Demet'te 5 branş, deneyimli eğitmenler ve samimi bir topluluk seni bekliyor.",
+      "description": "Ankara Yenimahalle Demet'te 6 branş, deneyimli eğitmenler ve samimi bir topluluk seni bekliyor.",
       "ctaPrimary": "Seansınızı Ayırtın",
       "ctaSecondary": "Branşları Keşfedin"
     },
     "stats": {
-      "branchesValue": "5",
+      "branchesValue": "6",
       "branchesLabel": "Branş",
       "hoursPrefix": "Her gün",
       "hoursValue": "12:00 - 23:00",
@@ -88,7 +88,7 @@
         },
         "variety": {
           "title": "5 Farklı Branş",
-          "text": "Taekwondo, Boks, Okçuluk, Jimnastik ve Reformer Pilates — tek tesiste."
+          "text": "Taekwondo, Boks, Okçuluk, Jimnastik, Kort Tenisi ve Reformer Pilates — tek tesiste."
         },
         "location": {
           "title": "Yenimahalle Demet'te",
@@ -121,10 +121,10 @@
     }
   },
   "Branches": {
-    "seoDescription": "Ankara spor kulübü Samimi'de 5 branş: Taekwondo, Boks & Kick Boks, Geleneksel Okçuluk, Çocuk Jimnastiği, Reformer Pilates. Programları gör, deneme seansı ayır.",
+    "seoDescription": "Ankara spor kulübü Samimi'de 6 branş: Taekwondo, Boks & Kick Boks, Geleneksel Okçuluk, Çocuk Jimnastiği, Kort Tenisi, Reformer Pilates. Programları gör, deneme seansı ayır.",
     "hero": {
       "title": "BRANŞLARIMIZ",
-      "subtitle": "Her seviyeye uygun, uzman eğitmenlerle 5 branş."
+      "subtitle": "Her seviyeye uygun, uzman eğitmenlerle 6 branş."
     },
     "labels": {
       "detailLink": "Detay",
@@ -369,7 +369,7 @@
     }
   },
   "About": {
-    "seoDescription": "Ankara Yenimahalle Demet / Demetevler'de samimi bir spor kulübü ve gençlik merkezi. 5 branş, sertifikalı eğitmenler, ailece güvenli ortam. Hikayemizi okuyun, gelip tanışın.",
+    "seoDescription": "Ankara Yenimahalle Demet / Demetevler'de samimi bir spor kulübü ve gençlik merkezi. 6 branş, sertifikalı eğitmenler, ailece güvenli ortam. Hikayemizi okuyun, gelip tanışın.",
     "hero": {
       "title": "HAKKIMIZDA",
       "subtitle": "Samimi Spor Kulübü"
@@ -535,11 +535,11 @@
       "steps": {
         "hero": {
           "title": "Samimi Spor Kulübü'ne hoş geldiniz",
-          "description": "Ankara Yenimahalle Demet'te 5 farklı branşta dersler veriyoruz. Kısa bir tur atalım mı?"
+          "description": "Ankara Yenimahalle Demet'te 6 farklı branşta dersler veriyoruz. Kısa bir tur atalım mı?"
         },
         "branches": {
-          "title": "5 branşımız",
-          "description": "Tekvando, Boks & Kick Boks, Geleneksel Okçuluk, Çocuk Jimnastiği ve Reformer Pilates. Hepsini buradan keşfedebilirsiniz."
+          "title": "6 branşımız",
+          "description": "Tekvando, Boks & Kick Boks, Geleneksel Okçuluk, Çocuk Jimnastiği, Kort Tenisi ve Reformer Pilates. Hepsini buradan keşfedebilirsiniz."
         },
         "trainers": {
           "title": "Eğitmenlerimiz",
@@ -593,7 +593,7 @@
     }
   },
   "Footer": {
-    "tagline": "Ankara Yenimahalle Demet'te samimi bir spor topluluğu. 5 branş, deneyimli eğitmenler, ailece güvenli ortam.",
+    "tagline": "Ankara Yenimahalle Demet'te samimi bir spor topluluğu. 6 branş, deneyimli eğitmenler, ailece güvenli ortam.",
     "quickLinks": "Hızlı Linkler",
     "contactTitle": "İletişim",
     "hoursTitle": "Çalışma Saatleri",

@@ -1,7 +1,7 @@
 {
   "Site": {
     "name": "Samimi Sports Club",
-    "tagline": "Taekwondo, Boxing, Archery, Gymnastics and Reformer Pilates in Ankara Yenimahalle.",
+    "tagline": "Taekwondo, Boxing, Archery, Gymnastics, Tennis and Reformer Pilates in Ankara Yenimahalle.",
     "seoDescription": "Taekwondo, boxing & kickboxing, traditional archery, kids gymnastics and Reformer Pilates in Ankara Yenimahalle Demet. Book a trial session on WhatsApp."
   },
   "Common": {
@@ -46,7 +46,7 @@
       "ctaSecondary": "Explore Classes"
     },
     "stats": {
-      "branchesValue": "5",
+      "branchesValue": "6",
       "branchesLabel": "Disciplines",
       "hoursPrefix": "Every day",
       "hoursValue": "12:00 - 23:00",
@@ -373,7 +373,7 @@
     }
   },
   "About": {
-    "seoDescription": "A warm sports community in Ankara Yenimahalle Demet — five disciplines, certified trainers and a family-friendly atmosphere. Read our story.",
+    "seoDescription": "A warm sports community in Ankara Yenimahalle Demet — six disciplines, certified trainers and a family-friendly atmosphere. Read our story.",
     "hero": {
       "title": "ABOUT US",
       "subtitle": "Samimi Sports Club"
@@ -539,11 +539,11 @@
       "steps": {
         "hero": {
           "title": "Welcome to Samimi Sports Club",
-          "description": "We offer 5 different classes in Ankara Yenimahalle Demet. Want a quick tour?"
+          "description": "We offer 6 different classes in Ankara Yenimahalle Demet. Want a quick tour?"
         },
         "branches": {
-          "title": "Our 5 classes",
-          "description": "Taekwondo, Boxing & Kickboxing, Traditional Archery, Kids Gymnastics and Reformer Pilates. Discover them all here."
+          "title": "Our 6 classes",
+          "description": "Taekwondo, Boxing & Kickboxing, Traditional Archery, Kids Gymnastics, Tennis and Reformer Pilates. Discover them all here."
         },
         "trainers": {
           "title": "Our trainers",

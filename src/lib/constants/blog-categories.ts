@@ -46,6 +46,12 @@ export const BLOG_CATEGORIES: ReadonlyArray<BlogCategoryDef> = [
     aliases: []
   },
   {
+    slug: 'tenis',
+    label_tr: 'Tenis',
+    label_en: 'Tennis',
+    aliases: []
+  },
+  {
     slug: 'genel',
     label_tr: 'Genel',
     label_en: 'General',
