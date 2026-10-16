@@ -16,8 +16,8 @@
 |---|-------|--------|------|
 | 1 | Tekvando | Pzt / Çrş / Cum | 18:00 – 19:30 |
 | 2 | Boks & Kick Boks | Pzt / Çrş / Cum | 19:30 – 21:00 |
-| 3 | Geleneksel Okçuluk | Sal / Per | 16:30 – 17:30 |
-| 4 | Çocuk Jimnastiği | Per 17:30 / Cmt 14:00 | 45 dk |
+| 3 | Geleneksel Okçuluk | Pzt / Çrş | 17:00 – 18:00 |
+| 4 | Çocuk Jimnastiği | Cmt 13:00 – 13:45 / Paz 12:00 – 12:45 | 45 dk |
 | 5 | Reformer Pilates (Bayanlara özel) | Sal / Per / Cmt / Paz | 12:00 – 23:00 |
 
 > Reformer Pilates 8 seanslık paket olarak satılır.
