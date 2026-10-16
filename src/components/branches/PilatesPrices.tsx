@@ -2,29 +2,26 @@ import {getTranslations} from 'next-intl/server';
 
 import type {BranchPricePackage} from '@/types/database';
 
-/** Fallback package list — used when a branch doesn't carry price_info. */
-const FALLBACK_PACKAGES: BranchPricePackage[] = [
-  {key: 'group4', campaign: '4.200 TL', normal: '5.000 TL'},
-  {key: 'group3', campaign: '5.200 TL', normal: '5.750 TL'},
-  {key: 'group2', campaign: '6.500 TL', normal: '6.750 TL'},
-  {key: 'individual', campaign: '9.000 TL', normal: '10.500 TL'}
+/** Single source of truth for Pilates prices (shown on /fiyatlar and the
+ *  Reformer Pilates page). Update here only. */
+const PACKAGES: BranchPricePackage[] = [
+  {key: 'group4', campaign: '3.150 TL', normal: '4.200 TL'},
+  {key: 'group3', campaign: '3.900 TL', normal: '5.200 TL'},
+  {key: 'group2', campaign: '4.875 TL', normal: '6.500 TL'},
+  {key: 'individual', campaign: '6.750 TL', normal: '9.000 TL'}
 ];
 
 export async function PilatesPrices({
   className,
-  as: HeadingTag = 'h3',
-  packages
+  as: HeadingTag = 'h3'
 }: {
   className?: string;
   /** Heading level for the section title. h3 (default) when nested
    *  inside another section's h2; h2 when used as a top-level section. */
   as?: 'h2' | 'h3';
-  /** Packages from the branch row's price_info.packages, or fallback. */
-  packages?: BranchPricePackage[] | null;
 }) {
   const t = await getTranslations('Branches.prices');
-  const rows =
-    packages && packages.length > 0 ? packages : FALLBACK_PACKAGES;
+  const rows = PACKAGES;
 
   return (
     <div className={className}>
@@ -65,6 +62,9 @@ export async function PilatesPrices({
           </tbody>
         </table>
       </div>
+      <p className="mt-4 rounded-lg bg-brand-yellow/20 px-4 py-2 text-sm font-medium text-brand-black dark:text-white">
+        {t('discountNote')}
+      </p>
     </div>
   );
 }

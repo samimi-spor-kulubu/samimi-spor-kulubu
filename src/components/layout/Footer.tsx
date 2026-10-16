@@ -10,6 +10,7 @@ const QUICK_LINKS = [
   {href: '/galeri', tKey: 'gallery'},
   {href: '/blog', tKey: 'blog'},
   {href: '/hakkimizda', tKey: 'about'},
+  {href: '/fiyatlar', tKey: 'prices'},
   {href: '/iletisim', tKey: 'contact'},
   {href: '/sss', tKey: 'faq'}
 ] as const;

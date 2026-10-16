@@ -19,6 +19,7 @@
     "gallery": "Galeri",
     "blog": "Blog",
     "about": "Hakkımızda",
+    "prices": "Fiyatlar",
     "contact": "İletişim",
     "faq": "SSS",
     "tour": "Tesis Turu",
@@ -131,7 +132,8 @@
       "firstClassFree": "İlk Ders Ücretsiz"
     },
     "prices": {
-      "title": "Paket Fiyatları (8 Seans)",
+      "title": "Pilates Fiyatları",
+      "discountNote": "Tüm paketlerde %25 indirim uygulanmıştır.",
       "package": "Paket",
       "campaign": "Kampanyalı",
       "normal": "Normal",
@@ -139,7 +141,7 @@
         "group4": "4 Kişilik Grup",
         "group3": "3 Kişilik Grup",
         "group2": "2 Kişilik Grup",
-        "individual": "Bireysel"
+        "individual": "Özel ders"
       }
     },
     "cta": {
@@ -557,6 +559,11 @@
         }
       }
     }
+  },
+  "Prices": {
+    "seoDescription": "Samimi Spor Kulübü Ankara Reformer Pilates fiyatları: 4, 3 ve 2 kişilik grup ile özel ders paketleri.",
+    "title": "FİYATLAR",
+    "subtitle": "Reformer Pilates paket fiyatlarımız."
   },
   "Faq": {
     "seoDescription": "Samimi Spor Kulübü Ankara SSS: üyelik, deneme dersi, Reformer Pilates fiyatları, ekipman ve tesis hakkında merak ettiklerinin cevapları burada.",

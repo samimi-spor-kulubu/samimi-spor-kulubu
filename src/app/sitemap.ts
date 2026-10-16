@@ -28,6 +28,7 @@ const STATIC_ENTRIES: Omit<Entry, 'lastModified'>[] = [
   {path: '/galeri', changeFrequency: 'monthly', priority: 0.7},
   {path: '/blog', changeFrequency: 'weekly', priority: 0.8},
   {path: '/hakkimizda', changeFrequency: 'monthly', priority: 0.7},
+  {path: '/fiyatlar', changeFrequency: 'monthly', priority: 0.8},
   {path: '/iletisim', changeFrequency: 'monthly', priority: 0.7},
   {path: '/sss', changeFrequency: 'monthly', priority: 0.7},
   {path: '/tesis-turu', changeFrequency: 'monthly', priority: 0.7}

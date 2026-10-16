@@ -168,11 +168,7 @@ export default async function BranchDetailPage({
                     </span>
                   </div>
                 )}
-                <PilatesPrices
-                  as="h2"
-                  className="p-6 sm:p-8"
-                  packages={branch.price_info?.packages ?? null}
-                />
+                <PilatesPrices as="h2" className="p-6 sm:p-8" />
               </div>
             )}
           </div>

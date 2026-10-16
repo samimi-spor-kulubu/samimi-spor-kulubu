@@ -19,6 +19,7 @@
     "gallery": "Gallery",
     "blog": "Blog",
     "about": "About",
+    "prices": "Prices",
     "contact": "Contact",
     "faq": "FAQ",
     "tour": "Facility Tour",
@@ -131,7 +132,8 @@
       "firstClassFree": "First Class Free"
     },
     "prices": {
-      "title": "Package Prices (8 Sessions)",
+      "title": "Pilates Prices",
+      "discountNote": "25% discount applied to all packages.",
       "package": "Package",
       "campaign": "Promo",
       "normal": "Regular",
@@ -139,7 +141,7 @@
         "group4": "Group of 4",
         "group3": "Group of 3",
         "group2": "Group of 2",
-        "individual": "Individual"
+        "individual": "Private lesson"
       }
     },
     "cta": {
@@ -561,6 +563,11 @@
         }
       }
     }
+  },
+  "Prices": {
+    "seoDescription": "Samimi Sports Club Ankara Reformer Pilates prices: group of 4, 3 and 2 packages and private lessons.",
+    "title": "PRICES",
+    "subtitle": "Our Reformer Pilates package prices."
   },
   "Faq": {
     "seoDescription": "FAQs about Samimi Sports Club Ankara: membership, trial classes, reformer pilates prices, equipment and facility. Quick answers to common questions.",
